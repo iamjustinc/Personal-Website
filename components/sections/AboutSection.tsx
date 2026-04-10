@@ -1,9 +1,11 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 import { MapPin } from 'lucide-react'
 import { Section } from '@/components/ui/Section'
 import { SectionLabel } from '@/components/ui/SectionLabel'
+import { StarMark } from '@/components/ui/StarMark'
 import { fadeUp, fadeIn, staggerContainer, useMotionSafe } from '@/lib/motion'
 import { siteConfig } from '@/data/site'
 
@@ -57,16 +59,34 @@ export function AboutSection() {
             viewport={{ once: true }}
             className="hidden md:block"
           >
-            <div
-              className="w-60 h-[300px] rounded-card overflow-hidden bg-surface-muted"
-              style={{ filter: 'saturate(0.92) sepia(0.08)' }}
-            >
-              {/* Replace this div with next/image when photoSrc is ready */}
-              {/* <Image src={siteConfig.photoSrc!} alt="Justin" fill className="object-cover" /> */}
+            {/* Photo frame */}
+            <div className="relative">
+              <div
+                className="w-60 h-[300px] rounded-card overflow-hidden bg-surface-muted relative"
+                style={{ filter: 'saturate(0.92) sepia(0.05)' }}
+              >
+                <Image
+                  src={siteConfig.photoSrc!}
+                  alt="Justin C."
+                  fill
+                  sizes="240px"
+                  className="object-cover object-top"
+                />
+              </div>
+              {/* Gold star accent — bottom-right of photo */}
+              <div
+                className="absolute -bottom-3 -right-3 w-7 h-7 rounded-full flex items-center justify-center"
+                style={{
+                  background: '#C4974A',
+                  boxShadow: '0 2px 8px rgba(196,151,74,0.35)',
+                }}
+              >
+                <StarMark size="xs" color="#fff" />
+              </div>
             </div>
 
             {/* Status card */}
-            <div className="mt-4 bg-surface rounded-status shadow-card p-4 flex items-start gap-2 max-w-[240px]">
+            <div className="mt-6 bg-surface rounded-status shadow-card p-4 flex items-start gap-2 max-w-[240px]">
               <MapPin size={14} className="text-accent shrink-0 mt-0.5" />
               <p className="font-sans text-sm text-text-muted leading-relaxed">
                 {siteConfig.currentlyOpen}

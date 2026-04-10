@@ -24,9 +24,9 @@ export const projects: Project[] = [
     stack: ['Next.js', 'TypeScript', 'OpenAI', 'PostgreSQL', 'Tailwind'],
     year: 2024,
     outcome: 'Reduced research synthesis time by 70% in internal testing.',
-    thumbnail: '/images/projects/kestrel/thumb.jpg',
+    thumbnail: '/images/projects/kestrel/thumb.png',
     screenshots: [],
-    panelAccentColor: '#F05A28',
+    panelAccentColor: '#2A8B87',
     problem:
       'Analysts spend most of their time organizing information rather than drawing conclusions from it. Existing tools either do too much or require too much manual work to be useful.',
     solution:
@@ -51,9 +51,9 @@ export const projects: Project[] = [
     stack: ['Node.js', 'TypeScript', 'Slack API', 'Notion API'],
     year: 2024,
     outcome: 'Adopted by 3 pilot teams within two weeks of launch.',
-    thumbnail: '/images/projects/quail/thumb.jpg',
+    thumbnail: '/images/projects/quail/thumb.png',
     screenshots: [],
-    panelAccentColor: '#4A90D9',
+    panelAccentColor: '#5E9FD4',
     problem:
       'Small teams lose relationship context constantly — who spoke to whom, what was promised, what the next step is. CRMs are too heavy to maintain consistently.',
     solution:
@@ -76,9 +76,9 @@ export const projects: Project[] = [
     stack: ['Next.js', 'Python', 'OpenAI', 'Supabase'],
     year: 2024,
     outcome: 'Surfaces weekly insight summaries that PMs describe as "actually useful."',
-    thumbnail: '/images/projects/chirpie/thumb.jpg',
+    thumbnail: '/images/projects/chirpie/thumb.png',
     screenshots: [],
-    panelAccentColor: '#6BCB77',
+    panelAccentColor: '#62BDB8',
     problem:
       'Product teams know social listening matters but existing tools surface volume, not insight. You get a dashboard full of mentions with no clear signal.',
     solution:

@@ -7,7 +7,7 @@ import { Section } from '@/components/ui/Section'
 import { SectionLabel } from '@/components/ui/SectionLabel'
 import { Button } from '@/components/ui/Button'
 import { Tag } from '@/components/ui/Tag'
-import { PlaceholderImage } from '@/components/ui/PlaceholderImage'
+import { ProjectMedia } from '@/components/ui/ProjectMedia'
 import { projects } from '@/data/projects'
 import { fadeUp, fadeIn, staggerContainer, useMotionSafe } from '@/lib/motion'
 import { cn } from '@/lib/utils'
@@ -16,11 +16,9 @@ import { cn } from '@/lib/utils'
 const MAX_GRID = 6
 
 /**
- * Projects section — scaffold.
- * Featured card gets full-width two-column treatment.
+ * Projects section.
+ * Featured card gets full-width two-column treatment with a teal accent strip.
  * Grid cards are secondary; scale from 2-up to 3-up as library grows.
- *
- * VideoPreview is not yet wired — PlaceholderImage stands in for all media.
  */
 export function ProjectsSection() {
   const stagger = useMotionSafe(staggerContainer(0.08))
@@ -63,6 +61,9 @@ export function ProjectsSection() {
               'hover:shadow-card-hover hover:-translate-y-0.5',
             )}
           >
+            {/* Teal accent strip — editorial highlight at the top of the featured card */}
+            <div className="h-[3px] w-full bg-accent" />
+
             <div className="grid md:grid-cols-2">
               {/* Left: content */}
               <div className="p-8 md:p-10 flex flex-col justify-center order-2 md:order-1">
@@ -111,12 +112,15 @@ export function ProjectsSection() {
               </div>
 
               {/* Right: media */}
-              <div className="order-1 md:order-2 overflow-hidden min-h-[240px] md:min-h-0
-                              rounded-t-card md:rounded-t-none md:rounded-r-card">
-                <PlaceholderImage
+              <div className="order-1 md:order-2 overflow-hidden min-h-[260px] md:min-h-0
+                              rounded-none">
+                <ProjectMedia
+                  src={featuredProject.thumbnail}
+                  alt={`${featuredProject.name} screenshot`}
                   projectName={featuredProject.name}
                   accentColor={featuredProject.panelAccentColor}
-                  className="w-full h-full"
+                  priority
+                  sizes="(max-width: 768px) 100vw, 600px"
                 />
               </div>
             </div>
@@ -148,11 +152,13 @@ export function ProjectsSection() {
                 )}
               >
                 {/* Thumbnail */}
-                <div className="aspect-video overflow-hidden rounded-t-card">
-                  <PlaceholderImage
+                <div className="aspect-video overflow-hidden rounded-t-card relative">
+                  <ProjectMedia
+                    src={project.thumbnail}
+                    alt={`${project.name} screenshot`}
                     projectName={project.name}
                     accentColor={project.panelAccentColor}
-                    className="w-full h-full"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 400px"
                   />
                 </div>
 

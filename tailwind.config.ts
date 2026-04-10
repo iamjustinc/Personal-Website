@@ -9,16 +9,18 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg: '#F7F4EE',
+        bg: '#F0EBE0',          // warm ivory / sand
         surface: '#FFFFFF',
-        'surface-muted': '#EDEAE2',
-        border: '#E8E3D8',
-        'text-base': '#1C1B18',
-        'text-muted': '#8C8A82',
-        accent: '#F05A28',
-        'accent-hover': '#D94E20',
+        'surface-muted': '#E6E1D6',
+        border: '#D4CFC2',
+        'text-base': '#1A2A3A', // deep ocean navy
+        'text-muted': '#6B7A89', // muted slate-blue
+        accent: '#2A8B87',      // tidal teal
+        'accent-hover': '#1F6E6B',
+        gold: '#C4974A',        // dune gold
+        'gold-muted': '#E8D5AE', // soft gold tint
         // accent-sub is used as a direct style value via hexToRgba — see lib/utils.ts
-        link: '#4A90D9',
+        link: '#2A8B87',
       },
       fontFamily: {
         display: ['var(--font-display)', 'Georgia', 'serif'],

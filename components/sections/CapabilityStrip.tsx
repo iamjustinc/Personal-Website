@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
 import { siteConfig } from '@/data/site'
+import { StarMark } from '@/components/ui/StarMark'
 import { fadeUp, staggerContainer, useMotionSafe } from '@/lib/motion'
 
 const columnMap: Record<number, string> = {
@@ -14,7 +15,7 @@ const columnMap: Record<number, string> = {
 
 /**
  * Capability strip — editorial positioning band between hero and projects.
- * Three (or more) columns. Each column: accent bar → label → description.
+ * Three (or more) columns. Each column: star mark → label → description.
  * No stats. No skill logos. No charts. Just clear positioning statements.
  */
 export function CapabilityStrip() {
@@ -54,11 +55,11 @@ export function CapabilityStrip() {
                 'max-md:px-0',
               )}
             >
-              {/* Label row — accent bar anchors each item visually */}
+              {/* Label row — star mark anchors each item visually */}
               <div className="flex items-center gap-2.5 mb-3">
-                <div
-                  className="w-[2px] h-[18px] rounded-full bg-accent shrink-0 opacity-70"
-                  aria-hidden
+                <StarMark
+                  size="xs"
+                  className="text-accent opacity-60"
                 />
                 <p className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-text-muted leading-none">
                   {item.label}

@@ -1,6 +1,7 @@
 'use client'
 
 import { motion, useReducedMotion } from 'framer-motion'
+import Image from 'next/image'
 import { cn } from '@/lib/utils'
 import { EASING } from '@/lib/motion'
 import { PlaceholderImage } from '@/components/ui/PlaceholderImage'
@@ -69,9 +70,9 @@ export function FloatingPanel({
           <div
             className="absolute top-2.5 right-2.5 z-10 flex items-center gap-1.5 rounded-full px-2 py-0.5"
             style={{
-              background: 'rgba(255,255,255,0.88)',
+              background: 'rgba(255,255,255,0.90)',
               backdropFilter: 'blur(8px)',
-              border: '1px solid rgba(232,227,216,0.7)',
+              border: '1px solid rgba(212,207,194,0.8)',
             }}
           >
             <div
@@ -83,13 +84,14 @@ export function FloatingPanel({
             </span>
           </div>
 
-          {/* Content */}
+          {/* Content — next/image when src provided, placeholder fallback */}
           {imageSrc ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
+            <Image
               src={imageSrc}
               alt={`${projectName} preview`}
-              className="w-full h-full object-cover"
+              fill
+              sizes={`${width}px`}
+              className="object-cover object-top"
             />
           ) : (
             <PlaceholderImage

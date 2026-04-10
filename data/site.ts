@@ -27,9 +27,24 @@ export const siteConfig: SiteConfig = {
   ],
 
   heroFloatingPanels: [
-    { slug: 'kestrel', projectName: 'Kestrel', accentColor: '#F05A28' },
-    { slug: 'quail',   projectName: 'Quail',   accentColor: '#4A90D9' },
-    { slug: 'chirpie', projectName: 'Chirpie', accentColor: '#6BCB77' },
+    {
+      slug: 'kestrel',
+      projectName: 'Kestrel',
+      accentColor: '#2A8B87',
+      imageSrc: '/images/projects/kestrel/thumb.png',
+    },
+    {
+      slug: 'quail',
+      projectName: 'Quail',
+      accentColor: '#5E9FD4',
+      imageSrc: '/images/projects/quail/thumb.png',
+    },
+    {
+      slug: 'chirpie',
+      projectName: 'Chirpie',
+      accentColor: '#62BDB8',
+      imageSrc: '/images/projects/chirpie/thumb.png',
+    },
   ],
 
   aboutStatements: [
@@ -39,7 +54,7 @@ export const siteConfig: SiteConfig = {
     "I'm looking for roles where product thinking and technical credibility both matter.",
   ],
 
-  // photoSrc: '/images/justin.jpg', // uncomment when ready
+  photoSrc: '/images/pfp.png',
 
   email: 'justin@example.com',
   linkedinUrl: 'https://linkedin.com/in/justinc',

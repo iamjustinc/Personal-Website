@@ -20,7 +20,7 @@ export function Tag({ label, variant = 'category', className }: TagProps) {
       )}
       style={
         variant === 'category'
-          ? { background: 'rgba(240, 90, 40, 0.06)' }
+          ? { background: 'rgba(42, 139, 135, 0.06)' }
           : undefined
       }
     >
