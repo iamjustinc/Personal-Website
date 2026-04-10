@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base ─────────────────────────────────────────────────────────────────── */
+
+html {
+  scroll-behavior: smooth;
+  background-color: #F7F4EE;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Selection ────────────────────────────────────────────────────────────── */
+
+::selection {
+  background: rgba(240, 90, 40, 0.15);
+  color: #1C1B18;
+}
+
+/* ── Scrollbar ────────────────────────────────────────────────────────────── */
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #EDEAE2;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #C4C0B5;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #F05A28;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #C4C0B5 #EDEAE2;
+}
+
+/* ── Focus visible ────────────────────────────────────────────────────────── */
+
+:focus-visible {
+  outline: 2px solid #F05A28;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
