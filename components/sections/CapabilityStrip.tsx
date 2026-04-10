@@ -8,57 +8,65 @@ import { fadeUp, staggerContainer, useMotionSafe } from '@/lib/motion'
 const columnMap: Record<number, string> = {
   1: 'grid-cols-1',
   2: 'grid-cols-2',
-  3: 'grid-cols-3',
-  4: 'grid-cols-4',
+  3: 'md:grid-cols-3',
+  4: 'md:grid-cols-4',
 }
 
 /**
- * A narrow editorial band that communicates Justin's positioning.
- * 3-4 columns, each with a label + short description.
- * No stats. No logos. No charts.
+ * Capability strip — editorial positioning band between hero and projects.
+ * Three (or more) columns. Each column: accent bar → label → description.
+ * No stats. No skill logos. No charts. Just clear positioning statements.
  */
 export function CapabilityStrip() {
-  const stagger = useMotionSafe(staggerContainer(0.12))
+  const stagger = useMotionSafe(staggerContainer(0.1))
   const up      = useMotionSafe(fadeUp)
 
   const { capabilities } = siteConfig
-  const count = Math.min(capabilities.length, 4)
-  const gridClass = columnMap[count] ?? 'grid-cols-3'
+  const count     = Math.min(capabilities.length, 4)
+  const gridClass = columnMap[count] ?? 'md:grid-cols-3'
 
   return (
-    <div className="bg-bg border-t border-b border-border">
+    /*
+     * Single top border only — not sandwiched between two borders.
+     * The top border gives clean separation from the hero.
+     * The bottom bleeds naturally into the Projects section bg.
+     */
+    <div className="bg-bg border-t border-border">
       <div className="mx-auto max-w-[1200px] px-6">
         <motion.div
           variants={stagger}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: '-10%' }}
-          className={cn(
-            'grid',
-            // Desktop: dynamic column count with vertical dividers
-            gridClass,
-            // Mobile: always single column
-            'max-md:grid-cols-1',
-          )}
+          viewport={{ once: true, margin: '-8%' }}
+          className={cn('grid grid-cols-1', gridClass)}
         >
           {capabilities.map((item, i) => (
             <motion.div
               key={item.label}
               variants={up}
               className={cn(
-                'py-12 px-8',
-                // Vertical divider between columns (desktop)
+                'py-10 px-8',
+                // Vertical dividers between columns (desktop only)
                 i < capabilities.length - 1 && 'md:border-r md:border-border',
-                // Horizontal divider between rows (mobile)
-                i < capabilities.length - 1 && 'max-md:border-b max-md:border-border',
-                // No padding on mobile sides (handled by parent px-6)
-                'max-md:px-0 max-md:py-6',
+                // Horizontal dividers between items (mobile only)
+                i < capabilities.length - 1 && 'border-b border-border md:border-b-0',
+                // Flush left edge on mobile
+                'max-md:px-0',
               )}
             >
-              <p className="font-mono text-[11px] uppercase tracking-[0.08em] text-text-muted mb-2">
-                {item.label}
-              </p>
-              <p className="font-sans text-sm text-text-base leading-relaxed">
+              {/* Label row — accent bar anchors each item visually */}
+              <div className="flex items-center gap-2.5 mb-3">
+                <div
+                  className="w-[2px] h-[18px] rounded-full bg-accent shrink-0 opacity-70"
+                  aria-hidden
+                />
+                <p className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-text-muted leading-none">
+                  {item.label}
+                </p>
+              </div>
+
+              {/* Description — slightly larger than sm for readability */}
+              <p className="font-sans text-[15px] text-text-base leading-relaxed">
                 {item.description}
               </p>
             </motion.div>

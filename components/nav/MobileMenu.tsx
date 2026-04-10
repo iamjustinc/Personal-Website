@@ -11,10 +11,10 @@ interface MobileMenuProps {
 }
 
 const links = [
-  { label: 'Work',    href: '/#projects' },
-  { label: 'About',   href: '/#about' },
-  { label: 'Contact', href: '/#contact' },
-  { label: 'Resume',  href: '/resume.pdf', download: true },
+  { label: 'Work',    href: '/#projects',  download: false },
+  { label: 'About',   href: '/#about',     download: false },
+  { label: 'Contact', href: '/#contact',   download: false },
+  { label: 'Resume',  href: '/resume.pdf', download: true  },
 ]
 
 export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
@@ -25,40 +25,61 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.2, ease: EASING }}
+          transition={{ duration: 0.18, ease: EASING }}
           className="fixed inset-0 z-40 bg-bg flex flex-col"
         >
-          {/* Close */}
-          <div className="flex justify-end px-6 pt-5">
+          {/* Top bar — matches nav height */}
+          <div className="h-16 flex items-center justify-between px-6">
+            <span className="font-sans font-semibold text-[14px] tracking-tight text-text-base select-none">
+              Menu
+            </span>
             <button
               onClick={onClose}
-              className="p-2 text-text-muted hover:text-text-base transition-colors"
+              className="p-2 -mr-1 text-text-muted hover:text-text-base transition-colors rounded-btn"
               aria-label="Close menu"
             >
-              <X size={22} />
+              <X size={20} />
             </button>
           </div>
 
+          {/* Divider */}
+          <div className="mx-6 h-px bg-border" />
+
           {/* Links */}
-          <nav className="flex flex-col items-start justify-center flex-1 px-8 pb-16 gap-2">
+          <nav className="flex flex-col flex-1 justify-center px-6 pb-16 gap-1">
             {links.map((link, i) => (
               <motion.div
                 key={link.label}
-                initial={{ opacity: 0, x: -16 }}
+                initial={{ opacity: 0, x: -12 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.05, duration: 0.35, ease: EASING }}
+                transition={{ delay: i * 0.05 + 0.05, duration: 0.3, ease: EASING }}
               >
                 <Link
                   href={link.href}
                   onClick={onClose}
-                  download={link.download}
-                  className="block font-sans font-medium text-3xl text-text-base hover:text-accent transition-colors py-2"
+                  download={link.download || undefined}
+                  className={
+                    link.download
+                      ? 'block font-sans font-medium text-2xl text-text-muted hover:text-text-base transition-colors py-3'
+                      : 'block font-sans font-medium text-2xl text-text-base hover:text-accent transition-colors py-3'
+                  }
                 >
                   {link.label}
+                  {/* Small arrow for external/download links */}
+                  {link.download && (
+                    <span className="ml-2 text-base opacity-50">↓</span>
+                  )}
                 </Link>
               </motion.div>
             ))}
           </nav>
+
+          {/* Footer */}
+          <div className="px-6 pb-8">
+            <p className="font-mono text-[11px] text-text-muted tracking-wider uppercase">
+              SE + PM
+            </p>
+          </div>
         </motion.div>
       )}
     </AnimatePresence>

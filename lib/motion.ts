@@ -28,6 +28,25 @@ export const fadeUpLg: Variants = {
   },
 }
 
+// For hero headings — more dramatic lift, slightly longer
+export const fadeUpHero: Variants = {
+  hidden: { opacity: 0, y: 28 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.65, ease: EASING },
+  },
+}
+
+// For small elements where a full fadeUp feels heavy
+export const fadeInFast: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { duration: 0.3, ease: EASING },
+  },
+}
+
 export const staggerContainer = (staggerChildren = 0.08): Variants => ({
   hidden: {},
   visible: { transition: { staggerChildren } },

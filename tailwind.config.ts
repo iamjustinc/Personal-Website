@@ -41,7 +41,9 @@ const config: Config = {
       boxShadow: {
         card: '0 2px 16px rgba(0,0,0,0.06)',
         'card-hover': '0 8px 32px rgba(0,0,0,0.10)',
+        'panel-sm': '0 2px 12px rgba(0,0,0,0.05)',
         panel: '0 4px 24px rgba(0,0,0,0.08)',
+        'panel-deep': '0 12px 48px rgba(0,0,0,0.13)',
       },
       transitionTimingFunction: {
         premium: 'cubic-bezier(0.16,1,0.3,1)',

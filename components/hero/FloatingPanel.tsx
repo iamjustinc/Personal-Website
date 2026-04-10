@@ -11,20 +11,22 @@ interface FloatingPanelProps {
   projectName: string
   accentColor: string
   size: PanelSize
-  /** Tailwind animation class for the continuous idle float. */
+  /** Tailwind CSS animation class (e.g. 'animate-float1'). */
   animClass: string
-  /** Absolute positioning classes from the parent layout. */
+  /** Absolute positioning + z-index classes from parent layout. */
   className?: string
-  /** Delay in seconds before the entrance animation plays. */
+  /** Entrance delay in seconds. */
   delay?: number
+  /** Tailwind shadow class — varies per panel to simulate depth. */
+  shadowClass?: string
   /** Optional real screenshot path. Falls back to PlaceholderImage. */
   imageSrc?: string
 }
 
 const sizeMap: Record<PanelSize, { width: number; height: number }> = {
-  lg: { width: 280, height: 175 },
-  md: { width: 210, height: 132 },
-  sm: { width: 160, height: 100 },
+  lg: { width: 288, height: 180 },
+  md: { width: 214, height: 134 },
+  sm: { width: 162, height: 102 },
 }
 
 export function FloatingPanel({
@@ -34,6 +36,7 @@ export function FloatingPanel({
   animClass,
   className,
   delay = 0,
+  shadowClass = 'shadow-panel',
   imageSrc,
 }: FloatingPanelProps) {
   const { width, height } = sizeMap[size]
@@ -41,38 +44,51 @@ export function FloatingPanel({
 
   return (
     /*
-     * Outer motion.div: handles Framer Motion entrance (opacity + y).
-     * Inner div: handles the continuous CSS float animation.
-     * These are on separate elements to avoid transform conflicts.
+     * Layer separation:
+     *   Outer motion.div → Framer Motion entrance (opacity + y).
+     *   Inner div        → CSS float keyframe animation.
+     * Kept on different elements to avoid transform conflicts.
      */
     <motion.div
-      initial={shouldReduce ? false : { opacity: 0, y: 40 }}
+      initial={shouldReduce ? false : { opacity: 0, y: 36 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={shouldReduce ? {} : { delay, duration: 0.6, ease: EASING }}
+      transition={shouldReduce ? {} : { delay, duration: 0.65, ease: EASING }}
       className={cn('absolute', className)}
       style={{ width, height }}
     >
-      {/* CSS float animation wrapper */}
-      <div className={cn('w-full h-full', shouldReduce ? undefined : animClass)}>
-        <div className="w-full h-full bg-surface rounded-panel shadow-panel overflow-hidden relative">
+      {/* Float animation wrapper */}
+      <div className={cn('w-full h-full', !shouldReduce && animClass)}>
 
-          {/* Project badge */}
-          <div className="absolute top-2 right-2 z-10 flex items-center gap-1.5 bg-surface/90 backdrop-blur-sm rounded-full px-2 py-0.5">
+        <div
+          className={cn(
+            'w-full h-full bg-surface rounded-panel overflow-hidden relative',
+            shadowClass,
+          )}
+        >
+          {/* Project badge — top right, frosted */}
+          <div
+            className="absolute top-2.5 right-2.5 z-10 flex items-center gap-1.5 rounded-full px-2 py-0.5"
+            style={{
+              background: 'rgba(255,255,255,0.88)',
+              backdropFilter: 'blur(8px)',
+              border: '1px solid rgba(232,227,216,0.7)',
+            }}
+          >
             <div
-              className="w-1.5 h-1.5 rounded-full shrink-0"
+              className="w-[6px] h-[6px] rounded-full shrink-0"
               style={{ backgroundColor: accentColor }}
             />
-            <span className="font-mono text-[10px] text-text-muted leading-none">
+            <span className="font-mono text-[10px] text-text-muted leading-none tracking-wide">
               {projectName}
             </span>
           </div>
 
-          {/* Screenshot or placeholder */}
+          {/* Content */}
           {imageSrc ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
               src={imageSrc}
-              alt={`${projectName} screenshot`}
+              alt={`${projectName} preview`}
               className="w-full h-full object-cover"
             />
           ) : (
@@ -83,6 +99,7 @@ export function FloatingPanel({
             />
           )}
         </div>
+
       </div>
     </motion.div>
   )
