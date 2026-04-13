@@ -1,14 +1,13 @@
 import type { SiteConfig } from '@/types/site'
 
-/**
- * Global site configuration.
- * Update this file to change copy, links, and section toggles.
- */
 export const siteConfig: SiteConfig = {
   name: 'Justin C.',
   roleTag: 'Solutions Engineering + Product Management',
   heroStatement: 'I turn complex systems and AI workflows into clear, usable products.',
   resumeUrl: '/resume.pdf',
+
+  logoSrc:    '/images/justin-logo.png',
+  portraitSrc: '/images/me.png',
 
   showCapabilityStrip: true,
   capabilities: [
@@ -27,24 +26,9 @@ export const siteConfig: SiteConfig = {
   ],
 
   heroFloatingPanels: [
-    {
-      slug: 'kestrel',
-      projectName: 'Kestrel',
-      accentColor: '#2A8B87',
-      imageSrc: '/images/projects/kestrel/thumb.png',
-    },
-    {
-      slug: 'quail',
-      projectName: 'Quail',
-      accentColor: '#5E9FD4',
-      imageSrc: '/images/projects/quail/thumb.png',
-    },
-    {
-      slug: 'chirpie',
-      projectName: 'Chirpie',
-      accentColor: '#62BDB8',
-      imageSrc: '/images/projects/chirpie/thumb.png',
-    },
+    { slug: 'kestrel', projectName: 'Kestrel', accentColor: '#0F7A7A', imageSrc: '/images/projects/kestrel/thumb.png' },
+    { slug: 'quail',   projectName: 'Quail',   accentColor: '#5E9FD4', imageSrc: '/images/projects/quail/thumb.png'   },
+    { slug: 'chirpie', projectName: 'Chirpie', accentColor: '#62BDB8', imageSrc: '/images/projects/chirpie/thumb.png' },
   ],
 
   aboutStatements: [
@@ -54,7 +38,45 @@ export const siteConfig: SiteConfig = {
     "I'm looking for roles where product thinking and technical credibility both matter.",
   ],
 
+  aboutHighlights: [
+    'AI workflow design and integration',
+    'Solutions Engineering and pre-sales',
+    'Full-stack product development',
+    'Technical to non-technical communication',
+  ],
+
   photoSrc: '/images/pfp.png',
+
+  // ── Career ─────────────────────────────────────────────────────────────────
+  // Update these with your real experience. Each item appears as a timeline
+  // milestone in the Career section. Set current: true for your present role.
+  career: [
+    {
+      role: 'Independent Product Builder',
+      company: 'Self-directed',
+      period: '2024 — Present',
+      description:
+        'Designed and shipped three AI-powered tools end-to-end: Kestrel, Quail, and Chirpie. Each project targets a real problem in how teams work with information.',
+      tags: ['AI', 'Full-Stack', 'Product Design'],
+      current: true,
+    },
+    {
+      role: 'Solutions Engineering',
+      company: '← Update with your role',
+      period: '← Update',
+      description:
+        'Add a brief description of your SE work here — what problems you solved, what you built or demonstrated, and what outcomes you drove.',
+      tags: ['Technical Sales', 'Integration', 'Demos'],
+    },
+    {
+      role: 'Product Management',
+      company: '← Update with your role',
+      period: '← Update',
+      description:
+        'Add a brief description of your PM work here — what products you owned, what decisions you made, and what shipped.',
+      tags: ['Roadmap', 'Discovery', 'Stakeholders'],
+    },
+  ],
 
   email: 'justin@example.com',
   linkedinUrl: 'https://linkedin.com/in/justinc',

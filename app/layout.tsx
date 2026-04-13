@@ -24,36 +24,42 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <body className="bg-bg text-text-base font-sans antialiased">
 
-        {/* ── Global dark atmosphere ─────────────────────────────────────── */}
-        {/* Fixed so it persists across all sections during scroll */}
-        <div className="fixed inset-0 pointer-events-none z-0" aria-hidden>
+        {/* ── Global atmosphere ─────────────────────────────────────────────
+            Fixed layer — persists across all sections during scroll.
+            Stars are intentionally visible but never distracting.        */}
+        <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden>
 
-          {/* Layered radial gradients — depth without heavy GPU cost */}
+          {/* Layered gradient background */}
           <div
             className="absolute inset-0"
             style={{
               background: `
-                radial-gradient(ellipse 70% 50% at 20% 10%, rgba(15,122,122,0.10) 0%, transparent 60%),
-                radial-gradient(ellipse 50% 40% at 85% 80%, rgba(74,159,174,0.06) 0%, transparent 60%),
-                linear-gradient(165deg, #0D1E35 0%, #0A1628 50%, #081422 100%)
+                radial-gradient(ellipse 75% 55% at 15% 8%, rgba(15,122,122,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse 55% 45% at 88% 85%, rgba(74,159,174,0.07) 0%, transparent 55%),
+                linear-gradient(170deg, #0D1E35 0%, #0A1628 45%, #08121E 100%)
               `,
             }}
           />
 
-          {/* Watermark star — upper right, large, very slow clockwise */}
-          <div className="absolute top-[-12%] right-[-8%]">
-            <WatermarkStar size={820} color="#0F7A7A" direction={1}  duration={260} opacity={0.042} />
+          {/* Primary watermark star — upper right, clockwise, more visible */}
+          <div className="absolute top-[-10%] right-[-6%]">
+            <WatermarkStar size={860} color="#0F7A7A" direction={1}  duration={250} opacity={0.065} />
           </div>
 
-          {/* Watermark star — lower left, counter-clockwise, slightly larger */}
-          <div className="absolute bottom-[-18%] left-[-12%]">
-            <WatermarkStar size={1000} color="#4A9FAE" direction={-1} duration={320} opacity={0.030} />
+          {/* Secondary watermark star — lower left, CCW, larger */}
+          <div className="absolute bottom-[-20%] left-[-14%]">
+            <WatermarkStar size={1060} color="#4A9FAE" direction={-1} duration={310} opacity={0.038} />
           </div>
 
-          {/* Shooting stars — two instances, long delays so they feel rare */}
-          <div className="overflow-hidden absolute inset-0">
-            <ShootingStar startX="8%"  startY="18%" angle={30} duration={16} delay={2}  />
-            <ShootingStar startX="72%" startY="10%" angle={28} duration={18} delay={10} />
+          {/* Tertiary star — mid-page right, small, slow */}
+          <div className="absolute top-[42%] right-[2%]">
+            <WatermarkStar size={280} color="#C4974A" direction={1}  duration={180} opacity={0.055} />
+          </div>
+
+          {/* Shooting stars — long intervals so they feel rare, not constant */}
+          <div className="absolute inset-0">
+            <ShootingStar startX="7%"  startY="16%" angle={30} duration={16} delay={3}  />
+            <ShootingStar startX="68%" startY="9%"  angle={28} duration={18} delay={11} />
           </div>
         </div>
 

@@ -27,10 +27,9 @@ body {
 ::-webkit-scrollbar-track  { background: #0D1E35; }
 ::-webkit-scrollbar-thumb  { background: #1A3A50; border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: #0F7A7A; }
+*                          { scrollbar-width: thin; scrollbar-color: #1A3A50 #0D1E35; }
 
-* { scrollbar-width: thin; scrollbar-color: #1A3A50 #0D1E35; }
-
-/* ── Focus visible ────────────────────────────────────────────────────────── */
+/* ── Focus ────────────────────────────────────────────────────────────────── */
 
 :focus-visible {
   outline: 2px solid #0F7A7A;
@@ -38,7 +37,38 @@ body {
   border-radius: 4px;
 }
 
-/* ── Shooting star util ───────────────────────────────────────────────────── */
+/* ── Portrait float animation ─────────────────────────────────────────────── */
+/* Used on the hero portrait. Separated from Framer to avoid hydration flash. */
+
+@keyframes portrait-float {
+  0%, 100% { transform: translateY(0px);   }
+  50%       { transform: translateY(-12px); }
+}
+
+.portrait-float {
+  animation: portrait-float 6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portrait-float { animation: none; }
+}
+
+/* ── Halo ring slow spin ──────────────────────────────────────────────────── */
+
+@keyframes halo-spin {
+  from { transform: rotate(0deg);   }
+  to   { transform: rotate(360deg); }
+}
+
+.halo-spin {
+  animation: halo-spin 18s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .halo-spin { animation: none; }
+}
+
+/* ── Shooting star ────────────────────────────────────────────────────────── */
 
 .shooting-star {
   position: absolute;
@@ -50,10 +80,10 @@ body {
 }
 
 @keyframes shoot-cycle {
-  0%    { opacity: 0; transform: translate(0px, 0px) scaleX(0); }
-  2%    { opacity: 1; transform: translate(0px, 0px) scaleX(1); }
-  30%   { opacity: 0; transform: translate(500px, 260px) scaleX(0.6); }
-  100%  { opacity: 0; transform: translate(500px, 260px) scaleX(0); }
+  0%    { opacity: 0; transform: translate(0px, 0px)     scaleX(0); }
+  3%    { opacity: 1; transform: translate(0px, 0px)     scaleX(1); }
+  32%   { opacity: 0; transform: translate(500px, 250px) scaleX(0.5); }
+  100%  { opacity: 0; transform: translate(500px, 250px) scaleX(0);   }
 }
 
 /* ── Angular clip-path button ─────────────────────────────────────────────── */
@@ -62,14 +92,17 @@ body {
   clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
 }
 
-/* ── Subtle grain texture overlay ────────────────────────────────────────── */
+/* ── Glow pulse (used on portrait ring) ──────────────────────────────────── */
 
-.grain::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events: none;
-  opacity: 0.025;
-  border-radius: inherit;
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 0 2px rgba(15,122,122,0.45), 0 0 0 8px rgba(15,122,122,0.10), 0 0 40px rgba(15,122,122,0.20); }
+  50%       { box-shadow: 0 0 0 2px rgba(15,122,122,0.60), 0 0 0 8px rgba(15,122,122,0.16), 0 0 56px rgba(15,122,122,0.28); }
+}
+
+.portrait-glow {
+  animation: glow-pulse 4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portrait-glow { animation: none; box-shadow: 0 0 0 2px rgba(15,122,122,0.45), 0 0 0 8px rgba(15,122,122,0.10); }
 }

@@ -8,144 +8,234 @@ import { StarMark } from '@/components/ui/StarMark'
 import { siteConfig } from '@/data/site'
 
 /**
- * Hero right column — cinematic dark composition.
- * Kestrel is the dominant visual. A slow-rotating star watermark lives
- * inside the frame as texture. Quail + Chirpie appear as smaller framed
- * tiles below, hinting at the broader portfolio.
+ * Hero right column — personal portrait composition.
+ *
+ * The portrait is the main focal element: round, glowing, slowly floating.
+ * A halo ring with a slow spin surrounds it. Small star marks are positioned
+ * at deliberate angles around the circle. Project preview badges float below.
+ *
+ * Design language: dark luxury, cinematic, personal — not generic.
  */
 export function HeroVisual() {
   const shouldReduce = useReducedMotion()
-  const panels  = siteConfig.heroFloatingPanels ?? []
-  const kestrel = panels[0]
-  const quail   = panels[1]
-  const chirpie = panels[2]
+  const panels       = siteConfig.heroFloatingPanels ?? []
 
   return (
     <motion.div
-      initial={shouldReduce ? false : { opacity: 0, y: 30 }}
+      initial={shouldReduce ? false : { opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.9, delay: 0.5, ease: EASING }}
-      className="relative flex flex-col gap-3"
+      transition={{ duration: 1.0, delay: 0.45, ease: EASING }}
+      className="relative flex flex-col items-center"
     >
-      {/* ── Main frame — Kestrel ────────────────────────────────────────── */}
-      <div className="relative rounded-2xl overflow-hidden" style={{ aspectRatio: '16/10' }}>
-        {/* Screenshot */}
-        {kestrel?.imageSrc && (
-          <Image
-            src={kestrel.imageSrc}
-            alt="Kestrel — AI research tool"
-            fill
-            sizes="(max-width: 1024px) 100vw, 560px"
-            className="object-cover object-top"
-            priority
-            style={{ opacity: 0.65 }}
-          />
-        )}
+      {/* ── Portrait composition ────────────────────────────────────────── */}
+      <div className="relative flex items-center justify-center" style={{ width: 380, height: 420 }}>
 
-        {/* Dark overlay gradient — cinematic depth */}
+        {/* Atmospheric teal aura — radial glow behind the whole composition */}
         <div
-          className="absolute inset-0"
+          aria-hidden
+          className="absolute pointer-events-none"
           style={{
-            background:
-              'linear-gradient(160deg, rgba(15,122,122,0.18) 0%, rgba(10,22,40,0.55) 60%, rgba(10,22,40,0.80) 100%)',
+            width: 440,
+            height: 440,
+            borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(15,122,122,0.20) 0%, rgba(15,122,122,0.06) 40%, transparent 70%)',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
           }}
         />
 
-        {/* Rotating watermark star inside the frame */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <WatermarkStar
-            size={280}
-            color="#0F7A7A"
-            direction={1}
-            duration={80}
-            opacity={0.08}
-          />
-        </div>
-
-        {/* Corner star accents */}
-        <div className="absolute top-3 left-3 pointer-events-none">
-          <StarMark size="xs" color="#4A9FAE" className="opacity-50" />
-        </div>
-        <div className="absolute bottom-3 right-3 pointer-events-none">
-          <StarMark size="xs" color="#C4974A" className="opacity-60" />
-        </div>
-
-        {/* Project label badge */}
+        {/* Watermark star — behind portrait, very slow */}
         <div
-          className="absolute top-3.5 right-3.5 flex items-center gap-1.5 rounded-full px-3 py-1"
+          aria-hidden
+          className="absolute pointer-events-none"
+          style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}
+        >
+          <WatermarkStar size={340} color="#0F7A7A" direction={1} duration={90} opacity={0.07} />
+        </div>
+
+        {/* Outer halo ring — slow spin, dashed-looking via SVG stroke-dasharray */}
+        <div
+          aria-hidden
+          className="absolute pointer-events-none halo-spin"
           style={{
-            background: 'rgba(13,30,53,0.80)',
-            backdropFilter: 'blur(12px)',
-            border: '1px solid rgba(15,122,122,0.25)',
+            width: 340,
+            height: 340,
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
           }}
         >
-          <div
-            className="w-[6px] h-[6px] rounded-full"
-            style={{ background: kestrel?.accentColor ?? '#0F7A7A', boxShadow: `0 0 6px ${kestrel?.accentColor ?? '#0F7A7A'}80` }}
-          />
-          <span className="font-mono text-[9.5px] text-text-muted tracking-wider uppercase">
-            Kestrel
-          </span>
+          <svg width="340" height="340" viewBox="0 0 340 340" fill="none">
+            <circle
+              cx="170" cy="170" r="166"
+              stroke="rgba(15,122,122,0.20)"
+              strokeWidth="1"
+              strokeDasharray="4 12"
+            />
+          </svg>
         </div>
 
-        {/* Frame border */}
+        {/* Inner ring — solid, gold tint */}
         <div
-          className="absolute inset-0 rounded-2xl pointer-events-none"
-          style={{ border: '1px solid rgba(15,122,122,0.22)' }}
+          aria-hidden
+          className="absolute pointer-events-none"
+          style={{
+            width: 304,
+            height: 304,
+            borderRadius: '50%',
+            border: '1px solid rgba(196,151,74,0.16)',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+          }}
         />
+
+        {/* ── Portrait circle ─────────────────────────────────────────── */}
+        {siteConfig.portraitSrc && (
+          <div
+            className="portrait-float relative"
+            style={{ width: 272, height: 272, zIndex: 10 }}
+          >
+            <div
+              className="portrait-glow"
+              style={{
+                width: '100%',
+                height: '100%',
+                borderRadius: '50%',
+                overflow: 'hidden',
+                position: 'relative',
+              }}
+            >
+              <Image
+                src={siteConfig.portraitSrc}
+                alt="Justin C."
+                fill
+                sizes="272px"
+                className="object-cover object-top"
+                priority
+              />
+              {/* Subtle cinematic overlay on the portrait */}
+              <div
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  background: 'linear-gradient(160deg, rgba(15,122,122,0.08) 0%, transparent 60%, rgba(10,22,40,0.15) 100%)',
+                  borderRadius: '50%',
+                }}
+              />
+            </div>
+
+            {/* Gold star badge — bottom-right of the portrait circle */}
+            <div
+              style={{
+                position: 'absolute',
+                bottom: 8,
+                right: 8,
+                width: 26,
+                height: 26,
+                borderRadius: '50%',
+                background: '#C4974A',
+                boxShadow: '0 0 14px rgba(196,151,74,0.55)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                zIndex: 20,
+              }}
+            >
+              <StarMark size="xs" color="#0A1628" />
+            </div>
+          </div>
+        )}
+
+        {/* ── Orbital star marks ──────────────────────────────────────── */}
+        {/* Positioned around the portrait at deliberate cardinal points  */}
+
+        {/* Top-right */}
+        <motion.div
+          aria-hidden
+          animate={shouldReduce ? {} : { y: [0, -4, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+          style={{ position: 'absolute', top: 28, right: 24, zIndex: 20 }}
+        >
+          <StarMark size="sm" color="#4A9FAE" className="opacity-70" />
+        </motion.div>
+
+        {/* Left */}
+        <motion.div
+          aria-hidden
+          animate={shouldReduce ? {} : { y: [0, 4, 0] }}
+          transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}
+          style={{ position: 'absolute', left: 10, top: '48%', zIndex: 20 }}
+        >
+          <StarMark size="xs" color="#C4974A" className="opacity-55" />
+        </motion.div>
+
+        {/* Bottom-left */}
+        <motion.div
+          aria-hidden
+          animate={shouldReduce ? {} : { y: [0, -3, 0] }}
+          transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut', delay: 0.8 }}
+          style={{ position: 'absolute', bottom: 34, left: 30, zIndex: 20 }}
+        >
+          <StarMark size="xs" color="#4A9FAE" className="opacity-40" />
+        </motion.div>
+
+        {/* Top-left subtle */}
+        <div
+          aria-hidden
+          style={{ position: 'absolute', top: 36, left: 36, zIndex: 20 }}
+        >
+          <StarMark size="xs" color="#4A9FAE" className="opacity-25" />
+        </div>
+
       </div>
 
-      {/* ── Secondary row — Quail + Chirpie ─────────────────────────────── */}
-      <div className="grid grid-cols-2 gap-3">
-        {[quail, chirpie].map((panel, i) =>
-          panel ? (
-            <motion.div
-              key={panel.slug}
-              initial={shouldReduce ? false : { opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.75 + i * 0.12, ease: EASING }}
-              className="relative rounded-xl overflow-hidden"
-              style={{ aspectRatio: '16/9' }}
-            >
-              {panel.imageSrc && (
-                <Image
-                  src={panel.imageSrc}
-                  alt={`${panel.projectName} preview`}
-                  fill
-                  sizes="280px"
-                  className="object-cover object-top"
-                  style={{ opacity: 0.55 }}
-                />
-              )}
-              <div
-                className="absolute inset-0"
-                style={{
-                  background: `linear-gradient(160deg, ${panel.accentColor}20 0%, rgba(10,22,40,0.65) 100%)`,
-                }}
-              />
-              {/* Label */}
-              <div
-                className="absolute bottom-2.5 left-2.5 flex items-center gap-1.5 rounded-full px-2.5 py-0.5"
-                style={{
-                  background: 'rgba(13,30,53,0.80)',
-                  backdropFilter: 'blur(10px)',
-                  border: '1px solid rgba(15,122,122,0.20)',
-                }}
-              >
-                <div className="w-[5px] h-[5px] rounded-full" style={{ background: panel.accentColor }} />
-                <span className="font-mono text-[9px] text-text-muted tracking-wider uppercase">
-                  {panel.projectName}
-                </span>
-              </div>
-              {/* Frame border */}
-              <div
-                className="absolute inset-0 rounded-xl pointer-events-none"
-                style={{ border: '1px solid rgba(15,122,122,0.16)' }}
-              />
-            </motion.div>
-          ) : null
-        )}
-      </div>
+      {/* ── Project preview badges ──────────────────────────────────────── */}
+      {/* Appear below the portrait as a horizontal float — hinting at work */}
+      <motion.div
+        initial={shouldReduce ? false : { opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.9, ease: EASING }}
+        className="flex items-center gap-2 mt-1"
+      >
+        {panels.slice(0, 3).map((panel) => (
+          <div
+            key={panel.slug}
+            className="flex items-center gap-1.5 rounded-full px-3 py-1.5"
+            style={{
+              background: 'rgba(13,30,53,0.75)',
+              backdropFilter: 'blur(12px)',
+              border: `1px solid ${panel.accentColor}30`,
+            }}
+          >
+            <div
+              className="w-[6px] h-[6px] rounded-full shrink-0"
+              style={{ background: panel.accentColor, boxShadow: `0 0 5px ${panel.accentColor}80` }}
+            />
+            <span className="font-mono text-[9px] uppercase tracking-wider text-text-muted">
+              {panel.projectName}
+            </span>
+          </div>
+        ))}
+      </motion.div>
+
+      {/* Availability chip — below badges */}
+      <motion.div
+        initial={shouldReduce ? false : { opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 1.1, ease: EASING }}
+        className="mt-3 flex items-center gap-1.5"
+      >
+        <span
+          className="w-1.5 h-1.5 rounded-full"
+          style={{ background: '#4A9FAE', boxShadow: '0 0 6px rgba(74,159,174,0.8)' }}
+        />
+        <span className="font-mono text-[9px] uppercase tracking-wider text-text-muted">
+          Open to opportunities
+        </span>
+      </motion.div>
+
     </motion.div>
   )
 }

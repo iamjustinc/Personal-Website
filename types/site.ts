@@ -6,16 +6,30 @@ export type CapabilityItem = {
 export type HeroPanelItem = {
   slug: string
   projectName: string
-  accentColor: string  // Hex.
-  imageSrc?: string    // Path to screenshot. Falls back to PlaceholderImage.
+  accentColor: string
+  imageSrc?: string
+}
+
+export type CareerItem = {
+  role: string
+  company: string
+  period: string
+  description: string
+  tags?: string[]
+  current?: boolean
 }
 
 export type SiteConfig = {
   // ── Identity ────────────────────────────────────────────────────────────────
   name: string
   roleTag: string
-  heroStatement: string     // One sentence. Max 80 chars.
+  heroStatement: string
   resumeUrl: string
+
+  /** Brand logo shown in nav. e.g. /images/justin-logo.png */
+  logoSrc?: string
+  /** Round portrait shown in hero right column and About. e.g. /images/me.png */
+  portraitSrc?: string
 
   // ── Sections ────────────────────────────────────────────────────────────────
   showCapabilityStrip: boolean
@@ -23,8 +37,14 @@ export type SiteConfig = {
   heroFloatingPanels?: HeroPanelItem[]
 
   // ── About ───────────────────────────────────────────────────────────────────
-  aboutStatements: string[]  // 3-4 items. Each is 1-3 sentences.
+  aboutStatements: string[]
+  /** Highlights listed as star-marked items in the About section. */
+  aboutHighlights?: string[]
+  /** Legacy: square photo. Use portraitSrc for the round portrait. */
   photoSrc?: string
+
+  // ── Career ──────────────────────────────────────────────────────────────────
+  career?: CareerItem[]
 
   // ── Contact ─────────────────────────────────────────────────────────────────
   email: string
