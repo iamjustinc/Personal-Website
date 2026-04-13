@@ -10,9 +10,10 @@ export function SectionLabel({ children, className }: SectionLabelProps) {
   return (
     <p
       className={cn(
-        'font-mono text-[11px] uppercase tracking-[0.1em] text-text-muted',
+        'font-mono text-[11px] uppercase tracking-[0.1em]',
         className,
       )}
+      style={{ color: '#A8C5D1' }}
     >
       {children}
     </p>

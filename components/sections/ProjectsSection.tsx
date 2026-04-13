@@ -1,217 +1,253 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
 import { Section } from '@/components/ui/Section'
-import { SectionLabel } from '@/components/ui/SectionLabel'
-import { Button } from '@/components/ui/Button'
-import { Tag } from '@/components/ui/Tag'
-import { ProjectMedia } from '@/components/ui/ProjectMedia'
+import { StarMark } from '@/components/ui/StarMark'
 import { projects } from '@/data/projects'
 import { fadeUp, fadeIn, staggerContainer, useMotionSafe } from '@/lib/motion'
 import { cn } from '@/lib/utils'
 
-// Max grid cards shown on homepage before "View all" link appears
-const MAX_GRID = 6
-
 /**
- * Projects section.
- * Featured card gets full-width two-column treatment with a teal accent strip.
- * Grid cards are secondary; scale from 2-up to 3-up as library grows.
+ * Projects section — alternating editorial layout.
+ * Each project gets a full-width two-column composition.
+ * Even-indexed projects: image left, content right.
+ * Odd-indexed: content left, image right.
+ *
+ * The featured project is sorted first regardless of order.
  */
 export function ProjectsSection() {
-  const stagger = useMotionSafe(staggerContainer(0.08))
+  const stagger = useMotionSafe(staggerContainer(0.12))
   const up      = useMotionSafe(fadeUp)
   const inn     = useMotionSafe(fadeIn)
 
-  const featuredProject = projects.find(p => p.featured && p.visible) ?? null
-  const gridProjects = projects
-    .filter(p => p.visible && p.homepageVisible && p.slug !== featuredProject?.slug)
-    .sort((a, b) => a.order - b.order)
-
-  const visibleGrid = gridProjects.slice(0, MAX_GRID)
-  const hasMore     = gridProjects.length > MAX_GRID
+  const visibleProjects = [
+    ...projects.filter(p => p.visible && p.homepageVisible && p.featured),
+    ...projects.filter(p => p.visible && p.homepageVisible && !p.featured)
+      .sort((a, b) => a.order - b.order),
+  ]
 
   return (
-    <Section id="projects">
-      {/* Heading */}
+    <Section id="projects" paddingY="lg">
+      {/* Section heading */}
       <motion.div
         variants={inn}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
+        className="mb-16 flex flex-col items-center text-center"
       >
-        <SectionLabel>Work</SectionLabel>
-        <h2 className="font-display text-h2 text-text-base mt-2">Selected Projects</h2>
+        {/* Label with star */}
+        <div
+          className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-4"
+          style={{
+            background: 'rgba(15,122,122,0.08)',
+            border: '1px solid rgba(15,122,122,0.22)',
+          }}
+        >
+          <StarMark size="xs" color="#C4974A" className="opacity-80" />
+          <span className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-text-muted">
+            Featured Work
+          </span>
+        </div>
+        <h2 className="font-display text-h1 text-text-base">Selected Projects</h2>
+        <p className="font-sans text-text-muted mt-3 max-w-[480px]" style={{ fontSize: '15px' }}>
+          A focused set of products built at the intersection of technical and human.
+        </p>
       </motion.div>
 
-      <div className="mt-12 flex flex-col gap-6">
+      {/* Project list */}
+      <motion.div
+        variants={stagger}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-8%' }}
+        className="flex flex-col gap-10"
+      >
+        {visibleProjects.map((project, index) => {
+          const isReversed = index % 2 === 1
 
-        {/* ── Featured project ──────────────────────────────────────────────── */}
-        {featuredProject && (
-          <motion.div
-            variants={up}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-10%' }}
-            className={cn(
-              'bg-surface rounded-card shadow-card overflow-hidden',
-              'transition-all duration-300 ease-premium',
-              'hover:shadow-card-hover hover:-translate-y-0.5',
-            )}
-          >
-            {/* Teal accent strip — editorial highlight at the top of the featured card */}
-            <div className="h-[3px] w-full bg-accent" />
+          return (
+            <motion.div
+              key={project.slug}
+              variants={up}
+              className={cn(
+                'grid lg:grid-cols-2 gap-0 rounded-2xl overflow-hidden',
+                'transition-shadow duration-400 ease-premium hover:shadow-card-hover',
+              )}
+              style={{
+                background: 'rgba(15,42,61,0.60)',
+                border: '1px solid rgba(15,122,122,0.14)',
+                boxShadow: '0 4px 32px rgba(0,0,0,0.30)',
+              }}
+            >
+              {/* Image column */}
+              <div
+                className={cn(
+                  'relative overflow-hidden min-h-[280px] lg:min-h-[400px]',
+                  isReversed ? 'lg:order-2' : 'lg:order-1',
+                )}
+              >
+                {project.thumbnail && (
+                  <Image
+                    src={project.thumbnail}
+                    alt={`${project.name} screenshot`}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 580px"
+                    className="object-cover object-top transition-transform duration-700 ease-premium group-hover:scale-[1.02]"
+                    style={{ opacity: 0.60 }}
+                    priority={index === 0}
+                  />
+                )}
 
-            <div className="grid md:grid-cols-2">
-              {/* Left: content */}
-              <div className="p-8 md:p-10 flex flex-col justify-center order-2 md:order-1">
-                <div className="flex gap-2 flex-wrap">
-                  {featuredProject.tags.slice(0, 3).map(tag => (
-                    <Tag key={tag} label={tag} variant="category" />
-                  ))}
+                {/* Color overlay — uses project accent */}
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background: `linear-gradient(160deg, ${project.panelAccentColor}22 0%, rgba(10,22,40,0.50) 70%, rgba(10,22,40,0.80) 100%)`,
+                  }}
+                />
+
+                {/* Rotating star inside frame */}
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 90, repeat: Infinity, ease: 'linear' }}
+                    style={{ opacity: 0.06 }}
+                  >
+                    <StarMark size="2xl" color={project.panelAccentColor} />
+                  </motion.div>
                 </div>
 
-                <h3 className="font-display text-h2 text-text-base mt-3">
-                  {featuredProject.name}
-                </h3>
-                <p className="font-sans text-lg text-accent mt-2 leading-snug">
-                  {featuredProject.tagline}
-                </p>
-                <p className="font-sans text-sm text-text-muted mt-3 leading-relaxed line-clamp-3">
-                  {featuredProject.summary}
-                </p>
+                {/* Corner star marks */}
+                <div className="absolute top-4 left-4 pointer-events-none">
+                  <StarMark size="xs" color={project.panelAccentColor} className="opacity-50" />
+                </div>
+                <div className="absolute bottom-4 right-4 pointer-events-none">
+                  <StarMark size="xs" color={project.panelAccentColor} className="opacity-50" />
+                </div>
 
-                {/* Outcome badge */}
-                <div className="mt-4">
-                  <span className="inline-flex items-center bg-surface-muted rounded-tag px-3 py-1.5 font-sans text-sm font-medium text-text-base">
-                    → {featuredProject.outcome}
+                {/* Project number stamp — top right */}
+                <div
+                  className="absolute top-4 right-4 flex items-center gap-1.5 rounded-full px-3 py-1"
+                  style={{
+                    background: 'rgba(13,30,53,0.82)',
+                    backdropFilter: 'blur(12px)',
+                    border: `1px solid ${project.panelAccentColor}30`,
+                  }}
+                >
+                  <StarMark size="xs" color={project.panelAccentColor} className="opacity-70" />
+                  <span className="font-mono text-[9.5px] uppercase tracking-wider text-text-muted">
+                    Project {String(index + 1).padStart(2, '0')}
                   </span>
                 </div>
 
-                {/* CTAs */}
-                <div className="flex gap-3 mt-8 flex-wrap">
-                  <Button
-                    variant="primary"
-                    href={`/projects/${featuredProject.slug}`}
-                    icon={<ArrowRight size={16} />}
-                  >
-                    View project
-                  </Button>
-                  {featuredProject.githubUrl && (
-                    <Button
-                      variant="ghost"
-                      href={featuredProject.githubUrl}
-                      target="_blank"
-                    >
-                      GitHub ↗
-                    </Button>
-                  )}
-                </div>
-              </div>
-
-              {/* Right: media */}
-              <div className="order-1 md:order-2 overflow-hidden min-h-[260px] md:min-h-0
-                              rounded-none">
-                <ProjectMedia
-                  src={featuredProject.thumbnail}
-                  alt={`${featuredProject.name} screenshot`}
-                  projectName={featuredProject.name}
-                  accentColor={featuredProject.panelAccentColor}
-                  priority
-                  sizes="(max-width: 768px) 100vw, 600px"
+                {/* Frame border */}
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{ border: `1px solid ${project.panelAccentColor}18` }}
                 />
               </div>
-            </div>
-          </motion.div>
-        )}
 
-        {/* ── Project grid ──────────────────────────────────────────────────── */}
-        {visibleGrid.length > 0 && (
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-10%' }}
-            className={cn(
-              'grid gap-6',
-              visibleGrid.length === 1 && 'sm:grid-cols-1 max-w-[560px]',
-              visibleGrid.length >= 2 && 'sm:grid-cols-2',
-              visibleGrid.length >= 5 && 'xl:grid-cols-3',
-            )}
-          >
-            {visibleGrid.map(project => (
-              <motion.div
-                key={project.slug}
-                variants={up}
+              {/* Content column */}
+              <div
                 className={cn(
-                  'bg-surface rounded-card shadow-card overflow-hidden flex flex-col',
-                  'transition-all duration-300 ease-premium',
-                  'hover:shadow-card-hover hover:-translate-y-1',
+                  'flex flex-col justify-center p-8 lg:p-12',
+                  isReversed ? 'lg:order-1' : 'lg:order-2',
                 )}
               >
-                {/* Thumbnail */}
-                <div className="aspect-video overflow-hidden rounded-t-card relative">
-                  <ProjectMedia
-                    src={project.thumbnail}
-                    alt={`${project.name} screenshot`}
-                    projectName={project.name}
-                    accentColor={project.panelAccentColor}
-                    sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 400px"
-                  />
+                {/* Tags */}
+                <div className="flex flex-wrap gap-2 mb-5">
+                  {project.tags.slice(0, 3).map(tag => (
+                    <span
+                      key={tag}
+                      className="font-mono text-[10.5px] uppercase tracking-wider px-3 py-1 rounded-full"
+                      style={{
+                        background: `${project.panelAccentColor}14`,
+                        border: `1px solid ${project.panelAccentColor}28`,
+                        color: '#A8C5D1',
+                      }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
                 </div>
 
-                {/* Content */}
-                <div className="p-6 flex flex-col flex-1">
-                  <div className="flex gap-1.5 flex-wrap">
-                    {project.tags.slice(0, 2).map(tag => (
-                      <Tag key={tag} label={tag} variant="category" />
+                {/* Name */}
+                <h3 className="font-display text-h1 text-text-base leading-tight">
+                  {project.name}
+                </h3>
+
+                {/* Meta */}
+                <p className="font-mono text-[11px] text-text-muted mt-2 tracking-wider uppercase">
+                  {project.year} · {project.role}
+                </p>
+
+                {/* Tagline */}
+                <p
+                  className="font-sans mt-5 leading-relaxed"
+                  style={{ fontSize: '15px', color: '#A8C5D1' }}
+                >
+                  {project.tagline}
+                </p>
+
+                {/* Outcome badge */}
+                {project.outcome && (
+                  <div
+                    className="mt-5 inline-flex items-start gap-2 self-start px-4 py-2.5 rounded-btn"
+                    style={{
+                      background: `${project.panelAccentColor}12`,
+                      border: `1px solid ${project.panelAccentColor}22`,
+                    }}
+                  >
+                    <StarMark size="xs" color={project.panelAccentColor} className="opacity-60 mt-0.5 shrink-0" />
+                    <span className="font-sans text-sm text-text-muted leading-snug">
+                      {project.outcome}
+                    </span>
+                  </div>
+                )}
+
+                {/* Stack pills */}
+                {project.stack && project.stack.length > 0 && (
+                  <div className="flex flex-wrap gap-1.5 mt-5">
+                    {project.stack.slice(0, 4).map(s => (
+                      <span
+                        key={s}
+                        className="font-mono text-[10px] text-text-muted px-2.5 py-1 rounded-btn"
+                        style={{
+                          background: 'rgba(15,42,61,0.80)',
+                          border: '1px solid rgba(15,122,122,0.14)',
+                        }}
+                      >
+                        {s}
+                      </span>
                     ))}
                   </div>
-                  <h3 className="font-display text-h3 text-text-base mt-2">
-                    {project.name}
-                  </h3>
-                  <p className="font-sans text-sm text-text-muted mt-1.5 line-clamp-2">
-                    {project.tagline}
-                  </p>
-                  <p className="font-sans text-sm font-medium text-accent mt-3">
-                    → {project.outcome}
-                  </p>
+                )}
 
-                  {/* Footer — pinned to bottom */}
-                  <div className="mt-auto pt-4 border-t border-border">
-                    <Link
-                      href={`/projects/${project.slug}`}
-                      className="font-sans text-sm font-medium text-accent hover:text-accent-hover transition-colors duration-200"
+                {/* CTA */}
+                <div className="mt-8">
+                  <motion.a
+                    href={`/projects/${project.slug}`}
+                    whileHover={{ scale: 1.04, y: -2 }}
+                    whileTap={{ scale: 0.97 }}
+                    className="inline-flex items-center gap-2 font-sans font-medium text-white text-[14px]"
+                  >
+                    <span
+                      className="px-6 py-2.5 btn-angular flex items-center gap-2 transition-shadow duration-300 hover:shadow-glow"
+                      style={{ background: `linear-gradient(135deg, ${project.panelAccentColor}, #4A9FAE)` }}
                     >
-                      View project →
-                    </Link>
-                  </div>
+                      View Case Study
+                      <ArrowRight size={15} className="transition-transform duration-200 group-hover:translate-x-1" />
+                    </span>
+                  </motion.a>
                 </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        )}
-
-        {/* Overflow link — appears when library grows past MAX_GRID */}
-        {hasMore && (
-          <div className="mt-2">
-            <Link
-              href="/projects"
-              className="inline-flex items-center gap-1.5 font-sans text-sm font-medium text-accent hover:text-accent-hover transition-colors duration-200"
-            >
-              View all projects
-              <ArrowRight size={14} />
-            </Link>
-          </div>
-        )}
-
-        {/* Empty state */}
-        {!featuredProject && visibleGrid.length === 0 && (
-          <p className="font-sans text-sm text-text-muted">No projects yet.</p>
-        )}
-      </div>
+              </div>
+            </motion.div>
+          )
+        })}
+      </motion.div>
     </Section>
   )
 }

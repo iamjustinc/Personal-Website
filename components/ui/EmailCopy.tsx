@@ -18,7 +18,6 @@ export function EmailCopy({ email, className }: EmailCopyProps) {
       setCopied(true)
       setTimeout(() => setCopied(false), 1500)
     } catch {
-      // Clipboard API not available — fall back to mailto
       window.location.href = `mailto:${email}`
     }
   }
@@ -27,18 +26,19 @@ export function EmailCopy({ email, className }: EmailCopyProps) {
     <button
       onClick={handleCopy}
       className={cn(
-        'group inline-flex items-center gap-2',
-        'font-sans font-medium text-xl text-text-base',
-        'transition-colors duration-200 hover:text-accent',
-        'cursor-pointer',
+        'group inline-flex items-center gap-2.5 cursor-pointer',
+        'font-sans font-medium text-xl',
+        'transition-colors duration-200',
         className,
       )}
+      style={{ color: copied ? '#4A9FAE' : '#E8F4F8' }}
       title={copied ? 'Copied!' : 'Click to copy email'}
     >
-      <span className="transition-colors duration-200">
-        {copied ? 'Copied!' : email}
-      </span>
-      <span className="text-text-muted group-hover:text-accent transition-colors duration-200">
+      <span>{copied ? 'Copied!' : email}</span>
+      <span
+        className="transition-colors duration-200"
+        style={{ color: copied ? '#4A9FAE' : 'rgba(168,197,209,0.55)' }}
+      >
         {copied ? <Check size={16} strokeWidth={2.5} /> : <Copy size={14} />}
       </span>
     </button>

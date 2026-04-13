@@ -11,6 +11,7 @@ interface SectionProps {
   containerClassName?: string
   paddingY?: PaddingY
   withContainer?: boolean
+  style?: React.CSSProperties
 }
 
 const paddingMap: Record<PaddingY, string> = {
@@ -26,9 +27,10 @@ export function Section({
   containerClassName,
   paddingY = 'default',
   withContainer = true,
+  style,
 }: SectionProps) {
   return (
-    <section id={id} className={cn(paddingMap[paddingY], className)}>
+    <section id={id} className={cn(paddingMap[paddingY], className)} style={style}>
       {withContainer ? (
         <Container className={containerClassName}>{children}</Container>
       ) : (

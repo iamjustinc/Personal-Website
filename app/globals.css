@@ -6,7 +6,7 @@
 
 html {
   scroll-behavior: smooth;
-  background-color: #F0EBE0;
+  background-color: #0A1628;
 }
 
 body {
@@ -17,39 +17,59 @@ body {
 /* ── Selection ────────────────────────────────────────────────────────────── */
 
 ::selection {
-  background: rgba(42, 139, 135, 0.18);
-  color: #1A2A3A;
+  background: rgba(15, 122, 122, 0.35);
+  color: #E8F4F8;
 }
 
 /* ── Scrollbar ────────────────────────────────────────────────────────────── */
 
-::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
-}
+::-webkit-scrollbar        { width: 5px; height: 5px; }
+::-webkit-scrollbar-track  { background: #0D1E35; }
+::-webkit-scrollbar-thumb  { background: #1A3A50; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #0F7A7A; }
 
-::-webkit-scrollbar-track {
-  background: #E6E1D6;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #B5B0A4;
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #2A8B87;
-}
-
-* {
-  scrollbar-width: thin;
-  scrollbar-color: #B5B0A4 #E6E1D6;
-}
+* { scrollbar-width: thin; scrollbar-color: #1A3A50 #0D1E35; }
 
 /* ── Focus visible ────────────────────────────────────────────────────────── */
 
 :focus-visible {
-  outline: 2px solid #2A8B87;
+  outline: 2px solid #0F7A7A;
   outline-offset: 2px;
   border-radius: 4px;
+}
+
+/* ── Shooting star util ───────────────────────────────────────────────────── */
+
+.shooting-star {
+  position: absolute;
+  width: 140px;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent 0%, rgba(74,159,174,0.95) 50%, transparent 100%);
+  border-radius: 9999px;
+  transform-origin: left center;
+}
+
+@keyframes shoot-cycle {
+  0%    { opacity: 0; transform: translate(0px, 0px) scaleX(0); }
+  2%    { opacity: 1; transform: translate(0px, 0px) scaleX(1); }
+  30%   { opacity: 0; transform: translate(500px, 260px) scaleX(0.6); }
+  100%  { opacity: 0; transform: translate(500px, 260px) scaleX(0); }
+}
+
+/* ── Angular clip-path button ─────────────────────────────────────────────── */
+
+.btn-angular {
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+
+/* ── Subtle grain texture overlay ────────────────────────────────────────── */
+
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: 0.025;
+  border-radius: inherit;
 }
