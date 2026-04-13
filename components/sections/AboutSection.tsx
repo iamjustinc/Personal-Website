@@ -151,7 +151,7 @@ export function AboutSection() {
                 >
                   <Image
                     src={portrait}
-                    alt="Justin C."
+                    alt="Justin Chang"
                     fill
                     sizes="200px"
                     className="object-cover object-top"

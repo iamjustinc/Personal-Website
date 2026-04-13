@@ -48,50 +48,50 @@ export function Nav() {
         <div
           className="relative rounded-2xl"
           style={{
-            background: 'rgba(11,27,48,0.78)',
-            backdropFilter: 'blur(28px) saturate(160%)',
-            WebkitBackdropFilter: 'blur(28px) saturate(160%)',
-            border: '1px solid rgba(15,122,122,0.22)',
-            boxShadow: '0 4px 40px rgba(0,0,0,0.50), 0 0 0 1px rgba(15,122,122,0.06) inset, 0 1px 0 rgba(255,255,255,0.04) inset',
+            background: 'rgba(10,24,44,0.82)',
+            backdropFilter: 'blur(36px) saturate(180%)',
+            WebkitBackdropFilter: 'blur(36px) saturate(180%)',
+            border: '1px solid rgba(15,122,122,0.28)',
+            boxShadow: '0 8px 48px rgba(0,0,0,0.60), 0 0 0 1px rgba(15,122,122,0.08) inset, 0 1px 0 rgba(255,255,255,0.05) inset, 0 0 24px rgba(15,122,122,0.05)',
           }}
         >
           <div className="px-5 py-3 flex items-center justify-between">
 
             {/* ── Brand lockup ────────────────────────────────────────── */}
             <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.2 }}>
-              <Link href="/#hero" className="flex items-center gap-2.5">
+              <Link href="/#hero" className="flex items-center gap-3">
                 {siteConfig.logoSrc ? (
-                  /* Justin-logo.png — displayed in a teal-bordered icon tile */
+                  /* Justin-logo.png — larger, more prominent icon tile */
                   <div
-                    className="relative w-9 h-9 rounded-xl overflow-hidden shrink-0 flex items-center justify-center"
+                    className="relative w-11 h-11 rounded-xl overflow-hidden shrink-0 flex items-center justify-center"
                     style={{
                       background: 'linear-gradient(135deg, #0D2A3D, #0F3A50)',
-                      border: '1px solid rgba(15,122,122,0.35)',
-                      boxShadow: '0 2px 12px rgba(15,122,122,0.20)',
+                      border: '1px solid rgba(15,122,122,0.40)',
+                      boxShadow: '0 2px 16px rgba(15,122,122,0.28), 0 0 0 1px rgba(15,122,122,0.08) inset',
                     }}
                   >
                     <Image
                       src={siteConfig.logoSrc}
                       alt={`${siteConfig.name} logo`}
-                      width={26}
-                      height={26}
+                      width={32}
+                      height={32}
                       className="object-contain"
                     />
                   </div>
                 ) : (
                   /* Fallback: teal icon tile with star */
                   <div
-                    className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
+                    className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0"
                     style={{ background: 'linear-gradient(135deg, #0F7A7A, #4A9FAE)' }}
                   >
                     <StarMark size="xs" color="white" />
                   </div>
                 )}
                 <div className="leading-tight">
-                  <div className="font-sans font-semibold text-[13px] text-text-base tracking-tight">
+                  <div className="font-sans font-semibold text-[14px] text-text-base tracking-tight">
                     {siteConfig.name}
                   </div>
-                  <div className="font-mono text-[9px] tracking-wider uppercase" style={{ color: '#4A9FAE' }}>
+                  <div className="font-mono text-[9px] tracking-widest uppercase" style={{ color: '#4A9FAE' }}>
                     SE · PM
                   </div>
                 </div>

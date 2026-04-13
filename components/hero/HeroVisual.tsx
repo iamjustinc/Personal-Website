@@ -109,7 +109,7 @@ export function HeroVisual() {
             >
               <Image
                 src={siteConfig.portraitSrc}
-                alt="Justin C."
+                alt="Justin Chang"
                 fill
                 sizes="272px"
                 className="object-cover object-top"

@@ -56,10 +56,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <WatermarkStar size={280} color="#C4974A" direction={1}  duration={180} opacity={0.055} />
           </div>
 
-          {/* Shooting stars — long intervals so they feel rare, not constant */}
+          {/* Shooting stars — varied positions, long intervals so they feel rare */}
           <div className="absolute inset-0">
             <ShootingStar startX="7%"  startY="16%" angle={30} duration={16} delay={3}  />
             <ShootingStar startX="68%" startY="9%"  angle={28} duration={18} delay={11} />
+            <ShootingStar startX="22%" startY="6%"  angle={32} duration={20} delay={19} />
+            <ShootingStar startX="52%" startY="22%" angle={25} duration={14} delay={7}  />
+            <ShootingStar startX="85%" startY="14%" angle={34} duration={22} delay={26} />
           </div>
         </div>
 

@@ -116,8 +116,8 @@ export function CareerSection() {
 
               {/* Content card */}
               <motion.div
-                whileHover={{ y: -2, boxShadow: '0 8px 40px rgba(0,0,0,0.40), 0 0 0 1px rgba(15,122,122,0.20)' }}
-                transition={{ duration: 0.25, ease: 'easeOut' }}
+                whileHover={{ y: -4, boxShadow: '0 12px 48px rgba(0,0,0,0.50), 0 0 0 1px rgba(15,122,122,0.28)' }}
+                transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
                 className="flex-1 rounded-2xl p-6 md:p-8"
                 style={{
                   background: 'rgba(15,42,61,0.50)',

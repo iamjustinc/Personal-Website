@@ -41,12 +41,14 @@ body {
 /* Used on the hero portrait. Separated from Framer to avoid hydration flash. */
 
 @keyframes portrait-float {
-  0%, 100% { transform: translateY(0px);   }
-  50%       { transform: translateY(-12px); }
+  0%        { transform: translateY(0px);    }
+  45%       { transform: translateY(-14px);  }
+  55%       { transform: translateY(-14px);  }
+  100%      { transform: translateY(0px);    }
 }
 
 .portrait-float {
-  animation: portrait-float 6s ease-in-out infinite;
+  animation: portrait-float 7s cubic-bezier(0.37, 0, 0.63, 1) infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -61,7 +63,7 @@ body {
 }
 
 .halo-spin {
-  animation: halo-spin 18s linear infinite;
+  animation: halo-spin 24s linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -75,10 +75,10 @@ export function ProjectsSection() {
               key={project.slug}
               variants={up}
               whileHover={{
-                y: -3,
-                boxShadow: '0 16px 56px rgba(0,0,0,0.55), 0 0 0 1px rgba(15,122,122,0.22)',
+                y: -5,
+                boxShadow: '0 20px 64px rgba(0,0,0,0.65), 0 0 0 1px rgba(15,122,122,0.30)',
               }}
-              transition={{ duration: 0.28, ease: 'easeOut' }}
+              transition={{ duration: 0.30, ease: [0.22, 1, 0.36, 1] }}
               className={cn(
                 'grid lg:grid-cols-2 gap-0 rounded-2xl overflow-hidden cursor-default',
               )}
@@ -233,22 +233,24 @@ export function ProjectsSection() {
                 <div className="mt-9">
                   <motion.a
                     href={`/projects/${project.slug}`}
-                    whileHover={{ scale: 1.04, y: -2 }}
-                    whileTap={{ scale: 0.97 }}
+                    whileHover={{
+                      scale: 1.05,
+                      y: -3,
+                      boxShadow: `0 12px 40px ${project.panelAccentColor}55, 0 0 0 1px ${project.panelAccentColor}35`,
+                    }}
+                    whileTap={{ scale: 0.96 }}
+                    transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
                     className="inline-flex font-sans font-medium text-white text-[14px] select-none"
                   >
                     <span
-                      className="px-7 py-3 btn-angular flex items-center gap-2 transition-shadow duration-300"
+                      className="px-7 py-3 btn-angular flex items-center gap-2"
                       style={{
                         background: `linear-gradient(135deg, ${project.panelAccentColor}, #4A9FAE)`,
-                        boxShadow: `0 4px 20px ${project.panelAccentColor}30`,
+                        boxShadow: `0 4px 20px ${project.panelAccentColor}35`,
                       }}
                     >
                       View Case Study
-                      <ArrowRight
-                        size={15}
-                        className="transition-transform duration-200 group-hover:translate-x-1"
-                      />
+                      <ArrowRight size={15} />
                     </span>
                   </motion.a>
                 </div>

@@ -1,7 +1,7 @@
 import type { SiteConfig } from '@/types/site'
 
 export const siteConfig: SiteConfig = {
-  name: 'Justin C.',
+  name: 'Justin Chang',
   roleTag: 'Solutions Engineering + Product Management',
   heroStatement: 'I turn complex systems and AI workflows into clear, usable products.',
   resumeUrl: '/resume.pdf',
@@ -82,5 +82,5 @@ export const siteConfig: SiteConfig = {
   linkedinUrl: 'https://linkedin.com/in/justinc',
   githubUrl: 'https://github.com/justinc',
   currentlyOpen: 'Open to SE + PM roles at startups and growth-stage companies.',
-  copyrightName: 'Justin C.',
+  copyrightName: 'Justin Chang',
 }

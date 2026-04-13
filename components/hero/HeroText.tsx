@@ -27,10 +27,10 @@ export function HeroText() {
       {/* ── Availability tag ────────────────────────────────────────────── */}
       <motion.div variants={fast} className="mb-7">
         <span
-          className="inline-flex items-center gap-2.5 font-mono text-[11px] tracking-[0.08em] uppercase rounded-full px-4 py-1.5"
+          className="inline-flex items-center gap-2.5 font-mono text-[11px] tracking-[0.12em] uppercase rounded-full px-4 py-2"
           style={{
-            border: '1px solid rgba(15,122,122,0.30)',
-            background: 'rgba(15,122,122,0.08)',
+            border: '1px solid rgba(15,122,122,0.32)',
+            background: 'rgba(15,122,122,0.09)',
             color: '#4A9FAE',
           }}
         >
@@ -93,19 +93,30 @@ export function HeroText() {
         {/* Primary — angular teal gradient */}
         <motion.a
           href="/#projects"
-          whileHover={{ scale: 1.04, y: -2 }}
-          whileTap={{ scale: 0.97 }}
+          whileHover={{
+            scale: 1.05,
+            y: -3,
+            boxShadow: '0 12px 40px rgba(15,122,122,0.50), 0 0 0 1px rgba(74,159,174,0.30)',
+          }}
+          whileTap={{ scale: 0.96 }}
+          transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
           className="inline-flex font-sans font-medium text-white text-[15px] select-none"
         >
           <span
-            className="px-7 py-3 btn-angular flex items-center gap-2 transition-shadow duration-300"
+            className="px-7 py-3 btn-angular flex items-center gap-2"
             style={{
               background: 'linear-gradient(135deg, #0F7A7A, #4A9FAE)',
-              boxShadow: '0 4px 20px rgba(15,122,122,0.25)',
+              boxShadow: '0 4px 20px rgba(15,122,122,0.30)',
             }}
           >
             View my work
-            <ArrowDown size={15} />
+            <motion.span
+              animate={{ x: [0, 0] }}
+              whileHover={{ x: 2 }}
+              className="inline-flex"
+            >
+              <ArrowDown size={15} />
+            </motion.span>
           </span>
         </motion.a>
 
@@ -113,11 +124,18 @@ export function HeroText() {
         <motion.a
           href={siteConfig.resumeUrl}
           download
-          whileHover={{ scale: 1.03, y: -1, borderColor: 'rgba(15,122,122,0.55)' }}
-          whileTap={{ scale: 0.97 }}
-          className="inline-flex items-center gap-2 font-sans font-medium text-[15px] px-6 py-3 rounded-btn transition-all duration-200 select-none"
+          whileHover={{
+            scale: 1.04,
+            y: -2,
+            backgroundColor: 'rgba(15,122,122,0.10)',
+            borderColor: 'rgba(15,122,122,0.50)',
+            color: '#E8F4F8',
+          }}
+          whileTap={{ scale: 0.96 }}
+          transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+          className="inline-flex items-center gap-2 font-sans font-medium text-[15px] px-6 py-3 rounded-btn select-none"
           style={{
-            border: '1px solid rgba(15,122,122,0.25)',
+            border: '1px solid rgba(15,122,122,0.28)',
             color: '#A8C5D1',
           }}
         >
