@@ -27,17 +27,17 @@ function SparkAccent({
       className="absolute pointer-events-none"
       style={{ left: x, top, zIndex: 10 }}
       initial={{ opacity: 0, scale: 0, rotate: 0 }}
-      animate={{ opacity: [0, 1, 0], scale: [0, 1, 0], rotate: 45 }}
-      transition={{ delay, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+      animate={{ opacity: [0, 1, 0], scale: [0, 1.4, 0], rotate: 45 }}
+      transition={{ delay, duration: 0.70, ease: [0.22, 1, 0.36, 1] }}
       aria-hidden
     >
       {/* Soft glow behind the star */}
       <span
         style={{
           position: 'absolute',
-          inset: -size,
+          inset: -size * 1.8,
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(244,213,141,0.35) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(244,213,141,0.55) 0%, transparent 70%)',
         }}
       />
       <svg width={size} height={size} viewBox="0 0 24 24" style={{ position: 'relative' }}>
@@ -56,11 +56,11 @@ function SparkAccent({
 // Runs concurrently with the star so the name appears to be revealed by it.
 
 const nameRevealVariant: Variants = {
-  hidden: { opacity: 0, y: 10 },
+  hidden: { opacity: 0, y: 22 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 1.05, ease: [0.25, 0, 0.35, 1] },
+    transition: { duration: 1.4, ease: [0.22, 0, 0.36, 1] },
   },
 }
 
@@ -149,9 +149,9 @@ export function HeroText() {
               }}
               transition={{
                 delay: 0.10,
-                duration: 0.58,
+                duration: 0.90,
                 ease: [0.4, 0, 0.55, 1],
-                opacity: { times: [0, 0.06, 0.50, 0.88, 1], ease: 'linear' },
+                opacity: { times: [0, 0.05, 0.50, 0.90, 1], ease: 'linear' },
               }}
             >
               {/*
@@ -171,15 +171,15 @@ export function HeroText() {
                 ────────────────────────────────────────────────────────── */}
                 <div
                   style={{
-                    width: 110,
-                    height: 2,
+                    width: 160,
+                    height: 3,
                     borderRadius: 9999,
                     background:
                       'linear-gradient(to right,' +
                       '  transparent 0%,' +
-                      '  rgba(74,159,174,0.15) 20%,' +
-                      '  rgba(100,200,220,0.45) 55%,' +
-                      '  rgba(220,248,255,0.82) 100%)',
+                      '  rgba(74,159,174,0.25) 20%,' +
+                      '  rgba(100,200,220,0.65) 55%,' +
+                      '  rgba(220,248,255,0.95) 100%)',
                   }}
                 />
 
@@ -192,9 +192,9 @@ export function HeroText() {
                 <div
                   style={{
                     position: 'relative',
-                    width: 16,
-                    height: 16,
-                    marginLeft: -3,
+                    width: 22,
+                    height: 22,
+                    marginLeft: -4,
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -205,16 +205,16 @@ export function HeroText() {
                   <div
                     style={{
                       position: 'absolute',
-                      width: 40,
-                      height: 40,
+                      width: 60,
+                      height: 60,
                       top: '50%',
                       left: '50%',
                       transform: 'translate(-50%, -50%)',
                       borderRadius: '50%',
                       background:
                         'radial-gradient(circle,' +
-                        '  rgba(220,248,255,0.65) 0%,' +
-                        '  rgba(100,200,220,0.28) 40%,' +
+                        '  rgba(220,248,255,0.80) 0%,' +
+                        '  rgba(100,200,220,0.38) 40%,' +
                         '  transparent 70%)',
                     }}
                   />
@@ -222,30 +222,30 @@ export function HeroText() {
                   <div
                     style={{
                       position: 'absolute',
-                      width: 20,
-                      height: 20,
+                      width: 28,
+                      height: 28,
                       top: '50%',
                       left: '50%',
                       transform: 'translate(-50%, -50%)',
                       borderRadius: '50%',
                       background:
                         'radial-gradient(circle,' +
-                        '  rgba(255,255,255,0.90) 0%,' +
-                        '  rgba(200,240,255,0.55) 55%,' +
+                        '  rgba(255,255,255,0.95) 0%,' +
+                        '  rgba(200,240,255,0.65) 55%,' +
                         '  transparent 100%)',
                     }}
                   />
                   {/* 4-pointed star */}
                   <svg
-                    width="14"
-                    height="14"
+                    width="20"
+                    height="20"
                     viewBox="0 0 24 24"
                     style={{ position: 'relative', zIndex: 1 }}
                   >
                     <path
                       d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z"
                       fill="white"
-                      opacity="0.97"
+                      opacity="1"
                     />
                   </svg>
                 </div>
@@ -257,10 +257,10 @@ export function HeroText() {
                 Alternating top/bottom so they feel organic, not aligned.
                 Delays follow the star's x position across the 0.58s travel.
             ────────────────────────────────────────────────────────────── */}
-            <SparkAccent delay={0.16} x="7%"  top="-13px" size={8} />
-            <SparkAccent delay={0.23} x="29%" top="calc(100% + 7px)" size={7} />
-            <SparkAccent delay={0.31} x="55%" top="-11px" size={9} />
-            <SparkAccent delay={0.38} x="79%" top="calc(100% + 5px)" size={7} />
+            <SparkAccent delay={0.18} x="7%"  top="-16px" size={12} />
+            <SparkAccent delay={0.30} x="29%" top="calc(100% + 10px)" size={10} />
+            <SparkAccent delay={0.42} x="55%" top="-14px" size={13} />
+            <SparkAccent delay={0.54} x="79%" top="calc(100% + 8px)" size={10} />
           </>
         )}
 
