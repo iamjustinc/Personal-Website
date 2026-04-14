@@ -382,17 +382,6 @@ function ContactSectionLayout() {
           <CopyEmailButton email={siteConfig.email} />
         </div>
 
-        <div className="mt-6 flex flex-wrap gap-3">
-          <MetaPill>Open to early-career roles</MetaPill>
-          <MetaPill>SE · PM · AI workflows</MetaPill>
-        </div>
-
-        <div className="mt-8 flex flex-wrap items-center gap-6">
-          <CompactLink href={siteConfig.linkedinUrl} icon={Linkedin} label="LinkedIn" />
-          <CompactLink href={siteConfig.githubUrl} icon={Github} label="GitHub" />
-          <CompactLink href={siteConfig.resumeUrl} icon={Download} label="Résumé" />
-        </div>
-
         <SectionFooter showThanks />
       </div>
 
