@@ -48,30 +48,33 @@ export function Nav() {
             <div className="relative px-5 py-1.5 flex items-center justify-between">
               {/* Brand */}
               <motion.div
-                whileHover={{ scale: 1.06, opacity: 0.9 }}
-                transition={{ duration: 0.2, ease: 'easeOut' }}
-                className="shrink-0 basis-[120px] md:basis-[140px] z-10 flex items-center"
-              >
-                <Link href="/" aria-label={`${siteConfig.name} — home`}>
-                  {siteConfig.logoSrc ? (
-                    <Image
-                      src={siteConfig.logoSrc}
-                      alt="Justin logo"
-                      width={120}
-                      height={120}
-                      className="w-[120px] h-auto max-h-10 object-contain"
-                      priority
-                    />
-                  ) : (
-                    <div
-                      className="w-14 h-14 rounded-xl flex items-center justify-center"
-                      style={{ background: 'linear-gradient(135deg, #0F7A7A, #4A9FAE)' }}
-                    >
-                      <StarMark size="sm" color="white" />
-                    </div>
-                  )}
-                </Link>
-              </motion.div>
+  whileHover={{ scale: 1.06, opacity: 0.9 }}
+  transition={{ duration: 0.2, ease: 'easeOut' }}
+  className="shrink-0 basis-[120px] md:basis-[140px] z-10 flex items-center"
+>
+  <Link
+    href="/"
+    aria-label={`${siteConfig.name} — home`}
+    className="relative block h-10 w-[132px]"
+  >
+    {siteConfig.logoSrc ? (
+      <Image
+        src={siteConfig.logoSrc}
+        alt="Justin logo"
+        fill
+        className="object-contain object-left"
+        priority
+      />
+    ) : (
+      <div
+        className="w-14 h-14 rounded-xl flex items-center justify-center"
+        style={{ background: 'linear-gradient(135deg, #0F7A7A, #4A9FAE)' }}
+      >
+        <StarMark size="sm" color="white" />
+      </div>
+    )}
+  </Link>
+</motion.div>
 
               {/* Nav links */}
               <nav
