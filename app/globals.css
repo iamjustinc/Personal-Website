@@ -113,10 +113,3 @@ body {
   .portrait-glow { animation: none; box-shadow: 0 0 0 2px rgba(15,122,122,0.45), 0 0 0 8px rgba(15,122,122,0.10); }
 }
 
-/* ── Sparkle cursor — applied only to HoverSparkle-wrapped elements ──────── */
-/* 4-pointed star in warm gold, 24×24, hotspot centred at 12 12.              */
-/* Base64-encoded to avoid quote/encoding ambiguity across all browsers.      */
-
-.cursor-sparkle {
-  cursor: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTIgMiBMMTQgMTAgTDIyIDEyIEwxNCAxNCBMMTIgMjIgTDEwIDE0IEwyIDEyIEwxMCAxMCBaIiBmaWxsPSIjRjRENThEIiBvcGFjaXR5PSIwLjkiLz48L3N2Zz4=") 12 12, pointer;
-}

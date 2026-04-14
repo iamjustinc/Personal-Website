@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { cn } from '@/lib/utils'
 
 type Spark = {
@@ -26,8 +27,11 @@ export function HoverSparkle({ children, className }: HoverSparkleProps) {
   const timeoutIdsRef = useRef<number[]>([])
   const [isTouch, setIsTouch] = useState(false)
   const [sparks, setSparks] = useState<Spark[]>([])
+  const [cursorPos, setCursorPos] = useState<{ x: number; y: number } | null>(null)
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
     const media = window.matchMedia('(pointer: coarse)')
     const update = () => setIsTouch(media.matches)
 
@@ -68,12 +72,25 @@ export function HoverSparkle({ children, className }: HoverSparkleProps) {
     timeoutIdsRef.current.push(timeoutId)
   }
 
+  // Only show custom cursor on pointer devices without reduced motion
+  const showCustomCursor = !isTouch && !reduceMotion
+
   return (
     <div
       ref={hostRef}
-      className={cn('relative isolate cursor-sparkle', className)}
-      onMouseEnter={(e) => spawnSpark(e.clientX, e.clientY, true)}
-      onMouseMove={(e) => spawnSpark(e.clientX, e.clientY)}
+      className={cn('relative isolate', className)}
+      style={showCustomCursor ? { cursor: 'none' } : undefined}
+      onMouseEnter={(e) => {
+        if (showCustomCursor) setCursorPos({ x: e.clientX, y: e.clientY })
+        spawnSpark(e.clientX, e.clientY, true)
+      }}
+      onMouseMove={(e) => {
+        if (showCustomCursor) setCursorPos({ x: e.clientX, y: e.clientY })
+        spawnSpark(e.clientX, e.clientY)
+      }}
+      onMouseLeave={() => {
+        setCursorPos(null)
+      }}
     >
       {children}
 
@@ -118,6 +135,48 @@ export function HoverSparkle({ children, className }: HoverSparkleProps) {
           ))}
         </AnimatePresence>
       </div>
+
+      {/* Custom cursor — portaled to document.body to escape any ancestor transform context
+          (Framer Motion animates ancestors with transform, which would break position:fixed) */}
+      {mounted && showCustomCursor && cursorPos &&
+        createPortal(
+          <div
+            aria-hidden="true"
+            className="pointer-events-none fixed z-[9999]"
+            style={{
+              left: cursorPos.x,
+              top: cursorPos.y,
+              transform: 'translate(-50%, -50%)',
+            }}
+          >
+            {/* Soft glow halo */}
+            <div
+              className="absolute inset-0 rounded-full"
+              style={{
+                width: 28,
+                height: 28,
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                background: 'radial-gradient(circle, rgba(244,213,141,0.22) 0%, transparent 70%)',
+              }}
+            />
+            {/* 4-pointed star */}
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z"
+                fill="#F4D58D"
+                opacity="0.92"
+              />
+            </svg>
+          </div>,
+          document.body,
+        )}
     </div>
   )
 }
