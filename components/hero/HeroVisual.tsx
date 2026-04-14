@@ -131,8 +131,8 @@ export function HeroVisual() {
           </div>
         )}
 
-        {/* ── Orbiting satellite dot ───────────────────────────────────── */}
-        {/* Replaces the old static bottom-right gold badge */}
+        {/* ── Orbiting satellites / sparkles ───────────────────────────── */}
+        {/* Main gold satellite — 3D feel */}
         <motion.div
           aria-hidden
           className="absolute pointer-events-none"
@@ -150,7 +150,7 @@ export function HeroVisual() {
             shouldReduce
               ? {}
               : {
-                  duration: 18,
+                  duration: 20,
                   repeat: Infinity,
                   ease: 'linear',
                 }
@@ -161,42 +161,215 @@ export function HeroVisual() {
               position: 'absolute',
               top: '50%',
               left: '50%',
-              width: 26,
-              height: 26,
-              marginLeft: -13,
-              marginTop: -13,
-              transform: 'rotate(130deg) translateY(-164px)',
+              width: 18,
+              height: 18,
+              marginLeft: -9,
+              marginTop: -9,
+              transform: 'rotate(132deg) translateY(-164px)',
             }}
           >
             <motion.div
-              animate={shouldReduce ? {} : { scale: [1, 1.08, 1] }}
+              animate={shouldReduce ? {} : { scale: [1, 1.08, 1], y: [0, -1.5, 0] }}
               transition={
                 shouldReduce
                   ? {}
                   : {
-                      duration: 2.6,
+                      duration: 2.8,
                       repeat: Infinity,
                       ease: 'easeInOut',
                     }
               }
               style={{
-                width: 26,
-                height: 26,
+                width: 18,
+                height: 18,
                 borderRadius: '50%',
-                background: '#C4974A',
-                boxShadow: '0 0 14px rgba(196,151,74,0.55), 0 0 28px rgba(196,151,74,0.22)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
+                background:
+                  'radial-gradient(circle at 32% 30%, #FFF5D9 0%, #E2BC69 34%, #C4974A 68%, #8E6320 100%)',
+                boxShadow:
+                  '0 0 10px rgba(196,151,74,0.55), 0 0 22px rgba(196,151,74,0.22), inset -2px -2px 4px rgba(0,0,0,0.18), inset 1px 1px 2px rgba(255,255,255,0.4)',
               }}
-            >
-              <StarMark size="xs" color="#0A1628" />
-            </motion.div>
+            />
+          </div>
+        </motion.div>
+
+        {/* Small teal satellite */}
+        <motion.div
+          aria-hidden
+          className="absolute pointer-events-none"
+          style={{
+            width: 296,
+            height: 296,
+            top: '50%',
+            left: '50%',
+            marginLeft: -148,
+            marginTop: -148,
+            zIndex: 19,
+          }}
+          animate={shouldReduce ? {} : { rotate: -360 }}
+          transition={
+            shouldReduce
+              ? {}
+              : {
+                  duration: 28,
+                  repeat: Infinity,
+                  ease: 'linear',
+                }
+          }
+        >
+          <div
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              width: 10,
+              height: 10,
+              marginLeft: -5,
+              marginTop: -5,
+              transform: 'rotate(36deg) translateY(-148px)',
+            }}
+          >
+            <motion.div
+              animate={shouldReduce ? {} : { scale: [1, 1.18, 1], opacity: [0.7, 1, 0.7] }}
+              transition={
+                shouldReduce
+                  ? {}
+                  : {
+                      duration: 3.2,
+                      repeat: Infinity,
+                      ease: 'easeInOut',
+                    }
+              }
+              style={{
+                width: 10,
+                height: 10,
+                borderRadius: '50%',
+                background:
+                  'radial-gradient(circle at 35% 35%, #D9FCFF 0%, #71D5E4 40%, #4A9FAE 75%, #1C5B68 100%)',
+                boxShadow:
+                  '0 0 8px rgba(74,159,174,0.55), 0 0 18px rgba(74,159,174,0.18), inset -1px -1px 2px rgba(0,0,0,0.18), inset 1px 1px 2px rgba(255,255,255,0.35)',
+              }}
+            />
+          </div>
+        </motion.div>
+
+        {/* Tiny aqua sparkle */}
+        <motion.div
+          aria-hidden
+          className="absolute pointer-events-none"
+          style={{
+            width: 350,
+            height: 350,
+            top: '50%',
+            left: '50%',
+            marginLeft: -175,
+            marginTop: -175,
+            zIndex: 18,
+          }}
+          animate={shouldReduce ? {} : { rotate: 360 }}
+          transition={
+            shouldReduce
+              ? {}
+              : {
+                  duration: 34,
+                  repeat: Infinity,
+                  ease: 'linear',
+                }
+          }
+        >
+          <div
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              width: 6,
+              height: 6,
+              marginLeft: -3,
+              marginTop: -3,
+              transform: 'rotate(248deg) translateY(-175px)',
+            }}
+          >
+            <motion.div
+              animate={shouldReduce ? {} : { scale: [1, 1.35, 1], opacity: [0.35, 0.9, 0.35] }}
+              transition={
+                shouldReduce
+                  ? {}
+                  : {
+                      duration: 2.4,
+                      repeat: Infinity,
+                      ease: 'easeInOut',
+                    }
+              }
+              style={{
+                width: 6,
+                height: 6,
+                borderRadius: '50%',
+                background: '#7EE7F2',
+                boxShadow: '0 0 10px rgba(126,231,242,0.45), 0 0 20px rgba(126,231,242,0.18)',
+              }}
+            />
+          </div>
+        </motion.div>
+
+        {/* Tiny gold sparkle */}
+        <motion.div
+          aria-hidden
+          className="absolute pointer-events-none"
+          style={{
+            width: 312,
+            height: 312,
+            top: '50%',
+            left: '50%',
+            marginLeft: -156,
+            marginTop: -156,
+            zIndex: 18,
+          }}
+          animate={shouldReduce ? {} : { rotate: -360 }}
+          transition={
+            shouldReduce
+              ? {}
+              : {
+                  duration: 24,
+                  repeat: Infinity,
+                  ease: 'linear',
+                }
+          }
+        >
+          <div
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              width: 5,
+              height: 5,
+              marginLeft: -2.5,
+              marginTop: -2.5,
+              transform: 'rotate(310deg) translateY(-156px)',
+            }}
+          >
+            <motion.div
+              animate={shouldReduce ? {} : { scale: [1, 1.4, 1], opacity: [0.3, 0.85, 0.3] }}
+              transition={
+                shouldReduce
+                  ? {}
+                  : {
+                      duration: 2.8,
+                      repeat: Infinity,
+                      ease: 'easeInOut',
+                      delay: 0.6,
+                    }
+              }
+              style={{
+                width: 5,
+                height: 5,
+                borderRadius: '50%',
+                background: '#E6C06C',
+                boxShadow: '0 0 8px rgba(196,151,74,0.45), 0 0 16px rgba(196,151,74,0.16)',
+              }}
+            />
           </div>
         </motion.div>
 
         {/* ── Orbital star marks ──────────────────────────────────────── */}
-        {/* Positioned around the portrait at deliberate cardinal points  */}
 
         {/* Top-right */}
         <motion.div

@@ -55,14 +55,14 @@ export function Nav() {
   <Link
     href="/"
     aria-label={`${siteConfig.name} — home`}
-    className="relative block h-10 w-[132px]"
+    className="relative block h-10 w-[118px] overflow-visible"
   >
     {siteConfig.logoSrc ? (
       <Image
         src={siteConfig.logoSrc}
         alt="Justin logo"
         fill
-        className="object-contain object-left"
+        className="object-contain object-left scale-[1.55] origin-left"
         priority
       />
     ) : (
