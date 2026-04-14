@@ -12,78 +12,88 @@ export const projects: Project[] = [
   {
     slug: 'kestrel',
     name: 'Kestrel',
-    tagline: 'An AI-powered research tool that turns scattered information into structured insight.',
+    tagline:
+      'AI career intelligence system that turns messy job descriptions into readiness scores, skill-gap analysis, and next-step recommendations.',
     summary:
-      'Kestrel helps analysts move from raw data to structured findings in a fraction of the time. Built around an AI pipeline that reads, synthesizes, and presents information clearly.',
+      'Kestrel is an AI decision-support system built to translate unstructured job descriptions into clear, actionable outputs. It helps users understand where they stand, what skills they are missing, and what to do next.',
     featured: true,
     order: 1,
     visible: true,
     homepageVisible: true,
-    role: 'Builder + Designer',
-    tags: ['AI', 'Product', 'Full-Stack'],
+    role: 'Builder + Product Thinker',
+    tags: ['AI', 'Decision Support', 'Product'],
     stack: ['Next.js', 'TypeScript', 'OpenAI', 'PostgreSQL', 'Tailwind'],
     year: 2026,
-    outcome: 'Reduced research synthesis time by 70% in internal testing.',
+    outcome:
+      'Designed explainable outputs and a live dashboard to make recommendations easy to act on.',
     thumbnail: '/images/projects/kestrel/thumb.png',
     screenshots: [],
     panelAccentColor: '#2A8B87',
     problem:
-      'Analysts spend most of their time organizing information rather than drawing conclusions from it. Existing tools either do too much or require too much manual work to be useful.',
+      'Job seekers often work from messy, inconsistent job descriptions and struggle to translate them into concrete priorities. Most tools stop at generic advice instead of helping people decide what matters now.',
     solution:
-      'Kestrel is a research pipeline that ingests sources, extracts structured findings, and presents them in a scannable, editable format. The AI handles structure; the user handles judgment.',
+      'Kestrel converts raw job descriptions into structured readiness scores, skill gaps, and recommended next steps. The system is designed to make AI outputs legible, explainable, and immediately useful.',
     impact:
-      'Early testing showed a 70% reduction in time from source to structured output. Users consistently described the output as "actually usable on first pass."',
+      'The product turns vague career information into clear action. It was built to demonstrate product judgment, structured AI outputs, and a workflow that users can trust and act on quickly.',
     buildNotes:
-      'The hardest part was prompt engineering for consistency — getting the model to produce the same schema across wildly different source types.',
+      'The hardest part was designing schema-constrained outputs that stayed consistent across wildly different job descriptions while still feeling useful and human-readable.',
   },
   {
     slug: 'quail',
-    name: 'Quail',
-    tagline: 'A lightweight CRM layer that lives inside the tools your team already uses.',
+    name: 'Quail Mail',
+    tagline:
+      'AI inbox triage assistant that turns high-volume email into prioritized action pipelines.',
     summary:
-      'Quail brings relationship context into Slack and email without asking teams to change their workflow. It surfaces the right information at the right moment.',
-    featured: false,
-    order: 1,
-    visible: true,
-    homepageVisible: true,
-    role: 'Solo Developer',
-    tags: ['Systems', 'Automation', 'Product'],
-    stack: ['Node.js', 'TypeScript', 'Slack API', 'Notion API'],
-    year: 2026,
-    outcome: 'Adopted by 3 pilot teams within two weeks of launch.',
-    thumbnail: '/images/projects/quail/thumb.png',
-    screenshots: [],
-    panelAccentColor: '#5E9FD4',
-    problem:
-      'Small teams lose relationship context constantly — who spoke to whom, what was promised, what the next step is. CRMs are too heavy to maintain consistently.',
-    solution:
-      'Quail hooks into existing communication tools and automatically logs relationship activity, surfaces context at the right moment, and requires zero manual data entry.',
-    impact:
-      'Three pilot teams adopted it within two weeks. One team lead described it as "the first CRM tool that doesn\'t feel like a CRM."',
-  },
-  {
-    slug: 'chirpie',
-    name: 'Chirpie',
-    tagline: 'A social listening tool that tracks signal across noise for product teams.',
-    summary:
-      'Chirpie monitors online conversations about a product or space and distills them into actionable product insights — not just raw mention counts.',
+      'Quail Mail helps busy professionals reduce inbox overload by classifying messages, surfacing what matters, and turning email into clear next steps. It is built as both a usable workflow tool and a strong live demo.',
     featured: false,
     order: 2,
     visible: true,
     homepageVisible: true,
-    role: 'Builder',
-    tags: ['AI', 'Product', 'UX'],
+    role: 'Builder + Workflow Designer',
+    tags: ['AI', 'Automation', 'Workflow'],
+    stack: ['Next.js', 'TypeScript', 'OpenAI', 'Resend', 'Tailwind'],
+    year: 2026,
+    outcome:
+      'Transforms inboxes into prioritized task pipelines, reducing triage time by 80%.',
+    thumbnail: '/images/projects/quail/thumb.png',
+    screenshots: [],
+    panelAccentColor: '#5E9FD4',
+    problem:
+      'High-volume inboxes create constant friction. Important messages get buried, follow-ups are missed, and users spend too much time deciding what deserves attention first.',
+    solution:
+      'Quail Mail applies AI classification across sender, urgency, and context to surface priorities, recommend actions, and support faster decision-making. It also integrates production email delivery to show an end-to-end usable workflow.',
+    impact:
+      'The system demonstrates how AI can reduce operational friction in a familiar workflow. It was designed to clearly communicate both user value and technical implementation in a live product demo.',
+    buildNotes:
+      'A key challenge was making the prioritization logic feel believable and useful rather than gimmicky, while also wiring real-time analysis and production email delivery into a polished demo flow.',
+  },
+  {
+    slug: 'chirpie',
+    name: 'Chirpie',
+    tagline:
+      'AI news companion that turns multi-source content into personalized, explainable digests.',
+    summary:
+      'Chirpie ingests current events from multiple sources and delivers structured chat-style summaries with context, confidence, and attribution. It is designed around trust, clarity, and repeat engagement.',
+    featured: false,
+    order: 3,
+    visible: true,
+    homepageVisible: true,
+    role: 'Builder + Systems Designer',
+    tags: ['AI', 'Product', 'Insights'],
     stack: ['Next.js', 'Python', 'OpenAI', 'Supabase'],
     year: 2026,
-    outcome: 'Surfaces weekly insight summaries that PMs describe as "actually useful."',
+    outcome:
+      'Built around source attribution, explainable summaries, and a digest flow designed for repeat use.',
     thumbnail: '/images/projects/chirpie/thumb.png',
     screenshots: [],
     panelAccentColor: '#62BDB8',
     problem:
-      'Product teams know social listening matters but existing tools surface volume, not insight. You get a dashboard full of mentions with no clear signal.',
+      'People want quick updates, but most news tools overwhelm them with volume or flatten everything into generic summaries. That creates convenience at the expense of trust and context.',
     solution:
-      'Chirpie pulls from multiple sources, filters noise using a custom relevance model, and distills what remains into weekly insight summaries with actionable framing.',
+      'Chirpie pulls from multiple sources and structures outputs around headlines, supporting context, confidence, and original-report links. The result is a digest experience that feels faster without feeling shallow.',
     impact:
-      'PMs using Chirpie consistently describe the weekly summaries as the most useful thing they read that week. Signal-to-noise ratio is dramatically higher than alternatives.',
+      'The product shows how structured AI outputs can improve trust and usability in information-heavy workflows. It was built to highlight product thinking around explainability, onboarding, and repeat engagement.',
+    buildNotes:
+      'The biggest challenge was balancing concise summaries with enough sourcing and context to keep the experience trustworthy instead of over-compressed.',
   },
 ]
