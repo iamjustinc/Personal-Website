@@ -10,7 +10,7 @@ import { MobileMenu } from './MobileMenu'
 import { HoverSparkle } from '@/components/ui/HoverSparkle'
 
 const navLinks = [
-  { label: 'Work', href: '/work' },
+  { label: 'Portfolio', href: '/work' },
   { label: 'About', href: '/about' },
   { label: 'Resume', href: '/resume' },
   { label: 'Contact', href: '/contact' },

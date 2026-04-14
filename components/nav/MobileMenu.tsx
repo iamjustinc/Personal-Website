@@ -12,7 +12,7 @@ interface MobileMenuProps {
 }
 
 const links = [
-  { label: 'Work',    href: '/work'    },
+  { label: 'Portfolio', href: '/work'    },
   { label: 'About',   href: '/about'   },
   { label: 'Contact', href: '/contact' },
   { label: 'Resume',  href: '/resume'  },
