@@ -12,10 +12,10 @@ import { MobileMenu } from './MobileMenu'
 import { siteConfig } from '@/data/site'
 
 const navLinks = [
-  { label: 'Work',    href: '/work',    download: false },
-  { label: 'About',   href: '/about',   download: false },
-  { label: 'Resume',  href: '/resume',            download: false },
-  { label: 'Contact', href: '/contact', download: false },
+  { label: 'Work', href: '/work' },
+  { label: 'About', href: '/about' },
+  { label: 'Resume', href: '/resume' },
+  { label: 'Contact', href: '/contact' },
 ]
 
 export function Nav() {
@@ -24,15 +24,13 @@ export function Nav() {
 
   return (
     <>
-      {/* ── Fixed centering wrapper — owns position, never animated ──────── */}
       <div
         className="fixed top-5 left-0 right-0 z-50 flex justify-center px-5 pointer-events-none"
         aria-label="Site header"
       >
-        {/* ── Motion element — owns animation only, no positioning transform */}
         <motion.header
           initial={{ y: -90, opacity: 0 }}
-          animate={{ y: 0,   opacity: 1 }}
+          animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1.0, delay: 0.10, ease: [0.22, 1, 0.36, 1] }}
           className="w-full max-w-[860px] pointer-events-auto"
         >
@@ -48,31 +46,22 @@ export function Nav() {
             }}
           >
             <div className="relative px-5 py-1.5 flex items-center justify-between">
-
-              {/* ── Brand — bare logo, no box, no text ─────────────────── */}
+              {/* Brand */}
               <motion.div
-                whileHover={{ scale: 1.06, opacity: 0.85 }}
+                whileHover={{ scale: 1.06, opacity: 0.9 }}
                 transition={{ duration: 0.2, ease: 'easeOut' }}
-                className="shrink-0 z-10"
+                className="shrink-0 basis-[120px] md:basis-[140px] z-10 flex items-center"
               >
                 <Link href="/" aria-label={`${siteConfig.name} — home`}>
                   {siteConfig.logoSrc ? (
-                    <motion.div
-                    whileHover={{ scale: 1.06, opacity: 0.9 }}
-                    transition={{ duration: 0.2, ease: 'easeOut' }}
-                    className="shrink-0 basis-[120px] md:basis-[150px] z-10 flex items-center"
-                  >
-                    <Link href="/" aria-label={`${siteConfig.name} — home`}>
                     <Image
-  src={siteConfig.logoSrc}
-  alt="Justin logo"
-  width={120}
-  height={40}
-  className="w-[120px] h-auto max-h-10 object-contain"
-  priority
-/>
-                    </Link>
-                  </motion.div>
+                      src={siteConfig.logoSrc}
+                      alt="Justin logo"
+                      width={120}
+                      height={40}
+                      className="w-[120px] h-auto max-h-10 object-contain"
+                      priority
+                    />
                   ) : (
                     <div
                       className="w-14 h-14 rounded-xl flex items-center justify-center"
@@ -84,14 +73,15 @@ export function Nav() {
                 </Link>
               </motion.div>
 
-              {/* ── Nav links — absolutely centered in the pill ─────────── */}
+              {/* Nav links */}
               <nav
                 className="hidden md:flex absolute left-1/2 top-1/2 items-center gap-5"
                 style={{ transform: 'translate(-50%, -50%)' }}
                 aria-label="Main navigation"
               >
-                {navLinks.map(({ label, href, download }, idx) => {
-                  const isActive = !download && pathname === href
+                {navLinks.map(({ label, href }, idx) => {
+                  const isActive = pathname === href
+
                   return (
                     <div key={label} className="flex items-center gap-5">
                       {idx > 0 && (
@@ -99,9 +89,9 @@ export function Nav() {
                           <StarMark size="xs" color="rgba(15,122,122,0.35)" />
                         </span>
                       )}
-                      <a
+
+                      <Link
                         href={href}
-                        download={download || undefined}
                         className={cn(
                           'relative group font-sans text-[13.5px] font-medium transition-colors duration-200 pb-0.5',
                           isActive
@@ -110,7 +100,7 @@ export function Nav() {
                         )}
                       >
                         {label}
-                        {/* Active underline indicator */}
+
                         <span
                           className="absolute -bottom-px left-0 right-0 h-px rounded-full transition-all duration-300"
                           style={{
@@ -120,20 +110,20 @@ export function Nav() {
                             opacity: isActive ? 1 : 0,
                           }}
                         />
-                        {/* Hover underline */}
+
                         <span
                           className="absolute -bottom-px left-0 right-0 h-px rounded-full transition-all duration-200 opacity-0 group-hover:opacity-35"
                           style={{
                             background: 'linear-gradient(90deg, #0F7A7A, #4A9FAE)',
                           }}
                         />
-                      </a>
+                      </Link>
                     </div>
                   )
                 })}
               </nav>
 
-              {/* ── Mobile hamburger (hidden md+) ──────────────────────── */}
+              {/* Mobile hamburger */}
               <div className="shrink-0 z-10">
                 <button
                   className="md:hidden p-2 -mr-1 text-text-muted hover:text-text-base transition-colors rounded-btn"
@@ -143,7 +133,6 @@ export function Nav() {
                   <Menu size={20} />
                 </button>
               </div>
-
             </div>
           </div>
         </motion.header>
