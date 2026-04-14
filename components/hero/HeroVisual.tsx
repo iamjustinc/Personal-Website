@@ -442,8 +442,8 @@ export function HeroVisual() {
           className="w-1.5 h-1.5 rounded-full"
           style={{ background: '#4A9FAE', boxShadow: '0 0 6px rgba(74,159,174,0.8)' }}
         />
-        <span className="font-mono text-[9px] uppercase tracking-wider text-text-muted">
-          Open to opportunities
+        <span className="font-mono text-[15px] uppercase tracking-wider text-text-muted">
+          Open to opportunities!
         </span>
       </motion.div>
     </motion.div>
