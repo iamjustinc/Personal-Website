@@ -40,7 +40,7 @@ export function ShootingStar({
       <div
         className="shooting-star"
         style={{
-          animation: `shoot-cycle ${duration}s ease-in ${delay}s infinite`,
+          animation: `shoot-cycle ${duration}s linear ${delay}s infinite`,
         }}
       />
     </div>

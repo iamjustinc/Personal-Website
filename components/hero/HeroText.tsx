@@ -90,56 +90,94 @@ export function HeroText() {
       {/* ── CTAs ─────────────────────────────────────────────────────────── */}
       <motion.div variants={fast} className="flex flex-wrap gap-3 mt-6">
 
-        {/* Primary — angular teal gradient */}
+        {/* ── Primary — angular, teal, star + arrow ─────────────────────── */}
         <motion.a
           href="/#projects"
-          whileHover={{
-            scale: 1.05,
-            y: -3,
-            boxShadow: '0 12px 40px rgba(15,122,122,0.50), 0 0 0 1px rgba(74,159,174,0.30)',
-          }}
-          whileTap={{ scale: 0.96 }}
-          transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-          className="inline-flex font-sans font-medium text-white text-[15px] select-none"
+          whileHover="hov"
+          whileTap={{ scale: 0.95 }}
+          className="inline-flex select-none"
         >
-          <span
-            className="px-7 py-3 btn-angular flex items-center gap-2"
+          <motion.span
+            variants={{
+              hov: {
+                scale: 1.05,
+                y: -4,
+                boxShadow: '0 16px 48px rgba(15,122,122,0.55), 0 0 0 1px rgba(74,159,174,0.40)',
+              }
+            }}
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            className="btn-angular inline-flex items-center gap-2.5 px-8 py-3.5 font-sans font-semibold text-[15px] text-white"
             style={{
               background: 'linear-gradient(135deg, #0F7A7A, #4A9FAE)',
-              boxShadow: '0 4px 20px rgba(15,122,122,0.30)',
+              boxShadow: '0 4px 20px rgba(15,122,122,0.32)',
             }}
           >
-            View my work
+            {/* Star spins 72° on hover */}
             <motion.span
-              animate={{ x: [0, 0] }}
-              whileHover={{ x: 2 }}
+              variants={{ hov: { rotate: 72, scale: 1.20 } }}
+              transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
               className="inline-flex"
             >
-              <ArrowDown size={15} />
+              <StarMark size="xs" color="rgba(255,255,255,0.88)" />
             </motion.span>
-          </span>
+
+            View my work
+
+            {/* Arrow drops on hover */}
+            <motion.span
+              variants={{ hov: { y: 3 } }}
+              transition={{ duration: 0.22, ease: 'easeOut' }}
+              className="inline-flex"
+            >
+              <ArrowDown size={14} />
+            </motion.span>
+          </motion.span>
         </motion.a>
 
-        {/* Secondary — ghost outlined */}
+        {/* ── Secondary — angular outline, gold star ─────────────────────── */}
         <motion.a
           href={siteConfig.resumeUrl}
           download
-          whileHover={{
-            scale: 1.04,
-            y: -2,
-            backgroundColor: 'rgba(15,122,122,0.10)',
-            borderColor: 'rgba(15,122,122,0.50)',
-            color: '#E8F4F8',
-          }}
-          whileTap={{ scale: 0.96 }}
-          transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-          className="inline-flex items-center gap-2 font-sans font-medium text-[15px] px-6 py-3 rounded-btn select-none"
-          style={{
-            border: '1px solid rgba(15,122,122,0.28)',
-            color: '#A8C5D1',
-          }}
+          whileHover="hov"
+          whileTap={{ scale: 0.95 }}
+          className="inline-flex select-none"
         >
-          Resume ↓
+          <motion.span
+            variants={{
+              hov: {
+                scale: 1.04,
+                y: -3,
+                boxShadow: '0 12px 36px rgba(15,122,122,0.28), inset 0 0 0 1px rgba(15,122,122,0.55)',
+              }
+            }}
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            className="btn-angular inline-flex items-center gap-2.5 px-8 py-3.5 font-sans font-medium text-[15px]"
+            style={{
+              background: 'rgba(15,122,122,0.07)',
+              boxShadow: 'inset 0 0 0 1px rgba(15,122,122,0.30)',
+              color: '#A8C5D1',
+            }}
+          >
+            {/* Gold star counter-spins on hover */}
+            <motion.span
+              variants={{ hov: { rotate: -72, scale: 1.15 } }}
+              transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
+              className="inline-flex"
+            >
+              <StarMark size="xs" color="#C4974A" className="opacity-75" />
+            </motion.span>
+
+            Resume
+
+            {/* Down indicator */}
+            <motion.span
+              variants={{ hov: { y: 3, opacity: 1 } }}
+              transition={{ duration: 0.22, ease: 'easeOut' }}
+              className="inline-flex opacity-50"
+            >
+              ↓
+            </motion.span>
+          </motion.span>
         </motion.a>
 
       </motion.div>

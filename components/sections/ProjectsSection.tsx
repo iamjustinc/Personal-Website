@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { ArrowRight } from 'lucide-react'
 import { Section } from '@/components/ui/Section'
 import { StarMark } from '@/components/ui/StarMark'
 import { projects } from '@/data/projects'
@@ -233,25 +232,41 @@ export function ProjectsSection() {
                 <div className="mt-9">
                   <motion.a
                     href={`/projects/${project.slug}`}
-                    whileHover={{
-                      scale: 1.05,
-                      y: -3,
-                      boxShadow: `0 12px 40px ${project.panelAccentColor}55, 0 0 0 1px ${project.panelAccentColor}35`,
-                    }}
-                    whileTap={{ scale: 0.96 }}
-                    transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+                    whileHover="hov"
+                    whileTap={{ scale: 0.95 }}
                     className="inline-flex font-sans font-medium text-white text-[14px] select-none"
                   >
-                    <span
-                      className="px-7 py-3 btn-angular flex items-center gap-2"
+                    <motion.span
+                      variants={{
+                        hov: {
+                          scale: 1.05,
+                          y: -3,
+                          boxShadow: `0 14px 44px ${project.panelAccentColor}55, 0 0 0 1px ${project.panelAccentColor}40`,
+                        }
+                      }}
+                      transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                      className="btn-angular inline-flex items-center gap-2.5 px-7 py-3"
                       style={{
                         background: `linear-gradient(135deg, ${project.panelAccentColor}, #4A9FAE)`,
                         boxShadow: `0 4px 20px ${project.panelAccentColor}35`,
                       }}
                     >
+                      <motion.span
+                        variants={{ hov: { rotate: 72, scale: 1.2 } }}
+                        transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
+                        className="inline-flex"
+                      >
+                        <StarMark size="xs" color="rgba(255,255,255,0.85)" />
+                      </motion.span>
                       View Case Study
-                      <ArrowRight size={15} />
-                    </span>
+                      <motion.span
+                        variants={{ hov: { x: 3 } }}
+                        transition={{ duration: 0.22, ease: 'easeOut' }}
+                        className="inline-flex"
+                      >
+                        →
+                      </motion.span>
+                    </motion.span>
                   </motion.a>
                 </div>
               </div>
