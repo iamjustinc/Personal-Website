@@ -63,14 +63,14 @@ export function Nav() {
                     className="shrink-0 basis-[120px] md:basis-[150px] z-10 flex items-center"
                   >
                     <Link href="/" aria-label={`${siteConfig.name} — home`}>
-                      <Image
-                        src={siteConfig.logoSrc}
-                        alt={`${siteConfig.name} logo`}
-                        width={220}
-                        height={80}
-                        className="w-[110px] md:w-[140px] h-auto max-h-8 object-contain"
-                        priority
-                      />
+                    <Image
+  src={siteConfig.logoSrc}
+  alt="Justin logo"
+  width={120}
+  height={40}
+  className="w-[120px] h-auto max-h-10 object-contain"
+  priority
+/>
                     </Link>
                   </motion.div>
                   ) : (
