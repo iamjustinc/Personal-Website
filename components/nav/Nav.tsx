@@ -58,7 +58,7 @@ export function Nav() {
                       src={siteConfig.logoSrc}
                       alt="Justin logo"
                       width={120}
-                      height={40}
+                      height={120}
                       className="w-[120px] h-auto max-h-10 object-contain"
                       priority
                     />
