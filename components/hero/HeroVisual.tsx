@@ -18,7 +18,7 @@ import { siteConfig } from '@/data/site'
  */
 export function HeroVisual() {
   const shouldReduce = useReducedMotion()
-  const panels       = siteConfig.heroFloatingPanels ?? []
+  const panels = siteConfig.heroFloatingPanels ?? []
 
   return (
     <motion.div
@@ -29,7 +29,6 @@ export function HeroVisual() {
     >
       {/* ── Portrait composition ────────────────────────────────────────── */}
       <div className="relative flex items-center justify-center" style={{ width: 380, height: 420 }}>
-
         {/* Atmospheric teal aura — radial glow behind the whole composition */}
         <div
           aria-hidden
@@ -38,7 +37,8 @@ export function HeroVisual() {
             width: 440,
             height: 440,
             borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(15,122,122,0.20) 0%, rgba(15,122,122,0.06) 40%, transparent 70%)',
+            background:
+              'radial-gradient(circle, rgba(15,122,122,0.20) 0%, rgba(15,122,122,0.06) 40%, transparent 70%)',
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
@@ -68,7 +68,9 @@ export function HeroVisual() {
         >
           <svg width="340" height="340" viewBox="0 0 340 340" fill="none">
             <circle
-              cx="170" cy="170" r="166"
+              cx="170"
+              cy="170"
+              r="166"
               stroke="rgba(15,122,122,0.20)"
               strokeWidth="1"
               strokeDasharray="4 12"
@@ -120,33 +122,78 @@ export function HeroVisual() {
                 style={{
                   position: 'absolute',
                   inset: 0,
-                  background: 'linear-gradient(160deg, rgba(15,122,122,0.08) 0%, transparent 60%, rgba(10,22,40,0.15) 100%)',
+                  background:
+                    'linear-gradient(160deg, rgba(15,122,122,0.08) 0%, transparent 60%, rgba(10,22,40,0.15) 100%)',
                   borderRadius: '50%',
                 }}
               />
             </div>
+          </div>
+        )}
 
-            {/* Gold star badge — bottom-right of the portrait circle */}
-            <div
+        {/* ── Orbiting satellite dot ───────────────────────────────────── */}
+        {/* Replaces the old static bottom-right gold badge */}
+        <motion.div
+          aria-hidden
+          className="absolute pointer-events-none"
+          style={{
+            width: 328,
+            height: 328,
+            top: '50%',
+            left: '50%',
+            marginLeft: -164,
+            marginTop: -164,
+            zIndex: 20,
+          }}
+          animate={shouldReduce ? {} : { rotate: 360 }}
+          transition={
+            shouldReduce
+              ? {}
+              : {
+                  duration: 18,
+                  repeat: Infinity,
+                  ease: 'linear',
+                }
+          }
+        >
+          <div
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              width: 26,
+              height: 26,
+              marginLeft: -13,
+              marginTop: -13,
+              transform: 'rotate(130deg) translateY(-164px)',
+            }}
+          >
+            <motion.div
+              animate={shouldReduce ? {} : { scale: [1, 1.08, 1] }}
+              transition={
+                shouldReduce
+                  ? {}
+                  : {
+                      duration: 2.6,
+                      repeat: Infinity,
+                      ease: 'easeInOut',
+                    }
+              }
               style={{
-                position: 'absolute',
-                bottom: 8,
-                right: 8,
                 width: 26,
                 height: 26,
                 borderRadius: '50%',
                 background: '#C4974A',
-                boxShadow: '0 0 14px rgba(196,151,74,0.55)',
+                boxShadow: '0 0 14px rgba(196,151,74,0.55), 0 0 28px rgba(196,151,74,0.22)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                zIndex: 20,
               }}
             >
               <StarMark size="xs" color="#0A1628" />
-            </div>
+            </motion.div>
           </div>
-        )}
+        </motion.div>
 
         {/* ── Orbital star marks ──────────────────────────────────────── */}
         {/* Positioned around the portrait at deliberate cardinal points  */}
@@ -188,11 +235,9 @@ export function HeroVisual() {
         >
           <StarMark size="xs" color="#4A9FAE" className="opacity-25" />
         </div>
-
       </div>
 
       {/* ── Project preview badges ──────────────────────────────────────── */}
-      {/* Appear below the portrait as a horizontal float — hinting at work */}
       <motion.div
         initial={shouldReduce ? false : { opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
@@ -235,7 +280,6 @@ export function HeroVisual() {
           Open to opportunities
         </span>
       </motion.div>
-
     </motion.div>
   )
 }
