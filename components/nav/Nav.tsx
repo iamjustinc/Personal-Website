@@ -14,7 +14,7 @@ import { siteConfig } from '@/data/site'
 const navLinks = [
   { label: 'Work',    href: '/work',    download: false },
   { label: 'About',   href: '/about',   download: false },
-  { label: 'Resume',  href: siteConfig.resumeUrl, download: true  },
+  { label: 'Resume',  href: '/resume',            download: false },
   { label: 'Contact', href: '/contact', download: false },
 ]
 
@@ -34,7 +34,7 @@ export function Nav() {
           initial={{ y: -90, opacity: 0 }}
           animate={{ y: 0,   opacity: 1 }}
           transition={{ duration: 1.0, delay: 0.10, ease: [0.22, 1, 0.36, 1] }}
-          className="w-full max-w-[1160px] pointer-events-auto"
+          className="w-full max-w-[860px] pointer-events-auto"
         >
           <div
             className="relative rounded-3xl"
@@ -60,8 +60,8 @@ export function Nav() {
                     <Image
                       src={siteConfig.logoSrc}
                       alt={`${siteConfig.name} logo`}
-                      width={100}
-                      height={100}
+                      width={52}
+                      height={52}
                       className="object-contain"
                       priority
                     />

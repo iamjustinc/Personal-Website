@@ -93,13 +93,12 @@ export function HeroText() {
           View my work
         </StarburstButton>
         <StarburstButton
-          href={siteConfig.resumeUrl}
-          download
+          href="/resume"
           variant="secondary"
           size="lg"
           starSpin
         >
-          Resume ↓
+          Resume
         </StarburstButton>
       </motion.div>
     </motion.div>
