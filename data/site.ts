@@ -78,7 +78,7 @@ export const siteConfig: SiteConfig = {
     },
   ],
 
-  email: 'justin@example.com',
+  email: 'justin886847@gmail.com',
   linkedinUrl: 'https://linkedin.com/in/justinc',
   githubUrl: 'https://github.com/justinc',
   currentlyOpen: 'Open to SE + PM roles at startups and growth-stage companies.',
