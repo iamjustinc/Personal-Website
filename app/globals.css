@@ -75,6 +75,8 @@ body {
 
 .shooting-star {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 160px;
   height: 1.5px;
   background: linear-gradient(90deg, transparent 0%, rgba(74,159,174,0.0) 0%, rgba(74,159,174,0.90) 45%, rgba(200,240,255,1.00) 72%, transparent 100%);

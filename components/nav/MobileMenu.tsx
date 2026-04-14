@@ -12,10 +12,10 @@ interface MobileMenuProps {
 }
 
 const links = [
-  { label: 'Work',    href: '/#projects',  download: false },
-  { label: 'About',   href: '/#about',     download: false },
-  { label: 'Contact', href: '/#contact',   download: false },
-  { label: 'Resume',  href: '/resume.pdf', download: true  },
+  { label: 'Work',    href: '/work'    },
+  { label: 'About',   href: '/about'   },
+  { label: 'Contact', href: '/contact' },
+  { label: 'Resume',  href: '/resume'  },
 ]
 
 export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
@@ -59,16 +59,9 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 <Link
                   href={link.href}
                   onClick={onClose}
-                  download={link.download || undefined}
-                  className={cn(
-                    'block font-sans font-medium text-2xl py-3 transition-colors duration-200',
-                    link.download
-                      ? 'text-text-muted hover:text-text-base'
-                      : 'text-text-base hover:text-accent-bright',
-                  )}
+                  className="block font-sans font-medium text-2xl py-3 transition-colors duration-200 text-text-base hover:text-accent-bright"
                 >
                   {link.label}
-                  {link.download && <span className="ml-2 text-base opacity-40">↓</span>}
                 </Link>
               </motion.div>
             ))}

@@ -11,16 +11,18 @@ interface ShootingStarProps {
 }
 
 /**
- * Shooting star — fires diagonally across the viewport once per cycle.
- * Uses a long-cycle CSS animation so it fires, pauses, then repeats.
- * The pause is built into the keyframe (opacity: 0 from 30%→100%).
- * Hidden when prefers-reduced-motion is active.
+ * Shooting star — travels diagonally across the viewport.
+ *
+ * The outer div is a zero-size anchor point at (startX, startY).
+ * It is rotated `angle` degrees around that point (transform-origin: 0 0).
+ * The inner element animates translateX — movement in the rotated axis.
+ * This avoids transform conflicts between the angle rotation and the motion.
  */
 export function ShootingStar({
   startX = '20%',
   startY = '15%',
   angle = 32,
-  duration = 14,  // full cycle including pause
+  duration = 14,
   delay = 0,
 }: ShootingStarProps) {
   const shouldReduce = useReducedMotion()
@@ -33,8 +35,10 @@ export function ShootingStar({
       style={{
         left: startX,
         top: startY,
+        width: 0,
+        height: 0,
         transform: `rotate(${angle}deg)`,
-        transformOrigin: 'left center',
+        transformOrigin: '0 0',
       }}
     >
       <div
