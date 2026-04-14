@@ -84,7 +84,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     src={siteConfig.logoSrc}
                     alt="Justin logo"
                     fill
-                    className="object-contain object-left scale-[2.25] origin-left"
+                    className="object-contain object-left scale-[2.4] origin-left"
                     priority
                   />
                 ) : (
