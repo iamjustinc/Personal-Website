@@ -37,7 +37,7 @@ export function Nav() {
           className="w-full max-w-[1160px] pointer-events-auto"
         >
           <div
-            className="relative rounded-2xl"
+            className="relative rounded-3xl"
             style={{
               background: 'rgba(10,24,44,0.82)',
               backdropFilter: 'blur(36px) saturate(180%)',
@@ -47,7 +47,7 @@ export function Nav() {
                 '0 8px 48px rgba(0,0,0,0.60), 0 0 0 1px rgba(15,122,122,0.08) inset, 0 1px 0 rgba(255,255,255,0.05) inset, 0 0 24px rgba(15,122,122,0.05)',
             }}
           >
-            <div className="relative px-5 py-2 flex items-center justify-between">
+            <div className="relative px-5 py-1.5 flex items-center justify-between">
 
               {/* ── Brand — bare logo, no box, no text ─────────────────── */}
               <motion.div
@@ -60,8 +60,8 @@ export function Nav() {
                     <Image
                       src={siteConfig.logoSrc}
                       alt={`${siteConfig.name} logo`}
-                      width={64}
-                      height={64}
+                      width={52}
+                      height={52}
                       className="object-contain"
                       priority
                     />
@@ -78,43 +78,49 @@ export function Nav() {
 
               {/* ── Nav links — absolutely centered in the pill ─────────── */}
               <nav
-                className="hidden md:flex absolute left-1/2 top-1/2 items-center gap-8"
+                className="hidden md:flex absolute left-1/2 top-1/2 items-center gap-5"
                 style={{ transform: 'translate(-50%, -50%)' }}
                 aria-label="Main navigation"
               >
-                {navLinks.map(({ label, href, download }) => {
+                {navLinks.map(({ label, href, download }, idx) => {
                   const isActive = !download && pathname === href
                   return (
-                    <a
-                      key={label}
-                      href={href}
-                      download={download || undefined}
-                      className={cn(
-                        'relative group font-sans text-[13.5px] font-medium transition-colors duration-200 pb-0.5',
-                        isActive
-                          ? 'text-text-base'
-                          : 'text-text-muted hover:text-text-base',
+                    <div key={label} className="flex items-center gap-5">
+                      {idx > 0 && (
+                        <span aria-hidden className="text-text-muted opacity-20">
+                          <StarMark size="xs" color="rgba(15,122,122,0.35)" />
+                        </span>
                       )}
-                    >
-                      {label}
-                      {/* Active underline indicator */}
-                      <span
-                        className="absolute -bottom-px left-0 right-0 h-px rounded-full transition-all duration-300"
-                        style={{
-                          background: 'linear-gradient(90deg, #0F7A7A, #4A9FAE)',
-                          transform: isActive ? 'scaleX(1)' : 'scaleX(0)',
-                          transformOrigin: 'left',
-                          opacity: isActive ? 1 : 0,
-                        }}
-                      />
-                      {/* Hover underline */}
-                      <span
-                        className="absolute -bottom-px left-0 right-0 h-px rounded-full transition-all duration-200 opacity-0 group-hover:opacity-35"
-                        style={{
-                          background: 'linear-gradient(90deg, #0F7A7A, #4A9FAE)',
-                        }}
-                      />
-                    </a>
+                      <a
+                        href={href}
+                        download={download || undefined}
+                        className={cn(
+                          'relative group font-sans text-[13.5px] font-medium transition-colors duration-200 pb-0.5',
+                          isActive
+                            ? 'text-text-base'
+                            : 'text-text-muted hover:text-text-base',
+                        )}
+                      >
+                        {label}
+                        {/* Active underline indicator */}
+                        <span
+                          className="absolute -bottom-px left-0 right-0 h-px rounded-full transition-all duration-300"
+                          style={{
+                            background: 'linear-gradient(90deg, #0F7A7A, #4A9FAE)',
+                            transform: isActive ? 'scaleX(1)' : 'scaleX(0)',
+                            transformOrigin: 'left',
+                            opacity: isActive ? 1 : 0,
+                          }}
+                        />
+                        {/* Hover underline */}
+                        <span
+                          className="absolute -bottom-px left-0 right-0 h-px rounded-full transition-all duration-200 opacity-0 group-hover:opacity-35"
+                          style={{
+                            background: 'linear-gradient(90deg, #0F7A7A, #4A9FAE)',
+                          }}
+                        />
+                      </a>
+                    </div>
                   )
                 })}
               </nav>

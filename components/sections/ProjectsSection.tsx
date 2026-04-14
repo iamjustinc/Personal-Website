@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { Section } from '@/components/ui/Section'
 import { StarMark } from '@/components/ui/StarMark'
+import { StarburstButton } from '@/components/ui/StarburstButton'
 import { projects } from '@/data/projects'
 import { fadeUp, fadeIn, staggerContainer, useMotionSafe } from '@/lib/motion'
 import { cn } from '@/lib/utils'
@@ -230,44 +231,9 @@ export function ProjectsSection() {
 
                 {/* CTA */}
                 <div className="mt-9">
-                  <motion.a
-                    href={`/projects/${project.slug}`}
-                    whileHover="hov"
-                    whileTap={{ scale: 0.95 }}
-                    className="inline-flex font-sans font-medium text-white text-[14px] select-none"
-                  >
-                    <motion.span
-                      variants={{
-                        hov: {
-                          scale: 1.05,
-                          y: -3,
-                          boxShadow: `0 14px 44px ${project.panelAccentColor}55, 0 0 0 1px ${project.panelAccentColor}40`,
-                        }
-                      }}
-                      transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-                      className="btn-angular inline-flex items-center gap-2.5 px-7 py-3"
-                      style={{
-                        background: `linear-gradient(135deg, ${project.panelAccentColor}, #4A9FAE)`,
-                        boxShadow: `0 4px 20px ${project.panelAccentColor}35`,
-                      }}
-                    >
-                      <motion.span
-                        variants={{ hov: { rotate: 72, scale: 1.2 } }}
-                        transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
-                        className="inline-flex"
-                      >
-                        <StarMark size="xs" color="rgba(255,255,255,0.85)" />
-                      </motion.span>
-                      View Case Study
-                      <motion.span
-                        variants={{ hov: { x: 3 } }}
-                        transition={{ duration: 0.22, ease: 'easeOut' }}
-                        className="inline-flex"
-                      >
-                        →
-                      </motion.span>
-                    </motion.span>
-                  </motion.a>
+                  <StarburstButton href={`/projects/${project.slug}`} variant="primary" size="md">
+                    View Case Study →
+                  </StarburstButton>
                 </div>
               </div>
             </motion.div>
