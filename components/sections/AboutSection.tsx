@@ -9,16 +9,14 @@ import { fadeUp, fadeIn, staggerContainer, useMotionSafe } from '@/lib/motion'
 import { siteConfig } from '@/data/site'
 
 export function AboutSection() {
-  const stagger     = useMotionSafe(staggerContainer(0.10))
-  const up          = useMotionSafe(fadeUp)
-  const inn         = useMotionSafe(fadeIn)
+  const stagger = useMotionSafe(staggerContainer(0.10))
+  const up = useMotionSafe(fadeUp)
+  const inn = useMotionSafe(fadeIn)
   const shouldReduce = useReducedMotion()
-  const portrait    = siteConfig.portraitSrc ?? siteConfig.photoSrc
+  const portrait = siteConfig.portraitSrc ?? siteConfig.photoSrc
 
   return (
     <Section id="about" className="relative overflow-hidden">
-
-      {/* Section-scoped watermark star — right side */}
       <div
         aria-hidden
         className="absolute top-[-10%] right-[-8%] pointer-events-none"
@@ -28,10 +26,7 @@ export function AboutSection() {
       </div>
 
       <div className="grid md:grid-cols-[55fr_45fr] gap-16 lg:gap-20 items-start relative">
-
-        {/* ── Left: statements ─────────────────────────────────────────── */}
         <div>
-          {/* Section label pill */}
           <motion.div
             variants={inn}
             initial="hidden"
@@ -51,14 +46,11 @@ export function AboutSection() {
               </span>
             </div>
 
-            {/* Large editorial heading */}
             <h2 className="font-display text-h1 text-text-base leading-tight">
-              How I{' '}
-              <span style={{ color: '#4A9FAE' }}>work</span>
+              How I <span style={{ color: '#4A9FAE' }}>work</span>
             </h2>
           </motion.div>
 
-          {/* Statements */}
           <motion.div
             variants={stagger}
             initial="hidden"
@@ -78,7 +70,6 @@ export function AboutSection() {
             ))}
           </motion.div>
 
-          {/* Expertise highlights — star-marked list */}
           {siteConfig.aboutHighlights && siteConfig.aboutHighlights.length > 0 && (
             <motion.div
               variants={stagger}
@@ -103,7 +94,6 @@ export function AboutSection() {
           )}
         </div>
 
-        {/* ── Right: portrait + status ──────────────────────────────────── */}
         {portrait && (
           <motion.div
             variants={up}
@@ -112,10 +102,7 @@ export function AboutSection() {
             viewport={{ once: true }}
             className="hidden md:flex flex-col items-center"
           >
-            {/* Portrait — same treatment as hero but slightly smaller */}
             <div className="relative flex items-center justify-center" style={{ width: 280, height: 300 }}>
-
-              {/* Aura */}
               <div
                 aria-hidden
                 className="absolute pointer-events-none"
@@ -124,12 +111,12 @@ export function AboutSection() {
                   height: 300,
                   borderRadius: '50%',
                   background: 'radial-gradient(circle, rgba(15,122,122,0.15) 0%, transparent 70%)',
-                  top: '50%', left: '50%',
+                  top: '50%',
+                  left: '50%',
                   transform: 'translate(-50%, -50%)',
                 }}
               />
 
-              {/* Halo ring */}
               <div
                 aria-hidden
                 className="absolute pointer-events-none halo-spin"
@@ -140,7 +127,6 @@ export function AboutSection() {
                 </svg>
               </div>
 
-              {/* Portrait circle */}
               <div
                 className="portrait-float"
                 style={{ width: 200, height: 200, position: 'relative', zIndex: 10 }}
@@ -158,29 +144,148 @@ export function AboutSection() {
                   />
                   <div
                     style={{
-                      position: 'absolute', inset: 0,
+                      position: 'absolute',
+                      inset: 0,
                       background: 'linear-gradient(160deg, rgba(15,122,122,0.07) 0%, transparent 60%)',
                       borderRadius: '50%',
                     }}
                   />
                 </div>
-
-                {/* Gold star badge */}
-                <div
-                  style={{
-                    position: 'absolute', bottom: 6, right: 6,
-                    width: 22, height: 22, borderRadius: '50%',
-                    background: '#C4974A',
-                    boxShadow: '0 0 10px rgba(196,151,74,0.50)',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    zIndex: 20,
-                  }}
-                >
-                  <StarMark size="xs" color="#0A1628" />
-                </div>
               </div>
 
-              {/* Orbital star marks */}
+              {/* Small orbiting gold satellite */}
+              <motion.div
+                aria-hidden
+                className="absolute pointer-events-none"
+                style={{
+                  width: 236,
+                  height: 236,
+                  top: '50%',
+                  left: '50%',
+                  marginLeft: -118,
+                  marginTop: -118,
+                  zIndex: 20,
+                }}
+                animate={shouldReduce ? {} : { rotate: 360 }}
+                transition={
+                  shouldReduce
+                    ? {}
+                    : {
+                        duration: 18,
+                        repeat: Infinity,
+                        ease: 'linear',
+                      }
+                }
+              >
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    width: 12,
+                    height: 12,
+                    marginLeft: -6,
+                    marginTop: -6,
+                    transform: 'rotate(132deg) translateY(-118px)',
+                  }}
+                >
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: '50%',
+                      left: '50%',
+                      width: 28,
+                      height: 7,
+                      transform: 'translate(-86%, -50%)',
+                      borderRadius: 999,
+                      background:
+                        'linear-gradient(90deg, rgba(196,151,74,0.0) 0%, rgba(196,151,74,0.10) 32%, rgba(196,151,74,0.18) 56%, rgba(196,151,74,0.0) 100%)',
+                      filter: 'blur(3px)',
+                      opacity: 0.7,
+                    }}
+                  />
+                  <motion.div
+                    animate={shouldReduce ? {} : { scale: [1, 1.08, 1] }}
+                    transition={
+                      shouldReduce
+                        ? {}
+                        : {
+                            duration: 2.6,
+                            repeat: Infinity,
+                            ease: 'easeInOut',
+                          }
+                    }
+                    style={{
+                      width: 12,
+                      height: 12,
+                      borderRadius: '50%',
+                      background:
+                        'radial-gradient(circle at 32% 30%, #FFF5D9 0%, #E2BC69 34%, #C4974A 68%, #8E6320 100%)',
+                      boxShadow:
+                        '0 0 8px rgba(196,151,74,0.45), 0 0 16px rgba(196,151,74,0.16), inset -1px -1px 2px rgba(0,0,0,0.18), inset 1px 1px 2px rgba(255,255,255,0.35)',
+                    }}
+                  />
+                </div>
+              </motion.div>
+
+              {/* Small teal sparkle */}
+              <motion.div
+                aria-hidden
+                className="absolute pointer-events-none"
+                style={{
+                  width: 220,
+                  height: 220,
+                  top: '50%',
+                  left: '50%',
+                  marginLeft: -110,
+                  marginTop: -110,
+                  zIndex: 19,
+                }}
+                animate={shouldReduce ? {} : { rotate: -360 }}
+                transition={
+                  shouldReduce
+                    ? {}
+                    : {
+                        duration: 24,
+                        repeat: Infinity,
+                        ease: 'linear',
+                      }
+                }
+              >
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    width: 6,
+                    height: 6,
+                    marginLeft: -3,
+                    marginTop: -3,
+                    transform: 'rotate(36deg) translateY(-110px)',
+                  }}
+                >
+                  <motion.div
+                    animate={shouldReduce ? {} : { scale: [1, 1.25, 1], opacity: [0.4, 0.9, 0.4] }}
+                    transition={
+                      shouldReduce
+                        ? {}
+                        : {
+                            duration: 2.8,
+                            repeat: Infinity,
+                            ease: 'easeInOut',
+                          }
+                    }
+                    style={{
+                      width: 6,
+                      height: 6,
+                      borderRadius: '50%',
+                      background: '#7EE7F2',
+                      boxShadow: '0 0 8px rgba(126,231,242,0.40), 0 0 14px rgba(126,231,242,0.16)',
+                    }}
+                  />
+                </div>
+              </motion.div>
+
               <motion.div
                 aria-hidden
                 animate={shouldReduce ? {} : { y: [0, -4, 0] }}
@@ -189,6 +294,7 @@ export function AboutSection() {
               >
                 <StarMark size="xs" color="#4A9FAE" className="opacity-60" />
               </motion.div>
+
               <div
                 aria-hidden
                 style={{ position: 'absolute', bottom: 28, left: 22, zIndex: 20 }}
@@ -197,25 +303,24 @@ export function AboutSection() {
               </div>
             </div>
 
-            {/* Status card */}
-<motion.div
-  variants={up}
-  className="mt-6 w-full max-w-[360px] p-5 rounded-2xl"
-  style={{
-    background: 'rgba(15,42,61,0.55)',
-    border: '1px solid rgba(15,122,122,0.16)',
-  }}
->
-  <div className="flex items-start gap-2.5">
-    <StarMark size="xs" color="#4A9FAE" className="opacity-60 mt-1 shrink-0" />
-    <p
-      className="font-sans text-[15px] leading-6 text-pretty"
-      style={{ color: '#A8C5D1' }}
-    >
-      Open to early-career SE + PM roles where I can turn technical systems into customer value.
-    </p>
-  </div>
-</motion.div>
+            <motion.div
+              variants={up}
+              className="mt-6 w-full max-w-[360px] p-5 rounded-2xl"
+              style={{
+                background: 'rgba(15,42,61,0.55)',
+                border: '1px solid rgba(15,122,122,0.16)',
+              }}
+            >
+              <div className="flex items-start gap-2.5">
+                <StarMark size="xs" color="#4A9FAE" className="opacity-60 mt-1 shrink-0" />
+                <p
+                  className="font-sans text-[15px] leading-6 text-pretty"
+                  style={{ color: '#A8C5D1' }}
+                >
+                  Open to early-career SE + PM roles where I can turn technical systems into customer value.
+                </p>
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </div>
