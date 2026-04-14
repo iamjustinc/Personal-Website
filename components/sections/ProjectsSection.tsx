@@ -10,30 +10,123 @@ import { projects } from '@/data/projects'
 import { fadeUp, fadeIn, staggerContainer, useMotionSafe } from '@/lib/motion'
 import { cn } from '@/lib/utils'
 
+function FloatingProjectVisual({
+  project,
+  priority = false,
+}: {
+  project: (typeof projects)[number]
+  priority?: boolean
+}) {
+  const landingShot = project.screenshots?.[0] || project.thumbnail
+  const interfaceShot = project.screenshots?.[1]
+
+  return (
+    <div className="absolute inset-0 overflow-hidden">
+      {/* ambient glow */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `radial-gradient(circle at 30% 30%, ${project.panelAccentColor}22 0%, rgba(10,22,40,0) 42%), radial-gradient(circle at 75% 70%, rgba(196,151,74,0.10) 0%, rgba(10,22,40,0) 30%)`,
+        }}
+      />
+
+      {/* slow floating star texture */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 120, repeat: Infinity, ease: 'linear' }}
+          style={{ opacity: 0.05 }}
+        >
+          <StarMark size="2xl" color={project.panelAccentColor} />
+        </motion.div>
+      </div>
+
+      {/* landing image */}
+      {landingShot && (
+        <motion.div
+          animate={{ y: [0, -10, 0], rotate: [-2, -1, -2] }}
+          transition={{ duration: 8.5, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute left-[8%] top-[10%] h-[68%] w-[58%] rounded-[22px] overflow-hidden"
+          style={{
+            background: 'rgba(245,248,251,0.96)',
+            border: `1px solid ${project.panelAccentColor}22`,
+            boxShadow: `0 22px 60px rgba(0,0,0,0.28), 0 0 0 1px ${project.panelAccentColor}10 inset`,
+          }}
+        >
+          <Image
+            src={landingShot}
+            alt={`${project.name} landing view`}
+            fill
+            sizes="(max-width: 1024px) 100vw, 420px"
+            className="object-contain object-center p-3"
+            priority={priority}
+          />
+        </motion.div>
+      )}
+
+      {/* interface image */}
+      {interfaceShot && (
+        <motion.div
+          animate={{ y: [0, 12, 0], rotate: [2.2, 1.1, 2.2] }}
+          transition={{ duration: 7.5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
+          whileHover={{ y: -4, scale: 1.01 }}
+          className="absolute right-[7%] bottom-[10%] h-[56%] w-[60%] rounded-[22px] overflow-hidden"
+          style={{
+            background: 'rgba(245,248,251,0.98)',
+            border: `1px solid ${project.panelAccentColor}2A`,
+            boxShadow: `0 28px 72px rgba(0,0,0,0.34), 0 0 0 1px ${project.panelAccentColor}12 inset`,
+          }}
+        >
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background: `linear-gradient(180deg, rgba(255,255,255,0.0) 0%, ${project.panelAccentColor}08 100%)`,
+            }}
+          />
+          <Image
+            src={interfaceShot}
+            alt={`${project.name} interface view`}
+            fill
+            sizes="(max-width: 1024px) 100vw, 460px"
+            className="object-contain object-center p-3"
+          />
+        </motion.div>
+      )}
+
+      {/* accent glow under front card */}
+      <div
+        className="absolute right-[14%] bottom-[8%] h-10 w-[34%] blur-2xl rounded-full"
+        style={{ background: `${project.panelAccentColor}33` }}
+      />
+
+      {/* corner star marks */}
+      <div className="absolute top-4 left-4 pointer-events-none">
+        <StarMark size="xs" color={project.panelAccentColor} className="opacity-45" />
+      </div>
+      <div className="absolute bottom-4 right-4 pointer-events-none">
+        <StarMark size="xs" color="#C4974A" className="opacity-45" />
+      </div>
+    </div>
+  )
+}
+
 /**
- * Projects section — alternating editorial layout with premium card motion.
- *
- * Featured project sorts first. Even-index: image left, content right.
- * Odd-index: content left, image right.
- *
- * Each card lifts and glows on hover. The CTA button uses the angular
- * clip-path treatment. A slow-rotating star lives inside each image frame
- * as atmospheric texture.
+ * Projects section — alternating editorial layout with richer media motion.
  */
 export function ProjectsSection() {
   const stagger = useMotionSafe(staggerContainer(0.14))
-  const up      = useMotionSafe(fadeUp)
-  const inn     = useMotionSafe(fadeIn)
+  const up = useMotionSafe(fadeUp)
+  const inn = useMotionSafe(fadeIn)
 
   const visibleProjects = [
-    ...projects.filter(p => p.visible && p.homepageVisible && p.featured),
-    ...projects.filter(p => p.visible && p.homepageVisible && !p.featured)
+    ...projects.filter((p) => p.visible && p.homepageVisible && p.featured),
+    ...projects
+      .filter((p) => p.visible && p.homepageVisible && !p.featured)
       .sort((a, b) => a.order - b.order),
   ]
 
   return (
     <Section id="projects" paddingY="lg">
-
       {/* Heading */}
       <motion.div
         variants={inn}
@@ -56,7 +149,7 @@ export function ProjectsSection() {
         </div>
         <h2 className="font-display text-h1 text-text-base">What I&apos;ve Built!</h2>
         <p className="font-sans text-text-muted mt-3 max-w-[460px]" style={{ fontSize: '15px' }}>
-        Built to show how I think across product, implementation, and technical communication.
+          Built to show how I think across product, implementation, and technical communication.
         </p>
       </motion.div>
 
@@ -76,68 +169,37 @@ export function ProjectsSection() {
               key={project.slug}
               variants={up}
               whileHover={{
-                y: -5,
-                boxShadow: '0 20px 64px rgba(0,0,0,0.65), 0 0 0 1px rgba(15,122,122,0.30)',
+                y: -6,
+                boxShadow: '0 24px 68px rgba(0,0,0,0.66), 0 0 0 1px rgba(15,122,122,0.30)',
               }}
-              transition={{ duration: 0.30, ease: [0.22, 1, 0.36, 1] }}
-              className={cn(
-                'grid lg:grid-cols-2 gap-0 rounded-2xl overflow-hidden cursor-default',
-              )}
+              transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+              className={cn('grid lg:grid-cols-2 gap-0 rounded-2xl overflow-hidden cursor-default')}
               style={{
                 background: 'rgba(15,42,61,0.60)',
                 border: '1px solid rgba(15,122,122,0.14)',
                 boxShadow: '0 4px 32px rgba(0,0,0,0.30)',
               }}
             >
-              {/* ── Image ──────────────────────────────────────────────── */}
+              {/* Media */}
               <div
                 className={cn(
-                  'relative overflow-hidden min-h-[280px] lg:min-h-[420px]',
+                  'relative overflow-hidden min-h-[320px] lg:min-h-[460px]',
                   isReversed ? 'lg:order-2' : 'lg:order-1',
                 )}
               >
-                {project.thumbnail && (
-                  <Image
-                    src={project.thumbnail}
-                    alt={`${project.name} screenshot`}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 580px"
-                    className="object-cover object-top transition-transform duration-700 ease-premium group-hover:scale-[1.03]"
-                    style={{ opacity: 0.58 }}
-                    priority={index === 0}
-                  />
-                )}
-
-                {/* Color overlay with project accent */}
+                {/* gradient wash */}
                 <div
                   className="absolute inset-0"
                   style={{
-                    background: `linear-gradient(155deg, ${project.panelAccentColor}20 0%, rgba(10,22,40,0.45) 60%, rgba(10,22,40,0.82) 100%)`,
+                    background: `linear-gradient(155deg, ${project.panelAccentColor}16 0%, rgba(10,22,40,0.22) 45%, rgba(10,22,40,0.78) 100%)`,
                   }}
                 />
 
-                {/* Rotating star inside frame */}
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 100, repeat: Infinity, ease: 'linear' }}
-                    style={{ opacity: 0.07 }}
-                  >
-                    <StarMark size="2xl" color={project.panelAccentColor} />
-                  </motion.div>
-                </div>
-
-                {/* Corner star marks */}
-                <div className="absolute top-4 left-4 pointer-events-none">
-                  <StarMark size="xs" color={project.panelAccentColor} className="opacity-45" />
-                </div>
-                <div className="absolute bottom-4 right-4 pointer-events-none">
-                  <StarMark size="xs" color="#C4974A" className="opacity-45" />
-                </div>
+                <FloatingProjectVisual project={project} priority={index === 0} />
 
                 {/* Project number badge */}
                 <div
-                  className="absolute top-4 right-4 flex items-center gap-1.5 rounded-full px-3 py-1"
+                  className="absolute top-4 right-4 flex items-center gap-1.5 rounded-full px-3 py-1 z-20"
                   style={{
                     background: 'rgba(13,30,53,0.85)',
                     backdropFilter: 'blur(12px)',
@@ -150,23 +212,22 @@ export function ProjectsSection() {
                   </span>
                 </div>
 
-                {/* Frame border inner glow */}
+                {/* frame border inner glow */}
                 <div
                   className="absolute inset-0 pointer-events-none"
                   style={{ boxShadow: `inset 0 0 0 1px ${project.panelAccentColor}16` }}
                 />
               </div>
 
-              {/* ── Content ──────────────────────────────────────────────── */}
+              {/* Content */}
               <div
                 className={cn(
                   'flex flex-col justify-center p-8 lg:p-12',
                   isReversed ? 'lg:order-1' : 'lg:order-2',
                 )}
               >
-                {/* Tags */}
                 <div className="flex flex-wrap gap-2 mb-5">
-                  {project.tags.slice(0, 3).map(tag => (
+                  {project.tags.slice(0, 3).map((tag) => (
                     <span
                       key={tag}
                       className="font-mono text-[10.5px] uppercase tracking-wider px-3 py-1 rounded-full"
@@ -181,9 +242,7 @@ export function ProjectsSection() {
                   ))}
                 </div>
 
-                <h3 className="font-display text-h1 text-text-base leading-tight">
-                  {project.name}
-                </h3>
+                <h3 className="font-display text-h1 text-text-base leading-tight">{project.name}</h3>
                 <p className="font-mono text-[11px] text-text-muted mt-2 tracking-wider uppercase">
                   {project.year} · {project.role}
                 </p>
@@ -195,7 +254,6 @@ export function ProjectsSection() {
                   {project.tagline}
                 </p>
 
-                {/* Outcome badge */}
                 {project.outcome && (
                   <div
                     className="mt-5 inline-flex items-start gap-2 self-start px-4 py-2.5 rounded-btn"
@@ -204,17 +262,20 @@ export function ProjectsSection() {
                       border: `1px solid ${project.panelAccentColor}22`,
                     }}
                   >
-                    <StarMark size="xs" color={project.panelAccentColor} className="opacity-55 mt-0.5 shrink-0" />
+                    <StarMark
+                      size="xs"
+                      color={project.panelAccentColor}
+                      className="opacity-55 mt-0.5 shrink-0"
+                    />
                     <span className="font-sans text-sm leading-snug text-text-muted">
                       {project.outcome}
                     </span>
                   </div>
                 )}
 
-                {/* Stack */}
                 {project.stack && project.stack.length > 0 && (
                   <div className="flex flex-wrap gap-1.5 mt-5">
-                    {project.stack.slice(0, 4).map(s => (
+                    {project.stack.slice(0, 4).map((s) => (
                       <span
                         key={s}
                         className="font-mono text-[9.5px] px-2.5 py-1 rounded-btn"
@@ -230,7 +291,6 @@ export function ProjectsSection() {
                   </div>
                 )}
 
-                {/* CTA */}
                 <div className="mt-9">
                   <HoverSparkle className="inline-flex">
                     <StarburstButton href={`/projects/${project.slug}`} variant="primary" size="md">

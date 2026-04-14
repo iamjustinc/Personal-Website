@@ -1,5 +1,12 @@
 import type { Project } from '@/types/project'
 
+import kestrelLanding from '../Kestrel.png'
+import kestrelInterface from '../kestrel-interface.png'
+import quailLanding from '../Quail.png'
+import quailInterface from '../quail-interface.png'
+import chirpieLanding from '../Chirpie.png'
+import chirpieInterface from '../Chirpie-interface.png'
+
 /**
  * All portfolio projects.
  *
@@ -26,8 +33,8 @@ export const projects: Project[] = [
     year: 2026,
     outcome:
       'Designed explainable outputs and a live dashboard to make recommendations easy to act on.',
-    thumbnail: '/images/projects/kestrel/thumb.png',
-    screenshots: [],
+    thumbnail: kestrelLanding.src,
+    screenshots: [kestrelLanding.src, kestrelInterface.src],
     panelAccentColor: '#2A8B87',
     problem:
       'Job seekers often work from messy, inconsistent job descriptions and struggle to translate them into concrete priorities. Most tools stop at generic advice instead of helping people decide what matters now.',
@@ -55,8 +62,8 @@ export const projects: Project[] = [
     year: 2026,
     outcome:
       'Transforms inboxes into prioritized task pipelines, reducing triage time by 80%.',
-    thumbnail: '/images/projects/quail/thumb.png',
-    screenshots: [],
+    thumbnail: quailLanding.src,
+    screenshots: [quailLanding.src, quailInterface.src],
     panelAccentColor: '#5E9FD4',
     problem:
       'High-volume inboxes create constant friction. Important messages get buried, follow-ups are missed, and users spend too much time deciding what deserves attention first.',
@@ -84,8 +91,8 @@ export const projects: Project[] = [
     year: 2026,
     outcome:
       'Built around source attribution, explainable summaries, and a digest flow designed for repeat use.',
-    thumbnail: '/images/projects/chirpie/thumb.png',
-    screenshots: [],
+    thumbnail: chirpieLanding.src,
+    screenshots: [chirpieLanding.src, chirpieInterface.src],
     panelAccentColor: '#62BDB8',
     problem:
       'People want quick updates, but most news tools overwhelm them with volume or flatten everything into generic summaries. That creates convenience at the expense of trust and context.',
