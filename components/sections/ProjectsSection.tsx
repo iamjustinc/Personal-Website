@@ -53,7 +53,7 @@ export function ProjectsSection() {
             Featured Work
           </span>
         </div>
-        <h2 className="font-display text-h1 text-text-base">What I&apos;ve Built</h2>
+        <h2 className="font-display text-h1 text-text-base">What I&apos;ve Built!</h2>
         <p className="font-sans text-text-muted mt-3 max-w-[460px]" style={{ fontSize: '15px' }}>
           Built at the intersection of technical systems and real human workflows.
         </p>
