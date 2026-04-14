@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { Section } from '@/components/ui/Section'
 import { StarMark } from '@/components/ui/StarMark'
 import { StarburstButton } from '@/components/ui/StarburstButton'
+import { HoverSparkle } from '@/components/ui/HoverSparkle'
 import { WatermarkStar } from '@/components/ui/WatermarkStar'
 import { projects } from '@/data/projects'
 import { siteConfig } from '@/data/site'
@@ -221,9 +222,11 @@ function WorkProjectCard({
 
           {/* CTA */}
           <div className="mt-8">
-            <StarburstButton href={`/projects/${project.slug}`} variant="primary" size="md">
-              View Full Case Study →
-            </StarburstButton>
+            <HoverSparkle className="inline-flex">
+              <StarburstButton href={`/projects/${project.slug}`} variant="primary" size="md">
+                View Full Case Study →
+              </StarburstButton>
+            </HoverSparkle>
           </div>
         </div>
       </div>

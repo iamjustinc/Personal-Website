@@ -5,6 +5,7 @@ import { Section } from '@/components/ui/Section'
 import { StarMark } from '@/components/ui/StarMark'
 import { WatermarkStar } from '@/components/ui/WatermarkStar'
 import { StarburstButton } from '@/components/ui/StarburstButton'
+import { HoverSparkle } from '@/components/ui/HoverSparkle'
 import { siteConfig } from '@/data/site'
 import { projects } from '@/data/projects'
 import { fadeUp, fadeIn, staggerContainer } from '@/lib/motion'
@@ -248,15 +249,17 @@ export default function ResumePage() {
 
             {/* Download button */}
             <motion.div variants={fadeIn} className="mt-7">
-              <StarburstButton
-                href={siteConfig.resumeUrl}
-                download
-                variant="secondary"
-                size="md"
-                starSpin
-              >
-                Download PDF ↓
-              </StarburstButton>
+              <HoverSparkle className="inline-flex">
+                <StarburstButton
+                  href={siteConfig.resumeUrl}
+                  download
+                  variant="secondary"
+                  size="md"
+                  starSpin
+                >
+                  Download PDF ↓
+                </StarburstButton>
+              </HoverSparkle>
             </motion.div>
           </motion.div>
 
@@ -396,14 +399,16 @@ export default function ResumePage() {
               </p>
             </div>
 
-            <StarburstButton
-              href={siteConfig.resumeUrl}
-              download
-              variant="secondary"
-              size="sm"
-            >
-              Download PDF ↓
-            </StarburstButton>
+            <HoverSparkle className="inline-flex">
+              <StarburstButton
+                href={siteConfig.resumeUrl}
+                download
+                variant="secondary"
+                size="sm"
+              >
+                Download PDF ↓
+              </StarburstButton>
+            </HoverSparkle>
           </motion.div>
 
         </div>

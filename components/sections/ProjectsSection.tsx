@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { Section } from '@/components/ui/Section'
 import { StarMark } from '@/components/ui/StarMark'
 import { StarburstButton } from '@/components/ui/StarburstButton'
+import { HoverSparkle } from '@/components/ui/HoverSparkle'
 import { projects } from '@/data/projects'
 import { fadeUp, fadeIn, staggerContainer, useMotionSafe } from '@/lib/motion'
 import { cn } from '@/lib/utils'
@@ -231,9 +232,11 @@ export function ProjectsSection() {
 
                 {/* CTA */}
                 <div className="mt-9">
-                  <StarburstButton href={`/projects/${project.slug}`} variant="primary" size="md">
-                    View Case Study →
-                  </StarburstButton>
+                  <HoverSparkle className="inline-flex">
+                    <StarburstButton href={`/projects/${project.slug}`} variant="primary" size="md">
+                      View Case Study →
+                    </StarburstButton>
+                  </HoverSparkle>
                 </div>
               </div>
             </motion.div>

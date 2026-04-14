@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { StarMark } from '@/components/ui/StarMark'
 import { StarburstButton } from '@/components/ui/StarburstButton'
+import { HoverSparkle } from '@/components/ui/HoverSparkle'
 import { siteConfig } from '@/data/site'
 import { fadeUpHero, fadeInFast, fadeUp, staggerContainer, useMotionSafe } from '@/lib/motion'
 
@@ -89,17 +90,21 @@ export function HeroText() {
 
       {/* ── CTAs ─────────────────────────────────────────────────────────── */}
       <motion.div variants={fast} className="flex flex-wrap gap-3 mt-6">
-        <StarburstButton href="/#projects" variant="primary" size="lg">
-          View my work
-        </StarburstButton>
-        <StarburstButton
-          href="/resume"
-          variant="secondary"
-          size="lg"
-          starSpin
-        >
-          Resume
-        </StarburstButton>
+        <HoverSparkle className="inline-flex">
+          <StarburstButton href="/#projects" variant="primary" size="lg">
+            View my work
+          </StarburstButton>
+        </HoverSparkle>
+        <HoverSparkle className="inline-flex">
+          <StarburstButton
+            href="/resume"
+            variant="secondary"
+            size="lg"
+            starSpin
+          >
+            Resume
+          </StarburstButton>
+        </HoverSparkle>
       </motion.div>
     </motion.div>
   )

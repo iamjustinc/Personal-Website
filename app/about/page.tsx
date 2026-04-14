@@ -6,6 +6,7 @@ import { Section } from '@/components/ui/Section'
 import { StarMark } from '@/components/ui/StarMark'
 import { WatermarkStar } from '@/components/ui/WatermarkStar'
 import { StarburstButton } from '@/components/ui/StarburstButton'
+import { HoverSparkle } from '@/components/ui/HoverSparkle'
 import { siteConfig } from '@/data/site'
 import { fadeUp, fadeIn, staggerContainer } from '@/lib/motion'
 
@@ -625,12 +626,16 @@ export default function AboutPage() {
             </div>
 
             <div className="flex gap-3 flex-wrap pt-2">
-              <StarburstButton href={`mailto:${siteConfig.email}`} variant="primary" size="md">
-                Get in touch
-              </StarburstButton>
-              <StarburstButton href="/resume" variant="secondary" size="md">
-                View Résumé
-              </StarburstButton>
+              <HoverSparkle className="inline-flex">
+                <StarburstButton href={`mailto:${siteConfig.email}`} variant="primary" size="md">
+                  Get in touch
+                </StarburstButton>
+              </HoverSparkle>
+              <HoverSparkle className="inline-flex">
+                <StarburstButton href="/resume" variant="secondary" size="md">
+                  View Résumé
+                </StarburstButton>
+              </HoverSparkle>
             </div>
           </motion.div>
         </motion.div>
