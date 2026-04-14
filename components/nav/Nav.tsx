@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation'
 import { Menu } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { MobileMenu } from './MobileMenu'
+import { HoverSparkle } from '@/components/ui/HoverSparkle'
 
 const navLinks = [
   { label: 'Work', href: '/work' },
@@ -66,34 +67,36 @@ export function Nav() {
                             </span>
                           )}
 
-                          <Link
-                            href={href}
-                            className={cn(
-                              'relative group font-sans text-[14.5px] lg:text-[15px] font-medium tracking-[0.02em] transition-colors duration-200 pb-0.5',
-                              isActive
-                                ? 'text-text-base'
-                                : 'text-text-muted hover:text-text-base',
-                            )}
-                          >
-                            {label}
+                          <HoverSparkle className="inline-flex">
+                            <Link
+                              href={href}
+                              className={cn(
+                                'relative group font-sans text-[14.5px] lg:text-[15px] font-medium tracking-[0.02em] transition-colors duration-200 pb-0.5',
+                                isActive
+                                  ? 'text-text-base'
+                                  : 'text-text-muted hover:text-text-base',
+                              )}
+                            >
+                              {label}
 
-                            <span
-                              className="absolute -bottom-px left-0 right-0 h-px rounded-full transition-all duration-300"
-                              style={{
-                                background: 'linear-gradient(90deg, #0F7A7A, #4A9FAE)',
-                                transform: isActive ? 'scaleX(1)' : 'scaleX(0)',
-                                transformOrigin: 'left',
-                                opacity: isActive ? 1 : 0,
-                              }}
-                            />
+                              <span
+                                className="absolute -bottom-px left-0 right-0 h-px rounded-full transition-all duration-300"
+                                style={{
+                                  background: 'linear-gradient(90deg, #0F7A7A, #4A9FAE)',
+                                  transform: isActive ? 'scaleX(1)' : 'scaleX(0)',
+                                  transformOrigin: 'left',
+                                  opacity: isActive ? 1 : 0,
+                                }}
+                              />
 
-                            <span
-                              className="absolute -bottom-px left-0 right-0 h-px rounded-full transition-all duration-200 opacity-0 group-hover:opacity-35"
-                              style={{
-                                background: 'linear-gradient(90deg, #0F7A7A, #4A9FAE)',
-                              }}
-                            />
-                          </Link>
+                              <span
+                                className="absolute -bottom-px left-0 right-0 h-px rounded-full transition-all duration-200 opacity-0 group-hover:opacity-35"
+                                style={{
+                                  background: 'linear-gradient(90deg, #0F7A7A, #4A9FAE)',
+                                }}
+                              />
+                            </Link>
+                          </HoverSparkle>
                         </div>
                       )
                     })}

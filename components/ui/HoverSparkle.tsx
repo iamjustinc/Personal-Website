@@ -71,7 +71,7 @@ export function HoverSparkle({ children, className }: HoverSparkleProps) {
   return (
     <div
       ref={hostRef}
-      className={cn('relative isolate', className)}
+      className={cn('relative isolate cursor-sparkle', className)}
       onMouseEnter={(e) => spawnSpark(e.clientX, e.clientY, true)}
       onMouseMove={(e) => spawnSpark(e.clientX, e.clientY)}
     >
