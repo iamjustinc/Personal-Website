@@ -58,13 +58,13 @@ export function Nav() {
                 <Link href="/" aria-label={`${siteConfig.name} — home`}>
                   {siteConfig.logoSrc ? (
                     <Image
-                      src={siteConfig.logoSrc}
-                      alt={`${siteConfig.name} logo`}
-                      width={120}
-                      height={120}
-                      className="object-contain"
-                      priority
-                    />
+                    src={siteConfig.logoSrc}
+                    alt={`${siteConfig.name} logo`}
+                    width={120}
+                    height={120}
+                    className="h-12 md:h-14 w-auto object-contain"
+                    priority
+                  />
                   ) : (
                     <div
                       className="w-14 h-14 rounded-xl flex items-center justify-center"
