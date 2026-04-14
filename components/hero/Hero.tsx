@@ -1,5 +1,5 @@
 import { HeroText } from './HeroText'
-import HeroVisual from './HeroVisual'
+import { HeroVisual } from './HeroVisual'
 import { StarMark } from '@/components/ui/StarMark'
 
 /**
