@@ -8,32 +8,43 @@ import { siteConfig } from '@/data/site'
 import { fadeUpHero, fadeInFast, fadeUp, staggerContainer, useMotionSafe } from '@/lib/motion'
 
 // ── Sparkle accent ──────────────────────────────────────────────────────────
-// Tiny gold 4-pointed star that blooms and fades at a fixed position.
-// Rendered OUTSIDE the h1 so it is never clipped by the clip-path reveal.
+// Gold 4-pointed star that blooms and fades at a fixed position.
+// Positioned outside the h1 so it is never masked or clipped.
 
 function SparkAccent({
   delay,
   x,
   top,
+  size = 9,
 }: {
   delay: number
   x: string
   top: string
+  size?: number
 }) {
   return (
     <motion.span
       className="absolute pointer-events-none"
-      style={{ left: x, top }}
-      initial={{ opacity: 0, scale: 0 }}
-      animate={{ opacity: [0, 1, 0], scale: [0, 1.1, 0], rotate: 45 }}
-      transition={{ delay, duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
+      style={{ left: x, top, zIndex: 10 }}
+      initial={{ opacity: 0, scale: 0, rotate: 0 }}
+      animate={{ opacity: [0, 1, 0], scale: [0, 1, 0], rotate: 45 }}
+      transition={{ delay, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
       aria-hidden
     >
-      <svg width="6" height="6" viewBox="0 0 12 12" fill="none">
+      {/* Soft glow behind the star */}
+      <span
+        style={{
+          position: 'absolute',
+          inset: -size,
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(244,213,141,0.35) 0%, transparent 70%)',
+        }}
+      />
+      <svg width={size} height={size} viewBox="0 0 24 24" style={{ position: 'relative' }}>
         <path
-          d="M6 0 L7 5 L12 6 L7 7 L6 12 L5 7 L0 6 L5 5 Z"
+          d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z"
           fill="#F4D58D"
-          opacity="0.88"
+          opacity="0.92"
         />
       </svg>
     </motion.span>
@@ -41,19 +52,15 @@ function SparkAccent({
 }
 
 // ── Name reveal variant ─────────────────────────────────────────────────────
-// clip-path inset expands left→right, matching the star's travel speed.
-// Opacity stays 1 throughout — the hard clip edge IS the reveal.
-// Duration and ease are intentionally identical to the star's translate
-// so both are perfectly synchronized.
-
-const NAME_DURATION = 0.56
-const NAME_EASE     = [0.4, 0, 0.55, 1] as const
+// Pure opacity + tiny y-lift. NO clip-path. Text is never cropped.
+// Runs concurrently with the star so the name appears to be revealed by it.
 
 const nameRevealVariant: Variants = {
-  hidden: { clipPath: 'inset(0 100% 0 0)' },
+  hidden: { opacity: 0, y: 10 },
   visible: {
-    clipPath: 'inset(0 0% 0 0)',
-    transition: { duration: NAME_DURATION, ease: NAME_EASE },
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.72, ease: [0.22, 1, 0.36, 1] },
   },
 }
 
@@ -61,7 +68,7 @@ const nameRevealVariant: Variants = {
 
 export function HeroText() {
   const stagger      = useMotionSafe(staggerContainer(0.10))
-  const hero         = useMotionSafe(fadeUpHero)   // fallback for reduced-motion
+  const hero         = useMotionSafe(fadeUpHero)   // reduced-motion fallback
   const up           = useMotionSafe(fadeUp)
   const fast         = useMotionSafe(fadeInFast)
   const reduceMotion = useReducedMotion()
@@ -70,7 +77,7 @@ export function HeroText() {
   const firstName = nameParts[0]
   const lastName  = nameParts.slice(1).join(' ')
 
-  // Reduced motion: fall back to standard fade-up, no clip-path, no star
+  // When reduced motion is on: standard fade-up, no star
   const nameVariant = reduceMotion ? hero : nameRevealVariant
 
   return (
@@ -97,18 +104,16 @@ export function HeroText() {
 
       {/* ── Name ────────────────────────────────────────────────────────── */}
       {/*
-          The regular <div> is the positioning context for the star and
-          sparkles. Variant propagation passes through non-motion elements
-          so the motion.h1 inside still receives the stagger's "visible" cue.
+          The wrapper div is the positioning context.
+          It has NO overflow:hidden so nothing is ever cropped.
 
-          The clip-path on motion.h1 hides the text initially (both firstName
-          and lastName), then reveals left→right as the variant animates.
+          motion.h1: starts opacity 0, fades in during the star's pass.
+          No clip-path. No masking. Text is always fully intact.
 
-          The star and sparkles live OUTSIDE the h1, so they are never
-          clipped. Their delays are tuned to match when the star's position
-          aligns with each sparkle's x coordinate.
+          The shooting star and sparkles are layered above the h1 via z-index,
+          outside its DOM subtree so they cannot be affected by its styles.
       */}
-      <div className="relative">
+      <div className="relative" style={{ overflow: 'visible' }}>
 
         <motion.h1
           variants={nameVariant}
@@ -124,80 +129,138 @@ export function HeroText() {
 
         {!reduceMotion && (
           <>
-            {/* ── Shooting star ────────────────────────────────────────────
-                Travels from x=-6% to x=104%, y shifts -4→+6 (diagonal).
-                Duration and ease match the clip-path exactly so the star tip
-                stays right at the reveal edge as the text emerges beneath it.
+            {/* ── Shooting star ───────────────────────────────────────────
+                Travels left→right across the name width at a slight diagonal.
+                Delay 0.10s matches the stagger cue for the 2nd child so the
+                star appears at the same moment the text begins fading in.
 
-                Opacity keyframe: snap in fast, hold, then fade at exit.
-            ──────────────────────────────────────────────────────────────── */}
+                The visual: a long teal→white gradient trail feeding into a
+                bright 4-pointed star head with a strong radial glow halo.
+                The star head is the clearly identifiable element.
+            ──────────────────────────────────────────────────────────── */}
             <motion.div
               aria-hidden
               className="absolute pointer-events-none"
-              style={{ top: '46%', left: 0 }}
-              initial={{ x: '-6%', y: -4, opacity: 0 }}
-              animate={{ x: '104%', y: 6, opacity: [0, 1, 1, 1, 0] }}
+              style={{ top: '50%', left: 0, zIndex: 10 }}
+              initial={{ x: '-6%', opacity: 0 }}
+              animate={{
+                x: '108%',
+                opacity: [0, 1, 1, 1, 0],
+              }}
               transition={{
-                delay: 0.10,             // matches stagger delay for 2nd child
-                duration: NAME_DURATION,
-                ease: NAME_EASE,
-                opacity: { times: [0, 0.07, 0.55, 0.88, 1], ease: 'linear' },
+                delay: 0.10,
+                duration: 0.58,
+                ease: [0.4, 0, 0.55, 1],
+                opacity: { times: [0, 0.06, 0.50, 0.88, 1], ease: 'linear' },
               }}
             >
-              {/* Trail + star tip, rotated slightly for the diagonal feel */}
-              <div style={{ display: 'flex', alignItems: 'center', transform: 'rotate(-2deg)' }}>
-
-                {/* Gradient trail — transparent tail → bright tip */}
+              {/*
+                  Inner div: translateY(-50%) centers on the text midline.
+                  rotate(-5deg) gives the diagonal "shooting" angle visually.
+              */}
+              <div
+                style={{
+                  transform: 'translateY(-50%) rotate(-5deg)',
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                {/* ── Trail ──────────────────────────────────────────────
+                    Gradient: transparent → dim teal → bright aqua → white.
+                    Long enough to read clearly as a trail on dark background.
+                ────────────────────────────────────────────────────────── */}
                 <div
                   style={{
-                    width: 68,
-                    height: 1.5,
+                    width: 110,
+                    height: 2,
                     borderRadius: 9999,
                     background:
-                      'linear-gradient(to right, transparent 0%, rgba(74,159,174,0.22) 35%, rgba(200,240,255,0.65) 100%)',
+                      'linear-gradient(to right,' +
+                      '  transparent 0%,' +
+                      '  rgba(74,159,174,0.15) 20%,' +
+                      '  rgba(100,200,220,0.45) 55%,' +
+                      '  rgba(220,248,255,0.82) 100%)',
                   }}
                 />
 
-                {/* Bright star head */}
-                <div style={{ position: 'relative', display: 'flex', alignItems: 'center', marginLeft: -2 }}>
-                  {/* Soft glow halo */}
+                {/* ── Star head ──────────────────────────────────────────
+                    A wide radial glow + a sharp 4-pointed star SVG.
+                    The glow makes it visible from a distance; the star
+                    shape makes it clearly read as a "star" and not just
+                    a blurry dot.
+                ────────────────────────────────────────────────────────── */}
+                <div
+                  style={{
+                    position: 'relative',
+                    width: 16,
+                    height: 16,
+                    marginLeft: -3,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0,
+                  }}
+                >
+                  {/* Wide soft glow */}
                   <div
                     style={{
                       position: 'absolute',
-                      inset: '-8px',
+                      width: 40,
+                      height: 40,
+                      top: '50%',
+                      left: '50%',
+                      transform: 'translate(-50%, -50%)',
                       borderRadius: '50%',
                       background:
-                        'radial-gradient(circle, rgba(210,245,255,0.48) 0%, rgba(74,159,174,0.15) 55%, transparent 70%)',
+                        'radial-gradient(circle,' +
+                        '  rgba(220,248,255,0.65) 0%,' +
+                        '  rgba(100,200,220,0.28) 40%,' +
+                        '  transparent 70%)',
                     }}
                   />
-                  {/* 4-pointed star — clearly reads as a star, not a blur */}
+                  {/* Tight inner glow */}
+                  <div
+                    style={{
+                      position: 'absolute',
+                      width: 20,
+                      height: 20,
+                      top: '50%',
+                      left: '50%',
+                      transform: 'translate(-50%, -50%)',
+                      borderRadius: '50%',
+                      background:
+                        'radial-gradient(circle,' +
+                        '  rgba(255,255,255,0.90) 0%,' +
+                        '  rgba(200,240,255,0.55) 55%,' +
+                        '  transparent 100%)',
+                    }}
+                  />
+                  {/* 4-pointed star */}
                   <svg
-                    width="9"
-                    height="9"
-                    viewBox="0 0 12 12"
-                    fill="none"
-                    style={{ position: 'relative' }}
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    style={{ position: 'relative', zIndex: 1 }}
                   >
                     <path
-                      d="M6 0 L7 5 L12 6 L7 7 L6 12 L5 7 L0 6 L5 5 Z"
+                      d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z"
                       fill="white"
-                      opacity="0.96"
+                      opacity="0.97"
                     />
                   </svg>
                 </div>
-
               </div>
             </motion.div>
 
             {/* ── Sparkle accents ─────────────────────────────────────────
-                Bloom along the star's diagonal path at alternating top/bottom.
-                Delays offset by ~70ms each, matching roughly where the star
-                tip will be at each x position given the 0.56s travel time.
+                Four gold stars scattered around the star's path.
+                Alternating top/bottom so they feel organic, not aligned.
+                Delays follow the star's x position across the 0.58s travel.
             ────────────────────────────────────────────────────────────── */}
-            <SparkAccent delay={0.17} x="8%"  top="-11px" />
-            <SparkAccent delay={0.24} x="28%" top="calc(100% + 5px)" />
-            <SparkAccent delay={0.31} x="55%" top="-9px" />
-            <SparkAccent delay={0.38} x="80%" top="calc(100% + 3px)" />
+            <SparkAccent delay={0.16} x="7%"  top="-13px" size={8} />
+            <SparkAccent delay={0.23} x="29%" top="calc(100% + 7px)" size={7} />
+            <SparkAccent delay={0.31} x="55%" top="-11px" size={9} />
+            <SparkAccent delay={0.38} x="79%" top="calc(100% + 5px)" size={7} />
           </>
         )}
 
