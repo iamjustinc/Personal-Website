@@ -60,7 +60,7 @@ const nameRevealVariant: Variants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.72, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 1.05, ease: [0.25, 0, 0.35, 1] },
   },
 }
 
