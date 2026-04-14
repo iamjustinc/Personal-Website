@@ -29,27 +29,6 @@ export const siteConfig: SiteConfig = {
     },
   ],
 
-  heroFloatingPanels: [
-    {
-      slug: 'kestrel',
-      projectName: 'Kestrel',
-      accentColor: '#0F7A7A',
-      imageSrc: '/images/projects/kestrel/thumb.png',
-    },
-    {
-      slug: 'quail',
-      projectName: 'Quail Mail',
-      accentColor: '#5E9FD4',
-      imageSrc: '/images/projects/quail/thumb.png',
-    },
-    {
-      slug: 'chirpie',
-      projectName: 'Chirpie',
-      accentColor: '#62BDB8',
-      imageSrc: '/images/projects/chirpie/thumb.png',
-    },
-  ],
-
   aboutStatements: [
     'I’m strongest where technical complexity meets user clarity. I like understanding how a system works, where it breaks, and how to make it more usable.',
     'That is why Solutions Engineering and Product roles both make sense for me — they sit at the intersection of technical depth, user empathy, and business context.',
