@@ -114,6 +114,6 @@ export const siteConfig: SiteConfig = {
   linkedinUrl: 'https://linkedin.com/in/jjustin-chang',
   githubUrl: 'https://github.com/iamjustinc',
   currentlyOpen:
-    'Exploring early-career Solutions Engineering and Product roles where I can translate technical systems into clear customer and business value.',
+  'Open to early-career SE + PM roles focused on technical systems and customer value.',
   copyrightName: 'Justin Chang',
 }

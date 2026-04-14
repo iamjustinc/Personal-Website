@@ -198,21 +198,24 @@ export function AboutSection() {
             </div>
 
             {/* Status card */}
-            <motion.div
-              variants={up}
-              className="mt-6 w-full max-w-[230px] p-4 rounded-xl"
-              style={{
-                background: 'rgba(15,42,61,0.55)',
-                border: '1px solid rgba(15,122,122,0.16)',
-              }}
-            >
-              <div className="flex items-start gap-2">
-                <StarMark size="xs" color="#4A9FAE" className="opacity-60 mt-0.5 shrink-0" />
-                <p className="font-sans text-sm leading-relaxed" style={{ color: '#A8C5D1' }}>
-                  {siteConfig.currentlyOpen}
-                </p>
-              </div>
-            </motion.div>
+<motion.div
+  variants={up}
+  className="mt-6 w-full max-w-[360px] p-5 rounded-2xl"
+  style={{
+    background: 'rgba(15,42,61,0.55)',
+    border: '1px solid rgba(15,122,122,0.16)',
+  }}
+>
+  <div className="flex items-start gap-2.5">
+    <StarMark size="xs" color="#4A9FAE" className="opacity-60 mt-1 shrink-0" />
+    <p
+      className="font-sans text-[15px] leading-6 text-pretty"
+      style={{ color: '#A8C5D1' }}
+    >
+      Open to early-career SE + PM roles where I can turn technical systems into customer value.
+    </p>
+  </div>
+</motion.div>
           </motion.div>
         )}
       </div>
