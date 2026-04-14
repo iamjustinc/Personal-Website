@@ -62,7 +62,7 @@ export function Nav() {
                     alt={`${siteConfig.name} logo`}
                     width={120}
                     height={120}
-                    className="h-20 md:h-24 w-auto object-contain"
+                    className="w-[110px] md:w-[140px] h-auto max-h-8 object-contain"
                     priority
                   />
                   ) : (
