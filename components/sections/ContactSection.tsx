@@ -207,6 +207,230 @@ function MetaPill({ children }: { children: React.ReactNode }) {
   )
 }
 
+function SectionFooter({ showThanks = true }: { showThanks?: boolean }) {
+  return (
+    <div
+      className="mt-16 flex items-center justify-between border-t pt-6"
+      style={{ borderColor: 'rgba(15,122,122,0.10)' }}
+    >
+      <div>
+        <p className="font-sans text-xs" style={{ color: 'rgba(168,197,209,0.45)' }}>
+          © {new Date().getFullYear()} {siteConfig.copyrightName}
+        </p>
+        {showThanks && (
+          <p className="mt-2 text-sm" style={{ color: 'rgba(168,197,209,0.50)' }}>
+            Thanks for stopping by — built with a lot of iteration and care.
+          </p>
+        )}
+      </div>
+
+      <div className="flex items-center gap-1.5">
+        <StarMark size="xs" color="#C4974A" className="opacity-30" />
+        <span
+          className="font-mono text-[9px] uppercase tracking-widest"
+          style={{ color: 'rgba(168,197,209,0.30)' }}
+        >
+          SE · PM
+        </span>
+      </div>
+    </div>
+  )
+}
+
+function ContactPageLayout() {
+  return (
+    <div className="space-y-14">
+      <div className="max-w-[840px]">
+        <div
+          className="mb-5 inline-flex items-center gap-2 rounded-full px-3.5 py-1.5"
+          style={{
+            background: 'rgba(15,122,122,0.08)',
+            border: '1px solid rgba(15,122,122,0.22)',
+          }}
+        >
+          <StarMark size="xs" color="#4A9FAE" className="opacity-70" />
+          <span className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-text-muted">
+            Contact
+          </span>
+        </div>
+
+        <h2 className="font-display text-hero leading-none text-text-base">
+          Let&apos;s build something useful.
+        </h2>
+
+        <p
+          className="mt-6 max-w-[760px] font-sans leading-relaxed"
+          style={{ color: '#A8C5D1', fontSize: '18px' }}
+        >
+          Whether you want to talk product demos, solutions engineering, AI workflow design, or
+          early-career opportunities, I’d love to connect. I’m especially excited by roles where
+          technical clarity, customer value, and product judgment all matter.
+        </p>
+      </div>
+
+      <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,1fr)_420px]">
+        <div className="max-w-[720px]">
+          <div className="mb-8">
+            <CopyEmailButton email={siteConfig.email} large />
+          </div>
+
+          <div className="mb-8 flex flex-wrap gap-3">
+            <MetaPill>Open to early-career roles</MetaPill>
+            <MetaPill>SE · PM · AI workflows</MetaPill>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-6">
+            <CompactLink href={siteConfig.linkedinUrl} icon={Linkedin} label="LinkedIn" />
+            <CompactLink href={siteConfig.githubUrl} icon={Github} label="GitHub" />
+            <CompactLink href={siteConfig.resumeUrl} icon={Download} label="Résumé" />
+          </div>
+
+          <SectionFooter showThanks={false} />
+        </div>
+
+        <div className="relative">
+          <div
+            className="rounded-[28px] border p-5 md:p-6"
+            style={{
+              background: 'rgba(10,24,44,0.42)',
+              borderColor: 'rgba(15,122,122,0.16)',
+              boxShadow:
+                '0 20px 60px rgba(0,0,0,0.24), 0 0 0 1px rgba(255,255,255,0.02) inset',
+            }}
+          >
+            <div className="mb-5 flex items-center justify-between gap-3">
+              <div>
+                <p className="font-sans text-[20px] font-medium text-text-base">
+                  Best ways to reach me
+                </p>
+                <p className="mt-1 text-sm" style={{ color: '#8DAFC0' }}>
+                  Quick links for intros, projects, and opportunities.
+                </p>
+              </div>
+
+              <div
+                className="flex h-10 w-10 items-center justify-center rounded-full"
+                style={{
+                  background: 'rgba(15,122,122,0.10)',
+                  border: '1px solid rgba(15,122,122,0.18)',
+                }}
+              >
+                <Sparkles size={18} color="#C4974A" />
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <ActionCard
+                href={`mailto:${siteConfig.email}`}
+                icon={Send}
+                title="Email me"
+                body="Best for role opportunities, product discussions, and collaboration."
+              />
+              <ActionCard
+                href={siteConfig.linkedinUrl}
+                icon={Linkedin}
+                title="Connect on LinkedIn"
+                body="Reach out for recruiting, networking, and quick professional intros."
+              />
+              <ActionCard
+                href={siteConfig.githubUrl}
+                icon={Github}
+                title="View GitHub"
+                body="Browse projects, code, and product experiments I’ve been building."
+              />
+              <ActionCard
+                href={siteConfig.resumeUrl}
+                icon={Download}
+                title="Download résumé"
+                body="A quick way to review experience, projects, and technical range."
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function ContactSectionLayout() {
+  return (
+    <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(420px,520px)] lg:gap-16">
+      <div className="relative">
+        <div
+          className="mb-5 inline-flex items-center gap-2 rounded-full px-3.5 py-1.5"
+          style={{
+            background: 'rgba(15,122,122,0.08)',
+            border: '1px solid rgba(15,122,122,0.22)',
+          }}
+        >
+          <StarMark size="xs" color="#4A9FAE" className="opacity-70" />
+          <span className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-text-muted">
+            Contact
+          </span>
+        </div>
+
+        <h2 className="font-display text-h1 text-text-base">Let&apos;s talk.</h2>
+
+        <p
+          className="mt-5 max-w-[680px] font-sans leading-relaxed"
+          style={{ color: '#A8C5D1', fontSize: '16px' }}
+        >
+          {siteConfig.currentlyOpen}
+        </p>
+
+        <div className="mt-8">
+          <CopyEmailButton email={siteConfig.email} />
+        </div>
+
+        <div className="mt-6 flex flex-wrap gap-3">
+          <MetaPill>Open to early-career roles</MetaPill>
+          <MetaPill>SE · PM · AI workflows</MetaPill>
+        </div>
+
+        <div className="mt-8 flex flex-wrap items-center gap-6">
+          <CompactLink href={siteConfig.linkedinUrl} icon={Linkedin} label="LinkedIn" />
+          <CompactLink href={siteConfig.githubUrl} icon={Github} label="GitHub" />
+          <CompactLink href={siteConfig.resumeUrl} icon={Download} label="Résumé" />
+        </div>
+
+        <SectionFooter showThanks />
+      </div>
+
+      <div className="grid gap-8 sm:grid-cols-3">
+        <div>
+          <p className="mb-4 font-sans text-[22px] font-medium text-text-base">Contact</p>
+          <div className="space-y-3">
+            <CompactLink href={`mailto:${siteConfig.email}`} icon={Mail} label="Email" />
+            <CompactLink href={siteConfig.resumeUrl} icon={Download} label="Résumé" />
+          </div>
+        </div>
+
+        <div>
+          <p className="mb-4 font-sans text-[22px] font-medium text-text-base">Profiles</p>
+          <div className="space-y-3">
+            <CompactLink href={siteConfig.linkedinUrl} icon={Linkedin} label="LinkedIn" />
+            <CompactLink href={siteConfig.githubUrl} icon={Github} label="GitHub" />
+          </div>
+        </div>
+
+        <div>
+          <p className="mb-4 font-sans text-[22px] font-medium text-text-base">Availability</p>
+          <div className="space-y-3 text-sm" style={{ color: '#A8C5D1' }}>
+            <div className="flex items-start gap-2">
+              <StarMark size="xs" color="#4A9FAE" className="mt-1 opacity-70" />
+              <span>Open to early-career SE + PM roles</span>
+            </div>
+            <div className="flex items-start gap-2">
+              <StarMark size="xs" color="#C4974A" className="mt-1 opacity-70" />
+              <span>Interested in AI systems, product demos, and customer-facing work</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export function ContactSection({ mode = 'section' }: ContactSectionProps) {
   const isPage = mode === 'page'
   const stagger = useMotionSafe(staggerContainer(0.08))
@@ -235,179 +459,10 @@ export function ContactSection({ mode = 'section' }: ContactSectionProps) {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: '-10%' }}
-        className={cn(
-          isPage
-            ? 'grid items-start gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(340px,430px)] lg:gap-16'
-            : 'grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(420px,520px)] lg:gap-16',
-        )}
       >
-        <div className="relative">
-          <motion.div variants={up}>
-            <div
-              className="mb-5 inline-flex items-center gap-2 rounded-full px-3.5 py-1.5"
-              style={{
-                background: 'rgba(15,122,122,0.08)',
-                border: '1px solid rgba(15,122,122,0.22)',
-              }}
-            >
-              <StarMark size="xs" color="#4A9FAE" className="opacity-70" />
-              <span className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-text-muted">
-                Contact
-              </span>
-            </div>
-
-            <h2 className={cn('font-display text-text-base', isPage ? 'text-hero leading-none' : 'text-h1')}>
-              {isPage ? 'Let’s build something useful.' : 'Let’s talk.'}
-            </h2>
-          </motion.div>
-
-          <motion.p
-            variants={up}
-            className="mt-5 max-w-[680px] font-sans leading-relaxed"
-            style={{
-              color: '#A8C5D1',
-              fontSize: isPage ? '18px' : '16px',
-            }}
-          >
-            {isPage
-              ? 'Whether you want to talk product demos, solutions engineering, AI workflow design, or early-career opportunities, I’d love to connect. I’m especially excited by roles where technical clarity, customer value, and product judgment all matter.'
-              : siteConfig.currentlyOpen}
-          </motion.p>
-
-          <motion.div variants={up} className="mt-8">
-            <CopyEmailButton email={siteConfig.email} large={isPage} />
-          </motion.div>
-
-          <motion.div variants={up} className="mt-6 flex flex-wrap gap-3">
-            <MetaPill>Open to early-career roles</MetaPill>
-            <MetaPill>SE · PM · AI workflows</MetaPill>
-          </motion.div>
-
-          <motion.div variants={up} className="mt-8 flex flex-wrap items-center gap-6">
-            <CompactLink href={siteConfig.linkedinUrl} icon={Linkedin} label="LinkedIn" />
-            <CompactLink href={siteConfig.githubUrl} icon={Github} label="GitHub" />
-            <CompactLink href={siteConfig.resumeUrl} icon={Download} label="Résumé" />
-          </motion.div>
-
-          <motion.div
-            variants={up}
-            className="mt-16 flex items-center justify-between border-t pt-6"
-            style={{ borderColor: 'rgba(15,122,122,0.10)' }}
-          >
-            <div>
-              <p className="font-sans text-xs" style={{ color: 'rgba(168,197,209,0.45)' }}>
-                © {new Date().getFullYear()} {siteConfig.copyrightName}
-              </p>
-              {!isPage && (
-                <p className="mt-2 text-sm" style={{ color: 'rgba(168,197,209,0.50)' }}>
-                  Thanks for stopping by — built with a lot of iteration and care.
-                </p>
-              )}
-            </div>
-
-            <div className="flex items-center gap-1.5">
-              <StarMark size="xs" color="#C4974A" className="opacity-30" />
-              <span
-                className="font-mono text-[9px] uppercase tracking-widest"
-                style={{ color: 'rgba(168,197,209,0.30)' }}
-              >
-                SE · PM
-              </span>
-            </div>
-          </motion.div>
-        </div>
-
-        {isPage ? (
-          <motion.div variants={up} className="relative">
-            <div
-              className="rounded-[28px] border p-5 md:p-6"
-              style={{
-                background: 'rgba(10,24,44,0.42)',
-                borderColor: 'rgba(15,122,122,0.16)',
-                boxShadow:
-                  '0 20px 60px rgba(0,0,0,0.24), 0 0 0 1px rgba(255,255,255,0.02) inset',
-              }}
-            >
-              <div className="mb-5 flex items-center justify-between gap-3">
-                <div>
-                  <p className="font-sans text-[20px] font-medium text-text-base">Best ways to reach me</p>
-                  <p className="mt-1 text-sm" style={{ color: '#8DAFC0' }}>
-                    Quick links for intros, projects, and opportunities.
-                  </p>
-                </div>
-
-                <div
-                  className="flex h-10 w-10 items-center justify-center rounded-full"
-                  style={{
-                    background: 'rgba(15,122,122,0.10)',
-                    border: '1px solid rgba(15,122,122,0.18)',
-                  }}
-                >
-                  <Sparkles size={18} color="#C4974A" />
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <ActionCard
-                  href={`mailto:${siteConfig.email}`}
-                  icon={Send}
-                  title="Email me"
-                  body="Best for role opportunities, product discussions, and collaboration."
-                />
-                <ActionCard
-                  href={siteConfig.linkedinUrl}
-                  icon={Linkedin}
-                  title="Connect on LinkedIn"
-                  body="Reach out for recruiting, networking, and quick professional intros."
-                />
-                <ActionCard
-                  href={siteConfig.githubUrl}
-                  icon={Github}
-                  title="View GitHub"
-                  body="Browse projects, code, and product experiments I’ve been building."
-                />
-                <ActionCard
-                  href={siteConfig.resumeUrl}
-                  icon={Download}
-                  title="Download résumé"
-                  body="A quick way to review experience, projects, and technical range."
-                />
-              </div>
-            </div>
-          </motion.div>
-        ) : (
-          <motion.div variants={up} className="grid gap-8 sm:grid-cols-3">
-            <div>
-              <p className="mb-4 font-sans text-[22px] font-medium text-text-base">Contact</p>
-              <div className="space-y-3">
-                <CompactLink href={`mailto:${siteConfig.email}`} icon={Mail} label="Email" />
-                <CompactLink href={siteConfig.resumeUrl} icon={Download} label="Résumé" />
-              </div>
-            </div>
-
-            <div>
-              <p className="mb-4 font-sans text-[22px] font-medium text-text-base">Profiles</p>
-              <div className="space-y-3">
-                <CompactLink href={siteConfig.linkedinUrl} icon={Linkedin} label="LinkedIn" />
-                <CompactLink href={siteConfig.githubUrl} icon={Github} label="GitHub" />
-              </div>
-            </div>
-
-            <div>
-              <p className="mb-4 font-sans text-[22px] font-medium text-text-base">Availability</p>
-              <div className="space-y-3 text-sm" style={{ color: '#A8C5D1' }}>
-                <div className="flex items-start gap-2">
-                  <StarMark size="xs" color="#4A9FAE" className="mt-1 opacity-70" />
-                  <span>Open to early-career SE + PM roles</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <StarMark size="xs" color="#C4974A" className="mt-1 opacity-70" />
-                  <span>Interested in AI systems, product demos, and customer-facing work</span>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        )}
+        <motion.div variants={up}>
+          {isPage ? <ContactPageLayout /> : <ContactSectionLayout />}
+        </motion.div>
       </motion.div>
     </Section>
   )
