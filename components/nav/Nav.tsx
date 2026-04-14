@@ -60,8 +60,8 @@ export function Nav() {
                     <Image
                       src={siteConfig.logoSrc}
                       alt={`${siteConfig.name} logo`}
-                      width={80}
-                      height={80}
+                      width={100}
+                      height={100}
                       className="object-contain"
                       priority
                     />
