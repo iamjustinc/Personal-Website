@@ -57,14 +57,22 @@ export function Nav() {
               >
                 <Link href="/" aria-label={`${siteConfig.name} — home`}>
                   {siteConfig.logoSrc ? (
-                    <Image
-                    src={siteConfig.logoSrc}
-                    alt={`${siteConfig.name} logo`}
-                    width={120}
-                    height={120}
-                    className="w-[110px] md:w-[140px] h-auto max-h-8 object-contain"
-                    priority
-                  />
+                    <motion.div
+                    whileHover={{ scale: 1.06, opacity: 0.9 }}
+                    transition={{ duration: 0.2, ease: 'easeOut' }}
+                    className="shrink-0 basis-[120px] md:basis-[150px] z-10 flex items-center"
+                  >
+                    <Link href="/" aria-label={`${siteConfig.name} — home`}>
+                      <Image
+                        src={siteConfig.logoSrc}
+                        alt={`${siteConfig.name} logo`}
+                        width={220}
+                        height={80}
+                        className="w-[110px] md:w-[140px] h-auto max-h-8 object-contain"
+                        priority
+                      />
+                    </Link>
+                  </motion.div>
                   ) : (
                     <div
                       className="w-14 h-14 rounded-xl flex items-center justify-center"
