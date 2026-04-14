@@ -153,8 +153,8 @@ export function HoverSparkle({ children, className }: HoverSparkleProps) {
             <div
               className="absolute inset-0 rounded-full"
               style={{
-                width: 28,
-                height: 28,
+                width: 44,
+                height: 44,
                 top: '50%',
                 left: '50%',
                 transform: 'translate(-50%, -50%)',
@@ -163,8 +163,8 @@ export function HoverSparkle({ children, className }: HoverSparkleProps) {
             />
             {/* 4-pointed star */}
             <svg
-              width="18"
-              height="18"
+              width="28"
+              height="28"
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
             >
