@@ -62,7 +62,7 @@ export function Nav() {
         src={siteConfig.logoSrc}
         alt="Justin logo"
         fill
-        className="object-contain object-left scale-[2.0] origin-left"
+        className="object-contain object-left scale-[2.2] origin-left"
         priority
       />
     ) : (
