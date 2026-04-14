@@ -34,33 +34,29 @@ export function Nav() {
   return (
     <>
       <div
-        className="fixed top-5 left-0 right-0 z-50 flex justify-center px-5 pointer-events-none"
+        className="fixed top-5 left-0 right-0 z-50 px-5 pointer-events-none"
         aria-label="Site header"
       >
         <motion.header
           initial={{ y: -90, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1.0, delay: 0.10, ease: [0.22, 1, 0.36, 1] }}
-          className="w-full max-w-[1120px] pointer-events-auto"
+          className="mx-auto w-full max-w-[1180px] pointer-events-auto"
         >
-          <div className="grid grid-cols-[auto_1fr_auto] items-center gap-4">
-            {/* Logo — outside the nav bar */}
-            <motion.div
-              whileHover={{ scale: 1.06, opacity: 0.9 }}
-              transition={{ duration: 0.2, ease: 'easeOut' }}
-              className="shrink-0 z-10 flex items-center"
-            >
+          <div className="flex items-center justify-between gap-4">
+            {/* Static logo on the left */}
+            <div className="shrink-0 flex items-center">
               <Link
                 href="/"
                 aria-label={`${siteConfig.name} — home`}
-                className="relative block h-10 w-[118px] overflow-visible"
+                className="relative block h-10 w-[124px] overflow-visible"
               >
                 {siteConfig.logoSrc ? (
                   <Image
                     src={siteConfig.logoSrc}
                     alt="Justin logo"
                     fill
-                    className="object-contain object-left scale-[2.2] origin-left"
+                    className="object-contain object-left scale-[2.25] origin-left"
                     priority
                   />
                 ) : (
@@ -72,28 +68,28 @@ export function Nav() {
                   </div>
                 )}
               </Link>
-            </motion.div>
+            </div>
 
-            {/* Desktop nav bar */}
-            <div className="hidden md:flex justify-center">
+            {/* Desktop nav on the right only */}
+            <div className="hidden md:flex justify-end">
               <div
-                className="relative w-full max-w-[860px] rounded-3xl"
+                className="relative rounded-3xl"
                 style={navShellStyle}
               >
-                <div className="relative px-8 py-2 flex items-center justify-center">
+                <div className="relative px-7 lg:px-8 py-2 flex items-center justify-center">
                   <nav
-                    className="flex items-center gap-8 lg:gap-10"
+                    className="flex items-center gap-6 lg:gap-7"
                     aria-label="Main navigation"
                   >
                     {navLinks.map(({ label, href }, idx) => {
                       const isActive = pathname === href
 
                       return (
-                        <div key={label} className="flex items-center gap-8 lg:gap-10">
+                        <div key={label} className="flex items-center gap-6 lg:gap-7">
                           {idx > 0 && (
                             <span
                               aria-hidden
-                              className="text-text-muted opacity-30 text-[15px] leading-none select-none"
+                              className="text-text-muted opacity-25 text-[14px] leading-none select-none"
                             >
                               |
                             </span>
@@ -102,7 +98,7 @@ export function Nav() {
                           <Link
                             href={href}
                             className={cn(
-                              'relative group font-sans text-[15px] lg:text-[15.5px] font-medium tracking-[0.02em] transition-colors duration-200 pb-0.5',
+                              'relative group font-sans text-[14.5px] lg:text-[15px] font-medium tracking-[0.02em] transition-colors duration-200 pb-0.5',
                               isActive
                                 ? 'text-text-base'
                                 : 'text-text-muted hover:text-text-base',
@@ -135,11 +131,8 @@ export function Nav() {
               </div>
             </div>
 
-            {/* Desktop spacer to keep nav perfectly centered */}
-            <div className="hidden md:block w-[118px] h-10 shrink-0" aria-hidden />
-
             {/* Mobile hamburger */}
-            <div className="md:hidden z-10 flex justify-end">
+            <div className="md:hidden shrink-0">
               <div className="rounded-2xl" style={navShellStyle}>
                 <button
                   className="p-2.5 text-text-muted hover:text-text-base transition-colors rounded-btn"
