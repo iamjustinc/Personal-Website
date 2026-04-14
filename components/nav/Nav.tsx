@@ -3,13 +3,10 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { Menu } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { StarMark } from '@/components/ui/StarMark'
 import { MobileMenu } from './MobileMenu'
-import { siteConfig } from '@/data/site'
 
 const navLinks = [
   { label: 'Work', href: '/work' },
@@ -41,37 +38,11 @@ export function Nav() {
           initial={{ y: -90, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1.0, delay: 0.10, ease: [0.22, 1, 0.36, 1] }}
-          className="mx-auto w-full max-w-[1180px] pointer-events-auto"
+          className="mx-auto w-full max-w-[1180px]"
         >
-          <div className="flex items-center justify-between gap-4">
-            {/* Static logo on the left */}
-            <div className="shrink-0 flex items-center">
-              <Link
-                href="/"
-                aria-label={`${siteConfig.name} — home`}
-                className="relative block h-10 w-[124px] overflow-visible"
-              >
-                {siteConfig.logoSrc ? (
-                  <Image
-                    src={siteConfig.logoSrc}
-                    alt="Justin logo"
-                    fill
-                    className="object-contain object-left scale-[2.25] origin-left"
-                    priority
-                  />
-                ) : (
-                  <div
-                    className="w-14 h-14 rounded-xl flex items-center justify-center"
-                    style={{ background: 'linear-gradient(135deg, #0F7A7A, #4A9FAE)' }}
-                  >
-                    <StarMark size="sm" color="white" />
-                  </div>
-                )}
-              </Link>
-            </div>
-
+          <div className="flex items-center justify-end gap-4">
             {/* Desktop nav on the right only */}
-            <div className="hidden md:flex justify-end">
+            <div className="hidden md:flex justify-end pointer-events-auto">
               <div
                 className="relative rounded-3xl"
                 style={navShellStyle}
@@ -132,7 +103,7 @@ export function Nav() {
             </div>
 
             {/* Mobile hamburger */}
-            <div className="md:hidden shrink-0">
+            <div className="md:hidden shrink-0 pointer-events-auto">
               <div className="rounded-2xl" style={navShellStyle}>
                 <button
                   className="p-2.5 text-text-muted hover:text-text-base transition-colors rounded-btn"
