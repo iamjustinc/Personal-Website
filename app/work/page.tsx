@@ -60,7 +60,7 @@ function WorkProjectVisual({
             alt={`${project.name} landing view`}
             fill
             sizes="(max-width: 1024px) 100vw, 440px"
-            className="object-contain object-center p-3"
+            className="object-contain object-center scale-[1.22]"
             priority={priority}
           />
         </motion.div>
@@ -88,7 +88,7 @@ function WorkProjectVisual({
             alt={`${project.name} interface view`}
             fill
             sizes="(max-width: 1024px) 100vw, 500px"
-            className="object-contain object-center p-3"
+            className="object-contain object-center scale-[1.16]"
           />
         </motion.div>
       )}

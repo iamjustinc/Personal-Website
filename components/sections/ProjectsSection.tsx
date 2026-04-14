@@ -58,7 +58,7 @@ function FloatingProjectVisual({
             alt={`${project.name} landing view`}
             fill
             sizes="(max-width: 1024px) 100vw, 420px"
-            className="object-contain object-center p-3"
+            className="object-contain object-center scale-[1.22]"
             priority={priority}
           />
         </motion.div>
@@ -88,7 +88,7 @@ function FloatingProjectVisual({
             alt={`${project.name} interface view`}
             fill
             sizes="(max-width: 1024px) 100vw, 460px"
-            className="object-contain object-center p-3"
+            className="object-contain object-center scale-[1.16]"
           />
         </motion.div>
       )}
