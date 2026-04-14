@@ -19,7 +19,7 @@ const philosophyStatements = [
     starColor: '#C4974A',
   },
   {
-    text: 'I believe the best products are the ones that feel inevitable once you\'re using them.',
+    text: "I believe the best products are the ones that feel inevitable once you're using them.",
     starColor: '#4A9FAE',
   },
 ]
@@ -38,7 +38,6 @@ const expertiseExpansions: Record<string, string> = {
 export default function AboutPage() {
   return (
     <main className="pt-28 min-h-screen">
-
       {/* ── Section A: Editorial intro ───────────────────────────────────── */}
       <Section paddingY="lg">
         {/* Background watermark */}
@@ -52,7 +51,7 @@ export default function AboutPage() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="flex justify-center mb-16"
+          className="flex justify-center mb-12"
         >
           <div
             className="inline-flex items-center gap-2 rounded-full px-4 py-1.5"
@@ -69,74 +68,261 @@ export default function AboutPage() {
         </motion.div>
 
         {/* Editorial two-column */}
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-
-          {/* Left: portrait with gold star badge */}
+        <div className="grid lg:grid-cols-[48fr_52fr] gap-12 lg:gap-18 items-center">
+          {/* Left: portrait with hero-style orbit */}
           <motion.div
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="flex justify-center lg:justify-end"
+            className="flex justify-center"
           >
-            <div className="relative">
-              {/* Float wrapper */}
-              <div className="portrait-float">
-                {/* Halo ring */}
+            <div className="scale-[0.84] sm:scale-[0.92] lg:scale-100 origin-center">
+              <div
+                className="relative flex items-center justify-center"
+                style={{ width: 420, height: 420 }}
+              >
+                {/* Aura */}
                 <div
-                  className="absolute -inset-3 rounded-full halo-spin pointer-events-none"
-                  style={{
-                    background:
-                      'conic-gradient(from 0deg, transparent 0%, rgba(15,122,122,0.18) 25%, transparent 50%, rgba(196,151,74,0.10) 75%, transparent 100%)',
-                    borderRadius: '50%',
-                  }}
                   aria-hidden
+                  className="absolute pointer-events-none"
+                  style={{
+                    width: 460,
+                    height: 460,
+                    borderRadius: '50%',
+                    background:
+                      'radial-gradient(circle, rgba(15,122,122,0.18) 0%, rgba(15,122,122,0.05) 42%, transparent 70%)',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                  }}
+                />
+
+                {/* Watermark star */}
+                <div
+                  aria-hidden
+                  className="absolute pointer-events-none"
+                  style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}
+                >
+                  <WatermarkStar size={340} color="#0F7A7A" direction={1} opacity={0.07} />
+                </div>
+
+                {/* Dashed orbit ring */}
+                <div
+                  aria-hidden
+                  className="absolute pointer-events-none halo-spin"
+                  style={{
+                    width: 340,
+                    height: 340,
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                  }}
+                >
+                  <svg width="340" height="340" viewBox="0 0 340 340" fill="none">
+                    <circle
+                      cx="170"
+                      cy="170"
+                      r="166"
+                      stroke="rgba(15,122,122,0.20)"
+                      strokeWidth="1"
+                      strokeDasharray="4 12"
+                    />
+                  </svg>
+                </div>
+
+                {/* Thin inner ring */}
+                <div
+                  aria-hidden
+                  className="absolute pointer-events-none"
+                  style={{
+                    width: 304,
+                    height: 304,
+                    borderRadius: '50%',
+                    border: '1px solid rgba(196,151,74,0.16)',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                  }}
                 />
 
                 {/* Portrait */}
                 <div
-                  className="relative portrait-glow"
-                  style={{ borderRadius: '50%', overflow: 'hidden', width: 300, height: 320 }}
+                  className="portrait-float relative"
+                  style={{ width: 272, height: 272, zIndex: 10 }}
                 >
-                  {siteConfig.portraitSrc ? (
-                    <Image
-                      src={siteConfig.portraitSrc}
-                      alt={`${siteConfig.name} portrait`}
-                      fill
-                      sizes="300px"
-                      className="object-cover object-top"
-                      priority
-                    />
-                  ) : (
-                    <div
-                      className="w-full h-full flex items-center justify-center"
-                      style={{ background: 'linear-gradient(135deg, #0F2A3D, #0D1E30)' }}
-                    >
-                      <StarMark size="xl" color="#0F7A7A" className="opacity-30" />
-                    </div>
-                  )}
-                </div>
-              </div>
+                  <div
+                    className="portrait-glow"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      borderRadius: '50%',
+                      overflow: 'hidden',
+                      position: 'relative',
+                    }}
+                  >
+                    {siteConfig.portraitSrc ? (
+                      <Image
+                        src={siteConfig.portraitSrc}
+                        alt={`${siteConfig.name} portrait`}
+                        fill
+                        sizes="272px"
+                        className="object-cover object-top"
+                        priority
+                      />
+                    ) : (
+                      <div
+                        className="w-full h-full flex items-center justify-center"
+                        style={{ background: 'linear-gradient(135deg, #0F2A3D, #0D1E30)' }}
+                      >
+                        <StarMark size="xl" color="#0F7A7A" className="opacity-30" />
+                      </div>
+                    )}
 
-              {/* Gold star overlay badge — top-right corner */}
-              <motion.div
-                initial={{ scale: 0, rotate: -20, opacity: 0 }}
-                whileInView={{ scale: 1, rotate: 0, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="absolute -top-2 -right-2 z-10"
-              >
-                <div
-                  className="flex items-center justify-center w-10 h-10 rounded-full"
-                  style={{
-                    background: 'rgba(10,22,40,0.92)',
-                    border: '1px solid rgba(196,151,74,0.40)',
-                    boxShadow: '0 0 16px rgba(196,151,74,0.20)',
-                  }}
-                >
-                  <StarMark size="sm" color="#C4974A" />
+                    <div
+                      style={{
+                        position: 'absolute',
+                        inset: 0,
+                        background:
+                          'linear-gradient(160deg, rgba(15,122,122,0.08) 0%, transparent 60%, rgba(10,22,40,0.15) 100%)',
+                        borderRadius: '50%',
+                      }}
+                    />
+                  </div>
                 </div>
-              </motion.div>
+
+                {/* Main gold satellite */}
+                <motion.div
+                  aria-hidden
+                  className="absolute pointer-events-none"
+                  style={{
+                    width: 328,
+                    height: 328,
+                    top: '50%',
+                    left: '50%',
+                    marginLeft: -164,
+                    marginTop: -164,
+                    zIndex: 20,
+                  }}
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+                >
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: '50%',
+                      left: '50%',
+                      width: 18,
+                      height: 18,
+                      marginLeft: -9,
+                      marginTop: -9,
+                      transform: 'rotate(132deg) translateY(-164px)',
+                    }}
+                  >
+                    <div
+                      style={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        width: 44,
+                        height: 10,
+                        transform: 'translate(-88%, -50%)',
+                        borderRadius: 999,
+                        background:
+                          'linear-gradient(90deg, rgba(196,151,74,0.0) 0%, rgba(196,151,74,0.10) 28%, rgba(196,151,74,0.22) 55%, rgba(196,151,74,0.0) 100%)',
+                        filter: 'blur(4px)',
+                        opacity: 0.7,
+                      }}
+                    />
+                    <motion.div
+                      animate={{ scale: [1, 1.08, 1], y: [0, -1.5, 0] }}
+                      transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
+                      style={{
+                        position: 'relative',
+                        width: 18,
+                        height: 18,
+                        borderRadius: '50%',
+                        background:
+                          'radial-gradient(circle at 32% 30%, #FFF5D9 0%, #E2BC69 34%, #C4974A 68%, #8E6320 100%)',
+                        boxShadow:
+                          '0 0 10px rgba(196,151,74,0.55), 0 0 22px rgba(196,151,74,0.22), inset -2px -2px 4px rgba(0,0,0,0.18), inset 1px 1px 2px rgba(255,255,255,0.4)',
+                      }}
+                    />
+                  </div>
+                </motion.div>
+
+                {/* Small teal satellite */}
+                <motion.div
+                  aria-hidden
+                  className="absolute pointer-events-none"
+                  style={{
+                    width: 296,
+                    height: 296,
+                    top: '50%',
+                    left: '50%',
+                    marginLeft: -148,
+                    marginTop: -148,
+                    zIndex: 19,
+                  }}
+                  animate={{ rotate: -360 }}
+                  transition={{ duration: 28, repeat: Infinity, ease: 'linear' }}
+                >
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: '50%',
+                      left: '50%',
+                      width: 10,
+                      height: 10,
+                      marginLeft: -5,
+                      marginTop: -5,
+                      transform: 'rotate(36deg) translateY(-148px)',
+                    }}
+                  >
+                    <motion.div
+                      animate={{ scale: [1, 1.18, 1], opacity: [0.7, 1, 0.7] }}
+                      transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
+                      style={{
+                        width: 10,
+                        height: 10,
+                        borderRadius: '50%',
+                        background:
+                          'radial-gradient(circle at 35% 35%, #D9FCFF 0%, #71D5E4 40%, #4A9FAE 75%, #1C5B68 100%)',
+                        boxShadow:
+                          '0 0 8px rgba(74,159,174,0.55), 0 0 18px rgba(74,159,174,0.18), inset -1px -1px 2px rgba(0,0,0,0.18), inset 1px 1px 2px rgba(255,255,255,0.35)',
+                      }}
+                    />
+                  </div>
+                </motion.div>
+
+                {/* Floating stars */}
+                <motion.div
+                  aria-hidden
+                  animate={{ y: [0, -4, 0] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+                  style={{ position: 'absolute', top: 28, right: 24, zIndex: 20 }}
+                >
+                  <StarMark size="sm" color="#4A9FAE" className="opacity-70" />
+                </motion.div>
+
+                <motion.div
+                  aria-hidden
+                  animate={{ y: [0, 4, 0] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}
+                  style={{ position: 'absolute', left: 10, top: '48%', zIndex: 20 }}
+                >
+                  <StarMark size="xs" color="#C4974A" className="opacity-55" />
+                </motion.div>
+
+                <motion.div
+                  aria-hidden
+                  animate={{ y: [0, -3, 0] }}
+                  transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut', delay: 0.8 }}
+                  style={{ position: 'absolute', bottom: 34, left: 30, zIndex: 20 }}
+                >
+                  <StarMark size="xs" color="#4A9FAE" className="opacity-40" />
+                </motion.div>
+              </div>
             </div>
           </motion.div>
 
@@ -146,7 +332,7 @@ export default function AboutPage() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="flex flex-col"
+            className="flex flex-col justify-center max-w-[640px] mx-auto lg:mx-0"
           >
             {/* Name + role */}
             <motion.div variants={fadeUp} className="mb-6">
@@ -158,18 +344,22 @@ export default function AboutPage() {
                 }}
               >
                 <StarMark size="xs" color="#4A9FAE" className="opacity-70" />
-                <span className="font-mono text-[10px] uppercase tracking-[0.12em]" style={{ color: '#4A9FAE' }}>
+                <span
+                  className="font-mono text-[10px] uppercase tracking-[0.12em]"
+                  style={{ color: '#4A9FAE' }}
+                >
                   {siteConfig.roleTag}
                 </span>
               </div>
 
               <h1 className="font-display text-hero text-text-base leading-none">
                 {siteConfig.name.split(' ')[0]}{' '}
-                <span style={{ color: '#4A9FAE' }}>{siteConfig.name.split(' ').slice(1).join(' ')}</span>
+                <span style={{ color: '#4A9FAE' }}>
+                  {siteConfig.name.split(' ').slice(1).join(' ')}
+                </span>
               </h1>
             </motion.div>
 
-            {/* Personal statement paragraphs */}
             <motion.p
               variants={fadeUp}
               className="font-sans leading-relaxed"
@@ -310,7 +500,6 @@ export default function AboutPage() {
           viewport={{ once: true }}
           className="grid lg:grid-cols-2 gap-6 items-start"
         >
-          {/* Current role card */}
           {siteConfig.career?.[0] && (
             <motion.div
               variants={fadeUp}
@@ -365,7 +554,6 @@ export default function AboutPage() {
             </motion.div>
           )}
 
-          {/* Open to work + links */}
           <motion.div variants={fadeUp} className="flex flex-col gap-6">
             <div
               className="p-7 rounded-2xl"
@@ -385,18 +573,22 @@ export default function AboutPage() {
               </p>
             </div>
 
-            {/* Contact links */}
             <div className="flex flex-col gap-3">
               <a
                 href={`mailto:${siteConfig.email}`}
                 className="flex items-center gap-3 group transition-colors"
                 style={{ color: '#A8C5D1' }}
               >
-                <StarMark size="xs" color="#0F7A7A" className="opacity-60 group-hover:opacity-100 transition-opacity" />
+                <StarMark
+                  size="xs"
+                  color="#0F7A7A"
+                  className="opacity-60 group-hover:opacity-100 transition-opacity"
+                />
                 <span className="font-sans text-sm group-hover:text-text-base transition-colors">
                   {siteConfig.email}
                 </span>
               </a>
+
               <a
                 href={siteConfig.linkedinUrl}
                 target="_blank"
@@ -404,11 +596,16 @@ export default function AboutPage() {
                 className="flex items-center gap-3 group transition-colors"
                 style={{ color: '#A8C5D1' }}
               >
-                <StarMark size="xs" color="#0F7A7A" className="opacity-60 group-hover:opacity-100 transition-opacity" />
+                <StarMark
+                  size="xs"
+                  color="#0F7A7A"
+                  className="opacity-60 group-hover:opacity-100 transition-opacity"
+                />
                 <span className="font-sans text-sm group-hover:text-text-base transition-colors">
                   LinkedIn
                 </span>
               </a>
+
               <a
                 href={siteConfig.githubUrl}
                 target="_blank"
@@ -416,7 +613,11 @@ export default function AboutPage() {
                 className="flex items-center gap-3 group transition-colors"
                 style={{ color: '#A8C5D1' }}
               >
-                <StarMark size="xs" color="#0F7A7A" className="opacity-60 group-hover:opacity-100 transition-opacity" />
+                <StarMark
+                  size="xs"
+                  color="#0F7A7A"
+                  className="opacity-60 group-hover:opacity-100 transition-opacity"
+                />
                 <span className="font-sans text-sm group-hover:text-text-base transition-colors">
                   GitHub
                 </span>
@@ -434,7 +635,6 @@ export default function AboutPage() {
           </motion.div>
         </motion.div>
       </Section>
-
     </main>
   )
 }
