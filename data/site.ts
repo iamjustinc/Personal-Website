@@ -3,7 +3,7 @@ import type { SiteConfig } from '@/types/site'
 export const siteConfig: SiteConfig = {
   name: 'Justin Chang',
   roleTag: 'Solutions Engineering + Product Management',
-  heroStatement: 'I turn complex systems and AI workflows into clear, usable products.',
+  heroStatement: 'I turn complex systems and AI workflows into clear, usable products!',
   resumeUrl: '/resume.pdf',
 
   logoSrc:    '/images/justin-logo.png',
