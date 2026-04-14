@@ -212,41 +212,6 @@ export default function ResumePage() {
               </p>
             </motion.div>
 
-            {/* Contact links */}
-            <motion.div variants={fadeIn} className="flex flex-wrap items-center gap-4 mt-6">
-              <a
-                href={`mailto:${siteConfig.email}`}
-                className="font-sans text-sm transition-colors hover:text-text-base"
-                style={{ color: '#A8C5D1' }}
-              >
-                {siteConfig.email}
-              </a>
-              <span style={{ color: 'rgba(168,197,209,0.20)' }}>
-                <StarMark size="xs" color="rgba(15,122,122,0.40)" />
-              </span>
-              <a
-                href={siteConfig.linkedinUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-sans text-sm transition-colors hover:text-text-base"
-                style={{ color: '#A8C5D1' }}
-              >
-                LinkedIn
-              </a>
-              <span style={{ color: 'rgba(168,197,209,0.20)' }}>
-                <StarMark size="xs" color="rgba(15,122,122,0.40)" />
-              </span>
-              <a
-                href={siteConfig.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-sans text-sm transition-colors hover:text-text-base"
-                style={{ color: '#A8C5D1' }}
-              >
-                GitHub
-              </a>
-            </motion.div>
-
             {/* Download button */}
             <motion.div variants={fadeIn} className="mt-7">
               <HoverSparkle className="inline-flex">
