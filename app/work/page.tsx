@@ -264,7 +264,7 @@ export default function WorkPage() {
   ]
 
   return (
-    <main className="pt-28 min-h-screen">
+    <main className="pt-16 min-h-screen">
       <Section paddingY="lg">
         {/* Overflow watermark */}
         <div className="absolute top-32 right-0 pointer-events-none overflow-hidden" aria-hidden>

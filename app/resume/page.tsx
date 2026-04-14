@@ -162,7 +162,7 @@ export default function ResumePage() {
   const visibleProjects = projects.filter(p => p.visible)
 
   return (
-    <main className="pt-28 min-h-screen">
+    <main className="pt-16 min-h-screen">
       <Section paddingY="lg">
         {/* Background watermark */}
         <div className="absolute top-24 right-0 pointer-events-none overflow-hidden" aria-hidden>

@@ -38,7 +38,7 @@ const expertiseExpansions: Record<string, string> = {
 
 export default function AboutPage() {
   return (
-    <main className="pt-28 min-h-screen">
+    <main className="pt-16 min-h-screen">
       {/* ── Section A: Editorial intro ───────────────────────────────────── */}
       <Section paddingY="lg">
         {/* Background watermark */}
