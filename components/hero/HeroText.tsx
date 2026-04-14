@@ -66,7 +66,7 @@ export function HeroText() {
         {siteConfig.capabilities.slice(0, 3).map((cap) => (
           <span
             key={cap.label}
-            className="inline-flex items-center gap-1.5 font-mono text-[9.5px] uppercase tracking-wider rounded-full px-3 py-1"
+            className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-wider rounded-full px-3 py-1"
             style={{
               background: 'rgba(15,42,61,0.60)',
               border: '1px solid rgba(15,122,122,0.18)',
