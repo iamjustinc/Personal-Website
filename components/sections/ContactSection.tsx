@@ -385,14 +385,7 @@ function ContactSectionLayout() {
         <SectionFooter showThanks />
       </div>
 
-      <div className="grid gap-8 sm:grid-cols-3">
-        <div>
-          <p className="mb-4 font-sans text-[22px] font-medium text-text-base">Contact</p>
-          <div className="space-y-3">
-            <CompactLink href={`mailto:${siteConfig.email}`} icon={Mail} label="Email" />
-            <CompactLink href={siteConfig.resumeUrl} icon={Download} label="Résumé" />
-          </div>
-        </div>
+      <div className="grid gap-8 sm:grid-cols-2">
 
         <div>
           <p className="mb-4 font-sans text-[22px] font-medium text-text-base">Profiles</p>
