@@ -255,7 +255,7 @@ function ContactPageLayout() {
         </div>
 
         <h2 className="font-display text-hero leading-none text-text-base">
-          Let&apos;s build something useful.
+          Contact Me!
         </h2>
 
         <p
@@ -263,8 +263,7 @@ function ContactPageLayout() {
           style={{ color: '#A8C5D1', fontSize: '18px' }}
         >
           Whether you want to talk product demos, solutions engineering, AI workflow design, or
-          early-career opportunities, I’d love to connect. I’m especially excited by roles where
-          technical clarity, customer value, and product judgment all matter.
+          early-career opportunities, I’d love to connect!
         </p>
       </div>
 
@@ -272,11 +271,6 @@ function ContactPageLayout() {
         <div className="max-w-[720px]">
           <div className="mb-8">
             <CopyEmailButton email={siteConfig.email} large />
-          </div>
-
-          <div className="mb-8 flex flex-wrap gap-3">
-            <MetaPill>Open to early-career roles</MetaPill>
-            <MetaPill>SE · PM · AI workflows</MetaPill>
           </div>
 
           <div className="flex flex-wrap items-center gap-6">

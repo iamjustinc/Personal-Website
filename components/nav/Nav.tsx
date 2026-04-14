@@ -1,23 +1,40 @@
 'use client'
 
 import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Menu } from 'lucide-react'
+import { Menu, ChevronDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { MobileMenu } from './MobileMenu'
 import { HoverSparkle } from '@/components/ui/HoverSparkle'
+import { StarMark } from '@/components/ui/StarMark'
 
-const navLinks = [
-  { label: 'Portfolio', href: '/work' },
-  { label: 'About', href: '/about' },
-  { label: 'Resume', href: '/resume' },
+type NavLink = {
+  label: string
+  href: string
+  projects?: { label: string; href: string }[]
+}
+
+const navLinks: NavLink[] = [
+  { label: 'Home', href: '/#hero' },
+  {
+    label: 'Portfolio',
+    href: '/work',
+    projects: [
+      { label: 'Kestrel', href: '/projects/kestrel' },
+      { label: 'Chirpie', href: '/projects/chirpie' },
+      { label: 'Quail',   href: '/projects/quail'   },
+    ],
+  },
+  { label: 'About',   href: '/about'   },
+  { label: 'Resume',  href: '/resume'  },
   { label: 'Contact', href: '/contact' },
 ]
 
 export function Nav() {
-  const [mobileOpen, setMobileOpen] = useState(false)
+  const [mobileOpen,    setMobileOpen]    = useState(false)
+  const [openDropdown,  setOpenDropdown]  = useState<string | null>(null)
   const pathname = usePathname()
 
   const navShellStyle = {
@@ -27,6 +44,14 @@ export function Nav() {
     border: '1px solid rgba(15,122,122,0.28)',
     boxShadow:
       '0 8px 48px rgba(0,0,0,0.60), 0 0 0 1px rgba(15,122,122,0.08) inset, 0 1px 0 rgba(255,255,255,0.05) inset, 0 0 24px rgba(15,122,122,0.05)',
+  } as const
+
+  const dropdownShellStyle = {
+    background: 'rgba(8,20,38,0.97)',
+    backdropFilter: 'blur(36px) saturate(180%)',
+    WebkitBackdropFilter: 'blur(36px) saturate(180%)',
+    border: '1px solid rgba(15,122,122,0.22)',
+    boxShadow: '0 12px 40px rgba(0,0,0,0.65), 0 0 0 1px rgba(15,122,122,0.06) inset',
   } as const
 
   return (
@@ -42,19 +67,23 @@ export function Nav() {
           className="mx-auto w-full max-w-[1180px]"
         >
           <div className="flex items-center justify-end gap-4">
-            {/* Desktop nav on the right only */}
+
+            {/* ── Desktop nav ───────────────────────────────────────────── */}
             <div className="hidden md:flex justify-end pointer-events-auto">
-              <div
-                className="relative rounded-3xl"
-                style={navShellStyle}
-              >
+              <div className="relative rounded-3xl" style={navShellStyle}>
                 <div className="relative px-7 lg:px-8 py-2 flex items-center justify-center">
                   <nav
                     className="flex items-center gap-6 lg:gap-7"
                     aria-label="Main navigation"
                   >
-                    {navLinks.map(({ label, href }, idx) => {
-                      const isActive = pathname === href
+                    {navLinks.map(({ label, href, projects }, idx) => {
+                      // Active state: Home matches '/', Portfolio matches /work or any /projects/*
+                      const isActive =
+                        href === '/#hero'
+                          ? pathname === '/'
+                          : projects
+                          ? pathname === href || pathname.startsWith('/projects/')
+                          : pathname === href
 
                       return (
                         <div key={label} className="flex items-center gap-6 lg:gap-7">
@@ -67,36 +96,139 @@ export function Nav() {
                             </span>
                           )}
 
-                          <HoverSparkle className="inline-flex">
-                            <Link
-                              href={href}
-                              className={cn(
-                                'relative group font-sans text-[14.5px] lg:text-[15px] font-medium tracking-[0.02em] transition-colors duration-200 pb-0.5',
-                                isActive
-                                  ? 'text-text-base'
-                                  : 'text-text-muted hover:text-text-base',
-                              )}
+                          {projects ? (
+                            // ── Portfolio — clickable link + hover dropdown ──
+                            <div
+                              className="relative"
+                              onMouseEnter={() => setOpenDropdown(label)}
+                              onMouseLeave={() => setOpenDropdown(null)}
+                              onFocus={() => setOpenDropdown(label)}
+                              onBlur={(e) => {
+                                if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+                                  setOpenDropdown(null)
+                                }
+                              }}
                             >
-                              {label}
+                              <HoverSparkle className="inline-flex">
+                                <Link
+                                  href={href}
+                                  className={cn(
+                                    'relative group flex items-center gap-0.5 font-sans text-[14.5px] lg:text-[15px] font-medium tracking-[0.02em] transition-colors duration-200 pb-0.5',
+                                    isActive
+                                      ? 'text-text-base'
+                                      : 'text-text-muted hover:text-text-base',
+                                  )}
+                                >
+                                  {label}
+                                  <ChevronDown
+                                    size={11}
+                                    aria-hidden
+                                    className={cn(
+                                      'transition-transform duration-200 opacity-40 mt-px',
+                                      openDropdown === label ? 'rotate-180' : 'rotate-0',
+                                    )}
+                                  />
 
-                              <span
-                                className="absolute -bottom-px left-0 right-0 h-px rounded-full transition-all duration-300"
-                                style={{
-                                  background: 'linear-gradient(90deg, #0F7A7A, #4A9FAE)',
-                                  transform: isActive ? 'scaleX(1)' : 'scaleX(0)',
-                                  transformOrigin: 'left',
-                                  opacity: isActive ? 1 : 0,
-                                }}
-                              />
+                                  {/* Active underline */}
+                                  <span
+                                    className="absolute -bottom-px left-0 right-0 h-px rounded-full transition-all duration-300"
+                                    style={{
+                                      background: 'linear-gradient(90deg, #0F7A7A, #4A9FAE)',
+                                      transform: isActive ? 'scaleX(1)' : 'scaleX(0)',
+                                      transformOrigin: 'left',
+                                      opacity: isActive ? 1 : 0,
+                                    }}
+                                  />
+                                  {/* Hover underline */}
+                                  <span
+                                    className="absolute -bottom-px left-0 right-0 h-px rounded-full transition-all duration-200 opacity-0 group-hover:opacity-35"
+                                    style={{
+                                      background: 'linear-gradient(90deg, #0F7A7A, #4A9FAE)',
+                                    }}
+                                  />
+                                </Link>
+                              </HoverSparkle>
 
-                              <span
-                                className="absolute -bottom-px left-0 right-0 h-px rounded-full transition-all duration-200 opacity-0 group-hover:opacity-35"
-                                style={{
-                                  background: 'linear-gradient(90deg, #0F7A7A, #4A9FAE)',
-                                }}
-                              />
-                            </Link>
-                          </HoverSparkle>
+                              {/* ── Dropdown panel ─────────────────────────── */}
+                              <AnimatePresence>
+                                {openDropdown === label && (
+                                  <motion.div
+                                    initial={{ opacity: 0, y: -6, scale: 0.97 }}
+                                    animate={{ opacity: 1, y: 0,  scale: 1    }}
+                                    exit={{    opacity: 0, y: -6, scale: 0.97 }}
+                                    transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+                                    className="absolute left-1/2 -translate-x-1/2 z-50"
+                                    style={{ top: 'calc(100% + 14px)' }}
+                                  >
+                                    <div
+                                      className="rounded-2xl py-1.5 px-1.5"
+                                      style={dropdownShellStyle}
+                                    >
+                                      {projects.map((proj, i) => (
+                                        <div key={proj.label}>
+                                          {i > 0 && (
+                                            <div
+                                              className="mx-2 my-1 h-px"
+                                              style={{ background: 'rgba(15,122,122,0.12)' }}
+                                            />
+                                          )}
+                                          <Link
+                                            href={proj.href}
+                                            onClick={() => setOpenDropdown(null)}
+                                            className={cn(
+                                              'flex items-center gap-2 px-3 py-2 rounded-xl font-sans text-[13px] font-medium tracking-[0.01em] transition-colors duration-150 whitespace-nowrap hover:bg-white/[0.04]',
+                                              pathname === proj.href
+                                                ? 'text-text-base'
+                                                : 'text-text-muted hover:text-text-base',
+                                            )}
+                                          >
+                                            <StarMark
+                                              size="xs"
+                                              color="#0F7A7A"
+                                              className="opacity-40 shrink-0"
+                                            />
+                                            {proj.label}
+                                          </Link>
+                                        </div>
+                                      ))}
+                                    </div>
+                                  </motion.div>
+                                )}
+                              </AnimatePresence>
+                            </div>
+                          ) : (
+                            // ── Regular link ───────────────────────────────
+                            <HoverSparkle className="inline-flex">
+                              <Link
+                                href={href}
+                                className={cn(
+                                  'relative group font-sans text-[14.5px] lg:text-[15px] font-medium tracking-[0.02em] transition-colors duration-200 pb-0.5',
+                                  isActive
+                                    ? 'text-text-base'
+                                    : 'text-text-muted hover:text-text-base',
+                                )}
+                              >
+                                {label}
+
+                                <span
+                                  className="absolute -bottom-px left-0 right-0 h-px rounded-full transition-all duration-300"
+                                  style={{
+                                    background: 'linear-gradient(90deg, #0F7A7A, #4A9FAE)',
+                                    transform: isActive ? 'scaleX(1)' : 'scaleX(0)',
+                                    transformOrigin: 'left',
+                                    opacity: isActive ? 1 : 0,
+                                  }}
+                                />
+
+                                <span
+                                  className="absolute -bottom-px left-0 right-0 h-px rounded-full transition-all duration-200 opacity-0 group-hover:opacity-35"
+                                  style={{
+                                    background: 'linear-gradient(90deg, #0F7A7A, #4A9FAE)',
+                                  }}
+                                />
+                              </Link>
+                            </HoverSparkle>
+                          )}
                         </div>
                       )
                     })}
@@ -105,7 +237,7 @@ export function Nav() {
               </div>
             </div>
 
-            {/* Mobile hamburger */}
+            {/* ── Mobile hamburger ──────────────────────────────────────── */}
             <div className="md:hidden shrink-0 pointer-events-auto">
               <div className="rounded-2xl" style={navShellStyle}>
                 <button
@@ -117,6 +249,7 @@ export function Nav() {
                 </button>
               </div>
             </div>
+
           </div>
         </motion.header>
       </div>
