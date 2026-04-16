@@ -22,17 +22,20 @@ type HoverSparkleProps = {
 
 export function HoverSparkle({ children, className }: HoverSparkleProps) {
   const reduceMotion = useReducedMotion()
-  const hostRef = useRef<HTMLDivElement>(null)
-  const lastSpawnRef = useRef(0)
-  const timeoutIdsRef = useRef<number[]>([])
+  const hostRef        = useRef<HTMLDivElement>(null)
+  // Direct ref to the portal cursor DOM node — position is written via style mutation,
+  // never via React state, so cursor tracks the pointer with zero scheduling delay.
+  const cursorRef      = useRef<HTMLDivElement>(null)
+  const lastSpawnRef   = useRef(0)
+  const timeoutIdsRef  = useRef<number[]>([])
   const [isTouch, setIsTouch] = useState(false)
-  const [sparks, setSparks] = useState<Spark[]>([])
-  const [cursorPos, setCursorPos] = useState<{ x: number; y: number } | null>(null)
+  const [sparks,  setSparks]  = useState<Spark[]>([])
   const [mounted, setMounted] = useState(false)
+  // ↑ cursorPos state removed — position is now a direct DOM write, not React state.
 
   useEffect(() => {
     setMounted(true)
-    const media = window.matchMedia('(pointer: coarse)')
+    const media  = window.matchMedia('(pointer: coarse)')
     const update = () => setIsTouch(media.matches)
 
     update()
@@ -54,13 +57,13 @@ export function HoverSparkle({ children, className }: HoverSparkleProps) {
     const rect = hostRef.current.getBoundingClientRect()
 
     const spark: Spark = {
-      id: now + Math.random(),
-      x: clientX - rect.left,
-      y: clientY - rect.top,
-      dx: 10 + Math.random() * 10,
-      dy: -6 - Math.random() * 10,
+      id:     now + Math.random(),
+      x:      clientX - rect.left,
+      y:      clientY - rect.top,
+      dx:     10 + Math.random() * 10,
+      dy:     -6 - Math.random() * 10,
       rotate: -18 + Math.random() * 36,
-      scale: 0.85 + Math.random() * 0.35,
+      scale:  0.85 + Math.random() * 0.35,
     }
 
     setSparks((prev) => [...prev.slice(-10), spark])
@@ -72,7 +75,6 @@ export function HoverSparkle({ children, className }: HoverSparkleProps) {
     timeoutIdsRef.current.push(timeoutId)
   }
 
-  // Only show custom cursor on pointer devices without reduced motion
   const showCustomCursor = !isTouch && !reduceMotion
 
   return (
@@ -82,15 +84,27 @@ export function HoverSparkle({ children, className }: HoverSparkleProps) {
       className={cn('relative isolate', className)}
       style={showCustomCursor ? { cursor: 'none' } : undefined}
       onMouseEnter={(e) => {
-        if (showCustomCursor) setCursorPos({ x: e.clientX, y: e.clientY })
+        if (showCustomCursor) {
+          const el = cursorRef.current
+          if (el) {
+            // Synchronous DOM write — bypasses React scheduler entirely
+            el.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`
+            el.style.opacity   = '1'
+          }
+        }
         spawnSpark(e.clientX, e.clientY, true)
       }}
       onMouseMove={(e) => {
-        if (showCustomCursor) setCursorPos({ x: e.clientX, y: e.clientY })
+        if (showCustomCursor) {
+          const el = cursorRef.current
+          // Position only — no setState, no re-render, no scheduler latency
+          if (el) el.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`
+        }
         spawnSpark(e.clientX, e.clientY)
       }}
       onMouseLeave={() => {
-        setCursorPos(null)
+        const el = cursorRef.current
+        if (el) el.style.opacity = '0'
       }}
     >
       {children}
@@ -105,10 +119,10 @@ export function HoverSparkle({ children, className }: HoverSparkleProps) {
               initial={{ opacity: 0, scale: 0.6, rotate: spark.rotate }}
               animate={{
                 opacity: [0, 1, 0],
-                x: spark.dx,
-                y: spark.dy,
-                scale: [0.6, spark.scale, 0.7],
-                rotate: spark.rotate + 18,
+                x:       spark.dx,
+                y:       spark.dy,
+                scale:   [0.6, spark.scale, 0.7],
+                rotate:  spark.rotate + 18,
               }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.52, ease: [0.22, 1, 0.36, 1] }}
@@ -120,7 +134,7 @@ export function HoverSparkle({ children, className }: HoverSparkleProps) {
                   style={{
                     background:
                       'linear-gradient(90deg, rgba(244,213,141,0) 0%, rgba(244,213,141,0.85) 100%)',
-                    transform: 'rotate(-18deg)',
+                    transform:       'rotate(-18deg)',
                     transformOrigin: 'right center',
                   }}
                 />
@@ -137,28 +151,41 @@ export function HoverSparkle({ children, className }: HoverSparkleProps) {
         </AnimatePresence>
       </div>
 
-      {/* Custom cursor — portaled to document.body to escape any ancestor transform context
-          (Framer Motion animates ancestors with transform, which would break position:fixed) */}
-      {mounted && showCustomCursor && cursorPos &&
+      {/*
+        Custom cursor — portaled to document.body to escape any ancestor transform context.
+
+        PERF: The div is rendered unconditionally (when showCustomCursor) so the ref is
+        always attached and ready. Position is written directly to style.transform — no
+        setState, no reconciliation, no scheduler delay. The element starts at opacity 0
+        and is made visible/invisible via direct style.opacity writes on enter/leave.
+
+        willChange: 'transform' promotes this element to its own GPU compositor layer
+        so transform updates are handled entirely off the main thread.
+      */}
+      {mounted && showCustomCursor &&
         createPortal(
           <div
+            ref={cursorRef}
             aria-hidden="true"
             className="pointer-events-none fixed z-[9999]"
             style={{
-              left: cursorPos.x,
-              top: cursorPos.y,
-              transform: 'translate(-50%, -50%)',
+              top:        0,
+              left:       0,
+              opacity:    0,
+              // Initial centering offset — JS overwrites the full translate on every move
+              transform:  'translate(-50%, -50%)',
+              willChange: 'transform',
             }}
           >
             {/* Soft glow halo */}
             <div
               className="absolute inset-0 rounded-full"
               style={{
-                width: 44,
-                height: 44,
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
+                width:      44,
+                height:     44,
+                top:        '50%',
+                left:       '50%',
+                transform:  'translate(-50%, -50%)',
                 background: 'radial-gradient(circle, rgba(244,213,141,0.22) 0%, transparent 70%)',
               }}
             />

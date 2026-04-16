@@ -8,9 +8,12 @@
  * and defers to HoverSparkle's own cursor + trail system. On inputs/textareas/selects
  * the native cursor is restored.
  *
- * Cursor position is updated via direct DOM style mutation — no React state, no
- * re-renders, no jank. The native cursor is suppressed by an injected <style> tag
- * that is removed on unmount.
+ * PERF: All hot-path work is synchronous DOM mutation — no React state, no re-renders.
+ *
+ * Position: written directly to style.transform on every mousemove.
+ * Visibility: only re-evaluated when e.target changes (skips closest() traversal
+ *             for every pixel of movement within the same element).
+ * Opacity:   only written to the DOM when the value actually changes.
  */
 
 import { useEffect, useRef, useState } from 'react'
@@ -18,16 +21,18 @@ import { createPortal } from 'react-dom'
 
 export function GlobalStarCursor() {
   const [mounted, setMounted] = useState(false)
-  const cursorRef = useRef<HTMLDivElement>(null)
+  const cursorRef    = useRef<HTMLDivElement>(null)
+  // Cached state for the visibility optimisation — avoids DOM traversal and
+  // style writes when neither the hovered element nor the hidden state changes.
+  const lastTargetRef = useRef<EventTarget | null>(null)
+  const isHiddenRef   = useRef(true) // start hidden until first mousemove
 
   useEffect(() => {
     setMounted(true)
 
     // Only activate on fine-pointer (mouse / trackpad) devices
-    const isFinePointer = window.matchMedia('(pointer: fine)').matches
-    const prefersReducedMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)',
-    ).matches
+    const isFinePointer      = window.matchMedia('(pointer: fine)').matches
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     if (!isFinePointer || prefersReducedMotion) return
 
@@ -46,18 +51,38 @@ export function GlobalStarCursor() {
       const el = cursorRef.current
       if (!el) return
 
-      // Always track position so there's no stale-position flash when re-appearing
+      // ── Position ──────────────────────────────────────────────────────────
+      // Synchronous style.transform write — GPU-composited, zero layout cost,
+      // no React scheduler, no rAF delay. Tightest possible cursor tracking.
       el.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`
 
-      const target = e.target as Element | null
-      const inSparkle = !!target?.closest('[data-hover-sparkle]')
-      const inInput = !!target?.closest('input, textarea, select')
+      // ── Visibility ────────────────────────────────────────────────────────
+      // Only re-check when the hovered element changes. Moving within the same
+      // element does not alter zone membership, so closest() is skipped entirely.
+      if (e.target !== lastTargetRef.current) {
+        lastTargetRef.current = e.target
 
-      el.style.opacity = inSparkle || inInput ? '0' : '1'
+        const target = e.target as Element | null
+        const shouldHide =
+          !!target?.closest('[data-hover-sparkle]') ||
+          !!target?.closest('input, textarea, select')
+
+        // Only write style.opacity when the value actually changes — prevents
+        // redundant style system work on every mousemove within a zone.
+        if (shouldHide !== isHiddenRef.current) {
+          isHiddenRef.current    = shouldHide
+          el.style.opacity = shouldHide ? '0' : '1'
+        }
+      }
     }
 
     const onLeave = () => {
-      if (cursorRef.current) cursorRef.current.style.opacity = '0'
+      const el = cursorRef.current
+      if (!el) return
+      if (!isHiddenRef.current) {
+        isHiddenRef.current  = true
+        el.style.opacity = '0'
+      }
     }
 
     document.addEventListener('mousemove', onMove, { passive: true })
@@ -77,35 +102,33 @@ export function GlobalStarCursor() {
       ref={cursorRef}
       aria-hidden="true"
       style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
+        position:      'fixed',
+        top:           0,
+        left:          0,
         pointerEvents: 'none',
         // Sit just below HoverSparkle's z-[9999] — they are never simultaneously
         // visible, but this ensures correct layering if timing ever overlaps.
-        zIndex: 9998,
+        zIndex:        9998,
         // Start invisible; first mousemove reveals it at the correct position
-        opacity: 0,
+        opacity:       0,
         // Only transition opacity — position updates must be instant to track the cursor
-        transition: 'opacity 0.1s ease',
-        willChange: 'transform',
+        transition:    'opacity 0.1s ease',
+        willChange:    'transform',
       }}
     >
-      {/* Soft ambient glow — slightly more restrained than the HoverSparkle halo
-          since this cursor appears over non-interactive content */}
+      {/* Soft ambient glow */}
       <div
         aria-hidden="true"
         style={{
-          position: 'absolute',
-          width: 44,
-          height: 44,
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
+          position:     'absolute',
+          width:        44,
+          height:       44,
+          top:          '50%',
+          left:         '50%',
+          transform:    'translate(-50%, -50%)',
           borderRadius: '50%',
-          background:
-            'radial-gradient(circle, rgba(244,213,141,0.15) 0%, transparent 70%)',
-          pointerEvents: 'none',
+          background:   'radial-gradient(circle, rgba(244,213,141,0.15) 0%, transparent 70%)',
+          pointerEvents:'none',
         }}
       />
 
