@@ -291,7 +291,7 @@ export function HeroText() {
           </StarburstButton>
         </HoverSparkle>
         <HoverSparkle className="inline-flex">
-          <StarburstButton href="/RESUME.pdf" download variant="secondary" size="lg" starSpin>
+          <StarburstButton href="/resume" variant="secondary" size="lg" starSpin>
             Resume
           </StarburstButton>
         </HoverSparkle>

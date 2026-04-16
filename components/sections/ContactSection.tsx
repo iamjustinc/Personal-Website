@@ -250,10 +250,6 @@ function ContactPageLayout() {
               border: '1px solid rgba(15,122,122,0.22)',
             }}
           >
-            <StarMark size="xs" color="#4A9FAE" className="opacity-70" />
-            <span className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-text-muted">
-              Contact
-            </span>
           </div>
 
           <h2 className="font-display text-hero leading-none text-text-base">
@@ -357,10 +353,6 @@ function ContactSectionLayout() {
             border: '1px solid rgba(15,122,122,0.22)',
           }}
         >
-          <StarMark size="xs" color="#4A9FAE" className="opacity-70" />
-          <span className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-text-muted">
-            Contact
-          </span>
         </div>
 
         <h2 className="font-display text-h1 text-text-base">Let&apos;s talk.</h2>

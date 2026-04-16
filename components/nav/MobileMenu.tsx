@@ -24,7 +24,7 @@ const navItems = [
     ],
   },
   { label: 'About',   href: '/about'   },
-  { label: 'Resume',  href: '/RESUME.pdf'  },
+  { label: 'Resume',  href: '/resume'  },
   { label: 'Contact', href: '/contact' },
 ]
 
