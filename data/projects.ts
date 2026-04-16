@@ -22,7 +22,7 @@ export const projects: Project[] = [
     tagline:
       'AI career intelligence system that turns messy job descriptions into readiness scores, skill-gap analysis, and next-step recommendations.',
     summary:
-      'Kestrel is an AI decision-support system built to translate unstructured job descriptions into clear, actionable outputs. It helps users understand where they stand, what skills they are missing, and what to do next.',
+      'Kestrel is a Gen AI decision-support tool that converts unstructured job descriptions into structured career intelligence: a readiness score, aligned strengths, a skill-gap analysis, and a concrete action roadmap.',
     featured: true,
     order: 1,
     visible: true,
@@ -32,18 +32,37 @@ export const projects: Project[] = [
     stack: ['Next.js', 'TypeScript', 'OpenAI', 'PostgreSQL', 'Tailwind'],
     year: 2026,
     outcome:
-      'Designed explainable outputs and a live dashboard to make recommendations easy to act on.',
+      'Designed explainable, card-based outputs so every recommendation is attributed and actionable, not just generated.',
     thumbnail: kestrelLanding.src,
     screenshots: [kestrelLanding.src, kestrelInterface.src],
     panelAccentColor: '#2A8B87',
+
+    overview:
+      'Kestrel is a Gen AI career intelligence system built to translate unstructured job descriptions into clear, structured outputs. A candidate submits a job description and their profile; Kestrel returns a readiness score, a breakdown of aligned strengths, a prioritized skill-gap analysis, and a concrete action roadmap. The system is built around a single principle: AI outputs are only useful when they are explainable. Every recommendation is labelled and attributed so users can reason with the system rather than just react to it.',
+
     problem:
-      'Job seekers often work from messy, inconsistent job descriptions and struggle to translate them into concrete priorities. Most tools stop at generic advice instead of helping people decide what matters now.',
+      'Job seekers face a navigation problem, not an information problem. There is no shortage of career advice, but there is a shortage of advice that is specific, ranked, and actionable for a given candidate targeting a given role. Job descriptions are often vague, inconsistent, and written by committee. Most preparation tools respond to this with generic checklists and broad guidance. Candidates who follow that advice improve on average, but they rarely improve on the specific dimensions that matter most for the specific role they are targeting. The result is real effort, misdirected.',
+
+    users:
+      'The primary user is an early-career candidate, typically a student or recent graduate, who is targeting a specific competitive role and understands their own background but cannot clearly map it to what the job actually requires. They are motivated and ready to put in effort; they just need a clearer target. The secondary lens is the recruiter or hiring manager who regularly reads under-prepared applications and benefits from seeing candidates who have done the work to understand role fit before applying.',
+
     solution:
-      'Kestrel converts raw job descriptions into structured readiness scores, skill gaps, and recommended next steps. The system is designed to make AI outputs legible, explainable, and immediately useful.',
+      'Kestrel takes a raw job description as input and runs it through a structured AI pipeline. The first pass extracts and normalizes the role requirements regardless of how inconsistently they are written. The second pass scores the candidate profile against those requirements and produces a readiness assessment. The third pass generates a ranked skill-gap analysis and a sequenced roadmap: what to focus on first, what to address next, and what to deprioritize. The full output is card-based and scannable. Each panel is an independent unit the user can act on without reading the entire analysis.',
+
+    productLogic:
+      'The readiness score appears first because users need an anchor before they can process detail. Without a clear orientation frame, skill-gap information produces anxiety rather than direction. Strengths surface before gaps for the same reason: confirming alignment before surfacing shortcomings makes users more receptive to hard feedback, not less. The roadmap is the most important section in the product. Most AI tools stop at diagnosis. Kestrel converts diagnosis into a prioritized action sequence, which is the difference between a report and a tool. All outputs include an attribution layer that shows what the AI identified in the job description and why each recommendation was generated. That transparency is a product requirement, not a design flourish. Without it, users can only follow recommendations blindly, which limits the product to users who already trust the system, and prevents anyone from building genuine understanding through use.',
+
+    experienceDesign:
+      'The core interface principle was: messy input, structured output. A disorganized job description enters; a clean, modular dashboard emerges. The output panels are independent so users can navigate directly to what matters rather than scrolling linearly through a long report. The visual hierarchy is anchored on the readiness score as the primary orientation point, with supporting panels arranged in a logical sequence from context to action. The interface avoids urgency signals, gamification, and progress mechanics that create friction without adding value. The goal was a product that a first-time user could navigate confidently without a walkthrough.',
+
     impact:
-      'The product turns vague career information into clear action. It was built to demonstrate product judgment, structured AI outputs, and a workflow that users can trust and act on quickly.',
+      'The product converts ambiguity into direction. A candidate who enters uncertain about their fit leaves with a ranked view of where they stand and a sequenced set of next steps. The system demonstrates that AI outputs can be structured, explainable, and immediately actionable rather than generative and exploratory. For a technical or product-oriented recruiting audience, the project communicates product judgment in defining the right outputs, engineering depth in building a reliable analysis pipeline, and design clarity in surfacing complex information in a form that does not require explanation.',
+
     buildNotes:
-      'The hardest part was designing schema-constrained outputs that stayed consistent across wildly different job descriptions while still feeling useful and human-readable.',
+      'The core engineering challenge was consistent schema-constrained output across wildly varied job description formats. The solution was a multi-step pipeline where each stage produces a validated, typed schema that feeds the next stage as structured context. This prevents hallucination drift and ensures the readiness score, gap analysis, and roadmap are all derived from the same normalized understanding of the role. The frontend is a Next.js and TypeScript application with a Tailwind card system that maps directly to the output schema. PostgreSQL stores session and analysis history so users can track changes across profile iterations.',
+
+    reflection:
+      'The most important constraint was restraint. AI outputs can always be richer, but richer is not the same as more useful. The discipline was identifying the minimum set of outputs that would let a user leave with a clear next action rather than a longer reading list. Earlier versions of the output schema included more panels, more granularity, and more edge-case handling. Each iteration removed detail that produced noise without changing what a user would actually do next. Future versions would include resume editing directly within the output view, persistent tracking across multiple job applications, and role-specific preparation templates for technical and product interview formats. This project reinforced a principle that now shapes how I approach most product decisions: if a user cannot explain why a recommendation exists, they will not trust it, and a recommendation that is not trusted is not acted on, regardless of how accurate it is.',
   },
   {
     slug: 'quail',
