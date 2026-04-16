@@ -87,21 +87,6 @@ export function HeroText() {
       animate="visible"
       className="flex flex-col"
     >
-      {/* ── Availability tag ────────────────────────────────────────────── */}
-      <motion.div variants={fast} className="mb-7">
-        <span
-          className="inline-flex items-center gap-2.5 font-mono text-[11px] tracking-[0.12em] uppercase rounded-full px-4 py-2"
-          style={{
-            border: '1px solid rgba(15,122,122,0.32)',
-            background: 'rgba(15,122,122,0.09)',
-            color: '#4A9FAE',
-          }}
-        >
-          <StarMark size="xs" color="#C4974A" className="opacity-80" />
-          {siteConfig.roleTag}
-        </span>
-      </motion.div>
-
       {/* ── Name ────────────────────────────────────────────────────────── */}
       {/*
           The wrapper div is the positioning context.
@@ -269,28 +254,25 @@ export function HeroText() {
       {/* ── Statement ───────────────────────────────────────────────────── */}
       <motion.p
         variants={up}
-        className="font-sans leading-relaxed mt-6 max-w-[420px]"
+        className="font-sans leading-relaxed mt-6 max-w-[520px]"
         style={{ fontSize: 'clamp(16px, 1.7vw, 19px)', color: '#A8C5D1' }}
       >
         {siteConfig.heroStatement}
       </motion.p>
 
-      {/* ── Capability pills ─────────────────────────────────────────────── */}
-      <motion.div variants={fast} className="flex flex-wrap gap-2 mt-6">
-        {siteConfig.capabilities.slice(0, 3).map((cap) => (
-          <span
-            key={cap.label}
-            className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-wider rounded-full px-3 py-1"
-            style={{
-              background: 'rgba(15,42,61,0.60)',
-              border: '1px solid rgba(15,122,122,0.18)',
-              color: '#7AABB8',
-            }}
-          >
-            <StarMark size="xs" color="#0F7A7A" className="opacity-60" />
-            {cap.label}
-          </span>
-        ))}
+      {/* ── Role pill ────────────────────────────────────────────────────── */}
+      <motion.div variants={fast} className="mt-6">
+        <span
+          className="inline-flex items-center gap-2.5 font-mono text-[11px] tracking-[0.12em] uppercase rounded-full px-6 py-2"
+          style={{
+            border: '1px solid rgba(15,122,122,0.32)',
+            background: 'rgba(15,122,122,0.09)',
+            color: '#4A9FAE',
+          }}
+        >
+          <StarMark size="xs" color="#C4974A" className="opacity-80" />
+          {siteConfig.roleTag}
+        </span>
       </motion.div>
 
       {/* ── Separator ───────────────────────────────────────────────────── */}
@@ -309,7 +291,7 @@ export function HeroText() {
           </StarburstButton>
         </HoverSparkle>
         <HoverSparkle className="inline-flex">
-          <StarburstButton href="/resume" variant="secondary" size="lg" starSpin>
+          <StarburstButton href="/RESUME.pdf" download variant="secondary" size="lg" starSpin>
             Resume
           </StarburstButton>
         </HoverSparkle>

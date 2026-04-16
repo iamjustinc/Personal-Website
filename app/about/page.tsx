@@ -632,7 +632,7 @@ export default function AboutPage() {
                 </StarburstButton>
               </HoverSparkle>
               <HoverSparkle className="inline-flex">
-                <StarburstButton href="/resume" variant="secondary" size="md">
+                <StarburstButton href="/RESUME.pdf" variant="secondary" size="md">
                   View Résumé
                 </StarburstButton>
               </HoverSparkle>

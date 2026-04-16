@@ -5,7 +5,7 @@ export const siteConfig: SiteConfig = {
   roleTag: 'Solutions Engineering + Product',
   heroStatement:
     'I turn complex systems, AI workflows, and data into clear demos, decisions, and usable products.',
-  resumeUrl: '/resume.pdf',
+  resumeUrl: '/RESUME.pdf',
 
   logoSrc: '/images/justin-logo.png',
   portraitSrc: '/images/me.png',
