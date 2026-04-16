@@ -243,14 +243,7 @@ function ContactPageLayout() {
       <div className="grid items-start gap-14 xl:grid-cols-[minmax(0,1fr)_420px] xl:gap-16">
         {/* Left column */}
         <div className="max-w-[760px]">
-          <div
-            className="mb-5 inline-flex items-center gap-2 rounded-full px-3.5 py-1.5"
-            style={{
-              background: 'rgba(15,122,122,0.08)',
-              border: '1px solid rgba(15,122,122,0.22)',
-            }}
-          >
-          </div>
+          
 
           <h2 className="font-display text-hero leading-none text-text-base">
             Contact Me!

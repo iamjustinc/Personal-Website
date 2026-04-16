@@ -54,4 +54,14 @@ export type Project = {
   solution: string          // 2-4 sentences.
   impact: string            // 2-4 sentences.
   buildNotes?: string       // Optional technical insight. 1-3 sentences.
+
+  // ── Extended case study sections (optional) ─────────────────────────────────
+  // When present, these unlock additional sections on the case study page.
+  // Falls back gracefully for projects that only have the core fields above.
+  overview?: string         // Richer executive summary for the case study page.
+                            //   Falls back to `summary` if omitted.
+  users?: string            // User lens: primary user + secondary audience.
+  productLogic?: string     // Key product decisions and the reasoning behind them.
+  experienceDesign?: string // UX principles and interface approach.
+  reflection?: string       // Learnings, tradeoffs, and future directions.
 }
