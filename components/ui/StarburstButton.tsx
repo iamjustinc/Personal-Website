@@ -16,6 +16,8 @@ const BURST = Array.from({ length: 8 }, (_, i) => {
 interface StarburstButtonProps {
   href?: string
   download?: boolean
+  target?: string
+  rel?: string
   onClick?: (e: React.MouseEvent) => void
   variant?: 'primary' | 'secondary'
   size?: 'sm' | 'md' | 'lg'
@@ -33,6 +35,8 @@ const sizeClasses: Record<string, string> = {
 export function StarburstButton({
   href = '#',
   download,
+  target,
+  rel,
   onClick,
   variant = 'primary',
   size = 'md',
@@ -104,6 +108,8 @@ export function StarburstButton({
     <motion.a
       href={href}
       download={download}
+      target={target}
+      rel={rel}
       onClick={fire}
       whileHover="hov"
       whileTap={{ scale: 0.95 }}

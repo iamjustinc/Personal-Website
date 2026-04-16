@@ -291,12 +291,31 @@ export function ProjectsSection() {
                   </div>
                 )}
 
-                <div className="mt-9">
+                {/* ── CTA row ─────────────────────────────────────────── */}
+                <div className="mt-8 flex flex-wrap gap-2">
                   <HoverSparkle className="inline-flex">
-                    <StarburstButton href={`/projects/${project.slug}`} variant="primary" size="md">
-                      View Case Study →
+                    <StarburstButton href={`/projects/${project.slug}`} variant="primary" size="sm">
+                      View Case Study
                     </StarburstButton>
                   </HoverSparkle>
+                  <HoverSparkle className="inline-flex">
+                    <StarburstButton href={`/projects/${project.slug}/demo`} variant="secondary" size="sm">
+                      Demo
+                    </StarburstButton>
+                  </HoverSparkle>
+                  {project.liveUrl && (
+                    <HoverSparkle className="inline-flex">
+                      <StarburstButton
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        variant="secondary"
+                        size="sm"
+                      >
+                        Try It Live ↗
+                      </StarburstButton>
+                    </HoverSparkle>
+                  )}
                 </div>
               </div>
             </motion.div>

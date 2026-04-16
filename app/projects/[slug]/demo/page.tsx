@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import { projects } from '@/data/projects'
-import { ProjectCaseStudy } from '@/components/projects/ProjectCaseStudy'
+import { ProjectDemo } from '@/components/projects/ProjectDemo'
 
 interface Props {
   params: { slug: string }
@@ -16,13 +16,13 @@ export async function generateMetadata({ params }: Props) {
   const project = projects.find((p) => p.slug === params.slug)
   if (!project) return {}
   return {
-    title: `${project.name} — Case Study | Justin Chang`,
-    description: project.tagline,
+    title: `${project.name} Demo — Justin Chang`,
+    description: `Interactive demo and walkthrough of ${project.name}: ${project.tagline}`,
   }
 }
 
-export default function ProjectPage({ params }: Props) {
+export default function ProjectDemoPage({ params }: Props) {
   const project = projects.find((p) => p.slug === params.slug && p.visible)
   if (!project) notFound()
-  return <ProjectCaseStudy project={project} />
+  return <ProjectDemo project={project} />
 }

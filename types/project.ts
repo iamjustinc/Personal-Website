@@ -1,11 +1,17 @@
 export type ProjectTag =
   | 'AI'
+  | 'Gen AI'
   | 'Systems'
   | 'Full-Stack'
   | 'Product'
   | 'UX'
   | 'Demo'
   | 'Automation'
+  | 'Workflow'
+  | 'Consumer'
+  | 'Decision Support'
+  | 'Web App'
+  | '0→1'
 
 export type Project = {
   // ── Identity ────────────────────────────────────────────────────────────────
@@ -39,7 +45,8 @@ export type Project = {
   panelAccentColor: string  // Hex. Color dot on hero floating panel badge.
 
   // ── Links ───────────────────────────────────────────────────────────────────
-  demoUrl?: string
+  liveUrl?: string          // External production URL — "Try It Live" CTA
+  demoUrl?: string          // Embed URL (Loom / YouTube) for /demo page
   githubUrl?: string
 
   // ── Detail page narrative ───────────────────────────────────────────────────

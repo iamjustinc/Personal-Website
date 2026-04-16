@@ -28,7 +28,7 @@ export const projects: Project[] = [
     visible: true,
     homepageVisible: true,
     role: 'Builder + Product Thinker',
-    tags: ['AI', 'Product', 'Full-Stack'],
+    tags: ['Gen AI', 'Decision Support', 'Full-Stack'],
     stack: ['Next.js', 'TypeScript', 'OpenAI', 'PostgreSQL', 'Tailwind'],
     year: 2026,
     outcome:
@@ -57,7 +57,7 @@ export const projects: Project[] = [
     visible: true,
     homepageVisible: true,
     role: 'Builder + Workflow Designer',
-    tags: ['Systems', 'Automation', 'Product'],
+    tags: ['Gen AI', 'Automation', 'Workflow'],
     stack: ['Next.js', 'TypeScript', 'OpenAI', 'Resend', 'Tailwind'],
     year: 2026,
     outcome:
@@ -86,7 +86,7 @@ export const projects: Project[] = [
     visible: true,
     homepageVisible: true,
     role: 'Builder + Systems Designer',
-    tags: ['AI', 'Product', 'UX'],
+    tags: ['Gen AI', 'Consumer', 'Full-Stack'],
     stack: ['Next.js', 'Python', 'OpenAI', 'Supabase'],
     year: 2026,
     outcome:
