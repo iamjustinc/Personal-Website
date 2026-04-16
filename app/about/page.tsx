@@ -1,7 +1,6 @@
 'use client'
 
-import Image from 'next/image'
-import { motion, useReducedMotion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { Section } from '@/components/ui/Section'
 import { StarMark } from '@/components/ui/StarMark'
 import { WatermarkStar } from '@/components/ui/WatermarkStar'
@@ -9,6 +8,7 @@ import { StarburstButton } from '@/components/ui/StarburstButton'
 import { HoverSparkle } from '@/components/ui/HoverSparkle'
 import { siteConfig } from '@/data/site'
 import { fadeUp, fadeIn, staggerContainer } from '@/lib/motion'
+import { HeroVisual } from '@/components/hero/HeroVisual'
 
 const signalPills = [
   'AI workflows',
@@ -96,8 +96,6 @@ const currentFocus = [
 ]
 
 export default function AboutPage() {
-  const shouldReduce = useReducedMotion()
-  const portrait = siteConfig.portraitSrc ?? siteConfig.photoSrc
   const firstName = siteConfig.name.split(' ')[0]
   const lastName = siteConfig.name.split(' ').slice(1).join(' ')
 
@@ -150,151 +148,8 @@ export default function AboutPage() {
             viewport={{ once: true }}
             className="flex justify-center lg:justify-start"
           >
-            <div className="relative flex items-center justify-center w-[320px] h-[320px] sm:w-[380px] sm:h-[380px]">
-              <div
-                aria-hidden
-                className="absolute rounded-full pointer-events-none"
-                style={{
-                  inset: '8%',
-                  background:
-                    'radial-gradient(circle, rgba(74,159,174,0.18) 0%, rgba(74,159,174,0.06) 42%, transparent 74%)',
-                  filter: 'blur(12px)',
-                }}
-              />
-
-              <motion.div
-                aria-hidden
-                className="absolute pointer-events-none rounded-full"
-                style={{
-                  width: '88%',
-                  height: '88%',
-                  border: '1px dashed rgba(74,159,174,0.20)',
-                }}
-                animate={shouldReduce ? {} : { rotate: 360 }}
-                transition={shouldReduce ? {} : { duration: 42, repeat: Infinity, ease: 'linear' }}
-              />
-
-              <motion.div
-                aria-hidden
-                className="absolute pointer-events-none rounded-full"
-                style={{
-                  width: '76%',
-                  height: '76%',
-                  border: '1px solid rgba(196,151,74,0.16)',
-                }}
-                animate={shouldReduce ? {} : { rotate: -360 }}
-                transition={shouldReduce ? {} : { duration: 28, repeat: Infinity, ease: 'linear' }}
-              />
-
-              <motion.div
-                className="relative z-10 rounded-full overflow-hidden"
-                animate={shouldReduce ? {} : { y: [0, -8, 0] }}
-                transition={
-                  shouldReduce ? {} : { duration: 5.4, repeat: Infinity, ease: 'easeInOut' }
-                }
-                style={{
-                  width: '66%',
-                  height: '66%',
-                  boxShadow:
-                    '0 0 0 1px rgba(74,159,174,0.28), 0 0 0 8px rgba(74,159,174,0.08), 0 18px 40px rgba(0,0,0,0.22)',
-                }}
-              >
-                {portrait ? (
-                  <Image
-                    src={portrait}
-                    alt={`${siteConfig.name} portrait`}
-                    fill
-                    sizes="260px"
-                    className="object-cover object-top"
-                    priority
-                  />
-                ) : (
-                  <div
-                    className="w-full h-full flex items-center justify-center"
-                    style={{ background: 'linear-gradient(135deg, #0F2A3D, #0D1E30)' }}
-                  >
-                    <StarMark size="xl" color="#0F7A7A" className="opacity-30" />
-                  </div>
-                )}
-
-                <div
-                  aria-hidden
-                  className="absolute inset-0"
-                  style={{
-                    background:
-                      'linear-gradient(155deg, rgba(74,159,174,0.10) 0%, transparent 55%)',
-                  }}
-                />
-              </motion.div>
-
-              <motion.div
-                aria-hidden
-                className="absolute pointer-events-none"
-                style={{ width: '88%', height: '88%' }}
-                animate={shouldReduce ? {} : { rotate: 360 }}
-                transition={shouldReduce ? {} : { duration: 18, repeat: Infinity, ease: 'linear' }}
-              >
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: '6%',
-                    left: '50%',
-                    width: 12,
-                    height: 12,
-                    marginLeft: -6,
-                    borderRadius: '999px',
-                    background:
-                      'radial-gradient(circle at 32% 30%, #FFF5D9 0%, #E2BC69 34%, #C4974A 68%, #8E6320 100%)',
-                    boxShadow:
-                      '0 0 8px rgba(196,151,74,0.45), 0 0 16px rgba(196,151,74,0.16)',
-                  }}
-                />
-              </motion.div>
-
-              <motion.div
-                aria-hidden
-                className="absolute pointer-events-none"
-                style={{ width: '76%', height: '76%' }}
-                animate={shouldReduce ? {} : { rotate: -360 }}
-                transition={shouldReduce ? {} : { duration: 24, repeat: Infinity, ease: 'linear' }}
-              >
-                <div
-                  style={{
-                    position: 'absolute',
-                    bottom: '4%',
-                    left: '50%',
-                    width: 7,
-                    height: 7,
-                    marginLeft: -3.5,
-                    borderRadius: '999px',
-                    background: '#7EE7F2',
-                    boxShadow:
-                      '0 0 8px rgba(126,231,242,0.48), 0 0 14px rgba(126,231,242,0.18)',
-                  }}
-                />
-              </motion.div>
-
-              <motion.div
-                aria-hidden
-                style={{ position: 'absolute', top: '16%', right: '10%' }}
-                animate={shouldReduce ? {} : { y: [0, -6, 0], opacity: [0.5, 1, 0.5] }}
-                transition={
-                  shouldReduce ? {} : { duration: 3.2, repeat: Infinity, ease: 'easeInOut' }
-                }
-              >
-                <StarMark size="xs" color="#4A9FAE" className="opacity-70" />
-              </motion.div>
-
-              <motion.div
-                aria-hidden
-                style={{ position: 'absolute', bottom: '18%', left: '8%' }}
-                animate={shouldReduce ? {} : { y: [0, 5, 0], opacity: [0.35, 0.7, 0.35] }}
-                transition={
-                  shouldReduce ? {} : { duration: 4.2, repeat: Infinity, ease: 'easeInOut' }
-                }
-              >
-                <StarMark size="xs" color="#C4974A" className="opacity-55" />
-              </motion.div>
+            <div className="scale-[0.84] sm:scale-[0.92] lg:scale-100 origin-center">
+              <HeroVisual />
             </div>
           </motion.div>
 
@@ -324,9 +179,7 @@ export default function AboutPage() {
 
               <h1 className="font-display text-hero text-text-base leading-none text-balance">
                 {firstName}{' '}
-                <span style={{ color: '#4A9FAE' }}>
-                  {lastName}
-                </span>
+                <span style={{ color: '#4A9FAE' }}>{lastName}</span>
               </h1>
 
               <p
