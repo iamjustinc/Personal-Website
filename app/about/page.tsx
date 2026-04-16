@@ -173,7 +173,7 @@ export default function AboutPage() {
                   className="font-mono text-[10px] uppercase tracking-[0.12em]"
                   style={{ color: '#4A9FAE' }}
                 >
-                  Solutions Engineering + Product
+                  Solutions Engineering + Product Management
                 </span>
               </div>
 

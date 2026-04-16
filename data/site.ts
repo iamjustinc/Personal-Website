@@ -2,7 +2,7 @@ import type { SiteConfig } from '@/types/site'
 
 export const siteConfig: SiteConfig = {
   name: 'Justin Chang',
-  roleTag: 'Solutions Engineering + Product',
+  roleTag: 'Solutions Engineering + Product Management',
   heroStatement:
     'I turn complex systems, AI workflows, and data into clear demos, decisions, and usable products.',
   resumeUrl: '/RESUME.pdf',
@@ -13,19 +13,19 @@ export const siteConfig: SiteConfig = {
   showCapabilityStrip: true,
   capabilities: [
     {
-      label: 'SOLUTIONS DESIGN',
+      label: 'SOLUTIONS ENGINEERING',
       description:
-        'I design AI workflows, dashboards, and automations that turn complex systems into clear decisions.',
+        'I turn AI workflows, APIs, and technical systems into clear demos, decision tools, and customer-ready solutions.',
     },
     {
       label: 'TECHNICAL COMMUNICATION',
       description:
-        'I translate APIs, models, and data pipelines into demos, workflows, and stakeholder-ready explanations.',
+        'I explain models, pipelines, and product behavior in ways stakeholders, customers, and non-technical teams can quickly trust.',
     },
     {
       label: 'PRODUCT JUDGMENT',
       description:
-        'I scope the right problem, prototype quickly, and ship tools people can actually use.',
+        'I identify the right problem, prototype with speed, and ship tools that are useful, usable, and grounded in real workflows.',
     },
   ],
 
