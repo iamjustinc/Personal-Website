@@ -3,22 +3,37 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { X } from 'lucide-react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { EASING } from '@/lib/motion'
 import { StarMark } from '@/components/ui/StarMark'
+import { cn } from '@/lib/utils'
 
 interface MobileMenuProps {
   isOpen: boolean
   onClose: () => void
 }
 
-const links = [
-  { label: 'Portfolio', href: '/work'    },
+const navItems = [
+  { label: 'Home',      href: '/#hero'   },
+  {
+    label: 'Portfolio', href: '/work',
+    projects: [
+      { label: 'Kestrel', href: '/projects/kestrel' },
+      { label: 'Chirpie', href: '/projects/chirpie' },
+      { label: 'Quail',   href: '/projects/quail'   },
+    ],
+  },
   { label: 'About',   href: '/about'   },
-  { label: 'Contact', href: '/contact' },
   { label: 'Resume',  href: '/resume'  },
+  { label: 'Contact', href: '/contact' },
 ]
 
 export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
+  const pathname = usePathname()
+
+  // Flat animation index — primary links + sub-links each get their own stagger slot
+  let animIdx = 0
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -49,22 +64,63 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
           {/* Links */}
           <nav className="flex flex-col flex-1 justify-center px-6 pb-16 gap-1">
-            {links.map((link, i) => (
-              <motion.div
-                key={link.label}
-                initial={{ opacity: 0, x: -16 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.05 + 0.06, duration: 0.3, ease: EASING }}
-              >
-                <Link
-                  href={link.href}
-                  onClick={onClose}
-                  className="block font-sans font-medium text-2xl py-3 transition-colors duration-200 text-text-base hover:text-accent-bright"
-                >
-                  {link.label}
-                </Link>
-              </motion.div>
-            ))}
+            {navItems.map((item) => {
+              const primaryIdx = animIdx++
+              const isActive =
+                item.href === '/#hero'
+                  ? pathname === '/'
+                  : item.projects
+                  ? pathname === item.href || pathname.startsWith('/projects/')
+                  : pathname === item.href
+
+              return (
+                <div key={item.label}>
+                  {/* Primary link */}
+                  <motion.div
+                    initial={{ opacity: 0, x: -16 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: primaryIdx * 0.05 + 0.06, duration: 0.3, ease: EASING }}
+                  >
+                    <Link
+                      href={item.href}
+                      onClick={onClose}
+                      className={cn(
+                        'block font-sans font-medium text-2xl py-3 transition-colors duration-200',
+                        isActive ? 'text-text-base' : 'text-text-muted hover:text-text-base',
+                      )}
+                    >
+                      {item.label}
+                    </Link>
+                  </motion.div>
+
+                  {/* Sub-links (project pages under Portfolio) */}
+                  {item.projects?.map((proj) => {
+                    const subIdx = animIdx++
+                    const isSubActive = pathname === proj.href
+                    return (
+                      <motion.div
+                        key={proj.label}
+                        initial={{ opacity: 0, x: -16 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: subIdx * 0.05 + 0.06, duration: 0.3, ease: EASING }}
+                      >
+                        <Link
+                          href={proj.href}
+                          onClick={onClose}
+                          className={cn(
+                            'flex items-center gap-2 pl-4 py-1.5 font-sans font-medium text-lg transition-colors duration-200',
+                            isSubActive ? 'text-text-base' : 'text-text-muted hover:text-text-base',
+                          )}
+                        >
+                          <StarMark size="xs" color="#0F7A7A" className="opacity-40 shrink-0" />
+                          {proj.label}
+                        </Link>
+                      </motion.div>
+                    )
+                  })}
+                </div>
+              )
+            })}
           </nav>
 
           {/* Footer */}
@@ -78,9 +134,4 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
       )}
     </AnimatePresence>
   )
-}
-
-// cn used inline — import at top
-function cn(...classes: (string | undefined | false)[]) {
-  return classes.filter(Boolean).join(' ')
 }

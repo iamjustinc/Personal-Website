@@ -6,6 +6,7 @@ import { Nav } from '@/components/nav/Nav'
 import { WatermarkStar } from '@/components/ui/WatermarkStar'
 import { ShootingStar } from '@/components/ui/ShootingStar'
 import { StarMark } from '@/components/ui/StarMark'
+import { GlobalStarCursor } from '@/components/ui/GlobalStarCursor'
 import { siteConfig } from '@/data/site'
 import './globals.css'
 
@@ -99,6 +100,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
           </div>
 
+          <GlobalStarCursor />
           <Nav />
           {children}
         </div>

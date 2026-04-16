@@ -78,6 +78,7 @@ export function HoverSparkle({ children, className }: HoverSparkleProps) {
   return (
     <div
       ref={hostRef}
+      data-hover-sparkle="true"
       className={cn('relative isolate', className)}
       style={showCustomCursor ? { cursor: 'none' } : undefined}
       onMouseEnter={(e) => {
