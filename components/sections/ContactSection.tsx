@@ -346,14 +346,6 @@ function ContactSectionLayout() {
   return (
     <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(420px,520px)] lg:gap-16">
       <div className="relative">
-        <div
-          className="mb-5 inline-flex items-center gap-2 rounded-full px-3.5 py-1.5"
-          style={{
-            background: 'rgba(15,122,122,0.08)',
-            border: '1px solid rgba(15,122,122,0.22)',
-          }}
-        >
-        </div>
 
         <h2 className="font-display text-h1 text-text-base">Let&apos;s talk.</h2>
 
@@ -411,11 +403,6 @@ export function ContactSection({ mode = 'section' }: ContactSectionProps) {
       className={cn('relative overflow-hidden', isPage && 'min-h-[calc(100vh-4rem)]')}
       style={{ borderTop: '1px solid rgba(15,122,122,0.10)' }}
     >
-      <div
-        className="pointer-events-none absolute -left-24 top-10 h-72 w-72 rounded-full blur-3xl"
-        style={{ background: 'rgba(15,122,122,0.08)' }}
-        aria-hidden
-      />
       <div
         className="pointer-events-none absolute right-[-100px] bottom-0 h-80 w-80 rounded-full blur-3xl"
         style={{ background: 'rgba(74,159,174,0.06)' }}
