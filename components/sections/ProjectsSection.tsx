@@ -10,6 +10,19 @@ import { projects } from '@/data/projects'
 import { fadeUp, fadeIn, staggerContainer, useMotionSafe } from '@/lib/motion'
 import { cn } from '@/lib/utils'
 
+function shortenText(text: string | undefined, max = 120) {
+  if (!text) return ''
+  const clean = text.replace(/\s+/g, ' ').trim()
+  const firstSentence = clean.match(/.*?[.!?](\s|$)/)?.[0]?.trim()
+
+  if (firstSentence && firstSentence.length <= max) return firstSentence
+  if (clean.length <= max) return clean
+
+  const trimmed = clean.slice(0, max)
+  const safe = trimmed.slice(0, Math.max(trimmed.lastIndexOf(' '), max - 18)).trim()
+  return `${safe}…`
+}
+
 function FloatingProjectVisual({
   project,
   priority = false,
@@ -22,35 +35,30 @@ function FloatingProjectVisual({
 
   return (
     <div className="absolute inset-0 overflow-hidden">
-      {/* ambient glow */}
       <div
         className="absolute inset-0"
         style={{
-          background: `radial-gradient(circle at 30% 30%, ${project.panelAccentColor}22 0%, rgba(10,22,40,0) 42%), radial-gradient(circle at 75% 70%, rgba(196,151,74,0.10) 0%, rgba(10,22,40,0) 30%)`,
+          background: `radial-gradient(circle at 30% 30%, ${project.panelAccentColor}18 0%, rgba(10,22,40,0) 42%), radial-gradient(circle at 75% 70%, rgba(196,151,74,0.08) 0%, rgba(10,22,40,0) 30%)`,
         }}
       />
 
-      {/* slow floating star texture */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 120, repeat: Infinity, ease: 'linear' }}
-          style={{ opacity: 0.05 }}
+          style={{ opacity: 0.04 }}
         >
           <StarMark size="2xl" color={project.panelAccentColor} />
         </motion.div>
       </div>
 
-      {/* landing image */}
       {landingShot && (
         <motion.div
           animate={{ y: [0, -10, 0], rotate: [-2, -1, -2] }}
           transition={{ duration: 8.5, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute left-[8%] top-[10%] h-[68%] w-[58%] rounded-[22px] overflow-hidden"
+          className="absolute left-[8%] top-[10%] h-[68%] w-[58%] overflow-hidden"
           style={{
-            background: 'rgba(245,248,251,0.96)',
-            border: `1px solid ${project.panelAccentColor}22`,
-            boxShadow: `0 22px 60px rgba(0,0,0,0.28), 0 0 0 1px ${project.panelAccentColor}10 inset`,
+            boxShadow: '0 22px 60px rgba(0,0,0,0.26)',
           }}
         >
           <Image
@@ -58,61 +66,47 @@ function FloatingProjectVisual({
             alt={`${project.name} landing view`}
             fill
             sizes="(max-width: 1024px) 100vw, 420px"
-            className="object-contain object-center scale-[1.22]"
+            className="object-contain object-center"
             priority={priority}
           />
         </motion.div>
       )}
 
-      {/* interface image */}
       {interfaceShot && (
         <motion.div
           animate={{ y: [0, 12, 0], rotate: [2.2, 1.1, 2.2] }}
           transition={{ duration: 7.5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
           whileHover={{ y: -4, scale: 1.01 }}
-          className="absolute right-[7%] bottom-[10%] h-[56%] w-[60%] rounded-[22px] overflow-hidden"
+          className="absolute right-[7%] bottom-[10%] h-[56%] w-[60%] overflow-hidden"
           style={{
-            background: 'rgba(245,248,251,0.98)',
-            border: `1px solid ${project.panelAccentColor}2A`,
-            boxShadow: `0 28px 72px rgba(0,0,0,0.34), 0 0 0 1px ${project.panelAccentColor}12 inset`,
+            boxShadow: '0 28px 72px rgba(0,0,0,0.30)',
           }}
         >
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              background: `linear-gradient(180deg, rgba(255,255,255,0.0) 0%, ${project.panelAccentColor}08 100%)`,
-            }}
-          />
           <Image
             src={interfaceShot}
             alt={`${project.name} interface view`}
             fill
             sizes="(max-width: 1024px) 100vw, 460px"
-            className="object-contain object-center scale-[1.16]"
+            className="object-contain object-center"
           />
         </motion.div>
       )}
 
-      {/* accent glow under front card */}
       <div
         className="absolute right-[14%] bottom-[8%] h-10 w-[34%] blur-2xl rounded-full"
-        style={{ background: `${project.panelAccentColor}33` }}
+        style={{ background: `${project.panelAccentColor}2A` }}
       />
 
-      {/* corner star marks */}
       <div className="absolute top-4 left-4 pointer-events-none">
-        <StarMark size="xs" color={project.panelAccentColor} className="opacity-45" />
+        <StarMark size="xs" color={project.panelAccentColor} className="opacity-40" />
       </div>
       <div className="absolute bottom-4 right-4 pointer-events-none">
-        <StarMark size="xs" color="#C4974A" className="opacity-45" />
+        <StarMark size="xs" color="#C4974A" className="opacity-40" />
       </div>
     </div>
   )
 }
 
-/**
- * Projects section — alternating editorial layout with richer media motion.
- */
 export function ProjectsSection() {
   const stagger = useMotionSafe(staggerContainer(0.14))
   const up = useMotionSafe(fadeUp)
@@ -127,7 +121,6 @@ export function ProjectsSection() {
 
   return (
     <Section id="projects" paddingY="lg">
-      {/* Heading */}
       <motion.div
         variants={inn}
         initial="hidden"
@@ -147,13 +140,14 @@ export function ProjectsSection() {
             Featured Work
           </span>
         </div>
-        <h2 className="font-display text-h1 text-text-base">What I&apos;ve Built!</h2>
-        <p className="font-sans text-text-muted mt-3 max-w-[460px]" style={{ fontSize: '15px' }}>
-          Built to show how I think across product, implementation, and technical communication.
+
+        <h2 className="font-display text-h1 text-text-base">Selected Work</h2>
+
+        <p className="font-sans text-text-muted mt-3 max-w-[540px]" style={{ fontSize: '15px' }}>
+          Three products built end-to-end to show product thinking, implementation, and technical communication.
         </p>
       </motion.div>
 
-      {/* Project list */}
       <motion.div
         variants={stagger}
         initial="hidden"
@@ -163,6 +157,8 @@ export function ProjectsSection() {
       >
         {visibleProjects.map((project, index) => {
           const isReversed = index % 2 === 1
+          const shortTagline = shortenText(project.tagline, 118)
+          const shortOutcome = shortenText(project.outcome, 132)
 
           return (
             <motion.div
@@ -180,24 +176,21 @@ export function ProjectsSection() {
                 boxShadow: '0 4px 32px rgba(0,0,0,0.30)',
               }}
             >
-              {/* Media */}
               <div
                 className={cn(
                   'relative overflow-hidden min-h-[320px] lg:min-h-[460px]',
                   isReversed ? 'lg:order-2' : 'lg:order-1',
                 )}
               >
-                {/* gradient wash */}
                 <div
                   className="absolute inset-0"
                   style={{
-                    background: `linear-gradient(155deg, ${project.panelAccentColor}16 0%, rgba(10,22,40,0.22) 45%, rgba(10,22,40,0.78) 100%)`,
+                    background: `linear-gradient(155deg, ${project.panelAccentColor}14 0%, rgba(10,22,40,0.20) 45%, rgba(10,22,40,0.76) 100%)`,
                   }}
                 />
 
                 <FloatingProjectVisual project={project} priority={index === 0} />
 
-                {/* Project number badge */}
                 <div
                   className="absolute top-4 right-4 flex items-center gap-1.5 rounded-full px-3 py-1 z-20"
                   style={{
@@ -208,18 +201,11 @@ export function ProjectsSection() {
                 >
                   <StarMark size="xs" color={project.panelAccentColor} className="opacity-65" />
                   <span className="font-mono text-[9.5px] uppercase tracking-wider text-text-muted">
-                    Project {String(index + 1).padStart(2, '0')}
+                    {String(index + 1).padStart(2, '0')}
                   </span>
                 </div>
-
-                {/* frame border inner glow */}
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{ boxShadow: `inset 0 0 0 1px ${project.panelAccentColor}16` }}
-                />
               </div>
 
-              {/* Content */}
               <div
                 className={cn(
                   'flex flex-col justify-center p-8 lg:p-12',
@@ -243,20 +229,21 @@ export function ProjectsSection() {
                 </div>
 
                 <h3 className="font-display text-h1 text-text-base leading-tight">{project.name}</h3>
+
                 <p className="font-mono text-[11px] text-text-muted mt-2 tracking-wider uppercase">
                   {project.year} · {project.role}
                 </p>
 
                 <p
-                  className="font-sans mt-5 leading-relaxed"
+                  className="font-sans mt-5 leading-relaxed max-w-[34ch]"
                   style={{ fontSize: '15px', color: '#A8C5D1' }}
                 >
-                  {project.tagline}
+                  {shortTagline}
                 </p>
 
-                {project.outcome && (
+                {shortOutcome && (
                   <div
-                    className="mt-5 inline-flex items-start gap-2 self-start px-4 py-2.5 rounded-btn"
+                    className="mt-5 inline-flex items-start gap-2 self-start px-4 py-2.5 rounded-btn max-w-[36rem]"
                     style={{
                       background: `${project.panelAccentColor}10`,
                       border: `1px solid ${project.panelAccentColor}22`,
@@ -268,7 +255,7 @@ export function ProjectsSection() {
                       className="opacity-55 mt-0.5 shrink-0"
                     />
                     <span className="font-sans text-sm leading-snug text-text-muted">
-                      {project.outcome}
+                      {shortOutcome}
                     </span>
                   </div>
                 )}
@@ -291,18 +278,19 @@ export function ProjectsSection() {
                   </div>
                 )}
 
-                {/* ── CTA row ─────────────────────────────────────────── */}
                 <div className="mt-8 flex flex-wrap gap-2">
                   <HoverSparkle className="inline-flex">
                     <StarburstButton href={`/projects/${project.slug}`} variant="primary" size="sm">
                       View Case Study
                     </StarburstButton>
                   </HoverSparkle>
+
                   <HoverSparkle className="inline-flex">
                     <StarburstButton href={`/projects/${project.slug}/demo`} variant="secondary" size="sm">
                       Demo
                     </StarburstButton>
                   </HoverSparkle>
+
                   {project.liveUrl && (
                     <HoverSparkle className="inline-flex">
                       <StarburstButton
