@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { Section } from '@/components/ui/Section'
 import { StarMark } from '@/components/ui/StarMark'
 import { WatermarkStar } from '@/components/ui/WatermarkStar'
@@ -10,43 +10,117 @@ import { HoverSparkle } from '@/components/ui/HoverSparkle'
 import { siteConfig } from '@/data/site'
 import { fadeUp, fadeIn, staggerContainer } from '@/lib/motion'
 
-const philosophyStatements = [
+const signalPills = [
+  'AI workflows',
+  'Technical demos',
+  'Dashboard design',
+  'Stakeholder communication',
+  'Full-stack prototyping',
+  'Product judgment',
+]
+
+const valueCards = [
   {
-    text: siteConfig.aboutStatements[2],
-    starColor: '#0F7A7A',
+    eyebrow: 'What I do best',
+    title: 'I turn technical complexity into clear decisions, usable workflows, and convincing demos.',
+    body:
+      'My strongest work lives at the intersection of systems thinking, communication, and product execution — where architecture needs to become something a user, stakeholder, or customer can actually understand and act on.',
   },
   {
-    text: siteConfig.aboutStatements[3],
-    starColor: '#C4974A',
+    eyebrow: 'Why SE + PM',
+    title: 'I’m strongest in roles where technical credibility and user judgment both matter.',
+    body:
+      'I like understanding how a system works, where it breaks, what matters most to the user, and how to shape the clearest solution around that. That is why Solutions Engineering and technical Product roles both make sense for me.',
   },
   {
-    text: "I believe the best products are the ones that feel inevitable once you're using them.",
-    starColor: '#4A9FAE',
+    eyebrow: 'What I optimize for',
+    title: 'I care less about shipping features in isolation and more about making products easier to trust, adopt, and use.',
+    body:
+      'That means better workflow design, better communication, and better product decisions — not just building something functional, but building something people can quickly understand and believe in.',
   },
 ]
 
-const expertiseExpansions: Record<string, string> = {
-  'AI workflow design and integration':
-    'Designing systems where AI handles structure so humans can focus on judgment — from prompt architecture to end-user experience.',
-  'Solutions Engineering and pre-sales':
-    'Translating technical capability into compelling, tailored demos that close the gap between what a product does and what a buyer needs to see.',
-  'Full-stack product development':
-    'Shipping complete products end-to-end — from schema design and API layer through to polished UI — without handing off between silos.',
-  'Technical to non-technical communication':
-    'Making complex systems legible to decision-makers, turning architectural choices into business rationale that actually lands.',
-}
+const proofStats = [
+  {
+    value: '30K+',
+    label: 'records analyzed in health AI systems',
+  },
+  {
+    value: '70%',
+    label: 'manual analysis time reduced in pipeline work',
+  },
+  {
+    value: '63%',
+    label: 'completion lift from workflow redesign',
+  },
+  {
+    value: '3',
+    label: 'AI product demos built for real user workflows',
+  },
+]
+
+const capabilityCards = [
+  {
+    title: 'Solutions Engineering',
+    body:
+      'Explaining product capability through tailored demos, structured workflows, and clear technical storytelling that connects system depth to customer value.',
+  },
+  {
+    title: 'Product Thinking',
+    body:
+      'Breaking messy problems into leverage points, then shaping the simplest solution that improves the user experience and the business outcome.',
+  },
+  {
+    title: 'AI Systems + Workflow Design',
+    body:
+      'Designing systems where models, structured outputs, interface logic, and human judgment work together instead of fighting each other.',
+  },
+  {
+    title: 'Technical Communication',
+    body:
+      'Making architecture, tradeoffs, and system behavior legible to non-technical stakeholders without flattening the complexity that matters.',
+  },
+]
+
+const quickProof = [
+  'Built predictive systems and dashboards for stakeholder decision-making in health AI environments.',
+  'Designed workflow tools and data systems that improved reliability, planning, and operational efficiency.',
+  'Built and demoed AI products across inbox triage, career intelligence, and personalized news workflows.',
+  'Comfortable working across Python, SQL, TypeScript, Next.js, APIs, and user-facing system design.',
+]
+
+const currentFocus = [
+  'Open to early-career Solutions Engineering and technical Product roles.',
+  'Especially interested in AI, workflow, platform, and customer-facing product environments.',
+  'Best fit where I can combine technical depth, communication, and product execution.',
+]
 
 export default function AboutPage() {
-  return (
-    <main className="pt-16 min-h-screen">
-      {/* ── Section A: Editorial intro ───────────────────────────────────── */}
-      <Section paddingY="lg">
-        {/* Background watermark */}
-        <div className="absolute top-0 right-0 pointer-events-none overflow-hidden" aria-hidden>
-          <WatermarkStar size={520} opacity={0.04} direction={1} />
-        </div>
+  const shouldReduce = useReducedMotion()
+  const portrait = siteConfig.portraitSrc ?? siteConfig.photoSrc
+  const firstName = siteConfig.name.split(' ')[0]
+  const lastName = siteConfig.name.split(' ').slice(1).join(' ')
 
-        {/* Page label */}
+  return (
+    <main className="pt-16 min-h-screen relative overflow-hidden">
+      <div
+        aria-hidden
+        className="absolute top-[-4%] right-[-10%] pointer-events-none"
+        style={{ opacity: 0.045 }}
+      >
+        <WatermarkStar size={560} opacity={1} direction={1} color="#4A9FAE" />
+      </div>
+
+      <div
+        aria-hidden
+        className="absolute left-[-12%] top-[18%] h-[520px] w-[520px] rounded-full blur-3xl pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(circle, rgba(74,159,174,0.12) 0%, rgba(74,159,174,0.04) 42%, transparent 72%)',
+        }}
+      />
+
+      <Section paddingY="lg">
         <motion.div
           variants={fadeIn}
           initial="hidden"
@@ -62,283 +136,178 @@ export default function AboutPage() {
             }}
           >
             <StarMark size="xs" color="#C4974A" className="opacity-80" />
-            <span className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-text-muted">
+            <span className="font-mono text-[10.5px] uppercase tracking-[0.12em] text-text-muted">
               About
             </span>
           </div>
         </motion.div>
 
-        {/* Editorial two-column */}
-        <div className="grid lg:grid-cols-[48fr_52fr] gap-12 lg:gap-18 items-center">
-          {/* Left: portrait with hero-style orbit */}
+        <div className="grid lg:grid-cols-[0.96fr_1.04fr] gap-12 lg:gap-16 items-center">
           <motion.div
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="flex justify-center"
+            className="flex justify-center lg:justify-start"
           >
-            <div className="scale-[0.84] sm:scale-[0.92] lg:scale-100 origin-center">
+            <div className="relative flex items-center justify-center w-[320px] h-[320px] sm:w-[380px] sm:h-[380px]">
               <div
-                className="relative flex items-center justify-center"
-                style={{ width: 420, height: 420 }}
+                aria-hidden
+                className="absolute rounded-full pointer-events-none"
+                style={{
+                  inset: '8%',
+                  background:
+                    'radial-gradient(circle, rgba(74,159,174,0.18) 0%, rgba(74,159,174,0.06) 42%, transparent 74%)',
+                  filter: 'blur(12px)',
+                }}
+              />
+
+              <motion.div
+                aria-hidden
+                className="absolute pointer-events-none rounded-full"
+                style={{
+                  width: '88%',
+                  height: '88%',
+                  border: '1px dashed rgba(74,159,174,0.20)',
+                }}
+                animate={shouldReduce ? {} : { rotate: 360 }}
+                transition={shouldReduce ? {} : { duration: 42, repeat: Infinity, ease: 'linear' }}
+              />
+
+              <motion.div
+                aria-hidden
+                className="absolute pointer-events-none rounded-full"
+                style={{
+                  width: '76%',
+                  height: '76%',
+                  border: '1px solid rgba(196,151,74,0.16)',
+                }}
+                animate={shouldReduce ? {} : { rotate: -360 }}
+                transition={shouldReduce ? {} : { duration: 28, repeat: Infinity, ease: 'linear' }}
+              />
+
+              <motion.div
+                className="relative z-10 rounded-full overflow-hidden"
+                animate={shouldReduce ? {} : { y: [0, -8, 0] }}
+                transition={
+                  shouldReduce ? {} : { duration: 5.4, repeat: Infinity, ease: 'easeInOut' }
+                }
+                style={{
+                  width: '66%',
+                  height: '66%',
+                  boxShadow:
+                    '0 0 0 1px rgba(74,159,174,0.28), 0 0 0 8px rgba(74,159,174,0.08), 0 18px 40px rgba(0,0,0,0.22)',
+                }}
               >
-                {/* Aura */}
+                {portrait ? (
+                  <Image
+                    src={portrait}
+                    alt={`${siteConfig.name} portrait`}
+                    fill
+                    sizes="260px"
+                    className="object-cover object-top"
+                    priority
+                  />
+                ) : (
+                  <div
+                    className="w-full h-full flex items-center justify-center"
+                    style={{ background: 'linear-gradient(135deg, #0F2A3D, #0D1E30)' }}
+                  >
+                    <StarMark size="xl" color="#0F7A7A" className="opacity-30" />
+                  </div>
+                )}
+
                 <div
                   aria-hidden
-                  className="absolute pointer-events-none"
+                  className="absolute inset-0"
                   style={{
-                    width: 460,
-                    height: 460,
-                    borderRadius: '50%',
                     background:
-                      'radial-gradient(circle, rgba(15,122,122,0.18) 0%, rgba(15,122,122,0.05) 42%, transparent 70%)',
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
+                      'linear-gradient(155deg, rgba(74,159,174,0.10) 0%, transparent 55%)',
                   }}
                 />
+              </motion.div>
 
-                {/* Watermark star */}
+              <motion.div
+                aria-hidden
+                className="absolute pointer-events-none"
+                style={{ width: '88%', height: '88%' }}
+                animate={shouldReduce ? {} : { rotate: 360 }}
+                transition={shouldReduce ? {} : { duration: 18, repeat: Infinity, ease: 'linear' }}
+              >
                 <div
-                  aria-hidden
-                  className="absolute pointer-events-none"
-                  style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}
-                >
-                  <WatermarkStar size={340} color="#0F7A7A" direction={1} opacity={0.07} />
-                </div>
-
-                {/* Dashed orbit ring */}
-                <div
-                  aria-hidden
-                  className="absolute pointer-events-none halo-spin"
                   style={{
-                    width: 340,
-                    height: 340,
-                    top: '50%',
+                    position: 'absolute',
+                    top: '6%',
                     left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                  }}
-                >
-                  <svg width="340" height="340" viewBox="0 0 340 340" fill="none">
-                    <circle
-                      cx="170"
-                      cy="170"
-                      r="166"
-                      stroke="rgba(15,122,122,0.20)"
-                      strokeWidth="1"
-                      strokeDasharray="4 12"
-                    />
-                  </svg>
-                </div>
-
-                {/* Thin inner ring */}
-                <div
-                  aria-hidden
-                  className="absolute pointer-events-none"
-                  style={{
-                    width: 304,
-                    height: 304,
-                    borderRadius: '50%',
-                    border: '1px solid rgba(196,151,74,0.16)',
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
+                    width: 12,
+                    height: 12,
+                    marginLeft: -6,
+                    borderRadius: '999px',
+                    background:
+                      'radial-gradient(circle at 32% 30%, #FFF5D9 0%, #E2BC69 34%, #C4974A 68%, #8E6320 100%)',
+                    boxShadow:
+                      '0 0 8px rgba(196,151,74,0.45), 0 0 16px rgba(196,151,74,0.16)',
                   }}
                 />
+              </motion.div>
 
-                {/* Portrait */}
+              <motion.div
+                aria-hidden
+                className="absolute pointer-events-none"
+                style={{ width: '76%', height: '76%' }}
+                animate={shouldReduce ? {} : { rotate: -360 }}
+                transition={shouldReduce ? {} : { duration: 24, repeat: Infinity, ease: 'linear' }}
+              >
                 <div
-                  className="portrait-float relative"
-                  style={{ width: 272, height: 272, zIndex: 10 }}
-                >
-                  <div
-                    className="portrait-glow"
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      borderRadius: '50%',
-                      overflow: 'hidden',
-                      position: 'relative',
-                    }}
-                  >
-                    {siteConfig.portraitSrc ? (
-                      <Image
-                        src={siteConfig.portraitSrc}
-                        alt={`${siteConfig.name} portrait`}
-                        fill
-                        sizes="272px"
-                        className="object-cover object-top"
-                        priority
-                      />
-                    ) : (
-                      <div
-                        className="w-full h-full flex items-center justify-center"
-                        style={{ background: 'linear-gradient(135deg, #0F2A3D, #0D1E30)' }}
-                      >
-                        <StarMark size="xl" color="#0F7A7A" className="opacity-30" />
-                      </div>
-                    )}
-
-                    <div
-                      style={{
-                        position: 'absolute',
-                        inset: 0,
-                        background:
-                          'linear-gradient(160deg, rgba(15,122,122,0.08) 0%, transparent 60%, rgba(10,22,40,0.15) 100%)',
-                        borderRadius: '50%',
-                      }}
-                    />
-                  </div>
-                </div>
-
-                {/* Main gold satellite */}
-                <motion.div
-                  aria-hidden
-                  className="absolute pointer-events-none"
                   style={{
-                    width: 328,
-                    height: 328,
-                    top: '50%',
+                    position: 'absolute',
+                    bottom: '4%',
                     left: '50%',
-                    marginLeft: -164,
-                    marginTop: -164,
-                    zIndex: 20,
+                    width: 7,
+                    height: 7,
+                    marginLeft: -3.5,
+                    borderRadius: '999px',
+                    background: '#7EE7F2',
+                    boxShadow:
+                      '0 0 8px rgba(126,231,242,0.48), 0 0 14px rgba(126,231,242,0.18)',
                   }}
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-                >
-                  <div
-                    style={{
-                      position: 'absolute',
-                      top: '50%',
-                      left: '50%',
-                      width: 18,
-                      height: 18,
-                      marginLeft: -9,
-                      marginTop: -9,
-                      transform: 'rotate(132deg) translateY(-164px)',
-                    }}
-                  >
-                    <div
-                      style={{
-                        position: 'absolute',
-                        top: '50%',
-                        left: '50%',
-                        width: 44,
-                        height: 10,
-                        transform: 'translate(-88%, -50%)',
-                        borderRadius: 999,
-                        background:
-                          'linear-gradient(90deg, rgba(196,151,74,0.0) 0%, rgba(196,151,74,0.10) 28%, rgba(196,151,74,0.22) 55%, rgba(196,151,74,0.0) 100%)',
-                        filter: 'blur(4px)',
-                        opacity: 0.7,
-                      }}
-                    />
-                    <motion.div
-                      animate={{ scale: [1, 1.08, 1], y: [0, -1.5, 0] }}
-                      transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
-                      style={{
-                        position: 'relative',
-                        width: 18,
-                        height: 18,
-                        borderRadius: '50%',
-                        background:
-                          'radial-gradient(circle at 32% 30%, #FFF5D9 0%, #E2BC69 34%, #C4974A 68%, #8E6320 100%)',
-                        boxShadow:
-                          '0 0 10px rgba(196,151,74,0.55), 0 0 22px rgba(196,151,74,0.22), inset -2px -2px 4px rgba(0,0,0,0.18), inset 1px 1px 2px rgba(255,255,255,0.4)',
-                      }}
-                    />
-                  </div>
-                </motion.div>
+                />
+              </motion.div>
 
-                {/* Small teal satellite */}
-                <motion.div
-                  aria-hidden
-                  className="absolute pointer-events-none"
-                  style={{
-                    width: 296,
-                    height: 296,
-                    top: '50%',
-                    left: '50%',
-                    marginLeft: -148,
-                    marginTop: -148,
-                    zIndex: 19,
-                  }}
-                  animate={{ rotate: -360 }}
-                  transition={{ duration: 28, repeat: Infinity, ease: 'linear' }}
-                >
-                  <div
-                    style={{
-                      position: 'absolute',
-                      top: '50%',
-                      left: '50%',
-                      width: 10,
-                      height: 10,
-                      marginLeft: -5,
-                      marginTop: -5,
-                      transform: 'rotate(36deg) translateY(-148px)',
-                    }}
-                  >
-                    <motion.div
-                      animate={{ scale: [1, 1.18, 1], opacity: [0.7, 1, 0.7] }}
-                      transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
-                      style={{
-                        width: 10,
-                        height: 10,
-                        borderRadius: '50%',
-                        background:
-                          'radial-gradient(circle at 35% 35%, #D9FCFF 0%, #71D5E4 40%, #4A9FAE 75%, #1C5B68 100%)',
-                        boxShadow:
-                          '0 0 8px rgba(74,159,174,0.55), 0 0 18px rgba(74,159,174,0.18), inset -1px -1px 2px rgba(0,0,0,0.18), inset 1px 1px 2px rgba(255,255,255,0.35)',
-                      }}
-                    />
-                  </div>
-                </motion.div>
+              <motion.div
+                aria-hidden
+                style={{ position: 'absolute', top: '16%', right: '10%' }}
+                animate={shouldReduce ? {} : { y: [0, -6, 0], opacity: [0.5, 1, 0.5] }}
+                transition={
+                  shouldReduce ? {} : { duration: 3.2, repeat: Infinity, ease: 'easeInOut' }
+                }
+              >
+                <StarMark size="xs" color="#4A9FAE" className="opacity-70" />
+              </motion.div>
 
-                {/* Floating stars */}
-                <motion.div
-                  aria-hidden
-                  animate={{ y: [0, -4, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                  style={{ position: 'absolute', top: 28, right: 24, zIndex: 20 }}
-                >
-                  <StarMark size="sm" color="#4A9FAE" className="opacity-70" />
-                </motion.div>
-
-                <motion.div
-                  aria-hidden
-                  animate={{ y: [0, 4, 0] }}
-                  transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}
-                  style={{ position: 'absolute', left: 10, top: '48%', zIndex: 20 }}
-                >
-                  <StarMark size="xs" color="#C4974A" className="opacity-55" />
-                </motion.div>
-
-                <motion.div
-                  aria-hidden
-                  animate={{ y: [0, -3, 0] }}
-                  transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut', delay: 0.8 }}
-                  style={{ position: 'absolute', bottom: 34, left: 30, zIndex: 20 }}
-                >
-                  <StarMark size="xs" color="#4A9FAE" className="opacity-40" />
-                </motion.div>
-              </div>
+              <motion.div
+                aria-hidden
+                style={{ position: 'absolute', bottom: '18%', left: '8%' }}
+                animate={shouldReduce ? {} : { y: [0, 5, 0], opacity: [0.35, 0.7, 0.35] }}
+                transition={
+                  shouldReduce ? {} : { duration: 4.2, repeat: Infinity, ease: 'easeInOut' }
+                }
+              >
+                <StarMark size="xs" color="#C4974A" className="opacity-55" />
+              </motion.div>
             </div>
           </motion.div>
 
-          {/* Right: bio text */}
           <motion.div
-            variants={staggerContainer(0.12)}
+            variants={staggerContainer(0.1)}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="flex flex-col justify-center max-w-[640px] mx-auto lg:mx-0"
+            className="max-w-[720px]"
           >
-            {/* Name + role */}
-            <motion.div variants={fadeUp} className="mb-6">
+            <motion.div variants={fadeUp}>
               <div
-                className="inline-flex items-center gap-2 rounded-full px-3.5 py-1 mb-4"
+                className="inline-flex items-center gap-2 rounded-full px-3.5 py-1 mb-5"
                 style={{
                   background: 'rgba(15,122,122,0.08)',
                   border: '1px solid rgba(15,122,122,0.22)',
@@ -349,69 +318,156 @@ export default function AboutPage() {
                   className="font-mono text-[10px] uppercase tracking-[0.12em]"
                   style={{ color: '#4A9FAE' }}
                 >
-                  {siteConfig.roleTag}
+                  Solutions Engineering + Product
                 </span>
               </div>
 
-              <h1 className="font-display text-hero text-text-base leading-none">
-                {siteConfig.name.split(' ')[0]}{' '}
+              <h1 className="font-display text-hero text-text-base leading-none text-balance">
+                {firstName}{' '}
                 <span style={{ color: '#4A9FAE' }}>
-                  {siteConfig.name.split(' ').slice(1).join(' ')}
+                  {lastName}
                 </span>
               </h1>
+
+              <p
+                className="mt-6 font-sans text-[17px] leading-8 max-w-[60ch]"
+                style={{ color: '#A8C5D1' }}
+              >
+                I’m strongest where technical depth, user clarity, and business context meet.
+                I like taking systems that feel messy or abstract and turning them into workflows,
+                demos, and product experiences that people can understand, trust, and act on.
+              </p>
             </motion.div>
 
-            <motion.p
-              variants={fadeUp}
-              className="font-sans leading-relaxed"
-              style={{ fontSize: '17px', color: '#A8C5D1' }}
-            >
-              {siteConfig.aboutStatements[0]}
-            </motion.p>
+            <motion.div variants={fadeUp} className="mt-7 flex flex-wrap gap-2.5">
+              {signalPills.map((pill) => (
+                <div
+                  key={pill}
+                  className="inline-flex items-center gap-2 rounded-full px-3.5 py-2"
+                  style={{
+                    background: 'rgba(10,32,48,0.62)',
+                    border: '1px solid rgba(74,159,174,0.18)',
+                    boxShadow: '0 0 0 1px rgba(255,255,255,0.02) inset',
+                  }}
+                >
+                  <StarMark size="xs" color="#C4974A" className="opacity-70" />
+                  <span
+                    className="font-mono text-[10.5px] uppercase tracking-[0.12em]"
+                    style={{ color: '#9BC0CB' }}
+                  >
+                    {pill}
+                  </span>
+                </div>
+              ))}
+            </motion.div>
 
-            <motion.p
-              variants={fadeUp}
-              className="font-sans leading-relaxed mt-5"
-              style={{ fontSize: '17px', color: '#A8C5D1' }}
-            >
-              {siteConfig.aboutStatements[1]}
-            </motion.p>
+            <motion.div variants={fadeUp} className="mt-8 flex gap-3 flex-wrap">
+              <HoverSparkle className="inline-flex">
+                <StarburstButton href={`mailto:${siteConfig.email}`} variant="primary" size="md">
+                  Get in touch
+                </StarburstButton>
+              </HoverSparkle>
+
+              <HoverSparkle className="inline-flex">
+                <StarburstButton href="/resume" variant="secondary" size="md">
+                  View Résumé
+                </StarburstButton>
+              </HoverSparkle>
+            </motion.div>
           </motion.div>
         </div>
       </Section>
 
-      {/* ── Section B: Philosophy cards ──────────────────────────────────── */}
       <Section paddingY="sm">
         <motion.div
-          variants={staggerContainer(0.10)}
+          variants={staggerContainer(0.08)}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid md:grid-cols-3 gap-5"
+          className="grid sm:grid-cols-2 xl:grid-cols-4 gap-4"
         >
-          {philosophyStatements.map((item, i) => (
+          {proofStats.map((item) => (
             <motion.div
-              key={i}
+              key={item.label}
               variants={fadeUp}
-              className="p-8 rounded-2xl flex flex-col gap-5"
+              className="rounded-[24px] p-6"
               style={{
-                background: 'rgba(15,42,61,0.50)',
-                border: '1px solid rgba(15,122,122,0.14)',
+                background:
+                  'linear-gradient(180deg, rgba(10,33,50,0.62) 0%, rgba(8,27,42,0.50) 100%)',
+                border: '1px solid rgba(74,159,174,0.13)',
               }}
             >
-              <StarMark size="md" color={item.starColor} className="opacity-80" />
+              <div className="flex items-center gap-2 mb-3">
+                <StarMark size="xs" color="#4A9FAE" className="opacity-65" />
+                <span
+                  className="font-mono text-[10px] uppercase tracking-[0.14em]"
+                  style={{ color: '#7FAFBB' }}
+                >
+                  Proof
+                </span>
+              </div>
+
+              <div className="font-display text-[42px] leading-none text-text-base">
+                {item.value}
+              </div>
+
               <p
-                className="font-display leading-snug"
-                style={{ fontSize: 'clamp(16px, 1.4vw, 20px)', color: '#E8F4F8' }}
+                className="mt-3 font-sans text-[14px] leading-6"
+                style={{ color: '#8FB2BE' }}
               >
-                {item.text}
+                {item.label}
               </p>
             </motion.div>
           ))}
         </motion.div>
       </Section>
 
-      {/* ── Section C: Expertise grid ─────────────────────────────────────── */}
+      <Section paddingY="sm">
+        <motion.div
+          variants={staggerContainer(0.1)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid md:grid-cols-3 gap-5"
+        >
+          {valueCards.map((card) => (
+            <motion.div
+              key={card.title}
+              variants={fadeUp}
+              className="rounded-[28px] p-7"
+              style={{
+                background:
+                  'linear-gradient(180deg, rgba(10,33,50,0.68) 0%, rgba(8,27,42,0.56) 100%)',
+                border: '1px solid rgba(74,159,174,0.14)',
+                boxShadow:
+                  '0 10px 40px rgba(0,0,0,0.16), inset 0 1px 0 rgba(255,255,255,0.025)',
+              }}
+            >
+              <div className="flex items-center gap-2">
+                <StarMark size="xs" color="#4A9FAE" className="opacity-65" />
+                <span
+                  className="font-mono text-[10.5px] uppercase tracking-[0.14em]"
+                  style={{ color: '#7FAFBB' }}
+                >
+                  {card.eyebrow}
+                </span>
+              </div>
+
+              <h2 className="mt-4 font-display text-[30px] md:text-[34px] leading-[1.06] text-text-base text-balance">
+                {card.title}
+              </h2>
+
+              <p
+                className="mt-4 font-sans text-[15.5px] leading-7"
+                style={{ color: '#8FB2BE' }}
+              >
+                {card.body}
+              </p>
+            </motion.div>
+          ))}
+        </motion.div>
+      </Section>
+
       <Section paddingY="sm">
         <motion.div
           variants={fadeIn}
@@ -429,7 +485,7 @@ export default function AboutPage() {
           >
             <StarMark size="xs" color="#C4974A" className="opacity-80" />
             <span className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-text-muted">
-              Expertise
+              Capabilities
             </span>
           </div>
         </motion.div>
@@ -439,39 +495,45 @@ export default function AboutPage() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid sm:grid-cols-2 lg:grid-cols-2 gap-4"
+          className="grid sm:grid-cols-2 xl:grid-cols-4 gap-4"
         >
-          {(siteConfig.aboutHighlights ?? []).map((highlight, i) => (
+          {capabilityCards.map((card) => (
             <motion.div
-              key={i}
+              key={card.title}
               variants={fadeUp}
-              className="p-6 rounded-2xl"
+              className="rounded-[26px] p-6"
               style={{
-                background: 'rgba(15,42,61,0.50)',
-                border: '1px solid rgba(15,122,122,0.14)',
+                background:
+                  'linear-gradient(180deg, rgba(10,33,50,0.62) 0%, rgba(8,27,42,0.50) 100%)',
+                border: '1px solid rgba(74,159,174,0.13)',
+                minHeight: 220,
               }}
             >
-              <div className="flex items-start gap-3">
-                <StarMark
-                  size="xs"
-                  color={i % 2 === 0 ? '#0F7A7A' : '#C4974A'}
-                  className="opacity-75 mt-0.5 shrink-0"
-                />
-                <div>
-                  <p className="font-sans font-semibold text-sm text-text-base mb-2">
-                    {highlight}
-                  </p>
-                  <p className="font-sans text-sm leading-relaxed" style={{ color: '#7AABB8' }}>
-                    {expertiseExpansions[highlight] ?? ''}
-                  </p>
-                </div>
+              <div className="flex items-center gap-2">
+                <StarMark size="xs" color="#4A9FAE" className="opacity-65" />
+                <span
+                  className="font-mono text-[10.5px] uppercase tracking-[0.14em]"
+                  style={{ color: '#7FAFBB' }}
+                >
+                  Capability
+                </span>
               </div>
+
+              <h3 className="mt-4 font-sans text-[22px] leading-[1.15] font-semibold text-text-base text-balance">
+                {card.title}
+              </h3>
+
+              <p
+                className="mt-4 font-sans text-[15px] leading-7"
+                style={{ color: '#8FB2BE' }}
+              >
+                {card.body}
+              </p>
             </motion.div>
           ))}
         </motion.div>
       </Section>
 
-      {/* ── Section D: Currently ──────────────────────────────────────────── */}
       <Section paddingY="sm">
         <motion.div
           variants={fadeIn}
@@ -489,153 +551,164 @@ export default function AboutPage() {
           >
             <StarMark size="xs" color="#C4974A" className="opacity-80" />
             <span className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-text-muted">
-              Currently
+              What I bring
             </span>
           </div>
         </motion.div>
 
         <motion.div
-          variants={staggerContainer(0.10)}
+          variants={staggerContainer(0.1)}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid lg:grid-cols-2 gap-6 items-start"
+          className="grid lg:grid-cols-[1.1fr_0.9fr] gap-6 items-start"
         >
-          {siteConfig.career?.[0] && (
-            <motion.div
-              variants={fadeUp}
-              className="p-7 rounded-2xl"
-              style={{
-                background: 'rgba(15,42,61,0.50)',
-                border: '1px solid rgba(196,151,74,0.20)',
-                boxShadow: '0 0 32px rgba(196,151,74,0.06)',
-              }}
-            >
-              <div className="flex items-center gap-2 mb-4">
-                <StarMark size="xs" color="#C4974A" className="opacity-80" />
-                <span
-                  className="font-mono text-[9px] uppercase tracking-wider rounded-full px-2.5 py-0.5"
-                  style={{
-                    background: 'rgba(196,151,74,0.10)',
-                    border: '1px solid rgba(196,151,74,0.25)',
-                    color: '#C4974A',
-                  }}
-                >
-                  Now
-                </span>
-              </div>
-
-              <h3 className="font-display text-h2 text-text-base">
-                {siteConfig.career[0].role}
-              </h3>
-              <p className="font-sans text-sm mt-1" style={{ color: '#4A9FAE' }}>
-                {siteConfig.career[0].company}
-              </p>
-              <p className="font-sans text-sm leading-relaxed mt-4" style={{ color: '#8DAFC0' }}>
-                {siteConfig.career[0].description}
-              </p>
-
-              {siteConfig.career[0].tags && (
-                <div className="flex flex-wrap gap-1.5 mt-4">
-                  {siteConfig.career[0].tags.map(tag => (
-                    <span
-                      key={tag}
-                      className="font-mono text-[9px] uppercase tracking-wider px-2.5 py-0.5 rounded-btn"
-                      style={{
-                        background: 'rgba(15,42,61,0.80)',
-                        border: '1px solid rgba(15,122,122,0.14)',
-                        color: '#6A9BAA',
-                      }}
-                    >
-                      {tag}
-                    </span>
-                  ))}
+          <motion.div
+            variants={fadeUp}
+            className="rounded-[30px] p-7"
+            style={{
+              background: 'rgba(15,42,61,0.50)',
+              border: '1px solid rgba(196,151,74,0.20)',
+              boxShadow: '0 0 32px rgba(196,151,74,0.06)',
+            }}
+          >
+            <div className="space-y-4">
+              {quickProof.map((item) => (
+                <div key={item} className="flex items-start gap-3">
+                  <StarMark
+                    size="xs"
+                    color="#C4974A"
+                    className="opacity-70 mt-[6px] shrink-0"
+                  />
+                  <p
+                    className="font-sans text-[15.5px] leading-7"
+                    style={{ color: '#A8C5D1' }}
+                  >
+                    {item}
+                  </p>
                 </div>
-              )}
-            </motion.div>
-          )}
+              ))}
+            </div>
+          </motion.div>
 
-          <motion.div variants={fadeUp} className="flex flex-col gap-6">
+          <motion.div variants={fadeUp} className="flex flex-col gap-5">
             <div
-              className="p-7 rounded-2xl"
+              className="rounded-[28px] p-6"
               style={{
                 background: 'rgba(15,42,61,0.50)',
                 border: '1px solid rgba(15,122,122,0.14)',
               }}
             >
-              <p
-                className="font-mono text-[10.5px] uppercase tracking-[0.1em] mb-3"
-                style={{ color: '#4A9FAE' }}
-              >
-                What I&apos;m building
-              </p>
-              <p className="font-sans text-base leading-relaxed" style={{ color: '#A8C5D1' }}>
-                {siteConfig.currentlyOpen}
-              </p>
+              <div className="flex items-center gap-2 mb-3">
+                <StarMark size="xs" color="#4A9FAE" className="opacity-65" />
+                <span
+                  className="font-mono text-[10.5px] uppercase tracking-[0.12em]"
+                  style={{ color: '#7FAFBB' }}
+                >
+                  Current focus
+                </span>
+              </div>
+
+              <div className="space-y-3">
+                {currentFocus.map((item) => (
+                  <div key={item} className="flex items-start gap-2.5">
+                    <StarMark
+                      size="xs"
+                      color="#C4974A"
+                      className="opacity-55 mt-[5px] shrink-0"
+                    />
+                    <p
+                      className="font-sans text-[15px] leading-6"
+                      style={{ color: '#A8C5D1' }}
+                    >
+                      {item}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            <div className="flex flex-col gap-3">
-              <a
-                href={`mailto:${siteConfig.email}`}
-                className="flex items-center gap-3 group transition-colors"
-                style={{ color: '#A8C5D1' }}
-              >
-                <StarMark
-                  size="xs"
-                  color="#0F7A7A"
-                  className="opacity-60 group-hover:opacity-100 transition-opacity"
-                />
-                <span className="font-sans text-sm group-hover:text-text-base transition-colors">
-                  {siteConfig.email}
+            <div
+              className="rounded-[28px] p-6"
+              style={{
+                background: 'rgba(15,42,61,0.50)',
+                border: '1px solid rgba(15,122,122,0.14)',
+              }}
+            >
+              <div className="flex items-center gap-2 mb-4">
+                <StarMark size="xs" color="#4A9FAE" className="opacity-65" />
+                <span
+                  className="font-mono text-[10.5px] uppercase tracking-[0.12em]"
+                  style={{ color: '#7FAFBB' }}
+                >
+                  Connect
                 </span>
-              </a>
+              </div>
 
-              <a
-                href={siteConfig.linkedinUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 group transition-colors"
-                style={{ color: '#A8C5D1' }}
-              >
-                <StarMark
-                  size="xs"
-                  color="#0F7A7A"
-                  className="opacity-60 group-hover:opacity-100 transition-opacity"
-                />
-                <span className="font-sans text-sm group-hover:text-text-base transition-colors">
-                  LinkedIn
-                </span>
-              </a>
+              <div className="flex flex-col gap-3">
+                <a
+                  href={`mailto:${siteConfig.email}`}
+                  className="flex items-center gap-3 group transition-colors"
+                  style={{ color: '#A8C5D1' }}
+                >
+                  <StarMark
+                    size="xs"
+                    color="#0F7A7A"
+                    className="opacity-60 group-hover:opacity-100 transition-opacity"
+                  />
+                  <span className="font-sans text-sm group-hover:text-text-base transition-colors">
+                    {siteConfig.email}
+                  </span>
+                </a>
 
-              <a
-                href={siteConfig.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 group transition-colors"
-                style={{ color: '#A8C5D1' }}
-              >
-                <StarMark
-                  size="xs"
-                  color="#0F7A7A"
-                  className="opacity-60 group-hover:opacity-100 transition-opacity"
-                />
-                <span className="font-sans text-sm group-hover:text-text-base transition-colors">
-                  GitHub
-                </span>
-              </a>
-            </div>
+                <a
+                  href={siteConfig.linkedinUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 group transition-colors"
+                  style={{ color: '#A8C5D1' }}
+                >
+                  <StarMark
+                    size="xs"
+                    color="#0F7A7A"
+                    className="opacity-60 group-hover:opacity-100 transition-opacity"
+                  />
+                  <span className="font-sans text-sm group-hover:text-text-base transition-colors">
+                    LinkedIn
+                  </span>
+                </a>
 
-            <div className="flex gap-3 flex-wrap pt-2">
-              <HoverSparkle className="inline-flex">
-                <StarburstButton href={`mailto:${siteConfig.email}`} variant="primary" size="md">
-                  Get in touch
-                </StarburstButton>
-              </HoverSparkle>
-              <HoverSparkle className="inline-flex">
-                <StarburstButton href="/resume" variant="secondary" size="md">
-                  View Résumé
-                </StarburstButton>
-              </HoverSparkle>
+                <a
+                  href={siteConfig.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 group transition-colors"
+                  style={{ color: '#A8C5D1' }}
+                >
+                  <StarMark
+                    size="xs"
+                    color="#0F7A7A"
+                    className="opacity-60 group-hover:opacity-100 transition-opacity"
+                  />
+                  <span className="font-sans text-sm group-hover:text-text-base transition-colors">
+                    GitHub
+                  </span>
+                </a>
+              </div>
+
+              <div className="flex gap-3 flex-wrap pt-6">
+                <HoverSparkle className="inline-flex">
+                  <StarburstButton href={`mailto:${siteConfig.email}`} variant="primary" size="md">
+                    Get in touch
+                  </StarburstButton>
+                </HoverSparkle>
+
+                <HoverSparkle className="inline-flex">
+                  <StarburstButton href="/resume" variant="secondary" size="md">
+                    View Résumé
+                  </StarburstButton>
+                </HoverSparkle>
+              </div>
             </div>
           </motion.div>
         </motion.div>
