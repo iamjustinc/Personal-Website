@@ -11,8 +11,6 @@ import { Tag } from '@/components/ui/Tag'
 import type { Project } from '@/types/project'
 import { fadeUp, fadeIn, staggerContainer, useMotionSafe } from '@/lib/motion'
 
-// ── Section wrapper ──────────────────────────────────────────────────────────
-
 function CaseSection({
   number,
   title,
@@ -34,11 +32,10 @@ function CaseSection({
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: '-4%' }}
-      className="py-10"
+      className="py-8"
       style={{ borderTop: '1px solid rgba(15,122,122,0.12)' }}
     >
-      {/* Section label row */}
-      <div className="flex items-center gap-3 mb-7">
+      <div className="flex items-center gap-3 mb-5">
         <span
           className="font-mono text-[10px] tabular-nums select-none shrink-0"
           style={{ color: accent, opacity: 0.4 }}
@@ -64,17 +61,13 @@ function CaseSection({
   )
 }
 
-// ── Prose ────────────────────────────────────────────────────────────────────
-
 function Prose({ children }: { children: React.ReactNode }) {
   return (
-    <p className="font-sans text-[15px] leading-[1.75]" style={{ color: '#A8C5D1' }}>
+    <p className="font-sans text-[15px] leading-[1.8] max-w-[68ch]" style={{ color: '#A8C5D1' }}>
       {children}
     </p>
   )
 }
-
-// ── Callout / highlight box ───────────────────────────────────────────────────
 
 function Callout({
   children,
@@ -85,7 +78,7 @@ function Callout({
 }) {
   return (
     <div
-      className="mt-6 flex items-start gap-3 px-5 py-4 rounded-btn"
+      className="mt-5 flex items-start gap-3 px-5 py-4 rounded-[18px]"
       style={{
         background: `${accent}0C`,
         border: `1px solid ${accent}22`,
@@ -99,21 +92,16 @@ function Callout({
   )
 }
 
-// ── Quick-facts strip ─────────────────────────────────────────────────────────
-
 function FactStrip({ project }: { project: Project }) {
   const facts = [
-    { label: 'Year',  value: String(project.year) },
-    { label: 'Role',  value: project.role },
+    { label: 'Year', value: String(project.year) },
+    { label: 'Role', value: project.role },
     { label: 'Stack', value: project.stack.slice(0, 3).join(' · ') },
   ]
 
   return (
-    <div
-      className="border-b"
-      style={{ borderColor: 'rgba(15,122,122,0.10)' }}
-    >
-      <div className="max-w-[1080px] mx-auto px-6 py-4">
+    <div style={{ borderColor: 'rgba(15,122,122,0.10)' }} className="border-b">
+      <div className="max-w-[1180px] mx-auto px-6 py-4">
         <div className="flex flex-wrap gap-x-8 gap-y-2">
           {facts.map((f) => (
             <div key={f.label} className="flex items-center gap-2">
@@ -137,31 +125,90 @@ function FactStrip({ project }: { project: Project }) {
   )
 }
 
-// ── Main component ───────────────────────────────────────────────────────────
+function FloatingCaseVisual({ project }: { project: Project }) {
+  const landingShot = project.screenshots?.[0]
+  const interfaceShot = project.screenshots?.[1]
+
+  return (
+    <div className="relative h-[360px] md:h-[460px] lg:h-[540px] overflow-hidden">
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `linear-gradient(155deg, ${project.panelAccentColor}10 0%, rgba(10,22,40,0.18) 45%, rgba(10,22,40,0.74) 100%)`,
+        }}
+      />
+
+      <div
+        className="absolute left-[6%] top-[10%] h-[62%] w-[60%]"
+        style={{ background: `linear-gradient(180deg, ${project.panelAccentColor}08 0%, transparent 100%)` }}
+      />
+
+      <div
+        className="absolute right-[9%] bottom-[12%] h-[54%] w-[56%]"
+        style={{ background: `linear-gradient(180deg, rgba(255,255,255,0.03) 0%, transparent 100%)` }}
+      />
+
+      {landingShot && (
+        <motion.div
+          animate={{ y: [0, -8, 0], rotate: [-2, -1, -2] }}
+          transition={{ duration: 8.5, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute left-[6%] top-[11%] h-[60%] w-[58%] overflow-hidden"
+          style={{ boxShadow: '0 18px 54px rgba(0,0,0,0.24)' }}
+        >
+          <Image
+            src={landingShot}
+            alt={`${project.name} landing`}
+            fill
+            className="object-cover object-left-top"
+            priority
+          />
+        </motion.div>
+      )}
+
+      {interfaceShot && (
+        <motion.div
+          animate={{ y: [0, 10, 0], rotate: [2, 1, 2] }}
+          transition={{ duration: 7.4, repeat: Infinity, ease: 'easeInOut', delay: 0.4 }}
+          className="absolute right-[7%] bottom-[8%] h-[54%] w-[62%] overflow-hidden"
+          style={{ boxShadow: '0 24px 64px rgba(0,0,0,0.28)' }}
+        >
+          <Image
+            src={interfaceShot}
+            alt={`${project.name} interface`}
+            fill
+            className="object-cover object-top"
+          />
+        </motion.div>
+      )}
+
+      <div className="absolute top-4 left-4 pointer-events-none">
+        <StarMark size="xs" color={project.panelAccentColor} className="opacity-45" />
+      </div>
+      <div className="absolute bottom-4 right-4 pointer-events-none">
+        <StarMark size="xs" color="#C4974A" className="opacity-40" />
+      </div>
+    </div>
+  )
+}
 
 export function ProjectCaseStudy({ project }: { project: Project }) {
-  const stagger = useMotionSafe(staggerContainer(0.10))
-  const up      = useMotionSafe(fadeUp)
-  const inn     = useMotionSafe(fadeIn)
+  const stagger = useMotionSafe(staggerContainer(0.1))
+  const up = useMotionSafe(fadeUp)
+  const inn = useMotionSafe(fadeIn)
 
-  // Build sequential section numbers based on which optional sections are present.
-  // Sections always present: overview, problem, solution, impact, links
-  // Sections conditional: users, productLogic, experienceDesign, buildNotes, reflection
   const sn = (() => {
     let n = 0
     const fmt = () => String(++n).padStart(2, '0')
     const has = (v: unknown) => v !== undefined && v !== null && v !== ''
     return {
-      overview:         fmt(),
-      problem:          fmt(),
-      users:            has(project.users)            ? fmt() : '',
-      solution:         fmt(),
-      productLogic:     has(project.productLogic)     ? fmt() : '',
-      experienceDesign: has(project.experienceDesign) ? fmt() : '',
-      technical:        has(project.buildNotes)       ? fmt() : '',
-      impact:           fmt(),
-      reflection:       has(project.reflection)       ? fmt() : '',
-      links:            fmt(),
+      overview: fmt(),
+      problem: fmt(),
+      users: has(project.users) ? fmt() : '',
+      solution: fmt(),
+      impact: fmt(),
+      technical: has(project.buildNotes) ? fmt() : '',
+      reflection: has(project.reflection) ? fmt() : '',
+      links: fmt(),
     }
   })()
 
@@ -169,8 +216,6 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
 
   return (
     <main className="bg-bg min-h-screen pt-16">
-
-      {/* ── Hero banner ─────────────────────────────────────────────────────── */}
       <div
         className="relative overflow-hidden"
         style={{
@@ -178,7 +223,6 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
           borderBottom: '1px solid rgba(15,122,122,0.10)',
         }}
       >
-        {/* Atmospheric watermark */}
         <div className="absolute top-0 right-0 pointer-events-none overflow-hidden" aria-hidden>
           <WatermarkStar
             size={520}
@@ -188,18 +232,21 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
           />
         </div>
 
-        <div className="max-w-[1080px] mx-auto px-6 py-14 lg:py-20">
-
-          {/* Back nav */}
+        <div className="max-w-[1180px] mx-auto px-6 py-14 lg:py-18">
           <motion.div variants={inn} initial="hidden" animate="visible">
             <Link
               href="/#projects"
               className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-wider text-text-muted hover:text-text-base transition-colors duration-200 mb-10"
             >
               <svg
-                width="14" height="14" viewBox="0 0 24 24"
-                fill="none" stroke="currentColor" strokeWidth="2"
-                strokeLinecap="round" strokeLinejoin="round"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 aria-hidden
               >
                 <polyline points="15 18 9 12 15 6" />
@@ -208,35 +255,36 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
             </Link>
           </motion.div>
 
-          {/* Two-column hero: text left, screenshot right */}
-          <div className="grid lg:grid-cols-[1fr_400px] gap-10 lg:gap-16 items-center">
+          <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-0 rounded-[28px] overflow-hidden border border-[rgba(15,122,122,0.14)] bg-[rgba(15,42,61,0.56)]">
+            <div className="relative min-h-[360px] lg:min-h-[540px]">
+              <FloatingCaseVisual project={project} />
+              <div
+                className="absolute top-6 right-6 flex items-center gap-1.5 rounded-full px-3 py-1 z-20"
+                style={{
+                  background: 'rgba(13,30,53,0.85)',
+                  backdropFilter: 'blur(12px)',
+                  border: `1px solid ${project.panelAccentColor}28`,
+                }}
+              >
+                <StarMark size="xs" color={project.panelAccentColor} className="opacity-65" />
+                <span className="font-mono text-[9.5px] uppercase tracking-wider text-text-muted">
+                  01
+                </span>
+              </div>
+            </div>
 
-            {/* Left: metadata + CTAs */}
             <motion.div
               variants={stagger}
               initial="hidden"
               animate="visible"
+              className="flex flex-col justify-center p-8 lg:p-12"
             >
-              {/* Eyebrow */}
-              <motion.div variants={inn} className="mb-5">
-                <div
-                  className="inline-flex items-center gap-2 rounded-full px-3.5 py-1.5"
-                  style={{
-                    background: `${project.panelAccentColor}14`,
-                    border: `1px solid ${project.panelAccentColor}30`,
-                  }}
-                >
-                  <StarMark size="xs" color={project.panelAccentColor} className="opacity-70" />
-                  <span
-                    className="font-mono text-[10px] uppercase tracking-[0.12em]"
-                    style={{ color: project.panelAccentColor }}
-                  >
-                    Case Study
-                  </span>
-                </div>
+              <motion.div variants={inn} className="flex flex-wrap gap-2 mb-5">
+                {project.tags.map((tag) => (
+                  <Tag key={tag} label={tag} variant="category" />
+                ))}
               </motion.div>
 
-              {/* Title */}
               <motion.h1
                 variants={up}
                 className="font-display text-h1 text-text-base leading-none"
@@ -244,33 +292,50 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                 {project.name}
               </motion.h1>
 
-              {/* Tagline */}
               <motion.p
                 variants={up}
-                className="font-sans text-[17px] leading-relaxed mt-4 max-w-[480px]"
+                className="font-mono text-[11px] text-text-muted mt-3 tracking-wider uppercase"
+              >
+                {project.year} · {project.role}
+              </motion.p>
+
+              <motion.p
+                variants={up}
+                className="font-sans text-[17px] leading-[1.65] mt-6 max-w-[26ch]"
                 style={{ color: '#A8C5D1' }}
               >
                 {project.tagline}
               </motion.p>
 
-              {/* Tags */}
-              <motion.div variants={inn} className="flex flex-wrap gap-2 mt-5">
-                {project.tags.map((tag) => (
-                  <Tag key={tag} label={tag} variant="category" />
+              {project.outcome && (
+                <motion.div variants={up}>
+                  <Callout accent={project.panelAccentColor}>{project.outcome}</Callout>
+                </motion.div>
+              )}
+
+              <motion.div variants={inn} className="flex flex-wrap gap-1.5 mt-6">
+                {project.stack.slice(0, 5).map((s) => (
+                  <span
+                    key={s}
+                    className="font-mono text-[10px] px-2.5 py-1 rounded-btn"
+                    style={{
+                      background: 'rgba(15,42,61,0.80)',
+                      border: '1px solid rgba(15,122,122,0.14)',
+                      color: '#6A9BAA',
+                    }}
+                  >
+                    {s}
+                  </span>
                 ))}
               </motion.div>
 
-              {/* CTAs */}
               <motion.div variants={inn} className="flex flex-wrap gap-2.5 mt-8">
                 <HoverSparkle className="inline-flex">
-                  <StarburstButton
-                    href={`/projects/${project.slug}/demo`}
-                    variant="primary"
-                    size="md"
-                  >
+                  <StarburstButton href={`/projects/${project.slug}/demo`} variant="primary" size="md">
                     View Demo
                   </StarburstButton>
                 </HoverSparkle>
+
                 {project.liveUrl && (
                   <HoverSparkle className="inline-flex">
                     <StarburstButton
@@ -284,6 +349,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                     </StarburstButton>
                   </HoverSparkle>
                 )}
+
                 {project.githubUrl && (
                   <HoverSparkle className="inline-flex">
                     <StarburstButton
@@ -299,152 +365,57 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                 )}
               </motion.div>
             </motion.div>
-
-            {/* Right: featured screenshot */}
-            {project.screenshots[0] && (
-              <motion.div
-                variants={up}
-                initial="hidden"
-                animate="visible"
-                transition={{ delay: 0.18 }}
-                className="relative h-[300px] lg:h-[360px] rounded-2xl overflow-hidden"
-                style={{
-                  background: 'rgba(245,248,251,0.96)',
-                  border: `1px solid ${project.panelAccentColor}22`,
-                  boxShadow: `0 24px 60px rgba(0,0,0,0.32), 0 0 0 1px ${project.panelAccentColor}10 inset`,
-                }}
-              >
-                <Image
-                  src={project.screenshots[0]}
-                  alt={`${project.name} screenshot`}
-                  fill
-                  className="object-contain object-center scale-[1.1]"
-                  priority
-                />
-              </motion.div>
-            )}
           </div>
         </div>
       </div>
 
-      {/* ── Quick-facts strip ───────────────────────────────────────────────── */}
-      <motion.div
-        variants={inn}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-      >
+      <motion.div variants={inn} initial="hidden" whileInView="visible" viewport={{ once: true }}>
         <FactStrip project={project} />
       </motion.div>
 
-      {/* ── Case study body ─────────────────────────────────────────────────── */}
-      <div className="max-w-[860px] mx-auto px-6 pt-4 pb-32">
-
-        {/* Overview */}
+      <div className="max-w-[860px] mx-auto px-6 pt-4 pb-28">
         <CaseSection number={sn.overview} title="Overview" accent={project.panelAccentColor}>
           <Prose>{overviewText}</Prose>
-          {/* Stack pills */}
-          <div className="flex flex-wrap gap-1.5 mt-6">
-            {project.stack.map((s) => (
-              <span
-                key={s}
-                className="font-mono text-[10px] px-2.5 py-1 rounded-btn"
-                style={{
-                  background: 'rgba(15,42,61,0.80)',
-                  border: '1px solid rgba(15,122,122,0.14)',
-                  color: '#6A9BAA',
-                }}
-              >
-                {s}
-              </span>
-            ))}
-          </div>
         </CaseSection>
 
-        {/* Problem */}
         <CaseSection number={sn.problem} title="Problem" accent={project.panelAccentColor}>
           <Prose>{project.problem}</Prose>
         </CaseSection>
 
-        {/* Users — optional */}
         {project.users && sn.users && (
           <CaseSection number={sn.users} title="Users" accent={project.panelAccentColor}>
             <Prose>{project.users}</Prose>
           </CaseSection>
         )}
 
-        {/* Solution */}
         <CaseSection number={sn.solution} title="Solution" accent={project.panelAccentColor}>
           <Prose>{project.solution}</Prose>
-          {project.screenshots[1] && (
-            <div
-              className="relative mt-8 h-[260px] rounded-2xl overflow-hidden"
-              style={{
-                background: 'rgba(245,248,251,0.96)',
-                border: `1px solid ${project.panelAccentColor}20`,
-                boxShadow: '0 12px 40px rgba(0,0,0,0.28)',
-              }}
-            >
-              <Image
-                src={project.screenshots[1]}
-                alt={`${project.name} interface`}
-                fill
-                className="object-contain object-center scale-[1.1]"
-              />
-            </div>
-          )}
         </CaseSection>
 
-        {/* Product Logic — optional */}
-        {project.productLogic && sn.productLogic && (
-          <CaseSection number={sn.productLogic} title="Product Logic" accent={project.panelAccentColor}>
-            <Prose>{project.productLogic}</Prose>
-          </CaseSection>
-        )}
+        <CaseSection number={sn.impact} title="Impact" accent={project.panelAccentColor}>
+          <Prose>{project.impact}</Prose>
+        </CaseSection>
 
-        {/* Experience Design — optional */}
-        {project.experienceDesign && sn.experienceDesign && (
-          <CaseSection number={sn.experienceDesign} title="Experience Design" accent={project.panelAccentColor}>
-            <Prose>{project.experienceDesign}</Prose>
-          </CaseSection>
-        )}
-
-        {/* Technical Build — optional */}
         {project.buildNotes && sn.technical && (
           <CaseSection number={sn.technical} title="Technical Build" accent={project.panelAccentColor}>
             <Prose>{project.buildNotes}</Prose>
           </CaseSection>
         )}
 
-        {/* Impact */}
-        <CaseSection number={sn.impact} title="Impact" accent={project.panelAccentColor}>
-          <Prose>{project.impact}</Prose>
-          {project.outcome && (
-            <Callout accent={project.panelAccentColor}>
-              {project.outcome}
-            </Callout>
-          )}
-        </CaseSection>
-
-        {/* Reflection — optional */}
         {project.reflection && sn.reflection && (
           <CaseSection number={sn.reflection} title="Reflection" accent={project.panelAccentColor}>
             <Prose>{project.reflection}</Prose>
           </CaseSection>
         )}
 
-        {/* Demo & Links */}
         <CaseSection number={sn.links} title="Demo &amp; Links" accent={project.panelAccentColor}>
           <div className="flex flex-wrap gap-3">
             <HoverSparkle className="inline-flex">
-              <StarburstButton
-                href={`/projects/${project.slug}/demo`}
-                variant="primary"
-                size="md"
-              >
+              <StarburstButton href={`/projects/${project.slug}/demo`} variant="primary" size="md">
                 View Demo
               </StarburstButton>
             </HoverSparkle>
+
             {project.liveUrl && (
               <HoverSparkle className="inline-flex">
                 <StarburstButton
@@ -458,6 +429,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                 </StarburstButton>
               </HoverSparkle>
             )}
+
             {project.githubUrl && (
               <HoverSparkle className="inline-flex">
                 <StarburstButton
@@ -471,6 +443,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                 </StarburstButton>
               </HoverSparkle>
             )}
+
             <HoverSparkle className="inline-flex">
               <StarburstButton href="/#projects" variant="secondary" size="md">
                 ← All Projects
@@ -478,7 +451,6 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
             </HoverSparkle>
           </div>
         </CaseSection>
-
       </div>
     </main>
   )
