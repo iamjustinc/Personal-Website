@@ -239,41 +239,40 @@ function SectionFooter({ showThanks = true }: { showThanks?: boolean }) {
 
 function ContactPageLayout() {
   return (
-    <div className="space-y-14">
-      <div className="max-w-[840px]">
-        <div
-          className="mb-5 inline-flex items-center gap-2 rounded-full px-3.5 py-1.5"
-          style={{
-            background: 'rgba(15,122,122,0.08)',
-            border: '1px solid rgba(15,122,122,0.22)',
-          }}
-        >
-          <StarMark size="xs" color="#4A9FAE" className="opacity-70" />
-          <span className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-text-muted">
-            Contact
-          </span>
-        </div>
+    <div className="mx-auto w-full max-w-[1220px]">
+      <div className="grid items-start gap-14 xl:grid-cols-[minmax(0,1fr)_420px] xl:gap-16">
+        {/* Left column */}
+        <div className="max-w-[760px]">
+          <div
+            className="mb-5 inline-flex items-center gap-2 rounded-full px-3.5 py-1.5"
+            style={{
+              background: 'rgba(15,122,122,0.08)',
+              border: '1px solid rgba(15,122,122,0.22)',
+            }}
+          >
+            <StarMark size="xs" color="#4A9FAE" className="opacity-70" />
+            <span className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-text-muted">
+              Contact
+            </span>
+          </div>
 
-        <h2 className="font-display text-hero leading-none text-text-base">
-          Contact Me!
-        </h2>
+          <h2 className="font-display text-hero leading-none text-text-base">
+            Contact Me!
+          </h2>
 
-        <p
-          className="mt-6 max-w-[760px] font-sans leading-relaxed"
-          style={{ color: '#A8C5D1', fontSize: '18px' }}
-        >
-          Whether you want to talk product demos, solutions engineering, AI workflow design, or
-          early-career opportunities, I’d love to connect!
-        </p>
-      </div>
+          <p
+            className="mt-6 max-w-[760px] font-sans leading-relaxed"
+            style={{ color: '#A8C5D1', fontSize: '18px' }}
+          >
+            Whether you want to talk product demos, solutions engineering, AI workflow design, or
+            early-career opportunities, I’d love to connect!
+          </p>
 
-      <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,1fr)_420px]">
-        <div className="max-w-[720px]">
-          <div className="mb-8">
+          <div className="mt-10">
             <CopyEmailButton email={siteConfig.email} large />
           </div>
 
-          <div className="flex flex-wrap items-center gap-6">
+          <div className="mt-8 flex flex-wrap items-center gap-6">
             <CompactLink href={siteConfig.linkedinUrl} icon={Linkedin} label="LinkedIn" />
             <CompactLink href={siteConfig.githubUrl} icon={Github} label="GitHub" />
             <CompactLink href={siteConfig.resumeUrl} icon={Download} label="Résumé" />
@@ -282,7 +281,8 @@ function ContactPageLayout() {
           <SectionFooter showThanks={false} />
         </div>
 
-        <div className="relative">
+        {/* Right column */}
+        <div className="relative xl:pt-1">
           <div
             className="rounded-[28px] border p-5 md:p-6"
             style={{
