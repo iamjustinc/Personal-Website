@@ -330,34 +330,34 @@ export default function AboutPage() {
                 </span>
               </div>
 
-              <h1 className="group/name relative inline-block font-display text-4xl sm:text-5xl lg:text-[5.25rem] xl:text-[5.75rem] text-text-base leading-[0.9] tracking-[-0.04em] max-w-[12ch] xl:max-w-[13ch]">
-                <span className="relative z-10">
-                  I turn messy technical systems into{' '}
-                  <span style={{ color: '#4A9FAE' }}>usable workflows, demos, and decisions.</span>
-                </span>
-                {!shouldReduce && (
-                  <motion.span
-                    aria-hidden
-                    className="pointer-events-none absolute left-0 right-0 top-[52%] z-0 h-[18%] rounded-full blur-xl"
-                    style={{
-                      background:
-                        'linear-gradient(90deg, transparent, rgba(74,159,174,0.16), rgba(196,151,74,0.10), transparent)',
-                    }}
-                    animate={{ opacity: [0.18, 0.42, 0.18], x: ['-2%', '2%', '-2%'] }}
-                    transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut' }}
-                  />
-                )}
-                {!shouldReduce && (
-                  <motion.span
-                    aria-hidden
-                    className="pointer-events-none absolute -right-4 top-2 opacity-0 transition-opacity duration-300 group-hover/name:opacity-100"
-                    animate={{ rotate: [0, 18, 0], scale: [0.88, 1.12, 0.88] }}
-                    transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
-                  >
-                    <StarMark size="xs" color="#C4974A" />
-                  </motion.span>
-                )}
-              </h1>
+              <h1 className="group/name relative inline-block font-display text-3xl sm:text-4xl lg:text-[4rem] xl:text-[4.4rem] text-text-base leading-[0.92] tracking-[-0.035em] max-w-[10ch]">
+  <span className="relative z-10">
+    I turn technical complexity into{' '}
+    <span style={{ color: '#4A9FAE' }}>clear demos and decisions.</span>
+  </span>
+  {!shouldReduce && (
+    <motion.span
+      aria-hidden
+      className="pointer-events-none absolute left-0 right-0 top-[52%] z-0 h-[18%] rounded-full blur-xl"
+      style={{
+        background:
+          'linear-gradient(90deg, transparent, rgba(74,159,174,0.16), rgba(196,151,74,0.10), transparent)',
+      }}
+      animate={{ opacity: [0.18, 0.42, 0.18], x: ['-2%', '2%', '-2%'] }}
+      transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut' }}
+    />
+  )}
+  {!shouldReduce && (
+    <motion.span
+      aria-hidden
+      className="pointer-events-none absolute -right-4 top-2 opacity-0 transition-opacity duration-300 group-hover/name:opacity-100"
+      animate={{ rotate: [0, 18, 0], scale: [0.88, 1.12, 0.88] }}
+      transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
+    >
+      <StarMark size="xs" color="#C4974A" />
+    </motion.span>
+  )}
+</h1>
 
               <p
                 className="mt-6 font-sans text-[17px] leading-8 max-w-[56ch]"
