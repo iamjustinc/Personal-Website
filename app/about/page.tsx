@@ -7,8 +7,10 @@ import { WatermarkStar } from '@/components/ui/WatermarkStar'
 import { StarburstButton } from '@/components/ui/StarburstButton'
 import { HoverSparkle } from '@/components/ui/HoverSparkle'
 import { siteConfig } from '@/data/site'
-import { fadeUp, fadeIn, staggerContainer } from '@/lib/motion'
+import { EASING, fadeUp, fadeIn, staggerContainer } from '@/lib/motion'
 import { HeroVisual } from '@/components/hero/HeroVisual'
+
+// ── Data ──────────────────────────────────────────────────────────────────────
 
 const proofStats = [
   {
@@ -76,13 +78,38 @@ const currentFocus = [
   'Best fit where I can combine technical depth, demos, communication, and problem solving.',
 ]
 
+const pageSparkles = [
+  { x: '18%', y: '30%', delay: 0.2, dur: 4.6, color: '#4A9FAE' },
+  { x: '78%', y: '34%', delay: 1.4, dur: 5.2, color: '#C4974A' },
+  { x: '68%', y: '58%', delay: 2.2, dur: 4.9, color: '#7EE7F2' },
+  { x: '22%', y: '76%', delay: 3.0, dur: 5.6, color: '#C4974A' },
+]
+
+const constellationLinks = [
+  { left: '12%', top: '33%', width: 118, rotate: 18, opacity: 0.12 },
+  { left: '71%', top: '39%', width: 96, rotate: -24, opacity: 0.10 },
+  { left: '18%', top: '81%', width: 132, rotate: -12, opacity: 0.11 },
+]
+
+// ── Page ──────────────────────────────────────────────────────────────────────
+
 export default function AboutPage() {
   const firstName = siteConfig.name.split(' ')[0]
   const lastName = siteConfig.name.split(' ').slice(1).join(' ')
   const shouldReduce = useReducedMotion()
 
+  // Fixed constellation positions for hero zone
+  const heroStars = [
+    { x: '7%',  y: '24%', delay: 0,    dur: 3.4, color: '#4A9FAE' },
+    { x: '95%', y: '36%', delay: 1.3,  dur: 4.1, color: '#C4974A' },
+    { x: '88%', y: '80%', delay: 0.7,  dur: 3.8, color: '#4A9FAE' },
+    { x: '11%', y: '90%', delay: 2.0,  dur: 3.2, color: '#7EE7F2' },
+  ]
+
   return (
     <main className="pt-16 min-h-screen relative overflow-hidden">
+
+      {/* ── Background atmosphere ── */}
       <div
         aria-hidden
         className="absolute top-[-6%] right-[-10%] pointer-events-none"
@@ -91,6 +118,7 @@ export default function AboutPage() {
         <WatermarkStar size={620} opacity={1} direction={1} color="#4A9FAE" />
       </div>
 
+      {/* Top-left glow */}
       <div
         aria-hidden
         className="absolute left-[-10%] top-[14%] h-[560px] w-[560px] rounded-full blur-3xl pointer-events-none"
@@ -100,7 +128,105 @@ export default function AboutPage() {
         }}
       />
 
+      {/* Bottom-right gold glow — depth layer */}
+      <div
+        aria-hidden
+        className="absolute right-[-6%] bottom-[6%] h-[400px] w-[400px] rounded-full blur-3xl pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(circle, rgba(196,151,74,0.07) 0%, rgba(196,151,74,0.03) 44%, transparent 72%)',
+        }}
+      />
+
+      {/* Bottom-left teal glow */}
+      <div
+        aria-hidden
+        className="absolute left-[2%] bottom-[20%] h-[280px] w-[280px] rounded-full blur-3xl pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle, rgba(15,122,122,0.06) 0%, transparent 68%)',
+        }}
+      />
+
+      {!shouldReduce && (
+        <>
+          <motion.div
+            aria-hidden
+            className="pointer-events-none absolute inset-y-[4%] -left-[34%] z-0 w-[28%] -skew-x-12 blur-2xl"
+            style={{
+              background:
+                'linear-gradient(90deg, transparent, rgba(74,159,174,0.045), rgba(196,151,74,0.026), transparent)',
+            }}
+            animate={{ x: ['0%', '520%'] }}
+            transition={{
+              duration: 18,
+              repeat: Infinity,
+              repeatDelay: 5,
+              ease: 'easeInOut',
+            }}
+          />
+
+          {pageSparkles.map((sparkle) => (
+            <motion.div
+              key={`${sparkle.x}-${sparkle.y}`}
+              aria-hidden
+              className="pointer-events-none absolute z-0"
+              style={{ left: sparkle.x, top: sparkle.y }}
+              animate={{ opacity: [0.05, 0.24, 0.05], scale: [0.76, 1.08, 0.76] }}
+              transition={{
+                duration: sparkle.dur,
+                repeat: Infinity,
+                ease: 'easeInOut',
+                delay: sparkle.delay,
+              }}
+            >
+              <StarMark size="xs" color={sparkle.color} />
+            </motion.div>
+          ))}
+
+          {constellationLinks.map((link) => (
+            <motion.div
+              key={`${link.left}-${link.top}`}
+              aria-hidden
+              className="pointer-events-none absolute z-0 h-px origin-left"
+              style={{
+                left: link.left,
+                top: link.top,
+                width: link.width,
+                rotate: `${link.rotate}deg`,
+                opacity: link.opacity,
+                background:
+                  'linear-gradient(90deg, transparent, rgba(126,231,242,0.44), rgba(196,151,74,0.30), transparent)',
+              }}
+              animate={{ opacity: [link.opacity * 0.55, link.opacity, link.opacity * 0.55] }}
+              transition={{
+                duration: 5.8,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }}
+            />
+          ))}
+        </>
+      )}
+
+      {/* Floating constellation stars in hero zone */}
+      {!shouldReduce && heroStars.map((star, i) => (
+        <motion.div
+          key={i}
+          aria-hidden
+          className="pointer-events-none absolute z-0"
+          style={{ left: star.x, top: star.y }}
+          animate={{ opacity: [0.05, 0.26, 0.05], scale: [0.75, 1.05, 0.75] }}
+          transition={{ duration: star.dur, repeat: Infinity, ease: 'easeInOut', delay: star.delay }}
+        >
+          <StarMark size="xs" color={star.color} />
+        </motion.div>
+      ))}
+
+      {/* ══════════════════════════════════
+          HERO
+      ══════════════════════════════════ */}
       <Section paddingY="lg">
+        {/* Page badge */}
         <motion.div
           variants={fadeIn}
           initial="hidden"
@@ -115,7 +241,12 @@ export default function AboutPage() {
               border: '1px solid rgba(15,122,122,0.22)',
             }}
           >
-            <StarMark size="xs" color="#C4974A" className="opacity-80" />
+            <motion.div
+              animate={shouldReduce ? {} : { rotate: [0, 12, 0], opacity: [0.7, 1, 0.7] }}
+              transition={{ duration: 3.6, repeat: Infinity, ease: 'easeInOut' }}
+            >
+              <StarMark size="xs" color="#C4974A" className="opacity-80" />
+            </motion.div>
             <span className="font-mono text-[10.5px] uppercase tracking-[0.12em] text-text-muted">
               About
             </span>
@@ -123,14 +254,19 @@ export default function AboutPage() {
         </motion.div>
 
         <div className="grid lg:grid-cols-[0.92fr_1.08fr] gap-12 lg:gap-18 items-center">
+
+          {/* HeroVisual */}
           <motion.div
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
+            whileHover={shouldReduce ? undefined : { scale: 1.012, y: -3 }}
+            transition={{ duration: 0.36, ease: EASING }}
             viewport={{ once: true }}
             className="flex justify-center lg:justify-start"
           >
             <div className="relative">
+              {/* Pulsing ambient glow */}
               <motion.div
                 aria-hidden
                 className="absolute -inset-10 rounded-full blur-3xl pointer-events-none"
@@ -142,6 +278,7 @@ export default function AboutPage() {
                 transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
               />
 
+              {/* Floating gold star */}
               <motion.div
                 aria-hidden
                 className="absolute -left-10 top-8"
@@ -151,6 +288,7 @@ export default function AboutPage() {
                 <StarMark size="sm" color="#C4974A" className="opacity-85" />
               </motion.div>
 
+              {/* Floating teal star */}
               <motion.div
                 aria-hidden
                 className="absolute -right-5 bottom-12"
@@ -160,12 +298,23 @@ export default function AboutPage() {
                 <StarMark size="xs" color="#7EE7F2" className="opacity-85" />
               </motion.div>
 
+              {/* Small accent star bottom-left */}
+              <motion.div
+                aria-hidden
+                className="absolute left-4 -bottom-3"
+                animate={shouldReduce ? {} : { opacity: [0.12, 0.48, 0.12], scale: [0.78, 1.08, 0.78] }}
+                transition={{ duration: 4.2, repeat: Infinity, ease: 'easeInOut', delay: 1.4 }}
+              >
+                <StarMark size="xs" color="#4A9FAE" className="opacity-60" />
+              </motion.div>
+
               <div className="scale-[0.84] sm:scale-[0.92] lg:scale-100 origin-center">
                 <HeroVisual />
               </div>
             </div>
           </motion.div>
 
+          {/* Text column */}
           <motion.div
             variants={staggerContainer(0.08)}
             initial="hidden"
@@ -181,7 +330,12 @@ export default function AboutPage() {
                   border: '1px solid rgba(15,122,122,0.22)',
                 }}
               >
-                <StarMark size="xs" color="#4A9FAE" className="opacity-70" />
+                <motion.div
+                  animate={shouldReduce ? {} : { scale: [1, 1.18, 1], opacity: [0.6, 1, 0.6] }}
+                  transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
+                >
+                  <StarMark size="xs" color="#4A9FAE" className="opacity-70" />
+                </motion.div>
                 <span
                   className="font-mono text-[10px] uppercase tracking-[0.12em]"
                   style={{ color: '#4A9FAE' }}
@@ -190,8 +344,32 @@ export default function AboutPage() {
                 </span>
               </div>
 
-              <h1 className="font-display text-hero text-text-base leading-none text-balance">
-                {firstName} <span style={{ color: '#4A9FAE' }}>{lastName}</span>
+              <h1 className="group/name relative inline-block font-display text-hero text-text-base leading-none text-balance">
+                <span className="relative z-10">
+                  {firstName} <span style={{ color: '#4A9FAE' }}>{lastName}</span>
+                </span>
+                {!shouldReduce && (
+                  <motion.span
+                    aria-hidden
+                    className="pointer-events-none absolute left-0 right-0 top-[52%] z-0 h-[18%] rounded-full blur-xl"
+                    style={{
+                      background:
+                        'linear-gradient(90deg, transparent, rgba(74,159,174,0.16), rgba(196,151,74,0.10), transparent)',
+                    }}
+                    animate={{ opacity: [0.18, 0.42, 0.18], x: ['-2%', '2%', '-2%'] }}
+                    transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut' }}
+                  />
+                )}
+                {!shouldReduce && (
+                  <motion.span
+                    aria-hidden
+                    className="pointer-events-none absolute -right-4 top-2 opacity-0 transition-opacity duration-300 group-hover/name:opacity-100"
+                    animate={{ rotate: [0, 18, 0], scale: [0.88, 1.12, 0.88] }}
+                    transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
+                  >
+                    <StarMark size="xs" color="#C4974A" />
+                  </motion.span>
+                )}
               </h1>
 
               <p
@@ -203,12 +381,24 @@ export default function AboutPage() {
               </p>
             </motion.div>
 
+            {/* Signal pills */}
             <motion.div variants={fadeUp} className="mt-7 flex flex-wrap gap-2.5">
               {compactSignals.map((pill, i) => (
                 <motion.div
                   key={pill}
-                  whileHover={shouldReduce ? {} : { y: -2 }}
-                  className="inline-flex items-center gap-2 rounded-full px-3.5 py-2"
+                  whileHover={
+                    shouldReduce
+                      ? {}
+                      : {
+                          y: -3,
+                          boxShadow:
+                            i % 2 === 0
+                              ? '0 6px 20px rgba(196,151,74,0.12), 0 0 0 1px rgba(196,151,74,0.24)'
+                              : '0 6px 20px rgba(74,159,174,0.12), 0 0 0 1px rgba(74,159,174,0.24)',
+                        }
+                  }
+                  transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                  className="inline-flex items-center gap-2 rounded-full px-3.5 py-2 cursor-default"
                   style={{
                     background: 'rgba(10,32,48,0.62)',
                     border: '1px solid rgba(74,159,174,0.18)',
@@ -220,8 +410,8 @@ export default function AboutPage() {
                       shouldReduce
                         ? {}
                         : i % 2 === 0
-                          ? { rotate: [0, 10, 0] }
-                          : { scale: [1, 1.08, 1] }
+                        ? { rotate: [0, 10, 0] }
+                        : { scale: [1, 1.08, 1] }
                     }
                     transition={{ duration: 3 + i * 0.2, repeat: Infinity, ease: 'easeInOut' }}
                   >
@@ -231,7 +421,6 @@ export default function AboutPage() {
                       className="opacity-75"
                     />
                   </motion.div>
-
                   <span
                     className="font-mono text-[10.5px] uppercase tracking-[0.12em]"
                     style={{ color: '#9BC0CB' }}
@@ -242,13 +431,13 @@ export default function AboutPage() {
               ))}
             </motion.div>
 
+            {/* CTAs */}
             <motion.div variants={fadeUp} className="mt-8 flex gap-3 flex-wrap">
               <HoverSparkle className="inline-flex">
                 <StarburstButton href={`mailto:${siteConfig.email}`} variant="primary" size="md">
                   Get in touch
                 </StarburstButton>
               </HoverSparkle>
-
               <HoverSparkle className="inline-flex">
                 <StarburstButton href="/resume" variant="secondary" size="md">
                   View Résumé
@@ -259,7 +448,11 @@ export default function AboutPage() {
         </div>
       </Section>
 
+      {/* ══════════════════════════════════
+          PROOF STATS
+      ══════════════════════════════════ */}
       <Section paddingY="sm">
+        {/* Badge */}
         <motion.div
           variants={fadeIn}
           initial="hidden"
@@ -274,19 +467,34 @@ export default function AboutPage() {
               border: '1px solid rgba(15,122,122,0.22)',
             }}
           >
-            <StarMark size="xs" color="#C4974A" className="opacity-80" />
+            <motion.div
+              animate={shouldReduce ? {} : { rotate: [0, -12, 0], opacity: [0.7, 1, 0.7] }}
+              transition={{ duration: 3.8, repeat: Infinity, ease: 'easeInOut', delay: 0.4 }}
+            >
+              <StarMark size="xs" color="#C4974A" className="opacity-80" />
+            </motion.div>
             <span className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-text-muted">
               Proof
             </span>
           </div>
         </motion.div>
 
+        {/* Stats panel */}
         <motion.div
           variants={staggerContainer(0.08)}
           initial="hidden"
           whileInView="visible"
+          whileHover={
+            shouldReduce
+              ? undefined
+              : {
+                  boxShadow:
+                    '0 22px 58px rgba(0,0,0,0.18), 0 0 0 1px rgba(74,159,174,0.18)',
+                }
+          }
+          transition={{ duration: 0.35, ease: EASING }}
           viewport={{ once: true }}
-          className="rounded-[34px] overflow-hidden"
+          className="relative rounded-[34px] overflow-hidden"
           style={{
             background:
               'linear-gradient(180deg, rgba(10,33,50,0.68) 0%, rgba(8,27,42,0.56) 100%)',
@@ -294,54 +502,178 @@ export default function AboutPage() {
             boxShadow: '0 16px 44px rgba(0,0,0,0.14)',
           }}
         >
-          <div className="grid md:grid-cols-2 xl:grid-cols-4">
-            {proofStats.map((item, i) => (
-              <motion.div
-                key={item.label}
-                variants={fadeUp}
-                whileHover={shouldReduce ? {} : { y: -3 }}
-                className="relative p-7 md:p-8"
-                style={{
-                  borderRight:
-                    i !== proofStats.length - 1 && i < 3 ? '1px solid rgba(74,159,174,0.10)' : undefined,
-                  borderBottom:
-                    i < 2 ? '1px solid rgba(74,159,174,0.10)' : undefined,
-                }}
-              >
-                <div className="flex items-center gap-2 mb-4">
-                  <StarMark size="xs" color={i % 2 === 0 ? '#4A9FAE' : '#C4974A'} className="opacity-70" />
-                  <span
-                    className="font-mono text-[10px] uppercase tracking-[0.14em]"
-                    style={{ color: '#7FAFBB' }}
+          {/* Animated top-edge shimmer */}
+          <motion.div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 top-0 h-px z-10"
+            animate={shouldReduce ? {} : { opacity: [0.30, 0.80, 0.30] }}
+            transition={{ duration: 4.2, repeat: Infinity, ease: 'easeInOut' }}
+            style={{
+              background:
+                'linear-gradient(90deg, transparent 0%, rgba(15,122,122,0.55) 26%, rgba(196,151,74,0.48) 54%, rgba(15,122,122,0.55) 80%, transparent 100%)',
+            }}
+          />
+
+          {!shouldReduce && (
+            <motion.div
+              aria-hidden
+              className="pointer-events-none absolute right-8 top-7 z-10"
+              animate={{ opacity: [0.12, 0.48, 0.12], rotate: [0, 16, 0], scale: [0.82, 1.1, 0.82] }}
+              transition={{ duration: 4.6, repeat: Infinity, ease: 'easeInOut', delay: 1.1 }}
+            >
+              <StarMark size="xs" color="#C4974A" />
+            </motion.div>
+          )}
+
+          {/* Periodic sweep beam across panel */}
+          {!shouldReduce && (
+            <motion.div
+              aria-hidden
+              className="pointer-events-none absolute inset-y-0 -skew-x-12 z-0"
+              style={{
+                width: '20%',
+                left: '-25%',
+                background:
+                  'linear-gradient(90deg, transparent, rgba(74,159,174,0.05), transparent)',
+              }}
+              animate={{ x: ['0%', '650%'] }}
+              transition={{
+                duration: 2.2,
+                repeat: Infinity,
+                repeatDelay: 10,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+            />
+          )}
+
+          <div className="grid md:grid-cols-2 xl:grid-cols-4 relative z-10">
+            {proofStats.map((item, i) => {
+              const accentColor = i % 2 === 0 ? '#4A9FAE' : '#C4974A'
+              return (
+                <motion.div
+                  key={item.label}
+                  variants={fadeUp}
+                  whileHover={
+                    shouldReduce
+                      ? {}
+                      : {
+                          y: -4,
+                          backgroundColor: `${accentColor}05`,
+                          boxShadow: `inset 0 0 36px ${accentColor}0C`,
+                        }
+                  }
+                  transition={{ duration: 0.26, ease: [0.22, 1, 0.36, 1] }}
+                  className="group relative p-7 md:p-8 overflow-hidden"
+                  style={{
+                    borderRight:
+                      i !== proofStats.length - 1 && i < 3
+                        ? '1px solid rgba(74,159,174,0.10)'
+                        : undefined,
+                    borderBottom: i < 2 ? '1px solid rgba(74,159,174,0.10)' : undefined,
+                  }}
+                >
+                  {/* Per-cell top shimmer */}
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-x-4 top-0 h-px"
+                    style={{
+                      background: `linear-gradient(90deg, transparent, ${accentColor}42, transparent)`,
+                      opacity: 0.65,
+                    }}
+                  />
+
+                  {/* Left accent bar on hover */}
+                  <div
+                    aria-hidden
+                    className="absolute left-0 top-5 bottom-5 w-[2px] rounded-r-full opacity-0 group-hover:opacity-100 transition-all duration-300"
+                    style={{ background: `linear-gradient(180deg, ${accentColor}, ${accentColor}28)` }}
+                  />
+
+                  {/* Hover light sweep */}
+                  {!shouldReduce && (
+                    <motion.div
+                      aria-hidden
+                      className="pointer-events-none absolute inset-y-0 -skew-x-12 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      style={{
+                        width: '52%',
+                        left: '-62%',
+                        background: `linear-gradient(90deg, transparent, ${accentColor}0E, transparent)`,
+                      }}
+                      animate={{ x: ['0%', '420%'] }}
+                      transition={{
+                        duration: 1.1,
+                        repeat: Infinity,
+                        repeatDelay: 0.6,
+                        ease: 'easeInOut',
+                      }}
+                    />
+                  )}
+
+                  {/* Label row */}
+                  <div className="flex items-center gap-2 mb-4">
+                    <motion.div
+                      animate={
+                        shouldReduce
+                          ? {}
+                          : { scale: [1, 1.14, 1], opacity: [0.55, 1, 0.55] }
+                      }
+                      transition={{
+                        duration: 2.6 + i * 0.3,
+                        repeat: Infinity,
+                        ease: 'easeInOut',
+                        delay: i * 0.45,
+                      }}
+                    >
+                      <StarMark size="xs" color={accentColor} className="opacity-70" />
+                    </motion.div>
+                    <span
+                      className="font-mono text-[10px] uppercase tracking-[0.14em]"
+                      style={{ color: '#7FAFBB' }}
+                    >
+                      Proof {String(i + 1).padStart(2, '0')}
+                    </span>
+                  </div>
+
+                  {/* Stat value */}
+                  <div className="font-display text-[44px] leading-none text-text-base">
+                    {item.value}
+                  </div>
+
+                  {/* Accent underline that grows on hover */}
+                  <div
+                    aria-hidden
+                    className="mt-2 h-px transition-all duration-400 group-hover:w-12"
+                    style={{
+                      width: 28,
+                      background: `linear-gradient(90deg, ${accentColor}60, transparent)`,
+                    }}
+                  />
+
+                  <p
+                    className="mt-3 font-mono text-[11px] uppercase tracking-[0.16em]"
+                    style={{ color: accentColor }}
                   >
-                    Proof {String(i + 1).padStart(2, '0')}
-                  </span>
-                </div>
+                    {item.label}
+                  </p>
 
-                <div className="font-display text-[44px] leading-none text-text-base">
-                  {item.value}
-                </div>
-
-                <p
-                  className="mt-3 font-mono text-[11px] uppercase tracking-[0.16em]"
-                  style={{ color: '#4A9FAE' }}
-                >
-                  {item.label}
-                </p>
-
-                <p
-                  className="mt-5 max-w-[26ch] font-sans text-[14px] leading-6"
-                  style={{ color: '#8FB2BE' }}
-                >
-                  {item.body}
-                </p>
-              </motion.div>
-            ))}
+                  <p
+                    className="mt-5 max-w-[26ch] font-sans text-[14px] leading-6"
+                    style={{ color: '#8FB2BE' }}
+                  >
+                    {item.body}
+                  </p>
+                </motion.div>
+              )
+            })}
           </div>
         </motion.div>
       </Section>
 
+      {/* ══════════════════════════════════
+          WHY I FIT SE ROLES
+      ══════════════════════════════════ */}
       <Section paddingY="sm">
+        {/* Badge */}
         <motion.div
           variants={fadeIn}
           initial="hidden"
@@ -356,17 +688,33 @@ export default function AboutPage() {
               border: '1px solid rgba(15,122,122,0.22)',
             }}
           >
-            <StarMark size="xs" color="#C4974A" className="opacity-80" />
+            <motion.div
+              animate={shouldReduce ? {} : { rotate: [0, 12, 0], opacity: [0.7, 1, 0.7] }}
+              transition={{ duration: 4.0, repeat: Infinity, ease: 'easeInOut', delay: 0.8 }}
+            >
+              <StarMark size="xs" color="#C4974A" className="opacity-80" />
+            </motion.div>
             <span className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-text-muted">
               Why I fit SE roles
             </span>
           </div>
         </motion.div>
 
+        {/* Panel */}
         <motion.div
           variants={staggerContainer(0.08)}
           initial="hidden"
           whileInView="visible"
+          whileHover={
+            shouldReduce
+              ? undefined
+              : {
+                  y: -3,
+                  boxShadow:
+                    '0 24px 60px rgba(0,0,0,0.20), 0 0 0 1px rgba(74,159,174,0.18)',
+                }
+          }
+          transition={{ duration: 0.35, ease: EASING }}
           viewport={{ once: true }}
           className="relative rounded-[36px] overflow-hidden p-7 md:p-8 lg:p-10"
           style={{
@@ -376,6 +724,17 @@ export default function AboutPage() {
             boxShadow: '0 18px 48px rgba(0,0,0,0.16)',
           }}
         >
+          {/* Static top shimmer */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 top-0 h-px"
+            style={{
+              background:
+                'linear-gradient(90deg, transparent 5%, rgba(74,159,174,0.44) 28%, rgba(196,151,74,0.32) 56%, rgba(74,159,174,0.44) 80%, transparent 95%)',
+            }}
+          />
+
+          {/* Animated radial glows (existing) */}
           <motion.div
             aria-hidden
             className="absolute inset-0 pointer-events-none"
@@ -387,7 +746,30 @@ export default function AboutPage() {
             }}
           />
 
-          <div className="grid xl:grid-cols-[0.86fr_1.14fr] gap-8 lg:gap-10 relative">
+          {/* Floating constellation stars inside panel */}
+          {!shouldReduce && (
+            <>
+              <motion.div
+                aria-hidden
+                className="pointer-events-none absolute right-10 top-8"
+                animate={{ opacity: [0.06, 0.32, 0.06], scale: [0.72, 1.08, 0.72] }}
+                transition={{ duration: 4.2, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                <StarMark size="xs" color="#4A9FAE" />
+              </motion.div>
+              <motion.div
+                aria-hidden
+                className="pointer-events-none absolute right-5 bottom-10"
+                animate={{ opacity: [0.05, 0.26, 0.05], scale: [0.8, 1.06, 0.8] }}
+                transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut', delay: 1.8 }}
+              >
+                <StarMark size="xs" color="#C4974A" />
+              </motion.div>
+            </>
+          )}
+
+          <div className="grid xl:grid-cols-[0.86fr_1.14fr] gap-8 lg:gap-10 relative z-10">
+            {/* Left: heading block */}
             <motion.div variants={fadeUp} className="xl:pr-6">
               <div className="flex items-center gap-2 mb-4">
                 <StarMark size="xs" color="#C4974A" className="opacity-80" />
@@ -412,56 +794,116 @@ export default function AboutPage() {
               </p>
             </motion.div>
 
+            {/* Right: strength cards */}
             <motion.div
-              variants={staggerContainer(0.08)}
+              variants={staggerContainer(0.10)}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               className="grid md:grid-cols-2 gap-4"
             >
-              {strengths.map((card, i) => (
-                <motion.div
-                  key={card.title}
-                  variants={fadeUp}
-                  whileHover={shouldReduce ? {} : { y: -5, scale: 1.01 }}
-                  className="rounded-[28px] p-6"
-                  style={{
-                    background: 'rgba(8, 27, 42, 0.34)',
-                    border: '1px solid rgba(74,159,174,0.12)',
-                    boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.02)',
-                  }}
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <span
-                      className="font-mono text-[12px] uppercase tracking-[0.16em]"
-                      style={{ color: '#7FAFBB' }}
-                    >
-                      {card.number}
-                    </span>
-                    <StarMark
-                      size="xs"
-                      color={i % 2 === 0 ? '#4A9FAE' : '#C4974A'}
-                      className="opacity-70"
-                    />
-                  </div>
-
-                  <h3 className="font-sans text-[22px] leading-[1.18] font-semibold text-text-base text-balance">
-                    {card.title}
-                  </h3>
-
-                  <p
-                    className="mt-4 font-sans text-[15px] leading-7"
-                    style={{ color: '#8FB2BE' }}
+              {strengths.map((card, i) => {
+                const accentColor = i % 2 === 0 ? '#4A9FAE' : '#C4974A'
+                return (
+                  <motion.div
+                    key={card.title}
+                    variants={fadeUp}
+                    whileHover={
+                      shouldReduce
+                        ? {}
+                        : {
+                            y: -6,
+                            scale: 1.012,
+                            boxShadow: `0 18px 44px rgba(0,0,0,0.26), 0 0 0 1px ${accentColor}30, 0 0 30px ${accentColor}0D`,
+                          }
+                    }
+                    transition={{ duration: 0.26, ease: [0.22, 1, 0.36, 1] }}
+                    className="group relative rounded-[28px] p-6 overflow-hidden"
+                    style={{
+                      background: 'rgba(8, 27, 42, 0.34)',
+                      border: '1px solid rgba(74,159,174,0.12)',
+                      boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.02)',
+                    }}
                   >
-                    {card.body}
-                  </p>
-                </motion.div>
-              ))}
+                    {/* Top shimmer */}
+                    <div
+                      aria-hidden
+                      className="pointer-events-none absolute inset-x-3 top-0 h-px"
+                      style={{
+                        background: `linear-gradient(90deg, transparent, ${accentColor}46, transparent)`,
+                        opacity: 0.7,
+                      }}
+                    />
+
+                    {/* Hover light sweep */}
+                    {!shouldReduce && (
+                      <motion.div
+                        aria-hidden
+                        className="pointer-events-none absolute inset-y-0 -skew-x-12 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        style={{
+                          width: '55%',
+                          left: '-65%',
+                          background: `linear-gradient(90deg, transparent, ${accentColor}0E, transparent)`,
+                        }}
+                        animate={{ x: ['0%', '400%'] }}
+                        transition={{
+                          duration: 1.2,
+                          repeat: Infinity,
+                          repeatDelay: 0.8,
+                          ease: 'easeInOut',
+                        }}
+                      />
+                    )}
+
+                    {/* Card header */}
+                    <div className="flex items-center justify-between mb-4">
+                      <span
+                        className="font-mono text-[12px] uppercase tracking-[0.16em] transition-opacity duration-300 group-hover:opacity-100"
+                        style={{ color: accentColor, opacity: 0.55 }}
+                      >
+                        {card.number}
+                      </span>
+                      <motion.div
+                        animate={
+                          shouldReduce
+                            ? {}
+                            : {
+                                opacity: [0.58, 1, 0.58],
+                                rotate: i % 2 === 0 ? [0, 8, 0] : [0, -8, 0],
+                              }
+                        }
+                        transition={{
+                          duration: 3.0 + i * 0.4,
+                          repeat: Infinity,
+                          ease: 'easeInOut',
+                          delay: i * 0.3,
+                        }}
+                      >
+                        <StarMark size="xs" color={accentColor} className="opacity-70" />
+                      </motion.div>
+                    </div>
+
+                    <h3 className="font-sans text-[22px] leading-[1.18] font-semibold text-text-base text-balance">
+                      {card.title}
+                    </h3>
+
+                    <p
+                      className="mt-4 font-sans text-[15px] leading-7"
+                      style={{ color: '#8FB2BE' }}
+                    >
+                      {card.body}
+                    </p>
+                  </motion.div>
+                )
+              })}
             </motion.div>
           </div>
         </motion.div>
       </Section>
 
+      {/* ══════════════════════════════════
+          WHAT I BRING + FOCUS + CONNECT
+      ══════════════════════════════════ */}
       <Section paddingY="sm">
         <motion.div
           variants={staggerContainer(0.1)}
@@ -470,16 +912,71 @@ export default function AboutPage() {
           viewport={{ once: true }}
           className="grid lg:grid-cols-[1.05fr_0.95fr] gap-6 items-start"
         >
+
+          {/* What I bring */}
           <motion.div
             variants={fadeUp}
-            whileHover={shouldReduce ? {} : { y: -4 }}
-            className="rounded-[32px] p-7 md:p-8"
+            whileHover={
+              shouldReduce
+                ? {}
+                : {
+                    y: -5,
+                    boxShadow:
+                      '0 18px 42px rgba(0,0,0,0.22), 0 0 0 1px rgba(196,151,74,0.30), 0 0 36px rgba(196,151,74,0.06)',
+                  }
+            }
+            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+            className="group relative rounded-[32px] p-7 md:p-8 overflow-hidden"
             style={{
               background: 'rgba(15,42,61,0.50)',
               border: '1px solid rgba(196,151,74,0.18)',
               boxShadow: '0 0 32px rgba(196,151,74,0.06)',
             }}
           >
+            {/* Pulsing top shimmer */}
+            <motion.div
+              aria-hidden
+              className="pointer-events-none absolute inset-x-0 top-0 h-px"
+              animate={shouldReduce ? {} : { opacity: [0.28, 0.78, 0.28] }}
+              transition={{ duration: 3.6, repeat: Infinity, ease: 'easeInOut' }}
+              style={{
+                background:
+                  'linear-gradient(90deg, transparent 8%, rgba(196,151,74,0.72) 34%, rgba(228,180,80,0.88) 52%, rgba(196,151,74,0.72) 68%, transparent 92%)',
+              }}
+            />
+
+            {/* Hover sweep */}
+            {!shouldReduce && (
+              <motion.div
+                aria-hidden
+                className="pointer-events-none absolute inset-y-0 -skew-x-12 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{
+                  width: '38%',
+                  left: '-48%',
+                  background:
+                    'linear-gradient(90deg, transparent, rgba(196,151,74,0.07), transparent)',
+                }}
+                animate={{ x: ['0%', '500%'] }}
+                transition={{
+                  duration: 1.7,
+                  repeat: Infinity,
+                  repeatDelay: 1.1,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+              />
+            )}
+
+            {/* Corner twinkling star */}
+            <motion.div
+              aria-hidden
+              className="pointer-events-none absolute bottom-5 right-5"
+              animate={shouldReduce ? {} : { opacity: [0.08, 0.38, 0.08], scale: [0.78, 1.1, 0.78] }}
+              transition={{ duration: 4.0, repeat: Infinity, ease: 'easeInOut', delay: 1.2 }}
+            >
+              <StarMark size="xs" color="#C4974A" />
+            </motion.div>
+
+            {/* Header */}
             <div className="flex items-center gap-2 mb-5">
               <StarMark size="xs" color="#C4974A" className="opacity-80" />
               <span
@@ -497,14 +994,22 @@ export default function AboutPage() {
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.06 }}
-                  className="flex items-start gap-3"
+                  transition={{ delay: i * 0.07, duration: 0.44, ease: [0.22, 1, 0.36, 1] }}
+                  className="group/bullet flex items-start gap-3"
                 >
-                  <StarMark
-                    size="xs"
-                    color="#C4974A"
-                    className="opacity-70 mt-[6px] shrink-0"
-                  />
+                  <div className="relative mt-[6px] shrink-0">
+                    {/* Glow halo on hover */}
+                    <div
+                      aria-hidden
+                      className="absolute inset-0 rounded-full opacity-0 group-hover/bullet:opacity-100 transition-opacity duration-300 blur-[4px]"
+                      style={{ background: '#C4974A' }}
+                    />
+                    <StarMark
+                      size="xs"
+                      color="#C4974A"
+                      className="relative opacity-70 group-hover/bullet:opacity-100 transition-opacity duration-200"
+                    />
+                  </div>
                   <p
                     className="font-sans text-[15.5px] leading-7"
                     style={{ color: '#A8C5D1' }}
@@ -516,16 +1021,60 @@ export default function AboutPage() {
             </div>
           </motion.div>
 
+          {/* Right column */}
           <motion.div variants={fadeUp} className="flex flex-col gap-5">
-            <div
-              className="rounded-[28px] p-6"
+
+            {/* Current focus */}
+            <motion.div
+              whileHover={
+                shouldReduce
+                  ? {}
+                  : {
+                      y: -3,
+                      boxShadow:
+                        '0 10px 28px rgba(0,0,0,0.18), 0 0 0 1px rgba(15,122,122,0.24)',
+                    }
+              }
+              transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+              className="group relative rounded-[28px] p-6 overflow-hidden"
               style={{
                 background: 'rgba(15,42,61,0.50)',
                 border: '1px solid rgba(15,122,122,0.14)',
               }}
             >
+              {/* Top shimmer */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-x-0 top-0 h-px"
+                style={{
+                  background:
+                    'linear-gradient(90deg, transparent 8%, rgba(15,122,122,0.46) 34%, rgba(74,159,174,0.58) 54%, rgba(15,122,122,0.46) 72%, transparent 92%)',
+                }}
+              />
+
+              {/* Hover sweep */}
+              {!shouldReduce && (
+                <motion.div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-y-0 -skew-x-12 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{
+                    width: '45%',
+                    left: '-55%',
+                    background:
+                      'linear-gradient(90deg, transparent, rgba(74,159,174,0.06), transparent)',
+                  }}
+                  animate={{ x: ['0%', '460%'] }}
+                  transition={{ duration: 1.3, repeat: Infinity, repeatDelay: 0.9, ease: 'easeInOut' }}
+                />
+              )}
+
               <div className="flex items-center gap-2 mb-4">
-                <StarMark size="xs" color="#4A9FAE" className="opacity-65" />
+                <motion.div
+                  animate={shouldReduce ? {} : { scale: [1, 1.16, 1], opacity: [0.52, 1, 0.52] }}
+                  transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut', delay: 0.6 }}
+                >
+                  <StarMark size="xs" color="#4A9FAE" className="opacity-65" />
+                </motion.div>
                 <span
                   className="font-mono text-[10.5px] uppercase tracking-[0.12em]"
                   style={{ color: '#7FAFBB' }}
@@ -535,8 +1084,15 @@ export default function AboutPage() {
               </div>
 
               <div className="space-y-3">
-                {currentFocus.map((item) => (
-                  <div key={item} className="flex items-start gap-2.5">
+                {currentFocus.map((item, i) => (
+                  <motion.div
+                    key={item}
+                    initial={{ opacity: 0, x: -8 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.09, duration: 0.40 }}
+                    className="flex items-start gap-2.5"
+                  >
                     <StarMark
                       size="xs"
                       color="#C4974A"
@@ -548,21 +1104,72 @@ export default function AboutPage() {
                     >
                       {item}
                     </p>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
-            </div>
+            </motion.div>
 
+            {/* Connect */}
             <motion.div
-              whileHover={shouldReduce ? {} : { y: -4 }}
-              className="rounded-[28px] p-6"
+              whileHover={
+                shouldReduce
+                  ? {}
+                  : {
+                      y: -4,
+                      boxShadow:
+                        '0 14px 36px rgba(0,0,0,0.20), 0 0 0 1px rgba(15,122,122,0.24)',
+                    }
+              }
+              transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
+              className="group relative rounded-[28px] p-6 overflow-hidden"
               style={{
                 background: 'rgba(15,42,61,0.50)',
                 border: '1px solid rgba(15,122,122,0.14)',
               }}
             >
+              {/* Top shimmer */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-x-0 top-0 h-px"
+                style={{
+                  background:
+                    'linear-gradient(90deg, transparent 8%, rgba(15,122,122,0.46) 34%, rgba(74,159,174,0.58) 54%, rgba(15,122,122,0.46) 72%, transparent 92%)',
+                }}
+              />
+
+              {/* Hover sweep */}
+              {!shouldReduce && (
+                <motion.div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-y-0 -skew-x-12 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{
+                    width: '45%',
+                    left: '-55%',
+                    background:
+                      'linear-gradient(90deg, transparent, rgba(74,159,174,0.06), transparent)',
+                  }}
+                  animate={{ x: ['0%', '460%'] }}
+                  transition={{ duration: 1.3, repeat: Infinity, repeatDelay: 0.9, ease: 'easeInOut', delay: 0.4 }}
+                />
+              )}
+
+              {/* Corner twinkling star */}
+              <motion.div
+                aria-hidden
+                className="pointer-events-none absolute top-4 right-5"
+                animate={shouldReduce ? {} : { opacity: [0.07, 0.30, 0.07], scale: [0.78, 1.06, 0.78] }}
+                transition={{ duration: 3.8, repeat: Infinity, ease: 'easeInOut', delay: 2.2 }}
+              >
+                <StarMark size="xs" color="#4A9FAE" />
+              </motion.div>
+
               <div className="flex items-center gap-2 mb-4">
-                <StarMark size="xs" color="#4A9FAE" className="opacity-65" />
+                <motion.div
+                  animate={shouldReduce ? {} : { scale: [1, 1.14, 1], opacity: [0.52, 1, 0.52] }}
+                  transition={{ duration: 2.9, repeat: Infinity, ease: 'easeInOut', delay: 1.2 }}
+                >
+                  <StarMark size="xs" color="#4A9FAE" className="opacity-65" />
+                </motion.div>
                 <span
                   className="font-mono text-[10.5px] uppercase tracking-[0.12em]"
                   style={{ color: '#7FAFBB' }}
@@ -572,51 +1179,75 @@ export default function AboutPage() {
               </div>
 
               <div className="flex flex-col gap-3">
+                {/* Email */}
                 <a
                   href={`mailto:${siteConfig.email}`}
-                  className="flex items-center gap-3 group transition-colors"
+                  className="group/link flex items-center gap-3 transition-colors"
                   style={{ color: '#A8C5D1' }}
                 >
-                  <StarMark
-                    size="xs"
-                    color="#0F7A7A"
-                    className="opacity-60 group-hover:opacity-100 transition-opacity"
-                  />
-                  <span className="font-sans text-sm group-hover:text-text-base transition-colors">
+                  <div className="relative shrink-0">
+                    <div
+                      aria-hidden
+                      className="absolute inset-0 rounded-full opacity-0 group-hover/link:opacity-100 transition-opacity duration-300 blur-[4px]"
+                      style={{ background: '#0F7A7A' }}
+                    />
+                    <StarMark
+                      size="xs"
+                      color="#0F7A7A"
+                      className="relative opacity-60 group-hover/link:opacity-100 transition-opacity"
+                    />
+                  </div>
+                  <span className="font-sans text-sm group-hover/link:text-text-base transition-colors duration-200">
                     {siteConfig.email}
                   </span>
                 </a>
 
+                {/* LinkedIn */}
                 <a
                   href={siteConfig.linkedinUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 group transition-colors"
+                  className="group/link flex items-center gap-3 transition-colors"
                   style={{ color: '#A8C5D1' }}
                 >
-                  <StarMark
-                    size="xs"
-                    color="#0F7A7A"
-                    className="opacity-60 group-hover:opacity-100 transition-opacity"
-                  />
-                  <span className="font-sans text-sm group-hover:text-text-base transition-colors">
+                  <div className="relative shrink-0">
+                    <div
+                      aria-hidden
+                      className="absolute inset-0 rounded-full opacity-0 group-hover/link:opacity-100 transition-opacity duration-300 blur-[4px]"
+                      style={{ background: '#0F7A7A' }}
+                    />
+                    <StarMark
+                      size="xs"
+                      color="#0F7A7A"
+                      className="relative opacity-60 group-hover/link:opacity-100 transition-opacity"
+                    />
+                  </div>
+                  <span className="font-sans text-sm group-hover/link:text-text-base transition-colors duration-200">
                     LinkedIn
                   </span>
                 </a>
 
+                {/* GitHub */}
                 <a
                   href={siteConfig.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 group transition-colors"
+                  className="group/link flex items-center gap-3 transition-colors"
                   style={{ color: '#A8C5D1' }}
                 >
-                  <StarMark
-                    size="xs"
-                    color="#0F7A7A"
-                    className="opacity-60 group-hover:opacity-100 transition-opacity"
-                  />
-                  <span className="font-sans text-sm group-hover:text-text-base transition-colors">
+                  <div className="relative shrink-0">
+                    <div
+                      aria-hidden
+                      className="absolute inset-0 rounded-full opacity-0 group-hover/link:opacity-100 transition-opacity duration-300 blur-[4px]"
+                      style={{ background: '#0F7A7A' }}
+                    />
+                    <StarMark
+                      size="xs"
+                      color="#0F7A7A"
+                      className="relative opacity-60 group-hover/link:opacity-100 transition-opacity"
+                    />
+                  </div>
+                  <span className="font-sans text-sm group-hover/link:text-text-base transition-colors duration-200">
                     GitHub
                   </span>
                 </a>
@@ -628,7 +1259,6 @@ export default function AboutPage() {
                     Get in touch
                   </StarburstButton>
                 </HoverSparkle>
-
                 <HoverSparkle className="inline-flex">
                   <StarburstButton href="/resume" variant="secondary" size="md">
                     View Résumé
