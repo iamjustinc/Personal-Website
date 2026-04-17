@@ -82,7 +82,7 @@ export function ProjectsSection() {
         </div>
         <h2 className="font-display text-h1 text-text-base">Selected Work</h2>
         <p className="font-sans text-text-muted mt-3 max-w-[560px]" style={{ fontSize: '15px' }}>
-          Three AI products built end-to-end to show demo craft, workflow thinking, and technical
+          Flagship AI product built end-to-end to show demo craft, workflow thinking, and technical
           execution.
         </p>
       </motion.div>

@@ -17,7 +17,7 @@ const careerCopyByRole: Record<string, string> = {
   'Research Data Analyst':
     'Built SQL, R, Excel, and Tableau tracking systems that reduced coordination friction and standardized study operations across teams.',
   'Independent Product Builder':
-    'Shipped three AI products with live demos, turning messy career, inbox, and news workflows into clearer decision experiences.',
+    'Shipped Kestrel as the live flagship while developing Quail Mail and Chirpie into polished product previews around inbox and news workflows.',
 }
 
 const ambientStars = [

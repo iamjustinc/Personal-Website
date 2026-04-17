@@ -84,7 +84,7 @@ export const siteConfig: SiteConfig = {
       company: 'Self-Directed',
       period: '2024 — Present',
       description:
-        'Designed and shipped three AI-powered tools end-to-end — Kestrel, Quail Mail, and Chirpie — each focused on turning messy information into clear, usable workflows.',
+        'Shipped Kestrel as the live flagship and developed Quail Mail and Chirpie as polished product previews focused on turning messy information into clearer workflows.',
       tags: ['AI', 'Full-Stack', 'Product Design'],
     },
   ],

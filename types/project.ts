@@ -13,6 +13,8 @@ export type ProjectTag =
   | 'Web App'
   | '0→1'
 
+export type ProjectLaunchStatus = 'active' | 'comingSoon'
+
 export type Project = {
   // ── Identity ────────────────────────────────────────────────────────────────
   slug: string              // URL slug. Never change after publish.
@@ -25,6 +27,7 @@ export type Project = {
   order: number             // Grid sort order, 1-indexed. Featured project excluded.
   visible: boolean          // false = hidden everywhere without deleting.
   homepageVisible: boolean  // false = accessible at /projects/[slug] but off homepage.
+  launchStatus?: ProjectLaunchStatus // active = fully available, comingSoon = preview-only.
 
   // ── Metadata ────────────────────────────────────────────────────────────────
   role: string              // "Builder + Designer"

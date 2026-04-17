@@ -311,7 +311,9 @@ function TimelineEntry({
 
 export default function ResumePage() {
   const reduceMotion = useReducedMotion()
-  const visibleProjects = projects.filter((p) => p.visible)
+  const visibleProjects = projects
+    .filter((p) => p.visible)
+    .sort((a, b) => a.order - b.order)
 
   return (
     <main className="min-h-screen pt-16">
@@ -554,73 +556,93 @@ export default function ResumePage() {
             viewport={{ once: true }}
             className="mb-14 mt-8 flex flex-col gap-2.5"
           >
-            {visibleProjects.map((project) => (
-              <motion.a
-                key={project.slug}
-                href={`/projects/${project.slug}`}
-                variants={fadeUp}
-                whileHover={reduceMotion ? {} : { y: -2 }}
-                transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-                className="group flex items-center justify-between gap-4 rounded-xl p-4"
-                style={{
-                  background: 'rgba(15,42,61,0.44)',
-                  border: '1px solid rgba(15,122,122,0.12)',
-                }}
-              >
-                {/* Left: dot + name + tagline */}
-                <div className="flex min-w-0 items-center gap-3">
-                  <span
-                    className="h-2 w-2 shrink-0 rounded-full"
-                    style={{ background: project.panelAccentColor }}
-                  />
-                  <div className="min-w-0">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <span className="font-sans text-sm font-semibold text-text-base">
-                        {project.name}
-                      </span>
-                      <span
-                        className="font-mono text-[9.5px]"
-                        style={{ color: 'rgba(168,197,209,0.38)' }}
-                      >
-                        {project.year}
-                      </span>
-                    </div>
-                    <p
-                      className="mt-0.5 truncate font-sans text-[12.5px] leading-snug"
-                      style={{ color: '#7AAABB' }}
-                    >
-                      {/* First sentence only */}
-                      {project.tagline.match(/.*?[.!?]/)?.[0] ?? project.tagline}
-                    </p>
-                  </div>
-                </div>
+            {visibleProjects.map((project) => {
+              const isComingSoon = project.launchStatus === 'comingSoon'
 
-                {/* Right: stack pills + arrow */}
-                <div className="flex shrink-0 items-center gap-2">
-                  <div className="hidden gap-1.5 sm:flex">
-                    {project.stack.slice(0, 3).map((s) => (
-                      <span
-                        key={s}
-                        className="rounded px-2 py-0.5 font-mono text-[9px]"
-                        style={{
-                          background: 'rgba(15,42,61,0.82)',
-                          border: '1px solid rgba(15,122,122,0.11)',
-                          color: '#6A9BAA',
-                        }}
+              return (
+                <motion.a
+                  key={project.slug}
+                  href={`/projects/${project.slug}`}
+                  variants={fadeUp}
+                  whileHover={reduceMotion ? {} : { y: -2 }}
+                  transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                  className="group flex items-center justify-between gap-4 rounded-xl p-4"
+                  style={{
+                    background: isComingSoon
+                      ? 'rgba(15,42,61,0.34)'
+                      : 'rgba(15,42,61,0.44)',
+                    border: isComingSoon
+                      ? '1px solid rgba(196,151,74,0.13)'
+                      : '1px solid rgba(15,122,122,0.12)',
+                  }}
+                >
+                  {/* Left: dot + name + tagline */}
+                  <div className="flex min-w-0 items-center gap-3">
+                    <span
+                      className="h-2 w-2 shrink-0 rounded-full"
+                      style={{ background: isComingSoon ? '#C4974A' : project.panelAccentColor }}
+                    />
+                    <div className="min-w-0">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="font-sans text-sm font-semibold text-text-base">
+                          {project.name}
+                        </span>
+                        <span
+                          className="font-mono text-[9.5px]"
+                          style={{ color: 'rgba(168,197,209,0.38)' }}
+                        >
+                          {project.year}
+                        </span>
+                        {isComingSoon && (
+                          <span
+                            className="rounded-full px-2 py-0.5 font-mono text-[8.5px] uppercase tracking-[0.1em]"
+                            style={{
+                              background: 'rgba(196,151,74,0.08)',
+                              border: '1px solid rgba(196,151,74,0.20)',
+                              color: '#D8B76E',
+                            }}
+                          >
+                            Coming Soon
+                          </span>
+                        )}
+                      </div>
+                      <p
+                        className="mt-0.5 truncate font-sans text-[12.5px] leading-snug"
+                        style={{ color: '#7AAABB' }}
                       >
-                        {s}
-                      </span>
-                    ))}
+                        {/* First sentence only */}
+                        {project.tagline.match(/.*?[.!?]/)?.[0] ?? project.tagline}
+                      </p>
+                    </div>
                   </div>
-                  <span
-                    className="font-mono text-[9.5px] uppercase tracking-wider opacity-0 transition-opacity duration-200 group-hover:opacity-100"
-                    style={{ color: project.panelAccentColor }}
-                  >
-                    View →
-                  </span>
-                </div>
-              </motion.a>
-            ))}
+
+                  {/* Right: stack pills + arrow */}
+                  <div className="flex shrink-0 items-center gap-2">
+                    <div className="hidden gap-1.5 sm:flex">
+                      {project.stack.slice(0, 3).map((s) => (
+                        <span
+                          key={s}
+                          className="rounded px-2 py-0.5 font-mono text-[9px]"
+                          style={{
+                            background: 'rgba(15,42,61,0.82)',
+                            border: '1px solid rgba(15,122,122,0.11)',
+                            color: '#6A9BAA',
+                          }}
+                        >
+                          {s}
+                        </span>
+                      ))}
+                    </div>
+                    <span
+                      className="font-mono text-[9.5px] uppercase tracking-wider opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+                      style={{ color: isComingSoon ? '#D8B76E' : project.panelAccentColor }}
+                    >
+                      {isComingSoon ? 'Soon' : 'View →'}
+                    </span>
+                  </div>
+                </motion.a>
+              )
+            })}
           </motion.div>
 
           {/* ════════════════════════════════════

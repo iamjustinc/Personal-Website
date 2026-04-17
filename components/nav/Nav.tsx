@@ -13,7 +13,7 @@ import { StarMark } from '@/components/ui/StarMark'
 type NavLink = {
   label: string
   href: string
-  projects?: { label: string; href: string }[]
+  projects?: { label: string; href: string; status?: 'comingSoon' }[]
 }
 
 const navLinks: NavLink[] = [
@@ -23,8 +23,8 @@ const navLinks: NavLink[] = [
     href: '/work',
     projects: [
       { label: 'Kestrel', href: '/projects/kestrel' },
-      { label: 'Chirpie', href: '/projects/chirpie' },
-      { label: 'Quail',   href: '/projects/quail'   },
+      { label: 'Chirpie', href: '/projects/chirpie', status: 'comingSoon' },
+      { label: 'Quail',   href: '/projects/quail',   status: 'comingSoon' },
     ],
   },
   { label: 'About',   href: '/about'   },
@@ -187,7 +187,19 @@ export function Nav() {
                                               color="#0F7A7A"
                                               className="opacity-40 shrink-0"
                                             />
-                                            {proj.label}
+                                            <span>{proj.label}</span>
+                                            {proj.status === 'comingSoon' && (
+                                              <span
+                                                className="rounded-full px-1.5 py-0.5 font-mono text-[8px] uppercase tracking-[0.08em]"
+                                                style={{
+                                                  background: 'rgba(196,151,74,0.08)',
+                                                  border: '1px solid rgba(196,151,74,0.22)',
+                                                  color: '#D8B76E',
+                                                }}
+                                              >
+                                                Soon
+                                              </span>
+                                            )}
                                           </Link>
                                         </div>
                                       ))}

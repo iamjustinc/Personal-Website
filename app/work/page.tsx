@@ -10,6 +10,7 @@ import { WatermarkStar } from '@/components/ui/WatermarkStar'
 import { projects } from '@/data/projects'
 import type { Project } from '@/types/project'
 import { EASING, fadeIn } from '@/lib/motion'
+import { cn } from '@/lib/utils'
 
 const portfolioProjectOrder = ['kestrel', 'chirpie', 'quail'] as const
 
@@ -84,6 +85,7 @@ function WorkProjectCard({
     ],
     glow: '34% 28%',
   }
+  const isComingSoon = project.launchStatus === 'comingSoon'
 
   return (
     <motion.article
@@ -103,10 +105,13 @@ function WorkProjectCard({
       viewport={{ once: true }}
       className="group relative overflow-hidden rounded-[28px]"
       style={{
-        background:
-          'linear-gradient(135deg, rgba(15,42,61,0.78), rgba(9,20,36,0.90) 48%, rgba(8,18,30,0.96))',
-        border: `1px solid ${project.panelAccentColor}24`,
-        boxShadow: '0 18px 58px rgba(0,0,0,0.40)',
+        background: isComingSoon
+          ? 'linear-gradient(135deg, rgba(15,42,61,0.66), rgba(9,20,36,0.88) 48%, rgba(8,18,30,0.96))'
+          : 'linear-gradient(135deg, rgba(15,42,61,0.78), rgba(9,20,36,0.90) 48%, rgba(8,18,30,0.96))',
+        border: `1px solid ${project.panelAccentColor}${isComingSoon ? '1F' : '24'}`,
+        boxShadow: isComingSoon
+          ? '0 16px 48px rgba(0,0,0,0.36)'
+          : '0 18px 58px rgba(0,0,0,0.40)',
       }}
     >
       <div
@@ -177,7 +182,10 @@ function WorkProjectCard({
             priority={index === 0}
             showWatermark
             imageSizes="(max-width: 1024px) 100vw, 560px"
-            className="transition-transform duration-700 ease-out group-hover:scale-[1.025]"
+            className={cn(
+              'transition-transform duration-700 ease-out group-hover:scale-[1.025]',
+              isComingSoon && 'opacity-[0.78] saturate-[0.84]',
+            )}
           />
 
           <div
@@ -190,7 +198,7 @@ function WorkProjectCard({
           >
             <StarMark size="xs" color={project.panelAccentColor} className="opacity-65" />
             <span className="font-mono text-[9.5px] uppercase tracking-wider text-text-muted">
-              {String(index + 1).padStart(2, '0')}
+              {isComingSoon ? 'Preview' : String(index + 1).padStart(2, '0')}
             </span>
           </div>
         </div>
@@ -214,6 +222,18 @@ function WorkProjectCard({
                 {tag}
               </motion.span>
             ))}
+            {isComingSoon && (
+              <span
+                className="rounded-full px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider"
+                style={{
+                  background: 'rgba(196,151,74,0.10)',
+                  border: '1px solid rgba(196,151,74,0.28)',
+                  color: '#D8B76E',
+                }}
+              >
+                Coming Soon
+              </span>
+            )}
           </div>
 
           <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
@@ -306,33 +326,57 @@ function WorkProjectCard({
           )}
 
           {/* CTAs */}
-          <div className="mt-auto flex flex-wrap gap-2.5 pt-6">
-            <HoverSparkle className="inline-flex">
-              <StarburstButton href={`/projects/${project.slug}`} variant="primary" size="sm">
-                View Case Study
-              </StarburstButton>
-            </HoverSparkle>
+          {isComingSoon ? (
+            <div className="mt-auto pt-6">
+              <div
+                className="flex flex-wrap items-center gap-2.5 rounded-2xl px-4 py-3"
+                style={{
+                  background: 'rgba(8,18,30,0.44)',
+                  border: '1px solid rgba(196,151,74,0.18)',
+                }}
+              >
+                <StarMark size="xs" color="#C4974A" className="opacity-70" />
+                <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#D8B76E]">
+                  Coming Soon
+                </span>
+                <span className="font-sans text-[12.5px] text-[#7FAFBB]">
+                  Case study, demo, and live access are being finalized.
+                </span>
+              </div>
+            </div>
+          ) : (
+            <div className="mt-auto flex flex-wrap gap-2.5 pt-6">
+              <HoverSparkle className="inline-flex">
+                <StarburstButton href={`/projects/${project.slug}`} variant="primary" size="sm">
+                  View Case Study
+                </StarburstButton>
+              </HoverSparkle>
 
-            <HoverSparkle className="inline-flex">
-              <StarburstButton href={`/projects/${project.slug}/demo`} variant="secondary" size="sm">
-                Demo
-              </StarburstButton>
-            </HoverSparkle>
-
-            {project.liveUrl && (
               <HoverSparkle className="inline-flex">
                 <StarburstButton
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href={`/projects/${project.slug}/demo`}
                   variant="secondary"
                   size="sm"
                 >
-                  Try It Out
+                  Demo
                 </StarburstButton>
               </HoverSparkle>
-            )}
-          </div>
+
+              {project.liveUrl && (
+                <HoverSparkle className="inline-flex">
+                  <StarburstButton
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    variant="secondary"
+                    size="sm"
+                  >
+                    Try It Out
+                  </StarburstButton>
+                </HoverSparkle>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </motion.article>
@@ -379,8 +423,8 @@ export default function WorkPage() {
             className="font-sans mt-5 max-w-[520px] leading-relaxed"
             style={{ fontSize: '16px', color: '#A8C5D1' }}
           >
-            Three products built end-to-end — from idea and system design through to shipped
-            experience. Each one targets a real gap in how people work with information.
+            Kestrel is live as the flagship product; Chirpie and Quail Mail are previewed here
+            while their case studies and demos are being finalized.
           </p>
         </motion.div>
 
