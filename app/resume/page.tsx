@@ -13,11 +13,16 @@ import { fadeUp, fadeIn, staggerContainer } from '@/lib/motion'
 // ── Impact metrics (SE-focused, quantified) ─────────────────────────────────
 
 const impactMetrics = [
-  { value: '30K+', label: 'records analyzed',    accent: '#2A8B87' },
-  { value: '70%',  label: 'manual work reduced', accent: '#4A9FAE' },
-  { value: '63%',  label: 'completion lift',     accent: '#0F7A7A' },
-  { value: '3',    label: 'AI tools shipped',    accent: '#C4974A' },
+  { value: '30K+', label: 'records modeled',       accent: '#2A8B87' },
+  { value: '70%',  label: 'analysis time reduced', accent: '#4A9FAE' },
+  { value: '63%',  label: 'completion increase',   accent: '#0F7A7A' },
+  { value: '3',    label: 'AI solution demos',     accent: '#C4974A' },
 ]
+
+const resumeRoleTag = 'Solutions Engineering Candidate'
+
+const resumeSummary =
+  'Early-career Solutions Engineering candidate designing and demonstrating AI-powered workflows, dashboards, and full-stack solutions for non-technical stakeholders.'
 
 // ── SE-focused skill groups ─────────────────────────────────────────────────
 
@@ -26,10 +31,10 @@ const skillGroups = [
     label: 'Solutioning & Demos',
     accent: '#4A9FAE',
     items: [
-      'Live demo architecture',
-      'AI/ML workflow design',
-      'Customer value translation',
-      'Technical pre-sales support',
+      'Live demo flows',
+      'AI workflow design',
+      'Technical value translation',
+      'Discovery-to-demo thinking',
     ],
   },
   {
@@ -37,9 +42,9 @@ const skillGroups = [
     accent: '#0F7A7A',
     items: [
       'Next.js · Python · SQL · TypeScript',
-      'LLM pipelines & prompt engineering',
-      'REST APIs & data systems',
-      'Dashboards & visualization',
+      'Structured LLM output flows',
+      'APIs, data systems, and dashboards',
+      'Python/R analysis pipelines',
     ],
   },
   {
@@ -47,7 +52,7 @@ const skillGroups = [
     accent: '#C4974A',
     items: [
       'Non-technical stakeholder readouts',
-      'Decision-support system design',
+      'Decision-support framing',
       'Cross-functional alignment',
       'Requirements → solution mapping',
     ],
@@ -57,12 +62,42 @@ const skillGroups = [
 // ── Header signal phrases ───────────────────────────────────────────────────
 
 const signalPhrases = [
-  'AI Workflows',
+  'Solutions Engineering',
   'Technical Demos',
-  'Stakeholder Comms',
-  'Full-Stack Builder',
-  'Business Value',
+  'Workflow Translation',
+  'Data Pipelines',
+  'Decision Support',
 ]
+
+const resumeExperienceCopyByRole: Record<string, string> = {
+  'Project Lead & Data Analyst':
+    'Owned predictive systems across 30K+ records, turning model outputs into risk-scoring workflows and dashboards for stakeholder decision support.',
+  'Senior Project Lead':
+    'Re-architected recruitment and scheduling workflows across 100+ sessions, increasing completion 63% and improving operational dashboard clarity for downstream analysis.',
+  'Intern Data Analyst':
+    'Built Python/R pipelines across 200+ fMRI sessions, reduced manual analysis time 70%, and demoed outputs and tradeoffs to non-technical research stakeholders.',
+  'Research Data Analyst':
+    'Standardized PETRUSHKA operations with Excel, R, SQL, and Tableau tracking systems, reducing coordination friction across patients and cross-functional teams.',
+  'Independent Product Builder':
+    'Built Kestrel, Quail Mail, and Chirpie as SE-style solution demos: structured AI outputs, prioritization logic, attribution, explainability, and guided dashboard flows.',
+}
+
+const resumeExperienceTagsByRole: Record<string, string[]> = {
+  'Project Lead & Data Analyst': ['Decision Support', 'Risk Dashboards', 'Stakeholder Translation'],
+  'Senior Project Lead': ['Workflow Redesign', 'Operational Dashboards', 'Coordination Systems'],
+  'Intern Data Analyst': ['Python/R Pipelines', 'Technical Demos', 'Stakeholder Readouts'],
+  'Research Data Analyst': ['Tracking Systems', 'SQL + Tableau', 'Cross-Functional Ops'],
+  'Independent Product Builder': ['AI Solution Demos', 'OpenAI Workflows', 'Explainability'],
+}
+
+const resumeProjectDescriptions: Record<string, string> = {
+  kestrel:
+    'Live AI decision-support demo that maps a job description into readiness signals, explainable gaps, and a guided dashboard workflow.',
+  chirpie:
+    'Coming-soon news demo using multi-source ingestion, schema-constrained outputs, attribution, and explainable summaries.',
+  quail:
+    'Coming-soon inbox triage demo around prioritization logic, action lanes, and production email delivery.',
+}
 
 // ── Section divider ─────────────────────────────────────────────────────────
 
@@ -114,6 +149,8 @@ function TimelineEntry({
   const [before, after] = item.period.split(' — ')
   const accentColor   = item.current ? '#C4974A' : '#0F7A7A'
   const accentBright  = item.current ? '#E8B055' : '#4A9FAE'
+  const description = resumeExperienceCopyByRole[item.role] ?? item.description
+  const tags = resumeExperienceTagsByRole[item.role] ?? item.tags
 
   return (
     <motion.div
@@ -281,13 +318,13 @@ function TimelineEntry({
 
         {/* ── Description with gold metric highlights ── */}
         <p className="mt-4 font-sans text-[13.5px] leading-relaxed" style={{ color: '#8DAFC0' }}>
-          <HighlightedDescription text={item.description} />
+          <HighlightedDescription text={description} />
         </p>
 
         {/* ── Tags ── */}
-        {item.tags && item.tags.length > 0 && (
+        {tags && tags.length > 0 && (
           <div className="mt-4 flex flex-wrap gap-1.5">
-            {item.tags.map((tag) => (
+            {tags.map((tag) => (
               <span
                 key={tag}
                 className="rounded-btn px-2.5 py-0.5 font-mono text-[9px] uppercase tracking-wider"
@@ -348,7 +385,13 @@ export default function ResumePage() {
                 className="mt-3 font-mono text-[11px] uppercase tracking-wider"
                 style={{ color: '#4A9FAE' }}
               >
-                {siteConfig.roleTag}
+                {resumeRoleTag}
+              </p>
+              <p
+                className="mt-4 max-w-[680px] font-sans text-[14.5px] leading-relaxed"
+                style={{ color: '#A8C5D1' }}
+              >
+                {resumeSummary}
               </p>
             </motion.div>
 
@@ -382,6 +425,12 @@ export default function ResumePage() {
                   Download PDF ↓
                 </StarburstButton>
               </HoverSparkle>
+              <p
+                className="mt-3 font-sans text-[12.5px]"
+                style={{ color: 'rgba(168,197,209,0.48)' }}
+              >
+                PDF includes the full version with experience, projects, and technical details.
+              </p>
             </motion.div>
           </motion.div>
 
@@ -546,7 +595,7 @@ export default function ResumePage() {
             viewport={{ once: true }}
             className="mb-4"
           >
-            <SectionDivider>Projects</SectionDivider>
+            <SectionDivider>Solution Demos</SectionDivider>
           </motion.div>
 
           <motion.div
@@ -610,8 +659,9 @@ export default function ResumePage() {
                         className="mt-0.5 truncate font-sans text-[12.5px] leading-snug"
                         style={{ color: '#7AAABB' }}
                       >
-                        {/* First sentence only */}
-                        {project.tagline.match(/.*?[.!?]/)?.[0] ?? project.tagline}
+                        {resumeProjectDescriptions[project.slug] ??
+                          project.tagline.match(/.*?[.!?]/)?.[0] ??
+                          project.tagline}
                       </p>
                     </div>
                   </div>
