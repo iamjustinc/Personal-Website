@@ -3,7 +3,7 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { ProjectFloatingScreenshots } from '@/components/projects/ProjectFloatingScreenshots'
 import { StarMark } from '@/components/ui/StarMark'
 import { StarburstButton } from '@/components/ui/StarburstButton'
@@ -411,6 +411,19 @@ function getCaseStudyCopy(project: Project): CaseStudyCopy {
   }
 }
 
+// ── Section glow positions (atmospheric accent per section) ──────────────────
+
+const SECTION_GLOW: Record<string, { x: string; y: string }> = {
+  overview:        { x: '88%', y: '18%' },
+  problem:         { x: '6%',  y: '58%' },
+  users:           { x: '82%', y: '42%' },
+  solution:        { x: '10%', y: '32%' },
+  impact:          { x: '90%', y: '22%' },
+  'technical-build': { x: '8%', y: '68%' },
+  reflection:      { x: '76%', y: '78%' },
+  'demo-links':    { x: '50%', y: '50%' },
+}
+
 // ── Fact strip ───────────────────────────────────────────────────────────────
 
 function FactStrip({ project, enhanced = false }: { project: Project; enhanced?: boolean }) {
@@ -422,16 +435,38 @@ function FactStrip({ project, enhanced = false }: { project: Project; enhanced?:
 
   return (
     <div
+      className="relative overflow-hidden"
       style={{
-        borderColor: enhanced ? `${project.panelAccentColor}1F` : 'rgba(15,122,122,0.10)',
+        borderBottom: enhanced
+          ? `1px solid ${project.panelAccentColor}1F`
+          : '1px solid rgba(15,122,122,0.10)',
         boxShadow: enhanced ? `inset 0 1px 0 ${project.panelAccentColor}12` : undefined,
       }}
-      className="border-b"
     >
+      {/* Subtle shimmer sweep */}
+      {enhanced && (
+        <motion.div
+          className="pointer-events-none absolute inset-y-0 -skew-x-12"
+          style={{
+            width: '30%',
+            left: '-40%',
+            background: `linear-gradient(90deg, transparent, ${project.panelAccentColor}0A, transparent)`,
+          }}
+          animate={{ x: ['0%', '520%'] }}
+          transition={{ duration: 6, repeat: Infinity, repeatDelay: 8, ease: 'easeInOut' }}
+          aria-hidden
+        />
+      )}
       <div className="max-w-[1180px] mx-auto px-6 py-4">
         <div className="flex flex-wrap gap-x-8 gap-y-2">
-          {facts.map((f) => (
-            <div key={f.label} className="flex items-center gap-2">
+          {facts.map((f, i) => (
+            <motion.div
+              key={f.label}
+              initial={{ opacity: 0, y: 4 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.07, duration: 0.4 }}
+              className="flex items-center gap-2"
+            >
               <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-text-muted">
                 {f.label}
               </span>
@@ -442,7 +477,7 @@ function FactStrip({ project, enhanced = false }: { project: Project; enhanced?:
                 /
               </span>
               <span className="font-mono text-[11px] text-text-base opacity-80">{f.value}</span>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -462,6 +497,7 @@ function SideNav({
   enhanced?: boolean
 }) {
   const [activeId, setActiveId] = useState(items[0]?.id ?? '')
+  const reduceMotion = useReducedMotion()
 
   useEffect(() => {
     const els = items
@@ -479,10 +515,7 @@ function SideNav({
             const bi = els.indexOf(b.target as HTMLElement)
             return ai - bi
           })
-
-        if (visible.length > 0) {
-          setActiveId(visible[0].target.id)
-        }
+        if (visible.length > 0) setActiveId(visible[0].target.id)
       },
       { rootMargin: '-15% 0px -70% 0px', threshold: 0 },
     )
@@ -492,67 +525,117 @@ function SideNav({
   }, [items])
 
   return (
-    <nav className="space-y-0.5" aria-label="Case study sections">
-      <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-text-muted opacity-40 px-3 mb-3">
+    <nav className="relative" aria-label="Case study sections">
+      {/* Faint vertical connecting rail */}
+      <div
+        className="pointer-events-none absolute left-[17px] top-8 bottom-2 w-px"
+        style={{
+          background: `linear-gradient(180deg, ${accent}30 0%, ${accent}10 60%, transparent 100%)`,
+        }}
+        aria-hidden
+      />
+
+      <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-text-muted opacity-40 px-3 mb-4">
         Contents
       </p>
 
-      {items.map((item) => {
-        const isActive = activeId === item.id
+      <div className="space-y-0.5">
+        {items.map((item) => {
+          const isActive = activeId === item.id
 
-        return (
-          <a
-            key={item.id}
-            href={`#${item.id}`}
-            onClick={(e) => {
-              e.preventDefault()
-              document.getElementById(item.id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-              setActiveId(item.id)
-            }}
-            className={cn(
-              'group flex items-center gap-2.5 rounded-lg px-3 py-2 transition-all duration-200',
-              isActive ? 'bg-[rgba(15,122,122,0.10)]' : 'hover:bg-[rgba(15,122,122,0.06)]',
-            )}
-            style={
-              enhanced && isActive
-                ? {
-                    background: `linear-gradient(90deg, ${accent}1A, rgba(15,122,122,0.04))`,
-                    boxShadow: `0 0 24px ${accent}10`,
-                  }
-                : undefined
-            }
-          >
-            <span
-              className="font-mono text-[9px] tabular-nums shrink-0 transition-opacity duration-200"
-              style={{ color: accent, opacity: isActive ? (enhanced ? 0.82 : 0.6) : 0.22 }}
-            >
-              {item.number}
-            </span>
-
-            <span
-              className="font-mono text-[10.5px] uppercase tracking-[0.09em] transition-colors duration-200 leading-none"
-              style={{
-                color: isActive ? (enhanced ? '#D7EEF1' : accent) : '#5A8A9A',
+          return (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              onClick={(e) => {
+                e.preventDefault()
+                document.getElementById(item.id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                setActiveId(item.id)
               }}
+              className="group relative flex items-center gap-2.5 rounded-lg px-3 py-2 transition-colors duration-200 overflow-hidden"
             >
-              {item.label}
-            </span>
+              {/* Animated sliding background — layoutId makes it glide between items */}
+              {isActive && (
+                <motion.div
+                  layoutId="sidenav-bg"
+                  className="absolute inset-0 rounded-lg"
+                  style={{
+                    background: enhanced
+                      ? `linear-gradient(90deg, ${accent}22 0%, ${accent}0D 50%, transparent 100%)`
+                      : `linear-gradient(90deg, ${accent}18, transparent)`,
+                  }}
+                  transition={{ type: 'spring', stiffness: 420, damping: 36, mass: 0.6 }}
+                />
+              )}
 
-            {isActive && (
+              {/* Active left accent bar */}
+              <div
+                className="absolute left-0 top-2 bottom-2 w-[2px] rounded-r-full transition-all duration-300"
+                style={{
+                  background: `linear-gradient(180deg, ${accent}, ${accent}44)`,
+                  opacity: isActive ? 1 : 0,
+                  transform: isActive ? 'scaleY(1)' : 'scaleY(0.3)',
+                  transformOrigin: 'center',
+                }}
+                aria-hidden
+              />
+
+              {/* Number */}
+              <span
+                className="relative font-mono text-[9px] tabular-nums shrink-0 transition-all duration-300"
+                style={{
+                  color: accent,
+                  opacity: isActive ? (enhanced ? 0.88 : 0.65) : 0.22,
+                  textShadow: isActive && enhanced ? `0 0 16px ${accent}66` : undefined,
+                }}
+              >
+                {item.number}
+              </span>
+
+              {/* Label */}
+              <span
+                className="relative font-mono text-[10.5px] uppercase tracking-[0.09em] transition-all duration-300 leading-none"
+                style={{
+                  color: isActive ? (enhanced ? '#D7EEF1' : accent) : '#5A8A9A',
+                  textShadow: isActive && enhanced ? `0 0 20px ${accent}28` : undefined,
+                }}
+              >
+                {item.label}
+              </span>
+
+              {/* Active indicator — twinkling star or dot */}
               <div
                 className={cn(
-                  'ml-auto rounded-full shrink-0',
-                  enhanced ? 'h-1.5 w-1.5' : 'h-1 w-1',
+                  'ml-auto shrink-0 transition-all duration-300',
+                  isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-50',
                 )}
-                style={{
-                  background: accent,
-                  boxShadow: enhanced ? `0 0 14px ${accent}99` : undefined,
-                }}
-              />
-            )}
-          </a>
-        )
-      })}
+              >
+                {isActive && !reduceMotion ? (
+                  <motion.div
+                    layoutId="sidenav-star"
+                    animate={{ opacity: [0.5, 1, 0.5], scale: [0.85, 1.15, 0.85] }}
+                    transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+                  >
+                    <StarMark
+                      size="xs"
+                      color={accent}
+                      className={enhanced ? 'opacity-90' : 'opacity-70'}
+                    />
+                  </motion.div>
+                ) : (
+                  <div
+                    className="h-1.5 w-1.5 rounded-full"
+                    style={{
+                      background: accent,
+                      boxShadow: enhanced ? `0 0 10px ${accent}88` : undefined,
+                    }}
+                  />
+                )}
+              </div>
+            </a>
+          )
+        })}
+      </div>
     </nav>
   )
 }
@@ -575,48 +658,87 @@ function CaseSection({
   children: React.ReactNode
 }) {
   const reduceMotion = useReducedMotion()
-  const variant = reduceMotion ? { hidden: {}, visible: {} } : fadeUp
+  const glowPos = SECTION_GLOW[id] ?? { x: '80%', y: '30%' }
 
   return (
     <motion.section
       id={id}
-      variants={variant}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: '-4%' }}
-      className="relative scroll-mt-24 py-10"
+      initial={reduceMotion ? {} : { opacity: 0, y: 24 }}
+      whileInView={reduceMotion ? {} : { opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-6%' }}
+      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+      className="relative scroll-mt-24 py-14 overflow-hidden"
       style={
         enhanced
           ? {
               borderTop: '1px solid transparent',
-              background: `linear-gradient(90deg, ${accent}2E, rgba(196,151,74,0.14), transparent 68%) top / 100% 1px no-repeat`,
+              background: `linear-gradient(90deg, ${accent}2C, rgba(196,151,74,0.12), transparent 68%) top / 100% 1px no-repeat`,
             }
           : { borderTop: '1px solid rgba(15,122,122,0.10)' }
       }
     >
+      {/* Ghost watermark number */}
+      <span
+        aria-hidden
+        className="pointer-events-none select-none absolute right-0 top-0 font-display leading-none opacity-[0.036]"
+        style={{
+          fontSize: 'clamp(5.5rem, 14vw, 11rem)',
+          color: accent,
+          lineHeight: 0.85,
+        }}
+      >
+        {number}
+      </span>
+
+      {/* Ambient glow pool */}
       {enhanced && (
         <div
-          className="pointer-events-none absolute -left-6 top-8 h-24 w-24 rounded-full blur-3xl"
-          style={{ background: `${accent}0D` }}
+          className="pointer-events-none absolute rounded-full blur-[90px]"
+          style={{
+            width: 280,
+            height: 180,
+            left: glowPos.x,
+            top: glowPos.y,
+            transform: 'translate(-50%, -50%)',
+            background: accent,
+            opacity: 0.055,
+          }}
           aria-hidden
         />
       )}
 
-      <div className="flex items-center gap-3 mb-6">
+      {/* Left margin glow for enhanced sections */}
+      {enhanced && (
+        <div
+          className="pointer-events-none absolute -left-6 top-10 h-20 w-20 rounded-full blur-3xl"
+          style={{ background: `${accent}0E` }}
+          aria-hidden
+        />
+      )}
+
+      {/* Section header */}
+      <div className="flex items-center gap-3 mb-8">
         <span
           className="font-mono text-[10px] tabular-nums select-none shrink-0"
-          style={{ color: accent, opacity: enhanced ? 0.62 : 0.38 }}
+          style={{ color: accent, opacity: enhanced ? 0.65 : 0.38 }}
         >
           {number}
         </span>
 
-        <StarMark size="xs" color={accent} className="opacity-55 shrink-0" />
+        <motion.div
+          initial={reduceMotion ? {} : { scale: 0.6, opacity: 0 }}
+          whileInView={reduceMotion ? {} : { scale: 1, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: 0.12 }}
+        >
+          <StarMark size="xs" color={accent} className="opacity-55 shrink-0" />
+        </motion.div>
 
         <span
-          className="font-mono text-[10.5px] uppercase tracking-[0.14em]"
+          className="font-mono text-[10.5px] uppercase tracking-[0.14em] relative"
           style={{
             color: enhanced ? '#D7EEF1' : accent,
-            textShadow: enhanced ? `0 0 20px ${accent}24` : undefined,
+            textShadow: enhanced ? `0 0 22px ${accent}26` : undefined,
           }}
         >
           {title}
@@ -626,7 +748,7 @@ function CaseSection({
           className="h-px flex-1"
           style={{
             background: enhanced
-              ? `linear-gradient(90deg, ${accent}42, rgba(196,151,74,0.18), transparent)`
+              ? `linear-gradient(90deg, ${accent}44, rgba(196,151,74,0.16), transparent)`
               : 'rgba(15,122,122,0.10)',
           }}
           aria-hidden
@@ -643,7 +765,7 @@ function CaseSection({
 function Prose({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
     <p
-      className={cn('font-sans text-[15px] leading-[1.84] max-w-[70ch]', className)}
+      className={cn('font-sans text-[15px] leading-[1.88] max-w-[70ch]', className)}
       style={{ color: '#A8C5D1' }}
     >
       {children}
@@ -660,11 +782,13 @@ function Callout({
   accent: string
   enhanced?: boolean
 }) {
+  const reduceMotion = useReducedMotion()
+
   return (
     <div
       className={cn(
-        'flex items-start gap-3 px-5 py-4 rounded-[18px]',
-        enhanced && 'relative overflow-hidden transition-transform duration-300 hover:-translate-y-0.5',
+        'relative flex items-start gap-3 px-5 py-4 rounded-[18px] overflow-hidden',
+        enhanced && 'transition-transform duration-300 hover:-translate-y-0.5',
       )}
       style={{
         background: enhanced
@@ -675,17 +799,30 @@ function Callout({
       }}
     >
       {enhanced && (
-        <div
-          className="pointer-events-none absolute inset-x-5 top-0 h-px"
-          style={{ background: `linear-gradient(90deg, transparent, ${accent}88, transparent)` }}
-          aria-hidden
-        />
+        <>
+          {/* Top shimmer */}
+          <div
+            className="pointer-events-none absolute inset-x-5 top-0 h-px"
+            style={{ background: `linear-gradient(90deg, transparent, ${accent}88, transparent)` }}
+            aria-hidden
+          />
+          {/* Pulsing ambient glow */}
+          {!reduceMotion && (
+            <motion.div
+              className="pointer-events-none absolute inset-0 rounded-[18px]"
+              animate={{ opacity: [0, 0.5, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}
+              style={{ boxShadow: `inset 0 0 32px ${accent}14` }}
+              aria-hidden
+            />
+          )}
+        </>
       )}
 
       <StarMark
         size="xs"
         color={accent}
-        className={cn(enhanced ? 'opacity-60' : 'opacity-50', 'mt-0.5 shrink-0')}
+        className={cn(enhanced ? 'opacity-60' : 'opacity-50', 'mt-0.5 shrink-0 relative')}
       />
 
       <p className="relative font-sans text-[14px] leading-relaxed" style={{ color: '#B8D0DC' }}>
@@ -695,10 +832,8 @@ function Callout({
   )
 }
 
-/**
- * PmInsight — visually distinct pull-block for the key product decision or
- * product insight in each case study. One per project, placed in Overview.
- */
+// ── PmInsight — featured key product decision block ───────────────────────────
+
 function PmInsight({
   label,
   body,
@@ -710,43 +845,76 @@ function PmInsight({
 }) {
   const reduceMotion = useReducedMotion()
 
+  // Fixed constellation star positions within the block
+  const constellationStars = [
+    { x: '88%', y: '18%', delay: 0,    dur: 3.2 },
+    { x: '92%', y: '72%', delay: 1.4,  dur: 4.1 },
+    { x: '78%', y: '44%', delay: 0.8,  dur: 3.7 },
+  ]
+
   return (
     <motion.div
-      initial={reduceMotion ? {} : { opacity: 0, y: 10 }}
+      initial={reduceMotion ? {} : { opacity: 0, y: 14 }}
       whileInView={reduceMotion ? {} : { opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.52, ease: [0.22, 1, 0.36, 1] }}
-      className="group relative mt-7 overflow-hidden rounded-[20px] p-6 transition-transform duration-300 hover:-translate-y-0.5"
+      transition={{ duration: 0.56, ease: [0.22, 1, 0.36, 1] }}
+      className="group relative mt-8 overflow-hidden rounded-[20px] p-6 transition-transform duration-300 hover:-translate-y-0.5"
       style={{
-        background: `linear-gradient(135deg, ${accent}16 0%, rgba(9,21,38,0.92) 55%)`,
-        border: `1px solid ${accent}34`,
-        boxShadow: `0 16px 48px rgba(0,0,0,0.28), 0 0 36px ${accent}0B`,
+        background: `linear-gradient(135deg, ${accent}18 0%, rgba(9,21,38,0.94) 58%)`,
+        border: `1px solid ${accent}36`,
+        boxShadow: `0 18px 52px rgba(0,0,0,0.30), 0 0 40px ${accent}0C`,
       }}
     >
       {/* Top shimmer */}
       <div
-        className="pointer-events-none absolute inset-x-5 top-0 h-px"
-        style={{ background: `linear-gradient(90deg, transparent, ${accent}90, rgba(196,151,74,0.35), transparent)` }}
+        className="pointer-events-none absolute inset-x-4 top-0 h-px"
+        style={{
+          background: `linear-gradient(90deg, transparent 0%, ${accent}94 38%, rgba(196,151,74,0.38) 56%, ${accent}94 72%, transparent 100%)`,
+        }}
         aria-hidden
       />
 
       {/* Left accent bar */}
       <div
-        className="absolute left-0 top-6 bottom-6 w-0.5 rounded-r-full"
-        style={{ background: `linear-gradient(180deg, ${accent}, ${accent}28)` }}
+        className="absolute left-0 top-5 bottom-5 w-[3px] rounded-r-full"
+        style={{ background: `linear-gradient(180deg, ${accent}EE 0%, ${accent}55 60%, ${accent}18 100%)` }}
         aria-hidden
       />
 
-      <div className="pl-4">
-        <p
-          className="font-mono text-[9.5px] uppercase tracking-[0.16em] mb-3"
-          style={{ color: accent, opacity: 0.90 }}
+      {/* Bottom-right ambient glow */}
+      <div
+        className="pointer-events-none absolute bottom-0 right-0 w-40 h-28 rounded-full blur-3xl opacity-40"
+        style={{ background: `radial-gradient(circle, ${accent}20, transparent 70%)` }}
+        aria-hidden
+      />
+
+      {/* Constellation stars */}
+      {!reduceMotion && constellationStars.map((star, i) => (
+        <motion.div
+          key={i}
+          className="pointer-events-none absolute"
+          style={{ left: star.x, top: star.y }}
+          animate={{ opacity: [0.08, 0.38, 0.08], scale: [0.7, 1.1, 0.7] }}
+          transition={{ duration: star.dur, repeat: Infinity, ease: 'easeInOut', delay: star.delay }}
+          aria-hidden
         >
-          {label}
-        </p>
+          <StarMark size="xs" color={accent} />
+        </motion.div>
+      ))}
+
+      <div className="pl-5 relative">
+        <div className="flex items-center gap-2 mb-3">
+          <StarMark size="xs" color={accent} className="opacity-85 shrink-0" />
+          <p
+            className="font-mono text-[9.5px] uppercase tracking-[0.16em]"
+            style={{ color: accent, opacity: 0.92 }}
+          >
+            {label}
+          </p>
+        </div>
         <p
-          className="font-sans text-[14.5px] leading-[1.82] max-w-[64ch]"
-          style={{ color: '#C6DCE8' }}
+          className="font-sans text-[15px] leading-[1.84] max-w-[64ch]"
+          style={{ color: '#C8DEE8' }}
         >
           {body}
         </p>
@@ -754,6 +922,8 @@ function PmInsight({
     </motion.div>
   )
 }
+
+// ── Screenshot block ─────────────────────────────────────────────────────────
 
 function ScreenshotBlock({
   src,
@@ -771,9 +941,9 @@ function ScreenshotBlock({
   const reduceMotion = useReducedMotion()
 
   return (
-    <div className="mt-7 space-y-2.5">
+    <div className="mt-8 space-y-2.5">
       <div
-        className="group relative w-full overflow-hidden rounded-[16px]"
+        className="group relative w-full overflow-hidden rounded-[18px]"
         style={{
           aspectRatio: '1.85 / 1',
           background: enhanced
@@ -781,7 +951,7 @@ function ScreenshotBlock({
             : 'rgba(10,22,40,0.28)',
           border: `1px solid ${enhanced ? `${accent}2C` : `${accent}18`}`,
           boxShadow: enhanced
-            ? `0 22px 62px rgba(0,0,0,0.38), 0 0 40px ${accent}0A`
+            ? `0 24px 68px rgba(0,0,0,0.40), 0 0 44px ${accent}0A`
             : '0 18px 52px rgba(0,0,0,0.32)',
         }}
       >
@@ -793,14 +963,29 @@ function ScreenshotBlock({
           />
         )}
 
+        {/* Hover shimmer sweep */}
+        {!reduceMotion && (
+          <motion.div
+            className="pointer-events-none absolute inset-y-0 z-10 opacity-0 group-hover:opacity-100 -skew-x-12 transition-opacity duration-300"
+            style={{
+              width: '35%',
+              left: '-40%',
+              background: `linear-gradient(90deg, transparent, ${accent}14, transparent)`,
+            }}
+            animate={{ x: ['0%', '500%'] }}
+            transition={{ duration: 1.4, repeat: Infinity, repeatDelay: 1.2, ease: 'easeInOut' }}
+            aria-hidden
+          />
+        )}
+
         <Image
           src={src}
           alt={alt}
           fill
           sizes="(max-width: 768px) 100vw, 900px"
           className={cn(
-            'object-contain object-center',
-            enhanced && !reduceMotion && 'transition-transform duration-700 group-hover:scale-[1.012]',
+            'object-cover object-top',
+            enhanced && !reduceMotion && 'transition-transform duration-700 group-hover:scale-[1.014]',
           )}
         />
       </div>
@@ -814,10 +999,12 @@ function ScreenshotBlock({
   )
 }
 
+// ── Stack pill ────────────────────────────────────────────────────────────────
+
 function StackPill({ label, accent }: { label: string; accent: string }) {
   return (
     <span
-      className="font-mono text-[9.5px] px-2.5 py-1 rounded-btn"
+      className="font-mono text-[9.5px] px-2.5 py-1 rounded-btn transition-all duration-200 hover:-translate-y-0.5"
       style={{
         background: 'rgba(15,42,61,0.80)',
         border: `1px solid ${accent}18`,
@@ -829,65 +1016,135 @@ function StackPill({ label, accent }: { label: string; accent: string }) {
   )
 }
 
+// ── Insight grid ─────────────────────────────────────────────────────────────
+
 function InsightGrid({
   items,
   accent,
   enhanced = false,
+  variant,
 }: {
   items?: InsightCardItem[]
   accent: string
   enhanced?: boolean
+  variant?: 'grid' | 'trio' | 'featured'
 }) {
+  const reduceMotion = useReducedMotion()
   if (!items || items.length === 0) return null
 
+  // Auto-detect trio, allow explicit override
+  const resolvedVariant = variant ?? (items.length === 3 ? 'trio' : 'grid')
+
   return (
-    <div className="grid gap-3 md:grid-cols-2 mt-6">
-      {items.map((item, idx) => (
-        <div
-          key={item.title}
-          className={cn(
-            'relative rounded-[18px] p-4 overflow-hidden',
-            enhanced && 'transition-transform duration-300 hover:-translate-y-0.5',
-          )}
-          style={{
-            background: enhanced
-              ? `linear-gradient(180deg, ${accent}0E, rgba(9,21,38,0.82))`
-              : 'rgba(9,21,38,0.72)',
-            border: `1px solid ${enhanced ? `${accent}22` : 'rgba(15,122,122,0.12)'}`,
-            boxShadow: enhanced ? `0 14px 34px rgba(0,0,0,0.18), 0 0 24px ${accent}08` : undefined,
-          }}
-        >
-          {enhanced && (
+    <motion.div
+      variants={staggerContainer(0.08)}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: '-4%' }}
+      className={cn(
+        'mt-7',
+        resolvedVariant === 'trio'
+          ? 'grid gap-3 md:grid-cols-2 lg:grid-cols-3'
+          : resolvedVariant === 'featured'
+          ? 'grid gap-3 md:grid-cols-2'
+          : 'grid gap-3 md:grid-cols-2',
+      )}
+    >
+      {items.map((item, idx) => {
+        const isFeaturedFirst = resolvedVariant === 'featured' && idx === 0
+
+        return (
+          <motion.div
+            key={item.title}
+            variants={fadeUp}
+            whileHover={
+              reduceMotion
+                ? {}
+                : {
+                    y: -4,
+                    boxShadow: enhanced
+                      ? `0 18px 44px rgba(0,0,0,0.28), 0 0 0 1px ${accent}38, 0 0 28px ${accent}0E`
+                      : `0 12px 32px rgba(0,0,0,0.22), 0 0 0 1px ${accent}28`,
+                  }
+            }
+            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+            className={cn(
+              'group relative overflow-hidden rounded-[18px] p-4',
+              enhanced && 'transition-transform duration-200',
+              isFeaturedFirst && 'md:col-span-2',
+            )}
+            style={{
+              background: enhanced
+                ? `linear-gradient(165deg, ${accent}10 0%, rgba(9,21,38,0.88) 48%)`
+                : 'rgba(9,21,38,0.72)',
+              border: `1px solid ${enhanced ? `${accent}22` : 'rgba(15,122,122,0.12)'}`,
+              boxShadow: enhanced
+                ? `0 14px 34px rgba(0,0,0,0.18), 0 0 24px ${accent}08`
+                : undefined,
+            }}
+          >
+            {/* Top shimmer line */}
             <div
-              className="pointer-events-none absolute inset-x-4 top-0 h-px"
-              style={{ background: `linear-gradient(90deg, transparent, ${accent}66, transparent)` }}
+              className="pointer-events-none absolute inset-x-3 top-0 h-px"
+              style={{
+                background: `linear-gradient(90deg, transparent, ${
+                  idx === 1 ? 'rgba(196,151,74,0.50)' : `${accent}55`
+                }, transparent)`,
+                opacity: enhanced ? 0.9 : 0.5,
+              }}
               aria-hidden
             />
-          )}
 
-          {/* Card index number — subtle editorial label */}
-          <span
-            className="font-mono text-[9px] tabular-nums mb-2 block"
-            style={{ color: accent, opacity: 0.32 }}
-          >
-            {String(idx + 1).padStart(2, '0')}
-          </span>
+            {/* Hover light sweep */}
+            {!reduceMotion && (
+              <motion.div
+                className="pointer-events-none absolute inset-y-0 -skew-x-12 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                style={{
+                  width: '45%',
+                  left: '-55%',
+                  background: `linear-gradient(90deg, transparent, ${accent}12, transparent)`,
+                }}
+                animate={{ x: ['0%', '450%'] }}
+                transition={{ duration: 1.1, repeat: Infinity, repeatDelay: 0.6, ease: 'easeInOut' }}
+                aria-hidden
+              />
+            )}
 
-          <p
-            className="font-mono text-[10px] uppercase tracking-[0.12em] mb-2"
-            style={{ color: enhanced ? '#D7EEF1' : accent, opacity: enhanced ? 0.92 : 0.78 }}
-          >
-            {item.title}
-          </p>
+            {/* Card index */}
+            <span
+              className="font-mono text-[9px] tabular-nums mb-2.5 block"
+              style={{ color: accent, opacity: 0.30 }}
+            >
+              {String(idx + 1).padStart(2, '0')}
+            </span>
 
-          <p className="font-sans text-[13.5px] leading-[1.75]" style={{ color: '#9EBBC7' }}>
-            {item.body}
-          </p>
-        </div>
-      ))}
-    </div>
+            <p
+              className={cn(
+                'font-mono uppercase tracking-[0.12em] mb-2.5',
+                isFeaturedFirst ? 'text-[11px]' : 'text-[10px]',
+              )}
+              style={{ color: enhanced ? '#D7EEF1' : accent, opacity: enhanced ? 0.92 : 0.78 }}
+            >
+              {item.title}
+            </p>
+
+            <p
+              className={cn(
+                'font-sans leading-[1.76]',
+                isFeaturedFirst ? 'text-[14px]' : 'text-[13.5px]',
+              )}
+              style={{ color: '#9EBBC7' }}
+            >
+              {item.body}
+            </p>
+          </motion.div>
+        )
+      })}
+    </motion.div>
   )
 }
+
+// ── Bullet rail ───────────────────────────────────────────────────────────────
 
 function BulletRail({
   items,
@@ -898,24 +1155,69 @@ function BulletRail({
   accent: string
   enhanced?: boolean
 }) {
+  const reduceMotion = useReducedMotion()
   if (!items || items.length === 0) return null
 
   return (
-    <div className="mt-6 space-y-3">
-      {items.map((item) => (
-        <div key={item} className="flex items-start gap-3">
-          <div
-            className="mt-[8px] h-1.5 w-1.5 rounded-full shrink-0"
-            style={{
-              background: accent,
-              boxShadow: enhanced ? `0 0 12px ${accent}66` : undefined,
-            }}
-          />
-          <p className="font-sans text-[14px] leading-[1.78] max-w-[68ch]" style={{ color: '#9EBBC7' }}>
+    <motion.div
+      variants={staggerContainer(0.1)}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: '-4%' }}
+      className="relative mt-7 space-y-0"
+    >
+      {/* Faint vertical connector between bullets */}
+      <div
+        className="pointer-events-none absolute left-[5px] top-[10px]"
+        style={{
+          bottom: 10,
+          width: 1,
+          background: `linear-gradient(180deg, ${accent}30, ${accent}10, transparent)`,
+        }}
+        aria-hidden
+      />
+
+      {items.map((item, i) => (
+        <motion.div
+          key={item}
+          variants={fadeUp}
+          className="group flex items-start gap-3.5 py-2"
+        >
+          <div className="relative mt-[9px] shrink-0">
+            {/* Glow halo on hover */}
+            <div
+              className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-[4px]"
+              style={{ background: accent }}
+              aria-hidden
+            />
+            <div
+              className="relative h-[7px] w-[7px] rounded-full transition-transform duration-200 group-hover:scale-110"
+              style={{
+                background: accent,
+                boxShadow: enhanced ? `0 0 10px ${accent}55` : undefined,
+              }}
+            />
+          </div>
+          <p
+            className="font-sans text-[14px] leading-[1.80] max-w-[68ch]"
+            style={{ color: '#9EBBC7' }}
+          >
             {item}
           </p>
-        </div>
+        </motion.div>
       ))}
+    </motion.div>
+  )
+}
+
+// ── Section divider accent ────────────────────────────────────────────────────
+
+function ChapterDivider({ accent }: { accent: string }) {
+  return (
+    <div className="relative flex items-center gap-4 my-2" aria-hidden>
+      <div className="h-px flex-1" style={{ background: `linear-gradient(90deg, transparent, ${accent}18)` }} />
+      <StarMark size="xs" color={accent} className="opacity-20" />
+      <div className="h-px flex-1" style={{ background: `linear-gradient(90deg, ${accent}18, transparent)` }} />
     </div>
   )
 }
@@ -926,6 +1228,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
   const stagger = useMotionSafe(staggerContainer(0.1))
   const up = useMotionSafe(fadeUp)
   const inn = useMotionSafe(fadeIn)
+  const reduceMotion = useReducedMotion()
 
   const isEnhancedCaseStudy = ['kestrel', 'chirpie', 'quail'].includes(project.slug)
   const caseCopy = getCaseStudyCopy(project)
@@ -935,43 +1238,82 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
   const has = (v: unknown) => v !== undefined && v !== null && v !== ''
 
   const navItems: NavItem[] = [
-    { id: 'overview', label: 'Overview', number: fmt() },
-    { id: 'problem', label: 'Problem', number: fmt() },
+    { id: 'overview',        label: 'Overview',   number: fmt() },
+    { id: 'problem',         label: 'Problem',    number: fmt() },
     ...(has(caseCopy.users) ? [{ id: 'users', label: 'Users', number: fmt() }] : []),
-    { id: 'solution', label: 'Solution', number: fmt() },
-    { id: 'impact', label: 'Impact', number: fmt() },
-    ...(has(caseCopy.buildNotes) ? [{ id: 'technical-build', label: 'Technical', number: fmt() }] : []),
-    ...(has(caseCopy.reflection) ? [{ id: 'reflection', label: 'Reflection', number: fmt() }] : []),
-    { id: 'demo-links', label: 'Links', number: fmt() },
+    { id: 'solution',        label: 'Solution',   number: fmt() },
+    { id: 'impact',          label: 'Impact',     number: fmt() },
+    ...(has(caseCopy.buildNotes)
+      ? [{ id: 'technical-build', label: 'Technical', number: fmt() }]
+      : []),
+    ...(has(caseCopy.reflection)
+      ? [{ id: 'reflection', label: 'Reflection', number: fmt() }]
+      : []),
+    { id: 'demo-links',      label: 'Links',      number: fmt() },
   ]
 
   const sn = (id: string) => navItems.find((item) => item.id === id)?.number ?? '—'
 
+  // Hero floating star positions
+  const heroStars = [
+    { x: '14%', y: '20%', delay: 0,    dur: 3.1 },
+    { x: '72%', y: '12%', delay: 1.2,  dur: 4.2 },
+    { x: '88%', y: '68%', delay: 0.5,  dur: 3.6 },
+    { x: '28%', y: '82%', delay: 1.8,  dur: 2.9 },
+    { x: '54%', y: '38%', delay: 0.9,  dur: 3.8 },
+  ]
+
   return (
     <main className="bg-bg min-h-screen pt-16">
+
       {/* ── Hero band ── */}
       <div
         className="relative overflow-hidden"
         style={{
-          background: `linear-gradient(150deg, ${project.panelAccentColor}14 0%, rgba(10,22,40,0) 55%)`,
+          background: `linear-gradient(150deg, ${project.panelAccentColor}16 0%, rgba(10,22,40,0) 55%)`,
           borderBottom: '1px solid rgba(15,122,122,0.10)',
         }}
       >
+        {/* Hero top-edge shimmer */}
         {isEnhancedCaseStudy && (
           <div
             className="pointer-events-none absolute inset-x-0 top-0 h-px"
             style={{
-              background: `linear-gradient(90deg, transparent, ${project.panelAccentColor}55, rgba(196,151,74,0.25), transparent)`,
+              background: `linear-gradient(90deg, transparent 0%, ${project.panelAccentColor}55 28%, rgba(196,151,74,0.28) 54%, ${project.panelAccentColor}55 78%, transparent 100%)`,
             }}
             aria-hidden
           />
         )}
 
+        {/* Large ambient glow behind hero */}
+        <div
+          className="pointer-events-none absolute top-0 left-[5%] w-[50%] h-full opacity-[0.07] blur-[100px]"
+          style={{
+            background: `radial-gradient(ellipse at 30% 50%, ${project.panelAccentColor}, transparent 70%)`,
+          }}
+          aria-hidden
+        />
+
+        {/* Watermark star */}
         <div className="absolute top-0 right-0 pointer-events-none overflow-hidden" aria-hidden>
-          <WatermarkStar size={520} opacity={0.025} direction={1} color={project.panelAccentColor} />
+          <WatermarkStar size={540} opacity={0.022} direction={1} color={project.panelAccentColor} />
         </div>
 
-        <div className="max-w-[1180px] mx-auto px-6 py-14 lg:py-20">
+        {/* Floating hero constellation stars */}
+        {isEnhancedCaseStudy && !reduceMotion && heroStars.map((star, i) => (
+          <motion.div
+            key={i}
+            className="pointer-events-none absolute z-0"
+            style={{ left: star.x, top: star.y }}
+            animate={{ opacity: [0.06, 0.28, 0.06], scale: [0.7, 1.0, 0.7] }}
+            transition={{ duration: star.dur, repeat: Infinity, ease: 'easeInOut', delay: star.delay }}
+            aria-hidden
+          >
+            <StarMark size="xs" color={project.panelAccentColor} />
+          </motion.div>
+        ))}
+
+        <div className="relative z-10 max-w-[1180px] mx-auto px-6 py-14 lg:py-22">
           <motion.div variants={inn} initial="hidden" animate="visible">
             <Link
               href="/#projects"
@@ -994,17 +1336,21 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
             </Link>
           </motion.div>
 
-          <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-16 items-start">
-            {/* Visual */}
-            <div
-              className="relative min-h-[360px] lg:min-h-[520px] rounded-[22px] overflow-hidden"
+          <div className="grid lg:grid-cols-[1.12fr_0.88fr] gap-10 lg:gap-16 items-start">
+
+            {/* Visual panel */}
+            <motion.div
+              initial={reduceMotion ? {} : { opacity: 0, scale: 0.97, y: 16 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.62, ease: [0.22, 1, 0.36, 1] }}
+              className="relative min-h-[360px] lg:min-h-[540px] rounded-[22px] overflow-hidden"
               style={{
                 background: `linear-gradient(155deg, ${project.panelAccentColor}10 0%, rgba(10,22,40,0.12) 40%, rgba(10,22,40,0.68) 100%)`,
                 border: isEnhancedCaseStudy
                   ? `1px solid ${project.panelAccentColor}24`
                   : '1px solid rgba(15,122,122,0.14)',
                 boxShadow: isEnhancedCaseStudy
-                  ? `0 20px 70px rgba(0,0,0,0.38), 0 0 44px ${project.panelAccentColor}0A`
+                  ? `0 24px 80px rgba(0,0,0,0.42), 0 0 52px ${project.panelAccentColor}0A`
                   : '0 4px 32px rgba(0,0,0,0.28)',
               }}
             >
@@ -1012,9 +1358,10 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                 project={project}
                 priority
                 showWatermark
-                imageSizes="(max-width: 1024px) 100vw, 620px"
+                imageSizes="(max-width: 1024px) 100vw, 640px"
               />
 
+              {/* Badge */}
               <div
                 className="absolute top-5 right-5 flex items-center gap-1.5 rounded-full px-3 py-1 z-20"
                 style={{
@@ -1028,14 +1375,14 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                   Case Study
                 </span>
               </div>
-            </div>
+            </motion.div>
 
             {/* Hero text */}
             <motion.div
               variants={stagger}
               initial="hidden"
               animate="visible"
-              className="flex flex-col pt-1 lg:pt-3"
+              className="flex flex-col pt-1 lg:pt-4"
             >
               <motion.div variants={inn} className="flex flex-wrap gap-2 mb-5">
                 {project.tags.map((tag) => (
@@ -1056,7 +1403,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
 
               <motion.p
                 variants={up}
-                className="font-sans text-[17px] leading-[1.7] mt-5"
+                className="font-sans text-[17px] leading-[1.72] mt-5"
                 style={{ color: '#A8C5D1' }}
               >
                 {caseCopy.tagline}
@@ -1122,8 +1469,8 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
       </motion.div>
 
       {/* ── Body: sidebar + content rail ── */}
-      <div className="max-w-[1180px] mx-auto px-6 pt-6 pb-28">
-        <div className="lg:grid lg:grid-cols-[196px_1fr] lg:gap-14 xl:gap-20 items-start">
+      <div className="max-w-[1180px] mx-auto px-6 pt-6 pb-32">
+        <div className="lg:grid lg:grid-cols-[200px_1fr] lg:gap-14 xl:gap-20 items-start">
 
           {/* Sticky side nav */}
           <aside className="hidden lg:block sticky top-24 self-start pt-10">
@@ -1147,7 +1494,6 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
             >
               <Prose>{caseCopy.overview}</Prose>
 
-              {/* Key product decision / insight block */}
               {caseCopy.pmInsight && (
                 <PmInsight
                   label={caseCopy.pmInsight.label}
@@ -1163,6 +1509,8 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
               />
             </CaseSection>
 
+            <ChapterDivider accent={project.panelAccentColor} />
+
             {/* ── Problem ── */}
             <CaseSection
               id="problem"
@@ -1174,10 +1522,10 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
               <div
                 className={cn(
                   'pl-5',
-                  isEnhancedCaseStudy && 'rounded-r-[18px] py-1 transition-colors duration-300',
+                  isEnhancedCaseStudy && 'rounded-r-[16px] py-1 transition-colors duration-300',
                 )}
                 style={{
-                  borderLeft: `2px solid ${project.panelAccentColor}${isEnhancedCaseStudy ? '55' : '35'}`,
+                  borderLeft: `2px solid ${project.panelAccentColor}${isEnhancedCaseStudy ? '58' : '35'}`,
                   background: isEnhancedCaseStudy
                     ? `linear-gradient(90deg, ${project.panelAccentColor}0A, transparent 58%)`
                     : undefined,
@@ -1193,22 +1541,29 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
               />
             </CaseSection>
 
+            <ChapterDivider accent={project.panelAccentColor} />
+
             {/* ── Users ── */}
             {caseCopy.users && (
-              <CaseSection
-                id="users"
-                number={sn('users')}
-                title="Users"
-                accent={project.panelAccentColor}
-                enhanced={isEnhancedCaseStudy}
-              >
-                <Prose>{caseCopy.users}</Prose>
-                <InsightGrid
-                  items={caseCopy.userCards}
+              <>
+                <CaseSection
+                  id="users"
+                  number={sn('users')}
+                  title="Users"
                   accent={project.panelAccentColor}
                   enhanced={isEnhancedCaseStudy}
-                />
-              </CaseSection>
+                >
+                  <Prose>{caseCopy.users}</Prose>
+                  <InsightGrid
+                    items={caseCopy.userCards}
+                    accent={project.panelAccentColor}
+                    enhanced={isEnhancedCaseStudy}
+                    variant="featured"
+                  />
+                </CaseSection>
+
+                <ChapterDivider accent={project.panelAccentColor} />
+              </>
             )}
 
             {/* ── Solution ── */}
@@ -1238,6 +1593,8 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
               )}
             </CaseSection>
 
+            <ChapterDivider accent={project.panelAccentColor} />
+
             {/* ── Impact ── */}
             <CaseSection
               id="impact"
@@ -1247,7 +1604,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
               enhanced={isEnhancedCaseStudy}
             >
               {caseCopy.outcome && (
-                <div className="mb-5">
+                <div className="mb-6">
                   <Callout accent={project.panelAccentColor} enhanced={isEnhancedCaseStudy}>
                     {caseCopy.outcome}
                   </Callout>
@@ -1260,66 +1617,77 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                 items={caseCopy.impactCards}
                 accent={project.panelAccentColor}
                 enhanced={isEnhancedCaseStudy}
+                variant="featured"
               />
             </CaseSection>
 
             {/* ── Technical Build ── */}
             {caseCopy.buildNotes && (
-              <CaseSection
-                id="technical-build"
-                number={sn('technical-build')}
-                title="Technical Build"
-                accent={project.panelAccentColor}
-                enhanced={isEnhancedCaseStudy}
-              >
-                <div className="flex flex-wrap gap-1.5 mb-5">
-                  {project.stack.map((s) => (
-                    <StackPill key={s} label={s} accent={project.panelAccentColor} />
-                  ))}
-                </div>
+              <>
+                <ChapterDivider accent={project.panelAccentColor} />
 
-                <Prose>{caseCopy.buildNotes}</Prose>
-
-                <InsightGrid
-                  items={caseCopy.buildCards}
+                <CaseSection
+                  id="technical-build"
+                  number={sn('technical-build')}
+                  title="Technical Build"
                   accent={project.panelAccentColor}
                   enhanced={isEnhancedCaseStudy}
-                />
-              </CaseSection>
+                >
+                  <div className="flex flex-wrap gap-1.5 mb-6">
+                    {project.stack.map((s) => (
+                      <StackPill key={s} label={s} accent={project.panelAccentColor} />
+                    ))}
+                  </div>
+
+                  <Prose>{caseCopy.buildNotes}</Prose>
+
+                  <InsightGrid
+                    items={caseCopy.buildCards}
+                    accent={project.panelAccentColor}
+                    enhanced={isEnhancedCaseStudy}
+                  />
+                </CaseSection>
+              </>
             )}
 
             {/* ── Reflection ── */}
             {caseCopy.reflection && (
-              <CaseSection
-                id="reflection"
-                number={sn('reflection')}
-                title="Reflection"
-                accent={project.panelAccentColor}
-                enhanced={isEnhancedCaseStudy}
-              >
-                <div
-                  className={cn('pl-5', isEnhancedCaseStudy && 'rounded-r-[18px] py-1')}
-                  style={{
-                    borderLeft: `1px solid ${
-                      isEnhancedCaseStudy
-                        ? `${project.panelAccentColor}40`
-                        : 'rgba(15,122,122,0.20)'
-                    }`,
-                    background: isEnhancedCaseStudy
-                      ? `linear-gradient(90deg, ${project.panelAccentColor}08, transparent 62%)`
-                      : undefined,
-                  }}
-                >
-                  <Prose>{caseCopy.reflection}</Prose>
-                </div>
+              <>
+                <ChapterDivider accent={project.panelAccentColor} />
 
-                <InsightGrid
-                  items={caseCopy.reflectionCards}
+                <CaseSection
+                  id="reflection"
+                  number={sn('reflection')}
+                  title="Reflection"
                   accent={project.panelAccentColor}
                   enhanced={isEnhancedCaseStudy}
-                />
-              </CaseSection>
+                >
+                  <div
+                    className={cn('pl-5', isEnhancedCaseStudy && 'rounded-r-[16px] py-1')}
+                    style={{
+                      borderLeft: `1px solid ${
+                        isEnhancedCaseStudy
+                          ? `${project.panelAccentColor}42`
+                          : 'rgba(15,122,122,0.20)'
+                      }`,
+                      background: isEnhancedCaseStudy
+                        ? `linear-gradient(90deg, ${project.panelAccentColor}08, transparent 62%)`
+                        : undefined,
+                    }}
+                  >
+                    <Prose>{caseCopy.reflection}</Prose>
+                  </div>
+
+                  <InsightGrid
+                    items={caseCopy.reflectionCards}
+                    accent={project.panelAccentColor}
+                    enhanced={isEnhancedCaseStudy}
+                  />
+                </CaseSection>
+              </>
             )}
+
+            <ChapterDivider accent={project.panelAccentColor} />
 
             {/* ── Demo & Links ── */}
             <CaseSection
