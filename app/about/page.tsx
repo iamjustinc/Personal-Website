@@ -330,9 +330,9 @@ export default function AboutPage() {
                 </span>
               </div>
 
-              <h1 className="group/name relative inline-block font-display text-3xl sm:text-4xl lg:text-[4rem] xl:text-[4.4rem] text-text-base leading-[0.92] tracking-[-0.035em] max-w-[10ch]">
+              <h1 className="group/name relative inline-block font-display text-3xl sm:text-4xl lg:text-[3.35rem] xl:text-[3.8rem] text-text-base leading-[0.94] tracking-[-0.03em] max-w-[11ch]">
   <span className="relative z-10">
-    I turn technical complexity into{' '}
+    I turn complexity into{' '}
     <span style={{ color: '#4A9FAE' }}>clear demos and decisions.</span>
   </span>
   {!shouldReduce && (
