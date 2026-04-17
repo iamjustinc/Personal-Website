@@ -252,28 +252,59 @@ function ContactPageLayout() {
           
 
           <h2 className="font-display text-hero leading-none text-text-base">
-            Contact Me!
+            Let&apos;s talk Solutions Engineering.
           </h2>
 
           <p
             className="mt-6 max-w-[760px] font-sans leading-relaxed"
             style={{ color: '#A8C5D1', fontSize: '18px' }}
           >
-            Whether you want to talk product demos, solutions engineering, AI workflow design, or
-            early-career opportunities, I’d love to connect!
+            I&apos;m looking for early-career Solutions Engineering conversations where demos,
+            discovery, AI workflows, and technical translation matter.
           </p>
 
           <div className="mt-10">
             <CopyEmailButton email={siteConfig.email} large />
           </div>
 
-          <div className="mt-8 flex flex-wrap items-center gap-6">
-            <CompactLink href={siteConfig.linkedinUrl} icon={Linkedin} label="LinkedIn" />
-            <CompactLink href={siteConfig.githubUrl} icon={Github} label="GitHub" />
-            <CompactLink href={siteConfig.resumeUrl} download="Justin-Chang-Resume.pdf" icon={Download} label="Résumé" />
+          <div
+            className="mt-8 max-w-[620px] rounded-[22px] border p-5"
+            style={{
+              background: 'rgba(10,24,44,0.38)',
+              borderColor: 'rgba(15,122,122,0.15)',
+              boxShadow:
+                '0 14px 42px rgba(0,0,0,0.20), 0 0 0 1px rgba(255,255,255,0.02) inset',
+            }}
+          >
+            <div className="mb-3 flex items-center gap-2">
+              <StarMark size="xs" color="#C4974A" className="opacity-80" />
+              <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-text-muted">
+                Primary fit
+              </p>
+            </div>
+            <p className="font-sans text-[15px] leading-relaxed" style={{ color: '#A8C5D1' }}>
+              Customer-facing technical teams that need clear demos, workflow discovery, and
+              systems translated into usable value.
+            </p>
           </div>
 
-          <SectionFooter showThanks={false} />
+          <div
+            className="mt-14 flex flex-wrap items-center justify-between gap-4 border-t pt-6"
+            style={{ borderColor: 'rgba(15,122,122,0.10)' }}
+          >
+            <p className="font-sans text-sm" style={{ color: 'rgba(168,197,209,0.55)' }}>
+              Best next step: email or LinkedIn for SE recruiting conversations.
+            </p>
+            <div className="flex items-center gap-1.5">
+              <StarMark size="xs" color="#C4974A" className="opacity-30" />
+              <span
+                className="font-mono text-[9px] uppercase tracking-widest"
+                style={{ color: 'rgba(168,197,209,0.30)' }}
+              >
+                Solutions Engineering
+              </span>
+            </div>
+          </div>
         </div>
 
         {/* Right column */}
@@ -290,10 +321,10 @@ function ContactPageLayout() {
             <div className="mb-5 flex items-center justify-between gap-3">
               <div>
                 <p className="font-sans text-[20px] font-medium text-text-base">
-                  Best ways to reach me
+                  Recruiter actions
                 </p>
                 <p className="mt-1 text-sm" style={{ color: '#8DAFC0' }}>
-                  Quick links for intros, projects, and opportunities.
+                  Start with email or LinkedIn; résumé and GitHub are there for deeper review.
                 </p>
               </div>
 
@@ -313,26 +344,26 @@ function ContactPageLayout() {
                 href={`mailto:${siteConfig.email}`}
                 icon={Send}
                 title="Email me"
-                body="Best for role opportunities, product discussions, and collaboration."
+                body="Fastest route for Solutions Engineering roles, recruiter intros, and interview follow-ups."
               />
               <ActionCard
                 href={siteConfig.linkedinUrl}
                 icon={Linkedin}
                 title="Connect on LinkedIn"
-                body="Reach out for recruiting, networking, and quick professional intros."
+                body="Best for recruiting conversations, SE fit, and quick context."
               />
               <ActionCard
                 href={siteConfig.githubUrl}
                 icon={Github}
                 title="View GitHub"
-                body="Browse projects, code, and product experiments I’ve been building."
+                body="Secondary proof for implementation style, AI workflows, and product systems."
               />
               <ActionCard
                 href={siteConfig.resumeUrl}
                 download="Justin-Chang-Resume.pdf"
                 icon={Download}
                 title="Download résumé"
-                body="A quick way to review experience, projects, and technical range."
+                body="Review experience across data pipelines, dashboards, demos, and technical communication."
               />
             </div>
           </div>
