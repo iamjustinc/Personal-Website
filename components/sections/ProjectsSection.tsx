@@ -54,12 +54,9 @@ export function ProjectsSection() {
   const up = useMotionSafe(fadeUp)
   const inn = useMotionSafe(fadeIn)
 
-  const visibleProjects = [
-    ...projects.filter((p) => p.visible && p.homepageVisible && p.featured),
-    ...projects
-      .filter((p) => p.visible && p.homepageVisible && !p.featured)
-      .sort((a, b) => a.order - b.order),
-  ]
+  const visibleProjects = ['kestrel', 'chirpie', 'quail'].flatMap((slug) =>
+    projects.filter((p) => p.slug === slug && p.visible && p.homepageVisible),
+  )
 
   return (
     <Section id="projects" paddingY="lg">
