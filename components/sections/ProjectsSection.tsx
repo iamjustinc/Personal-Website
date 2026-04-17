@@ -10,18 +10,18 @@ import { projects } from '@/data/projects'
 import { fadeUp, fadeIn, staggerContainer, useMotionSafe } from '@/lib/motion'
 import { cn } from '@/lib/utils'
 
+// Truncates to the first sentence if it fits, otherwise hard-trims.
 function shortenText(text: string | undefined, max = 120) {
   if (!text) return ''
   const clean = text.replace(/\s+/g, ' ').trim()
-  const firstSentence = clean.match(/.*?[.!?](\s|$)/)?.[0]?.trim()
-
-  if (firstSentence && firstSentence.length <= max) return firstSentence
+  const first = clean.match(/.*?[.!?](\s|$)/)?.[0]?.trim()
+  if (first && first.length <= max) return first
   if (clean.length <= max) return clean
-
   const trimmed = clean.slice(0, max)
-  const safe = trimmed.slice(0, Math.max(trimmed.lastIndexOf(' '), max - 18)).trim()
-  return `${safe}…`
+  return `${trimmed.slice(0, Math.max(trimmed.lastIndexOf(' '), max - 18)).trim()}…`
 }
+
+// ── Floating screenshot composition ─────────────────────────────────────────
 
 function FloatingProjectVisual({
   project,
@@ -35,52 +35,52 @@ function FloatingProjectVisual({
 
   return (
     <div className="absolute inset-0 overflow-hidden">
+      {/* Ambient glow */}
       <div
         className="absolute inset-0"
         style={{
-          background: `radial-gradient(circle at 30% 30%, ${project.panelAccentColor}18 0%, rgba(10,22,40,0) 42%), radial-gradient(circle at 75% 70%, rgba(196,151,74,0.08) 0%, rgba(10,22,40,0) 30%)`,
+          background: `radial-gradient(circle at 28% 28%, ${project.panelAccentColor}18 0%, rgba(10,22,40,0) 50%)`,
         }}
       />
 
+      {/* Slow rotating star */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <motion.div
           animate={{ rotate: 360 }}
-          transition={{ duration: 120, repeat: Infinity, ease: 'linear' }}
-          style={{ opacity: 0.04 }}
+          transition={{ duration: 130, repeat: Infinity, ease: 'linear' }}
+          style={{ opacity: 0.035 }}
         >
           <StarMark size="2xl" color={project.panelAccentColor} />
         </motion.div>
       </div>
 
+      {/* Landing screenshot — large, fills upper-left */}
       {landingShot && (
         <motion.div
-          animate={{ y: [0, -10, 0], rotate: [-2, -1, -2] }}
+          animate={{ y: [0, -9, 0], rotate: [-2, -1, -2] }}
           transition={{ duration: 8.5, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute left-[8%] top-[10%] h-[68%] w-[58%] rounded-2xl overflow-hidden"
-          style={{
-            boxShadow: '0 22px 60px rgba(0,0,0,0.36)',
-          }}
+          className="absolute left-[2%] top-[4%] h-[76%] w-[68%] rounded-2xl overflow-hidden"
+          style={{ boxShadow: '0 20px 56px rgba(0,0,0,0.44)' }}
         >
           <Image
             src={landingShot}
             alt={`${project.name} landing view`}
             fill
-            sizes="(max-width: 1024px) 100vw, 420px"
+            sizes="(max-width: 1024px) 100vw, 440px"
             className="object-cover object-top"
             priority={priority}
           />
         </motion.div>
       )}
 
+      {/* Interface screenshot — slightly smaller, floats lower-right */}
       {interfaceShot && (
         <motion.div
-          animate={{ y: [0, 12, 0], rotate: [2.2, 1.1, 2.2] }}
+          animate={{ y: [0, 11, 0], rotate: [2.2, 1.1, 2.2] }}
           transition={{ duration: 7.5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
           whileHover={{ y: -4, scale: 1.01 }}
-          className="absolute right-[7%] bottom-[10%] h-[56%] w-[60%] rounded-2xl overflow-hidden"
-          style={{
-            boxShadow: '0 28px 72px rgba(0,0,0,0.40)',
-          }}
+          className="absolute right-[2%] bottom-[3%] h-[58%] w-[66%] rounded-2xl overflow-hidden"
+          style={{ boxShadow: '0 26px 64px rgba(0,0,0,0.50)' }}
         >
           <Image
             src={interfaceShot}
@@ -92,11 +92,13 @@ function FloatingProjectVisual({
         </motion.div>
       )}
 
+      {/* Accent glow under front card */}
       <div
-        className="absolute right-[14%] bottom-[8%] h-10 w-[34%] blur-2xl rounded-full"
-        style={{ background: `${project.panelAccentColor}2A` }}
+        className="absolute right-[10%] bottom-[2%] h-10 w-[42%] blur-2xl rounded-full pointer-events-none"
+        style={{ background: `${project.panelAccentColor}28` }}
       />
 
+      {/* Corner marks */}
       <div className="absolute top-4 left-4 pointer-events-none">
         <StarMark size="xs" color={project.panelAccentColor} className="opacity-40" />
       </div>
@@ -106,6 +108,8 @@ function FloatingProjectVisual({
     </div>
   )
 }
+
+// ── Section ──────────────────────────────────────────────────────────────────
 
 export function ProjectsSection() {
   const stagger = useMotionSafe(staggerContainer(0.14))
@@ -121,6 +125,7 @@ export function ProjectsSection() {
 
   return (
     <Section id="projects" paddingY="lg">
+      {/* Heading */}
       <motion.div
         variants={inn}
         initial="hidden"
@@ -140,14 +145,14 @@ export function ProjectsSection() {
             Featured Work
           </span>
         </div>
-
         <h2 className="font-display text-h1 text-text-base">Selected Work</h2>
-
         <p className="font-sans text-text-muted mt-3 max-w-[540px]" style={{ fontSize: '15px' }}>
-          Three products built end-to-end to show product thinking, implementation, and technical communication.
+          Three products built end-to-end to show product thinking, implementation, and technical
+          communication.
         </p>
       </motion.div>
 
+      {/* Project cards */}
       <motion.div
         variants={stagger}
         initial="hidden"
@@ -157,8 +162,9 @@ export function ProjectsSection() {
       >
         {visibleProjects.map((project, index) => {
           const isReversed = index % 2 === 1
-          const shortTagline = shortenText(project.tagline, 118)
-          const shortOutcome = shortenText(project.outcome, 132)
+          // Tighter truncation keeps text column from overflowing
+          const shortTagline = shortenText(project.tagline, 112)
+          const shortOutcome = shortenText(project.outcome, 105)
 
           return (
             <motion.div
@@ -176,21 +182,21 @@ export function ProjectsSection() {
                 boxShadow: '0 4px 32px rgba(0,0,0,0.30)',
               }}
             >
+              {/* ── Media ── */}
               <div
                 className={cn(
-                  'relative overflow-hidden min-h-[320px] lg:min-h-[460px]',
+                  'relative overflow-hidden min-h-[320px] lg:min-h-[480px]',
                   isReversed ? 'lg:order-2' : 'lg:order-1',
                 )}
               >
                 <div
                   className="absolute inset-0"
                   style={{
-                    background: `linear-gradient(155deg, ${project.panelAccentColor}14 0%, rgba(10,22,40,0.20) 45%, rgba(10,22,40,0.76) 100%)`,
+                    background: `linear-gradient(155deg, ${project.panelAccentColor}14 0%, rgba(10,22,40,0.18) 40%, rgba(10,22,40,0.72) 100%)`,
                   }}
                 />
-
                 <FloatingProjectVisual project={project} priority={index === 0} />
-
+                {/* Project index badge */}
                 <div
                   className="absolute top-4 right-4 flex items-center gap-1.5 rounded-full px-3 py-1 z-20"
                   style={{
@@ -206,13 +212,20 @@ export function ProjectsSection() {
                 </div>
               </div>
 
+              {/* ── Text ──
+                  Using flex-col WITHOUT justify-center prevents overflow clipping.
+                  mt-auto on the CTA row guarantees buttons always render at the bottom.
+                  Stack pills removed — they pushed total height past the card boundary,
+                  causing the Demo button to be silently cropped by overflow-hidden.
+              ── */}
               <div
                 className={cn(
-                  'flex flex-col justify-center p-8 lg:p-12',
+                  'flex flex-col px-8 lg:px-12 py-9 lg:py-11',
                   isReversed ? 'lg:order-1' : 'lg:order-2',
                 )}
               >
-                <div className="flex flex-wrap gap-2 mb-5">
+                {/* Tags */}
+                <div className="flex flex-wrap gap-2 mb-4">
                   {project.tags.slice(0, 3).map((tag) => (
                     <span
                       key={tag}
@@ -228,22 +241,28 @@ export function ProjectsSection() {
                   ))}
                 </div>
 
-                <h3 className="font-display text-h1 text-text-base leading-tight">{project.name}</h3>
+                {/* Title */}
+                <h3 className="font-display text-h1 text-text-base leading-tight">
+                  {project.name}
+                </h3>
 
+                {/* Meta */}
                 <p className="font-mono text-[11px] text-text-muted mt-2 tracking-wider uppercase">
                   {project.year} · {project.role}
                 </p>
 
+                {/* Tagline */}
                 <p
-                  className="font-sans mt-5 leading-relaxed max-w-[34ch]"
+                  className="font-sans mt-4 leading-relaxed max-w-[34ch]"
                   style={{ fontSize: '15px', color: '#A8C5D1' }}
                 >
                   {shortTagline}
                 </p>
 
+                {/* Outcome callout */}
                 {shortOutcome && (
                   <div
-                    className="mt-5 inline-flex items-start gap-2 self-start px-4 py-2.5 rounded-btn max-w-[36rem]"
+                    className="mt-4 inline-flex items-start gap-2 self-start px-4 py-2.5 rounded-btn"
                     style={{
                       background: `${project.panelAccentColor}10`,
                       border: `1px solid ${project.panelAccentColor}22`,
@@ -260,33 +279,24 @@ export function ProjectsSection() {
                   </div>
                 )}
 
-                {project.stack && project.stack.length > 0 && (
-                  <div className="flex flex-wrap gap-1.5 mt-5">
-                    {project.stack.slice(0, 4).map((s) => (
-                      <span
-                        key={s}
-                        className="font-mono text-[9.5px] px-2.5 py-1 rounded-btn"
-                        style={{
-                          background: 'rgba(15,42,61,0.80)',
-                          border: '1px solid rgba(15,122,122,0.14)',
-                          color: '#6A9BAA',
-                        }}
-                      >
-                        {s}
-                      </span>
-                    ))}
-                  </div>
-                )}
-
-                <div className="mt-8 flex flex-wrap gap-2">
+                {/* CTAs — mt-auto pushes this to the card bottom regardless of content height */}
+                <div className="mt-auto pt-7 flex flex-wrap gap-2">
                   <HoverSparkle className="inline-flex">
-                    <StarburstButton href={`/projects/${project.slug}`} variant="primary" size="sm">
+                    <StarburstButton
+                      href={`/projects/${project.slug}`}
+                      variant="primary"
+                      size="sm"
+                    >
                       View Case Study
                     </StarburstButton>
                   </HoverSparkle>
 
                   <HoverSparkle className="inline-flex">
-                    <StarburstButton href={`/projects/${project.slug}/demo`} variant="secondary" size="sm">
+                    <StarburstButton
+                      href={`/projects/${project.slug}/demo`}
+                      variant="secondary"
+                      size="sm"
+                    >
                       Demo
                     </StarburstButton>
                   </HoverSparkle>
