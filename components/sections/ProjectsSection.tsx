@@ -80,7 +80,7 @@ export function ProjectsSection() {
             Solution Proof
           </span>
         </div>
-        <h2 className="font-display text-h1 text-text-base">Featured Solution</h2>
+        <h2 className="font-display text-h1 text-text-base">Featured Project</h2>
         <p className="font-sans text-text-muted mt-3 max-w-[560px]" style={{ fontSize: '15px' }}>
           A live case study showing how I structure ambiguity, translate requirements, and turn AI
           outputs into a guided decision workflow.

@@ -83,7 +83,7 @@ function CopyEmailButton({
             {email}
           </p>
           <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-text-muted">
-            Click to copy
+            Direct email
           </p>
         </div>
       </div>
@@ -225,7 +225,7 @@ function SectionFooter({ showThanks = true }: { showThanks?: boolean }) {
         </p>
         {showThanks && (
           <p className="mt-2 text-sm" style={{ color: 'rgba(168,197,209,0.50)' }}>
-            Thanks for stopping by! This was built with a lot care :D
+            Built to show how I translate systems into demos, workflows, and decisions.
           </p>
         )}
       </div>
@@ -236,7 +236,7 @@ function SectionFooter({ showThanks = true }: { showThanks?: boolean }) {
           className="font-mono text-[9px] uppercase tracking-widest"
           style={{ color: 'rgba(168,197,209,0.30)' }}
         >
-          SE · PM
+          Solutions Engineering
         </span>
       </div>
     </div>
@@ -347,13 +347,14 @@ function ContactSectionLayout() {
     <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(420px,520px)] lg:gap-16">
       <div className="relative">
 
-        <h2 className="font-display text-h1 text-text-base">Let&apos;s talk.</h2>
+        <h2 className="font-display text-h1 text-text-base">Let&apos;s talk solutions.</h2>
 
         <p
           className="mt-5 max-w-[680px] font-sans leading-relaxed"
           style={{ color: '#A8C5D1', fontSize: '16px' }}
         >
-          {siteConfig.currentlyOpen}
+          Open to early-career Solutions Engineering roles where technical demos, discovery, and
+          workflow translation turn complex systems into customer value.
         </p>
 
         <div className="mt-8">
@@ -366,23 +367,27 @@ function ContactSectionLayout() {
       <div className="grid gap-8 sm:grid-cols-2">
 
         <div>
-          <p className="mb-4 font-sans text-[22px] font-medium text-text-base">Profiles</p>
+          <p className="mb-4 font-sans text-[22px] font-medium text-text-base">Recruiter links</p>
           <div className="space-y-3">
-            <CompactLink href={siteConfig.linkedinUrl} icon={Linkedin} label="LinkedIn" />
-            <CompactLink href={siteConfig.githubUrl} icon={Github} label="GitHub" />
+            <CompactLink href={siteConfig.linkedinUrl} icon={Linkedin} label="LinkedIn profile" />
+            <CompactLink href={siteConfig.githubUrl} icon={Github} label="GitHub projects" />
           </div>
         </div>
 
         <div>
-          <p className="mb-4 font-sans text-[22px] font-medium text-text-base">Availability</p>
+          <p className="mb-4 font-sans text-[22px] font-medium text-text-base">Best fit</p>
           <div className="space-y-3 text-sm" style={{ color: '#A8C5D1' }}>
             <div className="flex items-start gap-2">
               <StarMark size="xs" color="#4A9FAE" className="mt-1 opacity-70" />
-              <span>Open to early-career SE + PM roles</span>
+              <span>Early-career Solutions Engineering roles</span>
             </div>
             <div className="flex items-start gap-2">
               <StarMark size="xs" color="#C4974A" className="mt-1 opacity-70" />
-              <span>Interested in AI systems, product demos, and customer-facing work</span>
+              <span>Technical demos, discovery, and workflow translation</span>
+            </div>
+            <div className="flex items-start gap-2">
+              <StarMark size="xs" color="#4A9FAE" className="mt-1 opacity-70" />
+              <span>Customer-facing teams turning complex systems into usable value</span>
             </div>
           </div>
         </div>
