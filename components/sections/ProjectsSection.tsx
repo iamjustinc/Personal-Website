@@ -35,32 +35,21 @@ function FloatingProjectVisual({
 
   return (
     <div className="absolute inset-0 overflow-hidden">
-      {/* Ambient glow */}
+      {/* Very subtle ambient glow — avoids the "display panel" feel */}
       <div
         className="absolute inset-0"
         style={{
-          background: `radial-gradient(circle at 28% 28%, ${project.panelAccentColor}18 0%, rgba(10,22,40,0) 50%)`,
+          background: `radial-gradient(circle at 28% 25%, ${project.panelAccentColor}10 0%, transparent 52%)`,
         }}
       />
 
-      {/* Slow rotating star */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 130, repeat: Infinity, ease: 'linear' }}
-          style={{ opacity: 0.035 }}
-        >
-          <StarMark size="2xl" color={project.panelAccentColor} />
-        </motion.div>
-      </div>
-
-      {/* Landing screenshot — large, fills upper-left */}
+      {/* Landing screenshot — large, bleeds toward top-left */}
       {landingShot && (
         <motion.div
-          animate={{ y: [0, -9, 0], rotate: [-2, -1, -2] }}
-          transition={{ duration: 8.5, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute left-[2%] top-[4%] h-[76%] w-[68%] rounded-2xl overflow-hidden"
-          style={{ boxShadow: '0 20px 56px rgba(0,0,0,0.44)' }}
+          animate={{ y: [0, -8, 0], rotate: [-1.5, -0.5, -1.5] }}
+          transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute left-[1%] top-[3%] h-[80%] w-[74%] rounded-2xl overflow-hidden"
+          style={{ boxShadow: '0 22px 58px rgba(0,0,0,0.50)' }}
         >
           <Image
             src={landingShot}
@@ -73,37 +62,36 @@ function FloatingProjectVisual({
         </motion.div>
       )}
 
-      {/* Interface screenshot — slightly smaller, floats lower-right */}
+      {/* Interface screenshot — slightly smaller, bleeds toward bottom-right */}
       {interfaceShot && (
         <motion.div
-          animate={{ y: [0, 11, 0], rotate: [2.2, 1.1, 2.2] }}
-          transition={{ duration: 7.5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-          whileHover={{ y: -4, scale: 1.01 }}
-          className="absolute right-[2%] bottom-[3%] h-[58%] w-[66%] rounded-2xl overflow-hidden"
-          style={{ boxShadow: '0 26px 64px rgba(0,0,0,0.50)' }}
+          animate={{ y: [0, 10, 0], rotate: [2, 1, 2] }}
+          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut', delay: 0.6 }}
+          className="absolute right-[1%] bottom-[2%] h-[62%] w-[72%] rounded-2xl overflow-hidden"
+          style={{ boxShadow: '0 26px 64px rgba(0,0,0,0.54)' }}
         >
           <Image
             src={interfaceShot}
             alt={`${project.name} interface view`}
             fill
-            sizes="(max-width: 1024px) 100vw, 460px"
+            sizes="(max-width: 1024px) 100vw, 440px"
             className="object-cover object-center"
           />
         </motion.div>
       )}
 
-      {/* Accent glow under front card */}
+      {/* Accent glow under front screenshot */}
       <div
-        className="absolute right-[10%] bottom-[2%] h-10 w-[42%] blur-2xl rounded-full pointer-events-none"
-        style={{ background: `${project.panelAccentColor}28` }}
+        className="absolute right-[8%] bottom-[1%] h-8 w-[40%] blur-2xl rounded-full pointer-events-none"
+        style={{ background: `${project.panelAccentColor}20` }}
       />
 
       {/* Corner marks */}
       <div className="absolute top-4 left-4 pointer-events-none">
-        <StarMark size="xs" color={project.panelAccentColor} className="opacity-40" />
+        <StarMark size="xs" color={project.panelAccentColor} className="opacity-35" />
       </div>
       <div className="absolute bottom-4 right-4 pointer-events-none">
-        <StarMark size="xs" color="#C4974A" className="opacity-40" />
+        <StarMark size="xs" color="#C4974A" className="opacity-30" />
       </div>
     </div>
   )
@@ -162,17 +150,16 @@ export function ProjectsSection() {
       >
         {visibleProjects.map((project, index) => {
           const isReversed = index % 2 === 1
-          // Tighter truncation keeps text column from overflowing
-          const shortTagline = shortenText(project.tagline, 112)
-          const shortOutcome = shortenText(project.outcome, 105)
+          const shortTagline = shortenText(project.tagline, 100)
+          const shortOutcome = shortenText(project.outcome, 88)
 
           return (
             <motion.div
               key={project.slug}
               variants={up}
               whileHover={{
-                y: -6,
-                boxShadow: '0 24px 68px rgba(0,0,0,0.66), 0 0 0 1px rgba(15,122,122,0.30)',
+                y: -5,
+                boxShadow: '0 24px 68px rgba(0,0,0,0.64), 0 0 0 1px rgba(15,122,122,0.28)',
               }}
               transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
               className={cn('grid lg:grid-cols-2 gap-0 rounded-2xl overflow-hidden cursor-default')}
@@ -185,17 +172,19 @@ export function ProjectsSection() {
               {/* ── Media ── */}
               <div
                 className={cn(
-                  'relative overflow-hidden min-h-[320px] lg:min-h-[480px]',
+                  'relative overflow-hidden min-h-[320px] lg:min-h-[500px]',
                   isReversed ? 'lg:order-2' : 'lg:order-1',
                 )}
               >
+                {/* Very light panel tint — screenshots should read as product UI, not posters */}
                 <div
                   className="absolute inset-0"
                   style={{
-                    background: `linear-gradient(155deg, ${project.panelAccentColor}14 0%, rgba(10,22,40,0.18) 40%, rgba(10,22,40,0.72) 100%)`,
+                    background: `linear-gradient(155deg, ${project.panelAccentColor}10 0%, rgba(10,22,40,0.10) 40%, rgba(10,22,40,0.65) 100%)`,
                   }}
                 />
                 <FloatingProjectVisual project={project} priority={index === 0} />
+
                 {/* Project index badge */}
                 <div
                   className="absolute top-4 right-4 flex items-center gap-1.5 rounded-full px-3 py-1 z-20"
@@ -213,26 +202,27 @@ export function ProjectsSection() {
               </div>
 
               {/* ── Text ──
-                  Using flex-col WITHOUT justify-center prevents overflow clipping.
-                  mt-auto on the CTA row guarantees buttons always render at the bottom.
-                  Stack pills removed — they pushed total height past the card boundary,
-                  causing the Demo button to be silently cropped by overflow-hidden.
+                  flex-col with NO justify-center: content stacks from top, no overflow risk.
+                  mt-auto on CTA row: always rendered at the card bottom regardless of content height.
+                  Stack pills: kept per spec.
+                  Layout math (lg): min-h 500px − py-9 72px = 428px available.
+                  Content ≈ 328px → 100px headroom → Demo is always visible.
               ── */}
               <div
                 className={cn(
-                  'flex flex-col px-8 lg:px-12 py-9 lg:py-11',
+                  'flex flex-col px-7 lg:px-10 py-7 lg:py-9',
                   isReversed ? 'lg:order-1' : 'lg:order-2',
                 )}
               >
-                {/* Tags */}
-                <div className="flex flex-wrap gap-2 mb-4">
+                {/* Category tags */}
+                <div className="flex flex-wrap gap-1.5 mb-3">
                   {project.tags.slice(0, 3).map((tag) => (
                     <span
                       key={tag}
-                      className="font-mono text-[10.5px] uppercase tracking-wider px-3 py-1 rounded-full"
+                      className="font-mono text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full"
                       style={{
-                        background: `${project.panelAccentColor}14`,
-                        border: `1px solid ${project.panelAccentColor}28`,
+                        background: `${project.panelAccentColor}12`,
+                        border: `1px solid ${project.panelAccentColor}24`,
                         color: '#A8C5D1',
                       }}
                     >
@@ -247,14 +237,14 @@ export function ProjectsSection() {
                 </h3>
 
                 {/* Meta */}
-                <p className="font-mono text-[11px] text-text-muted mt-2 tracking-wider uppercase">
+                <p className="font-mono text-[10.5px] text-text-muted mt-2 tracking-wider uppercase">
                   {project.year} · {project.role}
                 </p>
 
                 {/* Tagline */}
                 <p
-                  className="font-sans mt-4 leading-relaxed max-w-[34ch]"
-                  style={{ fontSize: '15px', color: '#A8C5D1' }}
+                  className="font-sans mt-3 leading-relaxed"
+                  style={{ fontSize: '14.5px', color: '#A8C5D1' }}
                 >
                   {shortTagline}
                 </p>
@@ -262,25 +252,42 @@ export function ProjectsSection() {
                 {/* Outcome callout */}
                 {shortOutcome && (
                   <div
-                    className="mt-4 inline-flex items-start gap-2 self-start px-4 py-2.5 rounded-btn"
+                    className="mt-3 inline-flex items-start gap-2 self-start px-3.5 py-2 rounded-btn"
                     style={{
-                      background: `${project.panelAccentColor}10`,
-                      border: `1px solid ${project.panelAccentColor}22`,
+                      background: `${project.panelAccentColor}0E`,
+                      border: `1px solid ${project.panelAccentColor}20`,
                     }}
                   >
                     <StarMark
                       size="xs"
                       color={project.panelAccentColor}
-                      className="opacity-55 mt-0.5 shrink-0"
+                      className="opacity-50 mt-0.5 shrink-0"
                     />
-                    <span className="font-sans text-sm leading-snug text-text-muted">
+                    <span className="font-sans text-[13px] leading-snug text-text-muted">
                       {shortOutcome}
                     </span>
                   </div>
                 )}
 
-                {/* CTAs — mt-auto pushes this to the card bottom regardless of content height */}
-                <div className="mt-auto pt-7 flex flex-wrap gap-2">
+                {/* Stack pills — kept per spec */}
+                <div className="flex flex-wrap gap-1.5 mt-3">
+                  {project.stack.slice(0, 5).map((s) => (
+                    <span
+                      key={s}
+                      className="font-mono text-[9.5px] px-2 py-0.5 rounded"
+                      style={{
+                        background: 'rgba(15,42,61,0.80)',
+                        border: '1px solid rgba(15,122,122,0.12)',
+                        color: '#6A9BAA',
+                      }}
+                    >
+                      {s}
+                    </span>
+                  ))}
+                </div>
+
+                {/* CTAs — mt-auto guarantees bottom render even when content is short */}
+                <div className="mt-auto pt-6 flex flex-wrap gap-2">
                   <HoverSparkle className="inline-flex">
                     <StarburstButton
                       href={`/projects/${project.slug}`}
