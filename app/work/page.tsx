@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion, type Variants } from 'framer-motion'
 import { ProjectFloatingScreenshots } from '@/components/projects/ProjectFloatingScreenshots'
 import { Section } from '@/components/ui/Section'
 import { StarMark } from '@/components/ui/StarMark'
@@ -9,17 +9,58 @@ import { HoverSparkle } from '@/components/ui/HoverSparkle'
 import { WatermarkStar } from '@/components/ui/WatermarkStar'
 import { projects } from '@/data/projects'
 import type { Project } from '@/types/project'
-import { fadeUp, fadeIn } from '@/lib/motion'
+import { EASING, fadeIn } from '@/lib/motion'
 
-// Truncates to the first sentence if it fits, otherwise hard-trims.
-function shortenText(text: string | undefined, max = 120) {
-  if (!text) return ''
-  const clean = text.replace(/\s+/g, ' ').trim()
-  const first = clean.match(/.*?[.!?](\s|$)/)?.[0]?.trim()
-  if (first && first.length <= max) return first
-  if (clean.length <= max) return clean
-  const trimmed = clean.slice(0, max)
-  return `${trimmed.slice(0, Math.max(trimmed.lastIndexOf(' '), max - 18)).trim()}…`
+const portfolioProjectOrder = ['kestrel', 'chirpie', 'quail'] as const
+
+const workProjectSpotlights: Record<
+  string,
+  {
+    description: string
+    metrics: { value: string; label: string }[]
+    glow: string
+  }
+> = {
+  kestrel: {
+    description:
+      'Turns job descriptions into fit scores, skill gaps, and an action roadmap users can trust.',
+    metrics: [
+      { value: '30K+', label: 'records analyzed' },
+      { value: '4', label: 'fit signals' },
+      { value: '1', label: 'action roadmap' },
+    ],
+    glow: '28% 22%',
+  },
+  chirpie: {
+    description:
+      'Turns multi-source news into explainable digests with confidence and attribution built in.',
+    metrics: [
+      { value: '3+', label: 'source streams' },
+      { value: '4', label: 'trust cues' },
+      { value: '1', label: 'digest loop' },
+    ],
+    glow: '72% 26%',
+  },
+  quail: {
+    description:
+      'Turns inbox overload into prioritized action lanes so users know what needs attention first.',
+    metrics: [
+      { value: '3', label: 'priority signals' },
+      { value: '4', label: 'action lanes' },
+      { value: '1', label: 'triage pipeline' },
+    ],
+    glow: '34% 72%',
+  },
+}
+
+const cardReveal: Variants = {
+  hidden: { opacity: 0, y: 28, scale: 0.985 },
+  visible: (index: number) => ({
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.58, delay: index * 0.08, ease: EASING },
+  }),
 }
 
 // ── Project card ──────────────────────────────────────────────────────────────
@@ -33,38 +74,101 @@ function WorkProjectCard({
   reversed: boolean
   index: number
 }) {
-  const shortTagline = shortenText(project.tagline, 110)
-  const shortOutcome = shortenText(project.outcome, 95)
+  const reduceMotion = useReducedMotion()
+  const spotlight = workProjectSpotlights[project.slug] ?? {
+    description: project.tagline,
+    metrics: [
+      { value: '3', label: 'product signals' },
+      { value: String(project.stack.length), label: 'core tools' },
+      { value: String(project.year), label: 'built' },
+    ],
+    glow: '34% 28%',
+  }
 
   return (
     <motion.article
-      variants={fadeUp}
+      custom={index}
+      variants={cardReveal}
       initial="hidden"
       whileInView="visible"
-      whileHover={{
-        y: -5,
-        boxShadow: '0 24px 68px rgba(0,0,0,0.64), 0 0 0 1px rgba(15,122,122,0.28)',
-      }}
+      whileHover={
+        reduceMotion
+          ? undefined
+          : {
+              y: -6,
+              boxShadow: `0 30px 82px rgba(0,0,0,0.68), 0 0 0 1px ${project.panelAccentColor}36`,
+            }
+      }
       transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
       viewport={{ once: true }}
-      className="rounded-2xl overflow-hidden"
+      className="group relative overflow-hidden rounded-[28px]"
       style={{
-        background: 'rgba(15,42,61,0.60)',
-        border: '1px solid rgba(15,122,122,0.14)',
-        boxShadow: '0 4px 32px rgba(0,0,0,0.30)',
+        background:
+          'linear-gradient(135deg, rgba(15,42,61,0.78), rgba(9,20,36,0.90) 48%, rgba(8,18,30,0.96))',
+        border: `1px solid ${project.panelAccentColor}24`,
+        boxShadow: '0 18px 58px rgba(0,0,0,0.40)',
       }}
     >
-      <div className={`flex flex-col lg:flex-row ${reversed ? 'lg:flex-row-reverse' : ''}`}>
+      <div
+        className="pointer-events-none absolute inset-0 opacity-80 transition-opacity duration-700 group-hover:opacity-100"
+        style={{
+          background: `radial-gradient(circle at ${spotlight.glow}, ${project.panelAccentColor}20 0%, transparent 34%), radial-gradient(circle at 88% 12%, rgba(196,151,74,0.08) 0%, transparent 24%)`,
+        }}
+        aria-hidden
+      />
+
+      <div
+        className="pointer-events-none absolute inset-px rounded-[27px] opacity-0 transition-opacity duration-700 group-hover:opacity-100"
+        style={{
+          background: `linear-gradient(120deg, transparent 0%, ${project.panelAccentColor}1A 28%, rgba(196,151,74,0.12) 48%, transparent 68%)`,
+        }}
+        aria-hidden
+      />
+
+      {!reduceMotion && (
+        <motion.div
+          className="pointer-events-none absolute -left-1/2 top-0 h-full w-1/2 opacity-35 blur-2xl"
+          animate={{ x: ['-10%', '330%'] }}
+          transition={{
+            duration: 8.5 + index,
+            repeat: Infinity,
+            repeatType: 'mirror',
+            ease: 'easeInOut',
+            delay: index * 0.7,
+          }}
+          style={{
+            background: `linear-gradient(90deg, transparent, ${project.panelAccentColor}24, rgba(196,151,74,0.12), transparent)`,
+          }}
+          aria-hidden
+        />
+      )}
+
+      <div className="pointer-events-none absolute left-5 top-5 z-20 opacity-35 transition-opacity duration-500 group-hover:opacity-70">
+        <StarMark size="xs" color={index === 1 ? '#C4974A' : project.panelAccentColor} />
+      </div>
+
+      <motion.div
+        className="pointer-events-none absolute right-7 top-7 z-20"
+        animate={
+          reduceMotion
+            ? undefined
+            : { opacity: [0.2, 0.85, 0.2], scale: [0.85, 1.18, 0.85], rotate: [0, 18, 0] }
+        }
+        transition={{ duration: 3.8, repeat: Infinity, ease: 'easeInOut', delay: index * 0.35 }}
+      >
+        <StarMark size="xs" color="#C4974A" />
+      </motion.div>
+
+      <div className={`relative z-10 flex flex-col lg:flex-row ${reversed ? 'lg:flex-row-reverse' : ''}`}>
 
         {/* ── Media column ── */}
         <div
-          className="relative lg:w-[48%] min-h-[340px] lg:min-h-[520px] overflow-hidden shrink-0"
+          className="relative min-h-[300px] overflow-hidden sm:min-h-[340px] lg:min-h-[430px] lg:w-[45%] xl:min-h-[460px] shrink-0"
         >
-          {/* Very light panel tint */}
           <div
             className="absolute inset-0"
             style={{
-              background: `linear-gradient(155deg, ${project.panelAccentColor}10 0%, rgba(10,22,40,0.10) 40%, rgba(10,22,40,0.65) 100%)`,
+              background: `linear-gradient(155deg, ${project.panelAccentColor}12 0%, rgba(10,22,40,0.06) 42%, rgba(10,22,40,0.72) 100%)`,
             }}
           />
 
@@ -73,15 +177,15 @@ function WorkProjectCard({
             priority={index === 0}
             showWatermark
             imageSizes="(max-width: 1024px) 100vw, 560px"
+            className="transition-transform duration-700 ease-out group-hover:scale-[1.025]"
           />
 
-          {/* Index badge */}
           <div
-            className="absolute top-4 right-4 flex items-center gap-1.5 rounded-full px-3 py-1 z-20"
+            className="absolute bottom-4 left-4 z-20 flex items-center gap-1.5 rounded-full px-3 py-1"
             style={{
-              background: 'rgba(13,30,53,0.85)',
+              background: 'rgba(13,30,53,0.82)',
               backdropFilter: 'blur(12px)',
-              border: `1px solid ${project.panelAccentColor}28`,
+              border: `1px solid ${project.panelAccentColor}32`,
             }}
           >
             <StarMark size="xs" color={project.panelAccentColor} className="opacity-65" />
@@ -91,124 +195,126 @@ function WorkProjectCard({
           </div>
         </div>
 
-        {/* ── Content column ──
-            flex-col, NO justify-center: content stacks from top, no overflow risk.
-            mt-auto on CTA row: buttons always render at card bottom.
-        ── */}
-        <div className="flex flex-col px-8 lg:px-10 py-8 lg:py-10 lg:flex-1">
+        {/* ── Content column ── */}
+        <div className="flex flex-col px-6 py-7 sm:px-8 lg:flex-1 lg:px-9 lg:py-8 xl:px-10">
 
           {/* Category tags */}
-          <div className="flex flex-wrap gap-1.5 mb-3">
+          <div className="mb-4 flex flex-wrap gap-2">
             {project.tags.slice(0, 3).map((tag) => (
-              <span
+              <motion.span
                 key={tag}
-                className="font-mono text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full"
+                whileHover={reduceMotion ? undefined : { y: -2 }}
+                className="rounded-full px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider"
                 style={{
-                  background: `${project.panelAccentColor}12`,
-                  border: `1px solid ${project.panelAccentColor}24`,
-                  color: '#A8C5D1',
+                  background: `${project.panelAccentColor}16`,
+                  border: `1px solid ${project.panelAccentColor}32`,
+                  color: '#C3D8E1',
                 }}
               >
                 {tag}
-              </span>
+              </motion.span>
             ))}
           </div>
 
-          {/* Title */}
-          <h2 className="font-display text-h1 text-text-base leading-tight">{project.name}</h2>
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+            <h2 className="font-display text-[clamp(2.45rem,5vw,4.65rem)] leading-[0.9] text-text-base">
+              {project.name}
+            </h2>
 
-          {/* Year / role meta */}
-          <p className="font-mono text-[10.5px] text-text-muted mt-2 tracking-wider uppercase opacity-75">
-            {project.year} · {project.role}
+            <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-text-muted/80 sm:pb-1">
+              {project.year} · {project.role}
+            </p>
+          </div>
+
+          <p className="mt-4 max-w-[620px] font-sans text-[15px] leading-relaxed text-[#B8D0DC]">
+            {spotlight.description}
           </p>
 
-          {/* Tagline */}
-          <p
-            className="font-sans mt-4 leading-relaxed"
-            style={{ fontSize: '15px', color: '#B8D0DC' }}
-          >
-            {shortTagline}
-          </p>
-
-          {/* Problem */}
-          {project.problem && (
-            <div className="mt-5">
-              <p
-                className="font-mono text-[9.5px] uppercase tracking-[0.12em] mb-2"
-                style={{ color: project.panelAccentColor, opacity: 0.75 }}
+          <div className="mt-6 grid grid-cols-3 gap-2.5">
+            {spotlight.metrics.map((metric, metricIndex) => (
+              <motion.div
+                key={`${project.slug}-${metric.label}`}
+                whileHover={
+                  reduceMotion
+                    ? undefined
+                    : {
+                        y: -3,
+                        borderColor: `${project.panelAccentColor}66`,
+                        backgroundColor: `${project.panelAccentColor}14`,
+                      }
+                }
+                transition={{ duration: 0.22, ease: EASING }}
+                className="relative overflow-hidden rounded-2xl px-2.5 py-3 text-center"
+                style={{
+                  background: 'rgba(8,18,30,0.48)',
+                  border: `1px solid ${project.panelAccentColor}26`,
+                }}
               >
-                Problem
-              </p>
-              <p className="font-sans text-[13.5px] leading-relaxed" style={{ color: '#8DAFC0' }}>
-                {shortenText(project.problem, 130)}
-              </p>
-            </div>
-          )}
-
-          {/* Solution */}
-          {project.solution && (
-            <div className="mt-4">
-              <p
-                className="font-mono text-[9.5px] uppercase tracking-[0.12em] mb-2"
-                style={{ color: project.panelAccentColor, opacity: 0.75 }}
-              >
-                Solution
-              </p>
-              <p className="font-sans text-[13.5px] leading-relaxed" style={{ color: '#8DAFC0' }}>
-                {shortenText(project.solution, 130)}
-              </p>
-            </div>
-          )}
-
-          {/* Outcome callout */}
-          {shortOutcome && (
-            <div
-              className="mt-5 flex items-start gap-2.5 px-4 py-3 rounded-[14px]"
-              style={{
-                background: `${project.panelAccentColor}0E`,
-                border: `1px solid ${project.panelAccentColor}22`,
-              }}
-            >
-              <StarMark
-                size="xs"
-                color={project.panelAccentColor}
-                className="opacity-55 mt-0.5 shrink-0"
-              />
-              <span className="font-sans text-[13px] leading-snug" style={{ color: '#A8C5D1' }}>
-                {shortOutcome}
-              </span>
-            </div>
-          )}
+                <motion.div
+                  className="absolute inset-x-2 top-0 h-px"
+                  animate={
+                    reduceMotion
+                      ? undefined
+                      : { opacity: metricIndex === 1 ? [0.2, 0.85, 0.2] : [0.15, 0.48, 0.15] }
+                  }
+                  transition={{
+                    duration: 3.2,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                    delay: metricIndex * 0.35,
+                  }}
+                  style={{
+                    background: `linear-gradient(90deg, transparent, ${project.panelAccentColor}, transparent)`,
+                  }}
+                />
+                <span
+                  className="block font-display text-[clamp(1.9rem,4vw,3rem)] leading-none"
+                  style={{ color: metricIndex === 0 ? project.panelAccentColor : '#E6EEF2' }}
+                >
+                  {metric.value}
+                </span>
+                <span className="mt-1.5 block font-mono text-[9px] uppercase leading-snug tracking-[0.12em] text-[#8DAFC0]">
+                  {metric.label}
+                </span>
+              </motion.div>
+            ))}
+          </div>
 
           {/* Stack pills */}
           {project.stack && project.stack.length > 0 && (
-            <div className="flex flex-wrap gap-1.5 mt-4">
-              {project.stack.map((s) => (
-                <span
+            <div className="mt-5 flex flex-wrap gap-2.5">
+              {project.stack.map((s, stackIndex) => (
+                <motion.span
                   key={s}
-                  className="font-mono text-[9.5px] px-2 py-0.5 rounded"
+                  whileHover={reduceMotion ? undefined : { y: -2, scale: 1.03 }}
+                  transition={{ duration: 0.2, ease: EASING }}
+                  className="rounded-full px-3 py-1.5 font-mono text-[10px]"
                   style={{
-                    background: 'rgba(15,42,61,0.80)',
-                    border: '1px solid rgba(15,122,122,0.12)',
-                    color: '#6A9BAA',
+                    background:
+                      stackIndex === 0 ? `${project.panelAccentColor}18` : 'rgba(15,42,61,0.72)',
+                    border:
+                      stackIndex === 0
+                        ? `1px solid ${project.panelAccentColor}40`
+                        : '1px solid rgba(74,159,174,0.18)',
+                    color: stackIndex === 0 ? '#D7EEF1' : '#8EB6C4',
                   }}
                 >
                   {s}
-                </span>
+                </motion.span>
               ))}
             </div>
           )}
 
-          {/* CTAs — mt-auto guarantees bottom render */}
-          <div className="mt-auto pt-7 flex flex-wrap gap-2">
+          {/* CTAs */}
+          <div className="mt-auto flex flex-wrap gap-2.5 pt-6">
             <HoverSparkle className="inline-flex">
-              <StarburstButton href={`/projects/${project.slug}`} variant="primary" size="md">
+              <StarburstButton href={`/projects/${project.slug}`} variant="primary" size="sm">
                 View Case Study
               </StarburstButton>
             </HoverSparkle>
 
             <HoverSparkle className="inline-flex">
-              <StarburstButton href={`/projects/${project.slug}/demo`} variant="secondary" size="md">
+              <StarburstButton href={`/projects/${project.slug}/demo`} variant="secondary" size="sm">
                 Demo
               </StarburstButton>
             </HoverSparkle>
@@ -220,7 +326,7 @@ function WorkProjectCard({
                   target="_blank"
                   rel="noopener noreferrer"
                   variant="secondary"
-                  size="md"
+                  size="sm"
                 >
                   Try It Out
                 </StarburstButton>
@@ -236,10 +342,9 @@ function WorkProjectCard({
 // ── Page ──────────────────────────────────────────────────────────────────────
 
 export default function WorkPage() {
-  const visibleProjects = [
-    ...projects.filter((p) => p.visible && p.featured),
-    ...projects.filter((p) => p.visible && !p.featured).sort((a, b) => a.order - b.order),
-  ]
+  const visibleProjects = portfolioProjectOrder
+    .map((slug) => projects.find((project) => project.slug === slug && project.visible))
+    .filter((project): project is Project => Boolean(project))
 
   return (
     <main className="pt-16 min-h-screen">
@@ -279,7 +384,7 @@ export default function WorkPage() {
           </p>
         </motion.div>
 
-        <div className="flex flex-col gap-12">
+        <div className="flex flex-col gap-8 lg:gap-9">
           {visibleProjects.map((project, i) => (
             <WorkProjectCard
               key={project.slug}
