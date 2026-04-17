@@ -422,7 +422,7 @@ export function HeroText() {
         className="font-sans leading-relaxed mt-6 max-w-[520px]"
         style={{ fontSize: 'clamp(16px, 1.7vw, 19px)', color: '#A8C5D1' }}
       >
-        {siteConfig.heroStatement}
+        I translate messy business needs into technical demos, guided workflows, and clear decisions.
       </motion.p>
 
       {/* ── Role pill ────────────────────────────────────────────────────── */}
@@ -436,7 +436,7 @@ export function HeroText() {
           }}
         >
           <StarMark size="xs" color="#C4974A" className="opacity-80" />
-          {siteConfig.roleTag}
+          Solutions Engineering + Technical Translation
         </span>
       </motion.div>
 
@@ -452,7 +452,7 @@ export function HeroText() {
       <motion.div variants={fast} className="flex flex-wrap gap-3 mt-6">
         <HoverSparkle className="inline-flex">
           <StarburstButton href="/#projects" variant="primary" size="lg">
-            View my work
+            See solution work
           </StarburstButton>
         </HoverSparkle>
         <HoverSparkle className="inline-flex">

@@ -19,11 +19,11 @@ const projectSpotlights: Record<
 > = {
   kestrel: {
     description:
-      'Turns role requirements into readiness scores, gap analysis, and a concrete career roadmap.',
+      'Translates a messy job description into fit signals, ranked gaps, and a guided action plan.',
     metrics: [
-      { value: '1 JD', label: 'to roadmap' },
-      { value: '4', label: 'fit signals' },
-      { value: '5', label: 'demo views' },
+      { value: '1 JD', label: 'requirements mapped' },
+      { value: '4', label: 'decision signals' },
+      { value: '5', label: 'workflow views' },
     ],
   },
   quail: {
@@ -77,13 +77,13 @@ export function ProjectsSection() {
         >
           <StarMark size="xs" color="#C4974A" className="opacity-80" />
           <span className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-text-muted">
-            Featured Work
+            Solution Proof
           </span>
         </div>
-        <h2 className="font-display text-h1 text-text-base">Selected Work</h2>
+        <h2 className="font-display text-h1 text-text-base">Featured Solution</h2>
         <p className="font-sans text-text-muted mt-3 max-w-[560px]" style={{ fontSize: '15px' }}>
-          Flagship AI product built end-to-end to show demo craft, workflow thinking, and technical
-          execution.
+          A live case study showing how I structure ambiguity, translate requirements, and turn AI
+          outputs into a guided decision workflow.
         </p>
       </motion.div>
 
@@ -239,7 +239,10 @@ export function ProjectsSection() {
               >
                 {/* Category tags */}
                 <div className="mb-4 flex flex-wrap gap-1.5">
-                  {project.tags.slice(0, 3).map((tag) => (
+                  {(project.slug === 'kestrel'
+                    ? ['Technical Demo', 'Requirement Mapping', 'Guided Workflow']
+                    : project.tags.slice(0, 3)
+                  ).map((tag) => (
                     <span
                       key={tag}
                       className="font-mono text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full"
@@ -370,7 +373,7 @@ export function ProjectsSection() {
                       variant="secondary"
                       size="sm"
                     >
-                      Demo
+                      View Demo
                     </StarburstButton>
                   </HoverSparkle>
 

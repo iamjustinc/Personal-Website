@@ -443,7 +443,7 @@ export function HeroVisual() {
           style={{ background: '#4A9FAE', boxShadow: '0 0 6px rgba(74,159,174,0.8)' }}
         />
         <span className="font-mono text-[15px] uppercase tracking-wider text-text-muted">
-          Open to opportunities!
+          Seeking Solutions Engineering roles
         </span>
       </motion.div>
     </motion.div>

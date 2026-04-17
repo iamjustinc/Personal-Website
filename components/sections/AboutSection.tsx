@@ -26,44 +26,44 @@ const proofPoints: ProofPoint[] = [
   {
     value: 30,
     suffix: 'K+',
-    label: 'records analyzed',
-    detail: 'Built predictive workflows from clinical-scale data.',
+    label: 'records modeled',
+    detail: 'Built risk-scoring workflows from clinical-scale data.',
   },
   {
     value: 70,
     suffix: '%',
-    label: 'analysis time reduced',
-    detail: 'Compressed manual review into reusable reporting flows.',
+    label: 'manual review reduced',
+    detail: 'Reduced analysis time through reusable Python/R pipelines.',
   },
   {
     value: 63,
     suffix: '%',
-    label: 'completion lift',
-    detail: 'Reworked operations around clearer user paths.',
+    label: 'completion rate lift',
+    detail: 'Improved completion after redesigning recruitment and scheduling flows.',
   },
   {
-    textValue: 'Demos',
-    label: 'technical demos delivered',
-    detail: 'Turned deployed AI products into live walkthroughs.',
+    textValue: 'Demo-led',
+    label: 'technical walkthroughs',
+    detail: 'Used demos to explain workflow, AI behavior, and next steps.',
   },
 ]
 
 const strengths = [
   {
     title: 'Demo the customer value',
-    body: 'I tailor walkthroughs around the user workflow, not a feature checklist.',
+    body: 'I tailor walkthroughs around the user workflow, decision criteria, and next step.',
   },
   {
     title: 'Diagnose before solving',
-    body: 'I find friction, decision criteria, and adoption risks before pitching the fix.',
+    body: 'I map friction, constraints, and decision criteria before recommending a fix.',
   },
   {
     title: 'Translate across the room',
-    body: 'I explain architecture, AI outputs, and tradeoffs clearly across audiences.',
+    body: 'I explain architecture, AI outputs, and tradeoffs in language each audience can use.',
   },
   {
     title: 'Tie systems to outcomes',
-    body: 'I connect data, automation, and product behavior to time saved or decisions unlocked.',
+    body: 'I connect data, automation, and product behavior to workflow impact and decisions unlocked.',
   },
 ]
 
@@ -172,8 +172,8 @@ export function AboutSection() {
           className="mt-5 max-w-[670px] font-sans text-[16px] leading-7"
           style={{ color: '#A8C5D1' }}
         >
-          I connect technical systems to the customer workflow: find the friction, demo the path
-          forward, and make AI/data complexity useful.
+          I work from the workflow first: clarify the friction, demo the path forward, and make
+          AI/data tradeoffs understandable.
         </p>
       </motion.div>
 
@@ -419,7 +419,7 @@ export function AboutSection() {
             </div>
 
             <h3 className="font-display text-[34px] leading-[1.05] text-text-base sm:text-[42px]">
-              How I create customer value
+              How I create customer clarity
             </h3>
 
             <p className="mt-5 font-sans text-[15px] leading-7" style={{ color: '#A8C5D1' }}>

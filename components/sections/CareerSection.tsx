@@ -9,15 +9,23 @@ import { cn } from '@/lib/utils'
 
 const careerCopyByRole: Record<string, string> = {
   'Project Lead & Data Analyst':
-    'Built predictive workflows across 30K+ records, translating model outputs into risk scores and dashboards stakeholders could act on.',
+    'Owned predictive pipelines across 30K+ records, turning model outputs into risk-scoring dashboards stakeholders could use for decision support.',
   'Senior Project Lead':
-    'Redesigned recruitment and scheduling workflows across 100+ sessions, lifting completion 63% through clearer handoffs and operational visibility.',
+    'Designed recruitment, scheduling, and operational dashboard systems across 100+ sessions, improving completion 63% and giving teams cleaner coordination data.',
   'Intern Data Analyst':
-    'Reduced manual analysis time by 70% through Python/R pipelines and translated 200+ fMRI sessions into stakeholder-ready insight.',
+    'Built Python/R pipelines for 200+ fMRI sessions, reduced manual analysis time by 70%, and demoed outputs and tradeoffs to non-technical stakeholders.',
   'Research Data Analyst':
-    'Built SQL, R, Excel, and Tableau tracking systems that reduced coordination friction and standardized study operations across teams.',
+    'Standardized PETRUSHKA coordination with Excel, R, SQL, and Tableau tracking systems, reducing handoff friction across clinical and research teams.',
   'Independent Product Builder':
-    'Shipped Kestrel as the live flagship while developing Quail Mail and Chirpie into polished product previews around inbox and news workflows.',
+    'Built Kestrel as a live AI decision-support demo, plus Quail Mail and Chirpie previews around triage logic, structured outputs, attribution, and explainability.',
+}
+
+const careerTagsByRole: Record<string, string[]> = {
+  'Project Lead & Data Analyst': ['Decision Support', 'Data Pipelines', 'Stakeholder Translation'],
+  'Senior Project Lead': ['Operational Dashboards', 'Workflow Design', 'Cross-Functional Alignment'],
+  'Intern Data Analyst': ['Python/R Pipelines', 'Technical Demos', 'Stakeholder Translation'],
+  'Research Data Analyst': ['Tracking Systems', 'SQL + Tableau', 'Coordination Systems'],
+  'Independent Product Builder': ['Technical Demos', 'OpenAI Integration', 'Explainability'],
 }
 
 const ambientStars = [
@@ -97,20 +105,20 @@ export function CareerSection() {
         >
           <StarMark size="xs" color="#C4974A" className="opacity-80" />
           <span className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-text-muted">
-            Career Journey
+            Paths So Far
           </span>
         </div>
 
         <h2 className="font-display text-h1 text-text-base leading-tight">
-          Where technical work became{' '}
-          <span style={{ color: '#4A9FAE' }}>clear value</span>
+          Technical ownership across{' '}
+          <span style={{ color: '#4A9FAE' }}>systems and demos</span>
         </h2>
         <p
           className="font-sans mt-3 max-w-[560px] leading-relaxed"
           style={{ fontSize: '15px', color: '#A8C5D1' }}
         >
-          A timeline of data systems, workflow redesigns, and AI product demos built around the SE
-          motion: discover the problem, explain the system, and make the next step obvious.
+          Across research, operations, and product work, I have built pipelines, dashboards, demos,
+          and workflow systems that help stakeholders understand what to do next.
         </p>
       </motion.div>
 
@@ -142,6 +150,7 @@ export function CareerSection() {
           {items.map((item, index) => {
             const accent = item.current ? '#C4974A' : index % 2 === 0 ? '#4A9FAE' : '#62BDB8'
             const description = careerCopyByRole[item.role] ?? item.description
+            const tags = careerTagsByRole[item.role] ?? item.tags
 
             return (
               <motion.div
@@ -314,9 +323,9 @@ export function CareerSection() {
                   </p>
 
                   {/* Tags */}
-                  {item.tags && item.tags.length > 0 && (
+                  {tags && tags.length > 0 && (
                     <div className={cn('relative flex flex-wrap gap-2 mt-4')}>
-                      {item.tags.map((tag, tagIndex) => (
+                      {tags.map((tag, tagIndex) => (
                         <motion.span
                           key={tag}
                           whileHover={shouldReduce ? undefined : { y: -2 }}
