@@ -14,34 +14,34 @@ const projectSpotlights: Record<
   string,
   {
     description: string
-    metrics: { value: string; label: string; detail: string }[]
+    metrics: { value: string; label: string }[]
   }
 > = {
   kestrel: {
     description:
-      'Turns messy job descriptions into readiness scores, skill gaps, and a roadmap candidates can act on.',
+      'Turns role requirements into readiness scores, gap analysis, and a concrete career roadmap.',
     metrics: [
-      { value: '1 JD', label: 'to roadmap', detail: 'from role text to next steps' },
-      { value: '4', label: 'fit signals', detail: 'score, strengths, gaps, plan' },
-      { value: '5', label: 'stacked views', detail: 'built for demo clarity' },
+      { value: '1 JD', label: 'to roadmap' },
+      { value: '4', label: 'fit signals' },
+      { value: '5', label: 'demo views' },
     ],
   },
   quail: {
     description:
-      'Turns high-volume email into a prioritized action pipeline so busy users know what needs attention first.',
+      'Turns inbox overload into a prioritized triage pipeline with clear next actions.',
     metrics: [
-      { value: '1 inbox', label: 'to pipeline', detail: 'workflow compression' },
-      { value: '3', label: 'priority signals', detail: 'sender, urgency, context' },
-      { value: '4', label: 'action lanes', detail: 'triage users can scan' },
+      { value: '1', label: 'inbox flow' },
+      { value: '3', label: 'priority signals' },
+      { value: '4', label: 'action lanes' },
     ],
   },
   chirpie: {
     description:
-      'Turns multi-source news into concise, source-aware digests with context, confidence, and a conversational flow.',
+      'Turns multi-source news into concise, source-aware digests with confidence cues.',
     metrics: [
-      { value: '3+', label: 'source streams', detail: 'inputs unified into one feed' },
-      { value: '4', label: 'trust cues', detail: 'source, context, confidence' },
-      { value: '1', label: 'chat digest', detail: 'repeatable reading loop' },
+      { value: '3+', label: 'source streams' },
+      { value: '4', label: 'trust cues' },
+      { value: '1', label: 'digest loop' },
     ],
   },
 }
@@ -103,9 +103,9 @@ export function ProjectsSection() {
           const spotlight = projectSpotlights[project.slug] ?? {
             description: project.tagline,
             metrics: [
-              { value: 'AI', label: 'workflow', detail: 'product system' },
-              { value: '1', label: 'demo path', detail: 'clear walkthrough' },
-              { value: '3', label: 'signals', detail: 'focused value proof' },
+              { value: 'AI', label: 'workflow' },
+              { value: '1', label: 'demo path' },
+              { value: '3', label: 'signals' },
             ],
           }
 
@@ -117,8 +117,8 @@ export function ProjectsSection() {
                 shouldReduce
                   ? {}
                   : {
-                      y: -7,
-                      boxShadow: `0 30px 76px rgba(0,0,0,0.66), 0 0 0 1px ${project.panelAccentColor}42`,
+                      y: -5,
+                      boxShadow: `0 28px 72px rgba(0,0,0,0.62), 0 0 0 1px ${project.panelAccentColor}38`,
                     }
               }
               transition={{ duration: 0.34, ease: [0.22, 1, 0.36, 1] }}
@@ -207,7 +207,7 @@ export function ProjectsSection() {
 
                 <motion.div
                   className="absolute inset-0"
-                  whileHover={shouldReduce ? {} : { scale: 1.018 }}
+                  whileHover={shouldReduce ? {} : { scale: 1.012 }}
                   transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                 >
                   <ProjectFloatingScreenshots
@@ -236,7 +236,7 @@ export function ProjectsSection() {
               {/* ── Content ── */}
               <div
                 className={cn(
-                  'relative z-10 flex flex-col px-7 py-8 sm:px-8 lg:px-10 lg:py-10',
+                  'relative z-10 flex flex-col px-7 py-9 sm:px-8 lg:px-11 lg:py-11',
                   isReversed ? 'lg:order-1' : 'lg:order-2',
                 )}
               >
@@ -262,14 +262,14 @@ export function ProjectsSection() {
                 </h3>
 
                 <p
-                  className="mt-3 max-w-[560px] font-sans text-[15px] leading-7"
+                  className="mt-4 max-w-[540px] font-sans text-[15px] leading-7"
                   style={{ color: '#B8D0DC' }}
                 >
                   {spotlight.description}
                 </p>
 
                 {/* Impact metrics */}
-                <div className="mt-6 grid grid-cols-3 gap-2.5">
+                <div className="mt-7 grid grid-cols-3 gap-3">
                   {spotlight.metrics.map((metric, metricIndex) => (
                     <motion.div
                       key={`${project.slug}-${metric.label}`}
@@ -277,12 +277,12 @@ export function ProjectsSection() {
                         shouldReduce
                           ? {}
                           : {
-                              y: -3,
+                              y: -2,
                               backgroundColor: 'rgba(15,42,61,0.72)',
                             }
                       }
                       transition={{ duration: 0.2 }}
-                      className="group/stat relative overflow-hidden rounded-[18px] px-3 py-3 sm:px-4"
+                      className="relative overflow-hidden rounded-[18px] px-3.5 py-4 sm:px-4"
                       style={{
                         background:
                           'linear-gradient(180deg, rgba(10,33,50,0.70) 0%, rgba(8,27,42,0.54) 100%)',
@@ -300,27 +300,22 @@ export function ProjectsSection() {
                               : `linear-gradient(90deg, transparent, ${project.panelAccentColor}66, transparent)`,
                         }}
                       />
-                      <div className="font-display text-[25px] leading-none text-text-base sm:text-[30px]">
+                      <div className="font-display text-[28px] leading-none text-text-base sm:text-[34px]">
                         {metric.value}
                       </div>
                       <p
-                        className="mt-2 font-mono text-[9.5px] uppercase tracking-[0.11em]"
+                        className="mt-3 font-mono text-[9.5px] uppercase tracking-[0.11em]"
                         style={{ color: metricIndex === 1 ? '#D8B76E' : '#7EE7F2' }}
                       >
                         {metric.label}
-                      </p>
-                      <p
-                        className="mt-2 hidden font-sans text-[12px] leading-5 text-text-muted opacity-70 sm:block"
-                      >
-                        {metric.detail}
                       </p>
                     </motion.div>
                   ))}
                 </div>
 
                 {/* Stack pills */}
-                <div className="mt-6">
-                  <div className="mb-2 flex items-center gap-2">
+                <div className="mt-8">
+                  <div className="mb-3 flex items-center gap-2">
                     <StarMark size="xs" color={project.panelAccentColor} className="opacity-70" />
                     <span
                       className="font-mono text-[9.5px] uppercase tracking-[0.14em]"
@@ -330,13 +325,13 @@ export function ProjectsSection() {
                     </span>
                   </div>
 
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2.5">
                     {project.stack.slice(0, 5).map((s, stackIndex) => (
                       <motion.span
                         key={s}
                         whileHover={shouldReduce ? {} : { y: -2 }}
                         transition={{ duration: 0.18 }}
-                        className="font-mono text-[10px] px-2.5 py-1 rounded-full"
+                        className="font-mono text-[10px] px-3 py-1.5 rounded-full"
                         style={{
                           background:
                             stackIndex === 0
@@ -359,7 +354,7 @@ export function ProjectsSection() {
 
                 {/* CTAs */}
                 <div
-                  className="mt-auto flex flex-wrap gap-2.5 pt-7"
+                  className="mt-auto flex flex-wrap gap-2.5 pt-8"
                   style={{ borderTop: '1px solid rgba(74,159,174,0.12)' }}
                 >
                   <HoverSparkle className="inline-flex">

@@ -8,7 +8,9 @@ export default function Home() {
   return (
     <main>
       <Hero />
-      <ProjectsSection />
+      <div className="-mt-16 md:-mt-20 lg:-mt-24">
+        <ProjectsSection />
+      </div>
       <AboutSection />
       <CareerSection/>
       <ContactSection />
