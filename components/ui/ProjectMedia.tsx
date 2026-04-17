@@ -13,6 +13,8 @@ interface ProjectMediaProps {
   priority?: boolean
   /** Image sizes hint for srcset. Defaults to a responsive 50vw/100vw split. */
   sizes?: string
+  /** Product screenshots should usually preserve composition. Use cover only for true thumbnails. */
+  fit?: 'contain' | 'cover'
 }
 
 /**
@@ -28,6 +30,7 @@ export function ProjectMedia({
   className,
   priority = false,
   sizes = '(max-width: 768px) 100vw, 50vw',
+  fit = 'contain',
 }: ProjectMediaProps) {
   if (!src) {
     return (
@@ -46,7 +49,7 @@ export function ProjectMedia({
         alt={alt}
         fill
         sizes={sizes}
-        className="object-cover object-top"
+        className={fit === 'cover' ? 'object-cover object-top' : 'object-contain object-center'}
         priority={priority}
       />
     </div>

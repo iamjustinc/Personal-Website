@@ -1,7 +1,7 @@
 'use client'
 
-import Image from 'next/image'
 import { motion } from 'framer-motion'
+import { ProjectFloatingScreenshots } from '@/components/projects/ProjectFloatingScreenshots'
 import { Section } from '@/components/ui/Section'
 import { StarMark } from '@/components/ui/StarMark'
 import { StarburstButton } from '@/components/ui/StarburstButton'
@@ -20,94 +20,6 @@ function shortenText(text: string | undefined, max = 120) {
   if (clean.length <= max) return clean
   const trimmed = clean.slice(0, max)
   return `${trimmed.slice(0, Math.max(trimmed.lastIndexOf(' '), max - 18)).trim()}…`
-}
-
-// ── Floating screenshot composition ──────────────────────────────────────────
-// Matches the homepage card visual treatment exactly: no white backgrounds,
-// no fake frames, object-cover, dominant sizing that bleeds toward edges.
-
-function WorkProjectVisual({
-  project,
-  priority = false,
-}: {
-  project: Project
-  priority?: boolean
-}) {
-  const landingShot = project.screenshots?.[0] || project.thumbnail
-  const interfaceShot = project.screenshots?.[1]
-
-  return (
-    <div className="absolute inset-0 overflow-hidden">
-      {/* Minimal ambient glow — avoids the panel/poster feel */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: `radial-gradient(circle at 28% 25%, ${project.panelAccentColor}10 0%, transparent 52%)`,
-        }}
-      />
-
-      {/* Slow-rotating watermark star */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 120, repeat: Infinity, ease: 'linear' }}
-          style={{ opacity: 0.028 }}
-        >
-          <StarMark size="2xl" color={project.panelAccentColor} />
-        </motion.div>
-      </div>
-
-      {/* Landing screenshot — large, bleeds toward top-left */}
-      {landingShot && (
-        <motion.div
-          animate={{ y: [0, -9, 0], rotate: [-1.5, -0.5, -1.5] }}
-          transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute left-[1%] top-[3%] h-[80%] w-[74%] rounded-2xl overflow-hidden"
-          style={{ boxShadow: '0 22px 58px rgba(0,0,0,0.50)' }}
-        >
-          <Image
-            src={landingShot}
-            alt={`${project.name} landing view`}
-            fill
-            sizes="(max-width: 1024px) 100vw, 480px"
-            className="object-cover object-top"
-            priority={priority}
-          />
-        </motion.div>
-      )}
-
-      {/* Interface screenshot — bleeds toward bottom-right, overlapping */}
-      {interfaceShot && (
-        <motion.div
-          animate={{ y: [0, 11, 0], rotate: [2, 1, 2] }}
-          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-          className="absolute right-[1%] bottom-[2%] h-[62%] w-[72%] rounded-2xl overflow-hidden"
-          style={{ boxShadow: '0 26px 64px rgba(0,0,0,0.54)' }}
-        >
-          <Image
-            src={interfaceShot}
-            alt={`${project.name} interface view`}
-            fill
-            sizes="(max-width: 1024px) 100vw, 480px"
-            className="object-cover object-center"
-          />
-        </motion.div>
-      )}
-
-      {/* Accent glow under front screenshot */}
-      <div
-        className="absolute right-[8%] bottom-[1%] h-8 w-[40%] blur-2xl rounded-full pointer-events-none"
-        style={{ background: `${project.panelAccentColor}20` }}
-      />
-
-      <div className="absolute top-4 left-4 pointer-events-none">
-        <StarMark size="xs" color={project.panelAccentColor} className="opacity-35" />
-      </div>
-      <div className="absolute bottom-4 right-4 pointer-events-none">
-        <StarMark size="xs" color="#C4974A" className="opacity-30" />
-      </div>
-    </div>
-  )
 }
 
 // ── Project card ──────────────────────────────────────────────────────────────
@@ -156,7 +68,12 @@ function WorkProjectCard({
             }}
           />
 
-          <WorkProjectVisual project={project} priority={index === 0} />
+          <ProjectFloatingScreenshots
+            project={project}
+            priority={index === 0}
+            showWatermark
+            imageSizes="(max-width: 1024px) 100vw, 560px"
+          />
 
           {/* Index badge */}
           <div

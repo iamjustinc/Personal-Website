@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import Image from 'next/image'
+import { ProjectFloatingScreenshots } from '@/components/projects/ProjectFloatingScreenshots'
 import { Section } from '@/components/ui/Section'
 import { StarMark } from '@/components/ui/StarMark'
 import { StarburstButton } from '@/components/ui/StarburstButton'
@@ -19,82 +19,6 @@ function shortenText(text: string | undefined, max = 120) {
   if (clean.length <= max) return clean
   const trimmed = clean.slice(0, max)
   return `${trimmed.slice(0, Math.max(trimmed.lastIndexOf(' '), max - 18)).trim()}…`
-}
-
-// ── Floating screenshot composition ─────────────────────────────────────────
-
-function FloatingProjectVisual({
-  project,
-  priority = false,
-}: {
-  project: (typeof projects)[number]
-  priority?: boolean
-}) {
-  const landingShot = project.screenshots?.[0] || project.thumbnail
-  const interfaceShot = project.screenshots?.[1]
-
-  return (
-    <div className="absolute inset-0 overflow-hidden">
-      {/* Very subtle ambient glow — avoids the "display panel" feel */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: `radial-gradient(circle at 28% 25%, ${project.panelAccentColor}10 0%, transparent 52%)`,
-        }}
-      />
-
-      {/* Landing screenshot — large, bleeds toward top-left */}
-      {landingShot && (
-        <motion.div
-          animate={{ y: [0, -8, 0], rotate: [-1.5, -0.5, -1.5] }}
-          transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute left-[1%] top-[3%] h-[80%] w-[74%] rounded-2xl overflow-hidden"
-          style={{ boxShadow: '0 22px 58px rgba(0,0,0,0.50)' }}
-        >
-          <Image
-            src={landingShot}
-            alt={`${project.name} landing view`}
-            fill
-            sizes="(max-width: 1024px) 100vw, 440px"
-            className="object-cover object-top"
-            priority={priority}
-          />
-        </motion.div>
-      )}
-
-      {/* Interface screenshot — slightly smaller, bleeds toward bottom-right */}
-      {interfaceShot && (
-        <motion.div
-          animate={{ y: [0, 10, 0], rotate: [2, 1, 2] }}
-          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut', delay: 0.6 }}
-          className="absolute right-[1%] bottom-[2%] h-[62%] w-[72%] rounded-2xl overflow-hidden"
-          style={{ boxShadow: '0 26px 64px rgba(0,0,0,0.54)' }}
-        >
-          <Image
-            src={interfaceShot}
-            alt={`${project.name} interface view`}
-            fill
-            sizes="(max-width: 1024px) 100vw, 440px"
-            className="object-cover object-center"
-          />
-        </motion.div>
-      )}
-
-      {/* Accent glow under front screenshot */}
-      <div
-        className="absolute right-[8%] bottom-[1%] h-8 w-[40%] blur-2xl rounded-full pointer-events-none"
-        style={{ background: `${project.panelAccentColor}20` }}
-      />
-
-      {/* Corner marks */}
-      <div className="absolute top-4 left-4 pointer-events-none">
-        <StarMark size="xs" color={project.panelAccentColor} className="opacity-35" />
-      </div>
-      <div className="absolute bottom-4 right-4 pointer-events-none">
-        <StarMark size="xs" color="#C4974A" className="opacity-30" />
-      </div>
-    </div>
-  )
 }
 
 // ── Section ──────────────────────────────────────────────────────────────────
@@ -183,7 +107,11 @@ export function ProjectsSection() {
                     background: `linear-gradient(155deg, ${project.panelAccentColor}10 0%, rgba(10,22,40,0.10) 40%, rgba(10,22,40,0.65) 100%)`,
                   }}
                 />
-                <FloatingProjectVisual project={project} priority={index === 0} />
+                <ProjectFloatingScreenshots
+                  project={project}
+                  priority={index === 0}
+                  imageSizes="(max-width: 1024px) 100vw, 520px"
+                />
 
                 {/* Project index badge */}
                 <div

@@ -172,19 +172,19 @@ export function ProjectDemo({ project }: { project: Project }) {
               {project.screenshots.map((shot, i) => (
                 <div
                   key={i}
-                  className="relative rounded-2xl overflow-hidden"
+                  className="relative aspect-[1.85/1] rounded-2xl overflow-hidden"
                   style={{
-                    height: 260,
-                    background: 'rgba(245,248,251,0.96)',
+                    background: 'rgba(10,22,40,0.28)',
                     border: `1px solid ${project.panelAccentColor}20`,
-                    boxShadow: '0 8px 30px rgba(0,0,0,0.25)',
+                    boxShadow: '0 12px 36px rgba(0,0,0,0.28)',
                   }}
                 >
                   <Image
                     src={shot}
                     alt={`${project.name} screenshot ${i + 1}`}
                     fill
-                    className="object-contain object-center scale-[1.1]"
+                    sizes="(max-width: 768px) 100vw, 520px"
+                    className="object-contain object-center"
                   />
                 </div>
               ))}

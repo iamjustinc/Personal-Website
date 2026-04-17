@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import { ProjectFloatingScreenshots } from '@/components/projects/ProjectFloatingScreenshots'
 import { StarMark } from '@/components/ui/StarMark'
 import { StarburstButton } from '@/components/ui/StarburstButton'
 import { HoverSparkle } from '@/components/ui/HoverSparkle'
@@ -44,85 +45,6 @@ function FactStrip({ project }: { project: Project }) {
             </div>
           ))}
         </div>
-      </div>
-    </div>
-  )
-}
-
-// ── Hero floating visual ──────────────────────────────────────────────────────
-
-function FloatingHeroVisual({ project }: { project: Project }) {
-  const landingShot = project.screenshots?.[0] || project.thumbnail
-  const interfaceShot = project.screenshots?.[1]
-
-  return (
-    <div className="absolute inset-0 overflow-hidden">
-      <div
-        className="absolute inset-0"
-        style={{
-          background: `radial-gradient(circle at 28% 25%, ${project.panelAccentColor}14 0%, transparent 52%)`,
-        }}
-      />
-
-      {/* Slow-rotating watermark star */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 140, repeat: Infinity, ease: 'linear' }}
-          style={{ opacity: 0.028 }}
-        >
-          <StarMark size="2xl" color={project.panelAccentColor} />
-        </motion.div>
-      </div>
-
-      {/* Landing screenshot — dominant, bleeds toward top-left */}
-      {landingShot && (
-        <motion.div
-          animate={{ y: [0, -9, 0], rotate: [-1.5, -0.5, -1.5] }}
-          transition={{ duration: 9.5, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute left-[1%] top-[3%] h-[80%] w-[74%] rounded-2xl overflow-hidden"
-          style={{ boxShadow: '0 22px 58px rgba(0,0,0,0.50)' }}
-        >
-          <Image
-            src={landingShot}
-            alt={`${project.name} landing view`}
-            fill
-            sizes="(max-width: 1024px) 100vw, 580px"
-            className="object-cover object-top"
-            priority
-          />
-        </motion.div>
-      )}
-
-      {/* Interface screenshot — bleeds toward bottom-right, overlapping */}
-      {interfaceShot && (
-        <motion.div
-          animate={{ y: [0, 11, 0], rotate: [2, 1, 2] }}
-          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-          className="absolute right-[1%] bottom-[2%] h-[62%] w-[72%] rounded-2xl overflow-hidden"
-          style={{ boxShadow: '0 28px 66px rgba(0,0,0,0.54)' }}
-        >
-          <Image
-            src={interfaceShot}
-            alt={`${project.name} interface view`}
-            fill
-            sizes="(max-width: 1024px) 100vw, 580px"
-            className="object-cover object-center"
-          />
-        </motion.div>
-      )}
-
-      {/* Glow under front screenshot */}
-      <div
-        className="absolute right-[8%] bottom-[1%] h-8 w-[40%] blur-2xl rounded-full pointer-events-none"
-        style={{ background: `${project.panelAccentColor}22` }}
-      />
-
-      <div className="absolute top-4 left-4 pointer-events-none">
-        <StarMark size="xs" color={project.panelAccentColor} className="opacity-35" />
-      </div>
-      <div className="absolute bottom-4 right-4 pointer-events-none">
-        <StarMark size="xs" color="#C4974A" className="opacity-30" />
       </div>
     </div>
   )
@@ -309,12 +231,19 @@ function ScreenshotBlock({
       <div
         className="relative w-full overflow-hidden rounded-[14px]"
         style={{
-          aspectRatio: '16/9',
+          aspectRatio: '1.85 / 1',
+          background: 'rgba(10,22,40,0.28)',
           border: `1px solid ${accent}18`,
-          boxShadow: '0 18px 52px rgba(0,0,0,0.36)',
+          boxShadow: '0 18px 52px rgba(0,0,0,0.32)',
         }}
       >
-        <Image src={src} alt={alt} fill className="object-cover object-top" />
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          sizes="(max-width: 768px) 100vw, 900px"
+          className="object-contain object-center"
+        />
       </div>
       {caption && (
         <p className="font-mono text-[10px] uppercase tracking-wider text-center text-text-muted opacity-50">
@@ -434,7 +363,12 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                 boxShadow: '0 4px 32px rgba(0,0,0,0.28)',
               }}
             >
-              <FloatingHeroVisual project={project} />
+              <ProjectFloatingScreenshots
+                project={project}
+                priority
+                showWatermark
+                imageSizes="(max-width: 1024px) 100vw, 620px"
+              />
 
               {/* "Case Study" badge */}
               <div
