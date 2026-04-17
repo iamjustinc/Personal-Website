@@ -13,6 +13,11 @@ import './globals.css'
 export const metadata: Metadata = {
   title: `${siteConfig.name} — Portfolio`,
   description: siteConfig.heroStatement,
+  icons: {
+    icon: [{ url: '/star.png', type: 'image/png' }],
+    shortcut: '/star.png',
+    apple: '/star.png',
+  },
   openGraph: {
     title: `${siteConfig.name} — Portfolio`,
     description: siteConfig.heroStatement,
