@@ -187,10 +187,10 @@ function TimelineEntry({
 
         <div className="flex flex-wrap items-start justify-between gap-2">
           <div>
-            <h3 className="font-display text-h3 leading-tight" style={{ color: '#4A9FAE' }}>
+            <p className="font-sans text-sm font-semibold text-text-base">{item.role}</p>
+            <p className="mt-0.5 font-sans text-[13px]" style={{ color: 'rgba(168,197,209,0.52)' }}>
               {item.company}
-            </h3>
-            <p className="mt-0.5 font-sans text-sm font-semibold text-text-base">{item.role}</p>
+            </p>
           </div>
           <span
             className="mt-0.5 shrink-0 font-mono text-[9.5px] tracking-wider"
