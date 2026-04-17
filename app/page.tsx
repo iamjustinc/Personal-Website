@@ -12,8 +12,8 @@ export default function Home() {
       <Hero />
       {siteConfig.showCapabilityStrip && <CapabilityStrip />}
       <ProjectsSection />
-      <CareerSection />
       <AboutSection />
+      <CareerSection/>
       <ContactSection />
     </main>
   )
