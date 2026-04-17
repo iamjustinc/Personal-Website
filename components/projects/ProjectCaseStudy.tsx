@@ -51,8 +51,30 @@ const kestrelCaseStudyCopy: CaseStudyCopy = {
     'The strongest product decision was restraint. Kestrel became more useful when I reduced output noise and prioritized the few signals that change a user\'s next action: fit, gaps, resume edits, and roadmap.',
 }
 
+const chirpieCaseStudyCopy: CaseStudyCopy = {
+  tagline:
+    'Conversational news product that turns multi-source reporting into source-aware, personalized digests users can follow up on.',
+  outcome:
+    'Makes news feel faster to enter without stripping out the trust cues users need: sources, context, tone, and a path to go deeper.',
+  overview:
+    'Chirpie is a chat-first news companion built around the idea that many users do not want another feed to browse. It turns multi-source reporting into structured digests with attribution, context, and room for follow-up interaction.',
+  problem:
+    'Most news products are optimized for browsing, not conversational consumption. Users face high-volume feeds, generic topic personalization, and AI summaries that can flatten nuance or hide where claims came from.',
+  users:
+    'Built for scroll-native readers, busy young professionals, and credibility-conscious users who want fast context without giving up source awareness or the ability to ask for more detail.',
+  solution:
+    'Chirpie transforms reporting into chat-style digests, preserves source links, supports follow-up questions, and adapts tone and pacing so the experience feels lighter without removing trust signals.',
+  impact:
+    'The product reduces the effort required to understand a story while keeping the credibility layer visible. Users can skim quickly, see what the summary is based on, and decide when a topic deserves deeper attention.',
+  buildNotes:
+    'The core challenge was structuring news content without over-compressing it. I designed the transformation around source attribution, supporting context, and careful summary boundaries so brevity did not erase nuance or imply unsupported certainty.',
+  reflection:
+    'Chirpie works best when delight supports usefulness instead of competing with it. The key restraint was making the interface feel conversational and lightweight while keeping trust, attribution, and follow-up depth in the foreground.',
+}
+
 function getCaseStudyCopy(project: Project): CaseStudyCopy {
   if (project.slug === 'kestrel') return kestrelCaseStudyCopy
+  if (project.slug === 'chirpie') return chirpieCaseStudyCopy
 
   return {
     tagline: project.tagline,
@@ -423,6 +445,8 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
   const up = useMotionSafe(fadeUp)
   const inn = useMotionSafe(fadeIn)
   const isKestrelCaseStudy = project.slug === 'kestrel'
+  const isChirpieCaseStudy = project.slug === 'chirpie'
+  const isEnhancedCaseStudy = isKestrelCaseStudy || isChirpieCaseStudy
   const caseCopy = getCaseStudyCopy(project)
 
   // Build ordered nav items, assigning sequential section numbers
@@ -465,7 +489,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
           borderBottom: '1px solid rgba(15,122,122,0.10)',
         }}
       >
-        {isKestrelCaseStudy && (
+        {isEnhancedCaseStudy && (
           <div
             className="pointer-events-none absolute inset-x-0 top-0 h-px"
             style={{
@@ -517,10 +541,10 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
               className="relative min-h-[360px] lg:min-h-[520px] rounded-[22px] overflow-hidden"
               style={{
                 background: `linear-gradient(155deg, ${project.panelAccentColor}10 0%, rgba(10,22,40,0.12) 40%, rgba(10,22,40,0.68) 100%)`,
-                border: isKestrelCaseStudy
+                border: isEnhancedCaseStudy
                   ? `1px solid ${project.panelAccentColor}24`
                   : '1px solid rgba(15,122,122,0.14)',
-                boxShadow: isKestrelCaseStudy
+                boxShadow: isEnhancedCaseStudy
                   ? `0 20px 70px rgba(0,0,0,0.38), 0 0 44px ${project.panelAccentColor}0A`
                   : '0 4px 32px rgba(0,0,0,0.28)',
               }}
@@ -593,15 +617,15 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                   <div
                     className="flex items-start gap-2.5 px-4 py-3 rounded-[15px]"
                     style={{
-                      background: isKestrelCaseStudy
+                      background: isEnhancedCaseStudy
                         ? `radial-gradient(circle at 8% 0%, ${project.panelAccentColor}18, transparent 42%), ${project.panelAccentColor}0D`
                         : `${project.panelAccentColor}0C`,
                       border: `1px solid ${
-                        isKestrelCaseStudy
+                        isEnhancedCaseStudy
                           ? `${project.panelAccentColor}34`
                           : `${project.panelAccentColor}20`
                       }`,
-                      boxShadow: isKestrelCaseStudy
+                      boxShadow: isEnhancedCaseStudy
                         ? `0 16px 44px rgba(0,0,0,0.22), 0 0 32px ${project.panelAccentColor}0A`
                         : undefined,
                     }}
@@ -677,7 +701,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
           FACT STRIP
       ════════════════════════════════════════ */}
       <motion.div variants={inn} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-        <FactStrip project={project} enhanced={isKestrelCaseStudy} />
+        <FactStrip project={project} enhanced={isEnhancedCaseStudy} />
       </motion.div>
 
       {/* ════════════════════════════════════════
@@ -691,7 +715,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
             <SideNav
               items={navItems}
               accent={project.panelAccentColor}
-              enhanced={isKestrelCaseStudy}
+              enhanced={isEnhancedCaseStudy}
             />
           </aside>
 
@@ -708,7 +732,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
               number={sn('overview')}
               title="Overview"
               accent={project.panelAccentColor}
-              enhanced={isKestrelCaseStudy}
+              enhanced={isEnhancedCaseStudy}
             >
               <Prose>{overviewText}</Prose>
             </CaseSection>
@@ -723,18 +747,18 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
               number={sn('problem')}
               title="Problem"
               accent={project.panelAccentColor}
-              enhanced={isKestrelCaseStudy}
+              enhanced={isEnhancedCaseStudy}
             >
               <div
                 className={cn(
                   'pl-5',
-                  isKestrelCaseStudy && 'rounded-r-[18px] py-1 transition-colors duration-300',
+                  isEnhancedCaseStudy && 'rounded-r-[18px] py-1 transition-colors duration-300',
                 )}
                 style={{
                   borderLeft: `2px solid ${project.panelAccentColor}${
-                    isKestrelCaseStudy ? '55' : '35'
+                    isEnhancedCaseStudy ? '55' : '35'
                   }`,
-                  background: isKestrelCaseStudy
+                  background: isEnhancedCaseStudy
                     ? `linear-gradient(90deg, ${project.panelAccentColor}0A, transparent 58%)`
                     : undefined,
                 }}
@@ -754,7 +778,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                 number={sn('users')}
                 title="Users"
                 accent={project.panelAccentColor}
-                enhanced={isKestrelCaseStudy}
+                enhanced={isEnhancedCaseStudy}
               >
                 <Prose>{caseCopy.users}</Prose>
               </CaseSection>
@@ -770,7 +794,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
               number={sn('solution')}
               title="Solution"
               accent={project.panelAccentColor}
-              enhanced={isKestrelCaseStudy}
+              enhanced={isEnhancedCaseStudy}
             >
               <Prose>{caseCopy.solution}</Prose>
               {project.screenshots?.[1] && (
@@ -779,7 +803,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                   alt={`${project.name} interface`}
                   accent={project.panelAccentColor}
                   caption={`${project.name} — interface`}
-                  enhanced={isKestrelCaseStudy}
+                  enhanced={isEnhancedCaseStudy}
                 />
               )}
             </CaseSection>
@@ -794,11 +818,11 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
               number={sn('impact')}
               title="Impact"
               accent={project.panelAccentColor}
-              enhanced={isKestrelCaseStudy}
+              enhanced={isEnhancedCaseStudy}
             >
               {caseCopy.outcome && (
                 <div className="mb-5">
-                  <Callout accent={project.panelAccentColor} enhanced={isKestrelCaseStudy}>
+                  <Callout accent={project.panelAccentColor} enhanced={isEnhancedCaseStudy}>
                     {caseCopy.outcome}
                   </Callout>
                 </div>
@@ -817,7 +841,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                 number={sn('technical-build')}
                 title="Technical Build"
                 accent={project.panelAccentColor}
-                enhanced={isKestrelCaseStudy}
+                enhanced={isEnhancedCaseStudy}
               >
                 {/* Full stack row */}
                 <div className="flex flex-wrap gap-1.5 mb-5">
@@ -840,15 +864,15 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                 number={sn('reflection')}
                 title="Reflection"
                 accent={project.panelAccentColor}
-                enhanced={isKestrelCaseStudy}
+                enhanced={isEnhancedCaseStudy}
               >
                 <div
-                  className={cn('pl-5', isKestrelCaseStudy && 'rounded-r-[18px] py-1')}
+                  className={cn('pl-5', isEnhancedCaseStudy && 'rounded-r-[18px] py-1')}
                   style={{
                     borderLeft: `1px solid ${
-                      isKestrelCaseStudy ? `${project.panelAccentColor}40` : 'rgba(15,122,122,0.20)'
+                      isEnhancedCaseStudy ? `${project.panelAccentColor}40` : 'rgba(15,122,122,0.20)'
                     }`,
-                    background: isKestrelCaseStudy
+                    background: isEnhancedCaseStudy
                       ? `linear-gradient(90deg, ${project.panelAccentColor}08, transparent 62%)`
                       : undefined,
                   }}
@@ -868,7 +892,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
               number={sn('demo-links')}
               title="Demo &amp; Links"
               accent={project.panelAccentColor}
-              enhanced={isKestrelCaseStudy}
+              enhanced={isEnhancedCaseStudy}
             >
               <div className="flex flex-wrap gap-3">
                 <HoverSparkle className="inline-flex">
