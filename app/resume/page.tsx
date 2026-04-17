@@ -81,6 +81,26 @@ function SectionDivider({ children }: { children: React.ReactNode }) {
   )
 }
 
+// ── Highlighted description — metrics glow gold ─────────────────────────────
+
+function HighlightedDescription({ text }: { text: string }) {
+  // Matches: 30K+  70%  63%  200+  100+  (not plain years like 2024)
+  const parts = text.split(/(\d+K\+|\d+%|\d{2,}\+)/g)
+  return (
+    <>
+      {parts.map((part, i) =>
+        /^(\d+K\+|\d+%|\d{2,}\+)$/.test(part) ? (
+          <span key={i} className="font-semibold" style={{ color: '#C4974A' }}>
+            {part}
+          </span>
+        ) : (
+          <span key={i}>{part}</span>
+        ),
+      )}
+    </>
+  )
+}
+
 // ── Timeline entry ──────────────────────────────────────────────────────────
 
 function TimelineEntry({
@@ -92,6 +112,8 @@ function TimelineEntry({
 }) {
   const reduceMotion = useReducedMotion()
   const [before, after] = item.period.split(' — ')
+  const accentColor   = item.current ? '#C4974A' : '#0F7A7A'
+  const accentBright  = item.current ? '#E8B055' : '#4A9FAE'
 
   return (
     <motion.div
@@ -99,11 +121,11 @@ function TimelineEntry({
       className="grid items-start"
       style={{ gridTemplateColumns: '68px 22px 1fr' }}
     >
-      {/* Year column */}
-      <div className="pt-1.5 pr-3 text-right">
+      {/* Year column — hidden; date now lives inside the card */}
+      <div className="pt-2 pr-3 text-right">
         <span
-          className="font-mono text-[10px] leading-snug block"
-          style={{ color: item.current ? '#C4974A' : 'rgba(168,197,209,0.38)' }}
+          className="font-mono text-[10px] leading-snug"
+          style={{ color: item.current ? '#C4974A' : 'rgba(168,197,209,0.32)' }}
         >
           <span className="block">{before}</span>
           <span className="block">{after === 'Present' ? 'Now' : (after ?? '')}</span>
@@ -111,102 +133,158 @@ function TimelineEntry({
       </div>
 
       {/* Spine */}
-      <div className="flex flex-col items-center pt-1.5">
+      <div className="flex flex-col items-center pt-2">
         <div
           className="w-px min-h-[6px] flex-1"
-          style={{
-            background: item.current ? 'rgba(196,151,74,0.32)' : 'rgba(15,122,122,0.18)',
-          }}
+          style={{ background: item.current ? 'rgba(196,151,74,0.30)' : 'rgba(15,122,122,0.16)' }}
         />
         {item.current ? (
           <motion.div
-            animate={
-              reduceMotion ? {} : { opacity: [0.65, 1, 0.65], scale: [0.88, 1.10, 0.88] }
-            }
-            transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+            animate={reduceMotion ? {} : { opacity: [0.6, 1, 0.6], scale: [0.86, 1.12, 0.86] }}
+            transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
           >
             <StarMark size="xs" color="#C4974A" className="opacity-90" />
           </motion.div>
         ) : (
-          <StarMark size="xs" color="#0F7A7A" className="opacity-38" />
+          <StarMark size="xs" color="#0F7A7A" className="opacity-36" />
         )}
         <div
           className="w-px flex-1"
-          style={{ background: 'rgba(15,122,122,0.10)', minHeight: 28 }}
+          style={{ background: 'rgba(15,122,122,0.09)', minHeight: 28 }}
         />
       </div>
 
-      {/* Card */}
+      {/* ── Card ── */}
       <motion.div
         whileHover={
           reduceMotion
             ? {}
             : {
-                y: -2,
+                y: -3,
                 boxShadow: item.current
-                  ? '0 6px 28px rgba(196,151,74,0.10)'
-                  : '0 4px 22px rgba(0,0,0,0.22)',
+                  ? `0 8px 36px rgba(196,151,74,0.14), 0 0 0 1px rgba(196,151,74,0.30)`
+                  : `0 6px 28px rgba(0,0,0,0.28), 0 0 0 1px rgba(15,122,122,0.22)`,
               }
         }
-        transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
         className="relative ml-4 mb-6 overflow-hidden rounded-2xl p-5"
         style={{
-          background: 'rgba(15,42,61,0.52)',
+          background: item.current
+            ? 'linear-gradient(135deg, rgba(20,48,68,0.70) 0%, rgba(15,42,61,0.58) 100%)'
+            : 'linear-gradient(135deg, rgba(15,42,61,0.58) 0%, rgba(10,30,48,0.52) 100%)',
           border: item.current
-            ? '1px solid rgba(196,151,74,0.22)'
-            : '1px solid rgba(15,122,122,0.12)',
-          boxShadow: item.current ? '0 0 24px rgba(196,151,74,0.04)' : 'none',
+            ? '1px solid rgba(196,151,74,0.24)'
+            : '1px solid rgba(15,122,122,0.13)',
+          boxShadow: item.current
+            ? '0 0 32px rgba(196,151,74,0.06), inset 0 1px 0 rgba(255,255,255,0.03)'
+            : 'inset 0 1px 0 rgba(255,255,255,0.02)',
         }}
       >
-        {/* Top-edge shimmer line */}
-        <div
+        {/* ── Animated top-edge shimmer line ── */}
+        <motion.div
           className="pointer-events-none absolute inset-x-0 top-0 h-px"
+          animate={reduceMotion ? {} : { opacity: [0.4, 0.95, 0.4] }}
+          transition={{
+            duration: 3.0,
+            repeat: Infinity,
+            ease: 'easeInOut',
+            delay: index * 0.45,
+          }}
           style={{
             background: item.current
-              ? 'linear-gradient(90deg, transparent, rgba(196,151,74,0.42), transparent)'
-              : 'linear-gradient(90deg, transparent, rgba(15,122,122,0.26), transparent)',
+              ? 'linear-gradient(90deg, transparent 5%, rgba(196,151,74,0.70) 38%, rgba(228,180,80,0.90) 52%, rgba(196,151,74,0.70) 66%, transparent 95%)'
+              : 'linear-gradient(90deg, transparent 5%, rgba(15,122,122,0.55) 38%, rgba(74,159,174,0.75) 52%, rgba(15,122,122,0.55) 66%, transparent 95%)',
           }}
           aria-hidden
         />
 
-        {/* "Current" badge */}
-        {item.current && (
-          <div className="mb-3 flex items-center gap-1.5">
-            <span
-              className="rounded-full px-2.5 py-0.5 font-mono text-[9px] uppercase tracking-wider"
-              style={{
-                background: 'rgba(196,151,74,0.10)',
-                border: '1px solid rgba(196,151,74,0.28)',
-                color: '#C4974A',
-              }}
-            >
-              Current
-            </span>
-          </div>
+        {/* ── Periodic light-sweep beam ── */}
+        {!reduceMotion && (
+          <motion.div
+            className="pointer-events-none absolute inset-y-0 -skew-x-12"
+            style={{
+              width: '42%',
+              left: '-50%',
+              background: `linear-gradient(90deg, transparent 0%, ${accentBright}0E 45%, ${accentBright}16 52%, ${accentBright}0E 58%, transparent 100%)`,
+            }}
+            animate={{ x: ['0%', '380%'] }}
+            transition={{
+              duration: 1.6,
+              repeat: Infinity,
+              repeatDelay: 7 + index * 1.4,
+              ease: [0.22, 1, 0.36, 1],
+              delay: index * 0.8,
+            }}
+            aria-hidden
+          />
         )}
 
-        <div className="flex flex-wrap items-start justify-between gap-2">
+        {/* ── Twinkling corner star ── */}
+        {!reduceMotion && (
+          <motion.div
+            className="pointer-events-none absolute bottom-3.5 right-3.5"
+            animate={{ opacity: [0.12, 0.55, 0.12], scale: [0.78, 1.08, 0.78] }}
+            transition={{
+              duration: 3.8 + index * 0.4,
+              repeat: Infinity,
+              ease: 'easeInOut',
+              delay: index * 0.6,
+            }}
+            aria-hidden
+          >
+            <StarMark size="xs" color={accentBright} />
+          </motion.div>
+        )}
+
+        {/* ── Header row: title + company left │ badge + date right ── */}
+        <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-1">
+          {/* Left */}
           <div>
-            <p className="font-sans text-sm font-semibold text-text-base">{item.role}</p>
-            <p className="mt-0.5 font-sans text-[13px]" style={{ color: 'rgba(168,197,209,0.52)' }}>
+            <h3
+              className="font-display text-h3 leading-tight text-text-base"
+            >
+              {item.role}
+            </h3>
+            <p className="mt-1 font-sans text-[13px]" style={{ color: '#4A9FAE' }}>
               {item.company}
             </p>
           </div>
-          <span
-            className="mt-0.5 shrink-0 font-mono text-[9.5px] tracking-wider"
-            style={{ color: 'rgba(168,197,209,0.36)' }}
-          >
-            {item.period}
-          </span>
+
+          {/* Right: badge + date */}
+          <div className="flex shrink-0 items-center gap-2 pt-0.5">
+            {item.current && (
+              <span
+                className="flex items-center gap-1.5 rounded-full px-2.5 py-0.5 font-mono text-[9px] uppercase tracking-wider"
+                style={{
+                  background: 'rgba(196,151,74,0.12)',
+                  border: '1px solid rgba(196,151,74,0.32)',
+                  color: '#C4974A',
+                }}
+              >
+                <motion.span
+                  className="inline-block h-1.5 w-1.5 rounded-full"
+                  style={{ background: '#C4974A' }}
+                  animate={reduceMotion ? {} : { opacity: [0.5, 1, 0.5] }}
+                  transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+                />
+                Current
+              </span>
+            )}
+            <span
+              className="font-mono text-[9.5px] tracking-wider"
+              style={{ color: 'rgba(168,197,209,0.38)' }}
+            >
+              {item.period}
+            </span>
+          </div>
         </div>
 
-        <p
-          className="mt-3.5 font-sans text-[13.5px] leading-relaxed"
-          style={{ color: '#8DAFC0' }}
-        >
-          {item.description}
+        {/* ── Description with gold metric highlights ── */}
+        <p className="mt-4 font-sans text-[13.5px] leading-relaxed" style={{ color: '#8DAFC0' }}>
+          <HighlightedDescription text={item.description} />
         </p>
 
+        {/* ── Tags ── */}
         {item.tags && item.tags.length > 0 && (
           <div className="mt-4 flex flex-wrap gap-1.5">
             {item.tags.map((tag) => (
@@ -214,8 +292,8 @@ function TimelineEntry({
                 key={tag}
                 className="rounded-btn px-2.5 py-0.5 font-mono text-[9px] uppercase tracking-wider"
                 style={{
-                  background: 'rgba(15,42,61,0.82)',
-                  border: '1px solid rgba(15,122,122,0.13)',
+                  background: 'rgba(15,42,61,0.84)',
+                  border: `1px solid ${accentColor}22`,
                   color: '#6A9BAA',
                 }}
               >
