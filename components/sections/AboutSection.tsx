@@ -8,31 +8,46 @@ import { WatermarkStar } from '@/components/ui/WatermarkStar'
 import { fadeUp, fadeIn, staggerContainer, useMotionSafe } from '@/lib/motion'
 import { siteConfig } from '@/data/site'
 
-const workStatements = [
-  'I do my best work where technical systems need to become clear for the people using, evaluating, or buying them. I like breaking down how a system works, where the workflow gets stuck, and what needs to be made easier to understand.',
-  'That is why Solutions Engineering fits me so well. I enjoy translating technical depth into tailored demos, structured workflows, and clear explanations that help non-technical stakeholders see the value quickly.',
-  'My background has been shaped by data systems, dashboards, and AI-powered workflows, but the common thread is always the same: take something complex, make it usable, and communicate it in a way that supports better decisions.',
-  'I am especially strong in early-career SE environments where technical credibility, curiosity, communication, and customer understanding all matter.'
-]
-
-const workHighlights = [
-  'Discovery and workflow mapping',
-  'Technical demos and storytelling',
-  'AI workflows and full-stack prototyping',
-  'Dashboard and systems communication',
-  'Stakeholder-facing problem solving',
-  'Translating complexity into business value',
+const strengths = [
+  {
+    title: 'Discovery-first',
+    body: 'I start by understanding the workflow, where friction appears, and what the user or buyer needs to believe.',
+  },
+  {
+    title: 'Demo-oriented',
+    body: 'I turn technical depth into clear walkthroughs, structured narratives, and customer-facing product value.',
+  },
+  {
+    title: 'Workflow clarity',
+    body: 'I like simplifying messy systems into flows people can understand, adopt, and act on.',
+  },
+  {
+    title: 'Stakeholder communication',
+    body: 'I explain architecture, tradeoffs, and outputs clearly for non-technical audiences without flattening the nuance.',
+  },
 ]
 
 const proofPoints = [
-  '30K+ records analyzed in health AI systems',
-  '70% manual analysis time reduced',
-  '63% completion lift from workflow redesign',
-  'Delivered demos to non-technical stakeholders',
+  {
+    value: '30K+',
+    label: 'records analyzed',
+  },
+  {
+    value: '70%',
+    label: 'analysis time reduced',
+  },
+  {
+    value: '63%',
+    label: 'completion lift',
+  },
+  {
+    value: 'Demos',
+    label: 'for non-technical teams',
+  },
 ]
 
 export function AboutSection() {
-  const stagger = useMotionSafe(staggerContainer(0.1))
+  const stagger = useMotionSafe(staggerContainer(0.08))
   const up = useMotionSafe(fadeUp)
   const inn = useMotionSafe(fadeIn)
   const shouldReduce = useReducedMotion()
@@ -45,10 +60,19 @@ export function AboutSection() {
         className="absolute top-[-10%] right-[-8%] pointer-events-none"
         style={{ opacity: 0.04 }}
       >
-        <WatermarkStar size={480} color="#4A9FAE" direction={-1} duration={200} opacity={1} />
+        <WatermarkStar size={500} color="#4A9FAE" direction={-1} duration={220} opacity={1} />
       </div>
 
-      <div className="grid md:grid-cols-[58fr_42fr] gap-16 lg:gap-20 items-start relative">
+      <div
+        aria-hidden
+        className="absolute left-[-10%] top-[10%] h-[420px] w-[420px] rounded-full blur-3xl pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(circle, rgba(74,159,174,0.10) 0%, rgba(74,159,174,0.04) 38%, transparent 72%)',
+        }}
+      />
+
+      <div className="grid xl:grid-cols-[0.95fr_1.05fr] gap-14 lg:gap-20 items-start relative">
         <div>
           <motion.div
             variants={inn}
@@ -74,52 +98,12 @@ export function AboutSection() {
             </h2>
 
             <p
-              className="mt-5 max-w-[58ch] font-sans text-[16px] leading-7"
-              style={{ color: '#8FB2BE' }}
+              className="mt-5 max-w-[52ch] font-sans text-[16px] leading-7"
+              style={{ color: '#A8C5D1' }}
             >
-              My approach is simple: understand the workflow, identify what matters most,
-              and make the system easier to explain, demonstrate, and act on.
+              I am strongest when technical systems need to become clear, convincing, and usable.
+              My value is translating complexity into better demos, better workflows, and better decisions.
             </p>
-          </motion.div>
-
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-10%' }}
-            className="mt-10 flex flex-col gap-6"
-          >
-            {workStatements.map((statement, i) => (
-              <motion.p
-                key={i}
-                variants={up}
-                className="font-sans text-[16px] leading-8 max-w-[64ch]"
-                style={{ color: '#A8C5D1' }}
-              >
-                {statement}
-              </motion.p>
-            ))}
-          </motion.div>
-
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-10%' }}
-            className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3"
-          >
-            {workHighlights.map((highlight, i) => (
-              <motion.div
-                key={i}
-                variants={up}
-                className="flex items-center gap-2.5"
-              >
-                <StarMark size="xs" color="#0F7A7A" className="opacity-65 shrink-0" />
-                <span className="font-sans text-sm" style={{ color: '#7AABB8' }}>
-                  {highlight}
-                </span>
-              </motion.div>
-            ))}
           </motion.div>
 
           <motion.div
@@ -129,25 +113,99 @@ export function AboutSection() {
             viewport={{ once: true, margin: '-10%' }}
             className="mt-10 grid sm:grid-cols-2 gap-4"
           >
+            {strengths.map((item, i) => (
+              <motion.div
+                key={item.title}
+                variants={up}
+                whileHover={shouldReduce ? {} : { y: -4, scale: 1.01 }}
+                transition={{ duration: 0.2 }}
+                className="group rounded-[26px] p-5"
+                style={{
+                  background:
+                    'linear-gradient(180deg, rgba(10,33,50,0.70) 0%, rgba(8,27,42,0.56) 100%)',
+                  border: '1px solid rgba(74,159,174,0.14)',
+                  boxShadow:
+                    '0 12px 32px rgba(0,0,0,0.14), inset 0 1px 0 rgba(255,255,255,0.02)',
+                }}
+              >
+                <div className="flex items-center gap-2 mb-3">
+                  <motion.div
+                    animate={
+                      shouldReduce
+                        ? {}
+                        : i % 2 === 0
+                          ? { rotate: [0, 8, 0] }
+                          : { scale: [1, 1.08, 1] }
+                    }
+                    transition={{
+                      duration: 3 + i * 0.4,
+                      repeat: Infinity,
+                      ease: 'easeInOut',
+                    }}
+                  >
+                    <StarMark size="xs" color={i % 2 === 0 ? '#4A9FAE' : '#C4974A'} className="opacity-80" />
+                  </motion.div>
+
+                  <span
+                    className="font-mono text-[10px] uppercase tracking-[0.14em]"
+                    style={{ color: '#7FAFBB' }}
+                  >
+                    Key strength
+                  </span>
+                </div>
+
+                <h3 className="font-sans text-[22px] leading-[1.15] font-semibold text-text-base">
+                  {item.title}
+                </h3>
+
+                <p
+                  className="mt-3 font-sans text-[14.5px] leading-6"
+                  style={{ color: '#8FB2BE' }}
+                >
+                  {item.body}
+                </p>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-10%' }}
+            className="mt-10 grid grid-cols-2 lg:grid-cols-4 gap-4"
+          >
             {proofPoints.map((item) => (
               <motion.div
-                key={item}
+                key={item.label}
                 variants={up}
-                className="rounded-[20px] px-4 py-4"
+                whileHover={shouldReduce ? {} : { y: -3 }}
+                className="rounded-[22px] p-4"
                 style={{
                   background: 'rgba(10,33,50,0.44)',
                   border: '1px solid rgba(74,159,174,0.12)',
                 }}
               >
-                <div className="flex items-start gap-2.5">
-                  <StarMark size="xs" color="#C4974A" className="opacity-70 mt-1 shrink-0" />
-                  <p
-                    className="font-sans text-[14px] leading-6"
-                    style={{ color: '#A8C5D1' }}
+                <div className="flex items-center gap-2 mb-2">
+                  <StarMark size="xs" color="#C4974A" className="opacity-70" />
+                  <span
+                    className="font-mono text-[10px] uppercase tracking-[0.14em]"
+                    style={{ color: '#7FAFBB' }}
                   >
-                    {item}
-                  </p>
+                    Proof
+                  </span>
                 </div>
+
+                <div className="font-display text-[28px] leading-none text-text-base">
+                  {item.value}
+                </div>
+
+                <p
+                  className="mt-2 font-sans text-[13px] leading-5"
+                  style={{ color: '#8FB2BE' }}
+                >
+                  {item.label}
+                </p>
               </motion.div>
             ))}
           </motion.div>
@@ -159,52 +217,63 @@ export function AboutSection() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="hidden md:flex flex-col items-center"
+            className="hidden xl:flex flex-col items-center xl:sticky xl:top-28"
           >
             <div
               className="relative flex items-center justify-center"
-              style={{ width: 280, height: 300 }}
+              style={{ width: 360, height: 360 }}
             >
               <div
                 aria-hidden
                 className="absolute pointer-events-none"
                 style={{
-                  width: 300,
-                  height: 300,
+                  width: 370,
+                  height: 370,
                   borderRadius: '50%',
-                  background: 'radial-gradient(circle, rgba(15,122,122,0.15) 0%, transparent 70%)',
+                  background: 'radial-gradient(circle, rgba(15,122,122,0.18) 0%, transparent 72%)',
                   top: '50%',
                   left: '50%',
                   transform: 'translate(-50%, -50%)',
                 }}
               />
 
-              <div
+              <motion.div
                 aria-hidden
-                className="absolute pointer-events-none halo-spin"
+                className="absolute pointer-events-none"
                 style={{
-                  width: 246,
-                  height: 246,
-                  top: '50%',
-                  left: '50%',
-                  transform: 'translate(-50%, -50%)',
+                  width: 328,
+                  height: 328,
+                  borderRadius: '50%',
+                  border: '1px dashed rgba(74,159,174,0.18)',
                 }}
-              >
-                <svg width="246" height="246" viewBox="0 0 246 246" fill="none">
-                  <circle
-                    cx="123"
-                    cy="123"
-                    r="120"
-                    stroke="rgba(15,122,122,0.18)"
-                    strokeWidth="1"
-                    strokeDasharray="3 10"
-                  />
-                </svg>
-              </div>
+                animate={shouldReduce ? {} : { rotate: 360 }}
+                transition={{
+                  duration: 34,
+                  repeat: Infinity,
+                  ease: 'linear',
+                }}
+              />
+
+              <motion.div
+                aria-hidden
+                className="absolute pointer-events-none"
+                style={{
+                  width: 290,
+                  height: 290,
+                  borderRadius: '50%',
+                  border: '1px solid rgba(196,151,74,0.16)',
+                }}
+                animate={shouldReduce ? {} : { rotate: -360 }}
+                transition={{
+                  duration: 24,
+                  repeat: Infinity,
+                  ease: 'linear',
+                }}
+              />
 
               <div
                 className="portrait-float"
-                style={{ width: 200, height: 200, position: 'relative', zIndex: 10 }}
+                style={{ width: 250, height: 250, position: 'relative', zIndex: 10 }}
               >
                 <div
                   className="portrait-glow"
@@ -214,20 +283,22 @@ export function AboutSection() {
                     borderRadius: '50%',
                     overflow: 'hidden',
                     position: 'relative',
+                    boxShadow:
+                      '0 0 0 6px rgba(15,122,122,0.18), 0 0 36px rgba(74,159,174,0.18)',
                   }}
                 >
                   <Image
                     src={portrait}
                     alt="Justin Chang"
                     fill
-                    sizes="200px"
+                    sizes="250px"
                     className="object-cover object-top"
                   />
                   <div
                     style={{
                       position: 'absolute',
                       inset: 0,
-                      background: 'linear-gradient(160deg, rgba(15,122,122,0.07) 0%, transparent 60%)',
+                      background: 'linear-gradient(160deg, rgba(15,122,122,0.08) 0%, transparent 60%)',
                       borderRadius: '50%',
                     }}
                   />
@@ -236,26 +307,36 @@ export function AboutSection() {
 
               <motion.div
                 aria-hidden
+                style={{ position: 'absolute', top: 42, right: 64, zIndex: 20 }}
+                animate={shouldReduce ? {} : { y: [0, -7, 0], opacity: [0.7, 1, 0.7] }}
+                transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                <StarMark size="sm" color="#C4974A" className="opacity-90" />
+              </motion.div>
+
+              <motion.div
+                aria-hidden
+                style={{ position: 'absolute', bottom: 56, left: 40, zIndex: 20 }}
+                animate={shouldReduce ? {} : { scale: [1, 1.14, 1], opacity: [0.5, 1, 0.5] }}
+                transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                <StarMark size="xs" color="#7EE7F2" className="opacity-90" />
+              </motion.div>
+
+              <motion.div
+                aria-hidden
                 className="absolute pointer-events-none"
                 style={{
-                  width: 236,
-                  height: 236,
+                  width: 314,
+                  height: 314,
                   top: '50%',
                   left: '50%',
-                  marginLeft: -118,
-                  marginTop: -118,
-                  zIndex: 20,
+                  marginLeft: -157,
+                  marginTop: -157,
+                  zIndex: 18,
                 }}
                 animate={shouldReduce ? {} : { rotate: 360 }}
-                transition={
-                  shouldReduce
-                    ? {}
-                    : {
-                        duration: 18,
-                        repeat: Infinity,
-                        ease: 'linear',
-                      }
-                }
+                transition={{ duration: 18, repeat: Infinity, ease: 'linear' }}
               >
                 <div
                   style={{
@@ -266,139 +347,50 @@ export function AboutSection() {
                     height: 12,
                     marginLeft: -6,
                     marginTop: -6,
-                    transform: 'rotate(132deg) translateY(-118px)',
+                    transform: 'rotate(146deg) translateY(-157px)',
                   }}
                 >
                   <div
-                    style={{
-                      position: 'absolute',
-                      top: '50%',
-                      left: '50%',
-                      width: 28,
-                      height: 7,
-                      transform: 'translate(-86%, -50%)',
-                      borderRadius: 999,
-                      background:
-                        'linear-gradient(90deg, rgba(196,151,74,0.0) 0%, rgba(196,151,74,0.10) 32%, rgba(196,151,74,0.18) 56%, rgba(196,151,74,0.0) 100%)',
-                      filter: 'blur(3px)',
-                      opacity: 0.7,
-                    }}
-                  />
-                  <motion.div
-                    animate={shouldReduce ? {} : { scale: [1, 1.08, 1] }}
-                    transition={
-                      shouldReduce
-                        ? {}
-                        : {
-                            duration: 2.6,
-                            repeat: Infinity,
-                            ease: 'easeInOut',
-                          }
-                    }
                     style={{
                       width: 12,
                       height: 12,
                       borderRadius: '50%',
                       background:
                         'radial-gradient(circle at 32% 30%, #FFF5D9 0%, #E2BC69 34%, #C4974A 68%, #8E6320 100%)',
-                      boxShadow:
-                        '0 0 8px rgba(196,151,74,0.45), 0 0 16px rgba(196,151,74,0.16), inset -1px -1px 2px rgba(0,0,0,0.18), inset 1px 1px 2px rgba(255,255,255,0.35)',
+                      boxShadow: '0 0 10px rgba(196,151,74,0.42)',
                     }}
                   />
                 </div>
               </motion.div>
-
-              <motion.div
-                aria-hidden
-                className="absolute pointer-events-none"
-                style={{
-                  width: 220,
-                  height: 220,
-                  top: '50%',
-                  left: '50%',
-                  marginLeft: -110,
-                  marginTop: -110,
-                  zIndex: 19,
-                }}
-                animate={shouldReduce ? {} : { rotate: -360 }}
-                transition={
-                  shouldReduce
-                    ? {}
-                    : {
-                        duration: 24,
-                        repeat: Infinity,
-                        ease: 'linear',
-                      }
-                }
-              >
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    width: 6,
-                    height: 6,
-                    marginLeft: -3,
-                    marginTop: -3,
-                    transform: 'rotate(36deg) translateY(-110px)',
-                  }}
-                >
-                  <motion.div
-                    animate={shouldReduce ? {} : { scale: [1, 1.25, 1], opacity: [0.4, 0.9, 0.4] }}
-                    transition={
-                      shouldReduce
-                        ? {}
-                        : {
-                            duration: 2.8,
-                            repeat: Infinity,
-                            ease: 'easeInOut',
-                          }
-                    }
-                    style={{
-                      width: 6,
-                      height: 6,
-                      borderRadius: '50%',
-                      background: '#7EE7F2',
-                      boxShadow: '0 0 8px rgba(126,231,242,0.40), 0 0 14px rgba(126,231,242,0.16)',
-                    }}
-                  />
-                </div>
-              </motion.div>
-
-              <motion.div
-                aria-hidden
-                animate={shouldReduce ? {} : { y: [0, -4, 0] }}
-                transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
-                style={{ position: 'absolute', top: 20, right: 20, zIndex: 20 }}
-              >
-                <StarMark size="xs" color="#4A9FAE" className="opacity-60" />
-              </motion.div>
-
-              <div
-                aria-hidden
-                style={{ position: 'absolute', bottom: 28, left: 22, zIndex: 20 }}
-              >
-                <StarMark size="xs" color="#C4974A" className="opacity-40" />
-              </div>
             </div>
 
             <motion.div
               variants={up}
-              className="mt-6 w-full max-w-[360px] p-5 rounded-2xl"
+              whileHover={shouldReduce ? {} : { y: -4 }}
+              className="mt-6 w-full max-w-[390px] rounded-[28px] p-6"
               style={{
-                background: 'rgba(15,42,61,0.55)',
+                background: 'rgba(15,42,61,0.56)',
                 border: '1px solid rgba(15,122,122,0.16)',
+                boxShadow: '0 18px 40px rgba(0,0,0,0.16)',
               }}
             >
-              <div className="flex items-start gap-2.5">
-                <StarMark size="xs" color="#4A9FAE" className="opacity-60 mt-1 shrink-0" />
-                <p
-                  className="font-sans text-[15px] leading-6 text-pretty"
-                  style={{ color: '#A8C5D1' }}
-                >
-                  Open to early-career Solutions Engineering roles where I can turn technical systems
-                  into clear demos, better workflows, and business value.
-                </p>
+              <div className="flex items-start gap-3">
+                <StarMark size="xs" color="#4A9FAE" className="opacity-70 mt-1 shrink-0" />
+                <div>
+                  <p
+                    className="font-mono text-[10px] uppercase tracking-[0.14em]"
+                    style={{ color: '#7FAFBB' }}
+                  >
+                    Recruiter signal
+                  </p>
+                  <p
+                    className="mt-2 font-sans text-[15px] leading-7"
+                    style={{ color: '#A8C5D1' }}
+                  >
+                    Open to early-career Solutions Engineering roles where I can combine technical depth,
+                    demos, stakeholder communication, and workflow thinking.
+                  </p>
+                </div>
               </div>
             </motion.div>
           </motion.div>
