@@ -3,7 +3,7 @@
 import * as React from 'react'
 import { cn } from '@/lib/utils'
 
-const RESUME_FILE_PATH = '/RESUME.pdf'
+const RESUME_FILE_PATH = '/api/resume'
 const RESUME_DOWNLOAD_NAME = 'Justin-Chang-Resume.pdf'
 
 type ResumeDownloadButtonProps = {
