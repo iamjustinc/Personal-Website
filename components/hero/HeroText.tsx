@@ -51,6 +51,62 @@ function SparkAccent({
   )
 }
 
+// ── Hover-only sparkle accent ────────────────────────────────────────────────
+// Small star accents that activate while hovering the hero name.
+
+function NameHoverSpark({
+  x,
+  y,
+  size = 8,
+  color = '#F4D58D',
+  delay = 0,
+}: {
+  x: string
+  y: string
+  size?: number
+  color?: string
+  delay?: number
+}) {
+  return (
+    <motion.span
+      aria-hidden
+      className="absolute pointer-events-none"
+      style={{ left: x, top: y, zIndex: 16 }}
+      initial="rest"
+      variants={{
+        rest: { opacity: 0, scale: 0.72, y: 0, rotate: 0 },
+        hover: {
+          opacity: [0, 0.95, 0.52],
+          scale: [0.72, 1.16, 1],
+          y: [0, -3, 0],
+          rotate: [0, 28, 0],
+          transition: {
+            delay,
+            duration: 0.72,
+            ease: [0.22, 1, 0.36, 1],
+          },
+        },
+      }}
+    >
+      <span
+        style={{
+          position: 'absolute',
+          inset: -size * 1.8,
+          borderRadius: '50%',
+          background: `radial-gradient(circle, ${color}55 0%, transparent 70%)`,
+        }}
+      />
+      <svg width={size} height={size} viewBox="0 0 24 24" style={{ position: 'relative' }}>
+        <path
+          d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z"
+          fill={color}
+          opacity="0.94"
+        />
+      </svg>
+    </motion.span>
+  )
+}
+
 // ── Name reveal variant ─────────────────────────────────────────────────────
 // Pure opacity + tiny y-lift. NO clip-path. Text is never cropped.
 // Runs concurrently with the star so the name appears to be revealed by it.
@@ -98,19 +154,128 @@ export function HeroText() {
           The shooting star and sparkles are layered above the h1 via z-index,
           outside its DOM subtree so they cannot be affected by its styles.
       */}
-      <div className="relative" style={{ overflow: 'visible' }}>
+      <motion.div
+        className="relative inline-block self-start"
+        style={{ overflow: 'visible' }}
+        whileHover={reduceMotion ? 'rest' : 'hover'}
+      >
 
         <motion.h1
           variants={nameVariant}
-          className="font-display text-hero text-text-base leading-none"
+          whileHover={
+            reduceMotion
+              ? {}
+              : {
+                  y: -1,
+                  textShadow:
+                    '0 0 22px rgba(74,159,174,0.18), 0 0 40px rgba(196,151,74,0.08)',
+                }
+          }
+          transition={{ duration: 0.34, ease: [0.22, 1, 0.36, 1] }}
+          className="relative z-10 font-display text-hero text-text-base leading-none"
         >
           {firstName}{lastName ? (
             <>
               {' '}
-              <span style={{ color: '#4A9FAE' }}>{lastName}</span>
+              <motion.span
+                style={{ color: '#4A9FAE' }}
+                whileHover={
+                  reduceMotion
+                    ? {}
+                    : {
+                        color: '#7EE7F2',
+                        textShadow: '0 0 26px rgba(126,231,242,0.24)',
+                      }
+                }
+                transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {lastName}
+              </motion.span>
             </>
           ) : null}
         </motion.h1>
+
+        {!reduceMotion && (
+          <>
+            {/* Hover shimmer clipped to a duplicate of the name text. */}
+            <motion.div
+              aria-hidden
+              className="absolute inset-0 z-20 pointer-events-none font-display text-hero leading-none"
+              initial="rest"
+              style={{
+                color: 'transparent',
+                backgroundImage:
+                  'linear-gradient(105deg, transparent 0%, transparent 34%, rgba(126,231,242,0.12) 42%, rgba(235,251,255,0.72) 48%, rgba(196,151,74,0.52) 53%, rgba(126,231,242,0.10) 60%, transparent 70%, transparent 100%)',
+                backgroundSize: '260% 100%',
+                backgroundPosition: '135% 0%',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                filter: 'drop-shadow(0 0 10px rgba(126,231,242,0.12))',
+                whiteSpace: 'nowrap',
+              }}
+              variants={{
+                rest: {
+                  opacity: 0,
+                  backgroundPosition: '135% 0%',
+                },
+                hover: {
+                  opacity: [0, 1, 0.74],
+                  backgroundPosition: ['135% 0%', '-45% 0%'],
+                  transition: {
+                    duration: 1.1,
+                    ease: [0.16, 1, 0.3, 1],
+                  },
+                },
+              }}
+            >
+              {firstName}{lastName ? (
+                <>
+                  {' '}
+                  <span>{lastName}</span>
+                </>
+              ) : null}
+            </motion.div>
+
+            {/* A narrow gold glint that crosses the accent word area. */}
+            {lastName && (
+              <motion.span
+                aria-hidden
+                className="absolute pointer-events-none"
+                initial="rest"
+                style={{
+                  left: '48%',
+                  top: '9%',
+                  zIndex: 21,
+                  width: '42%',
+                  height: 2,
+                  borderRadius: 9999,
+                  background:
+                    'linear-gradient(90deg, transparent 0%, rgba(196,151,74,0.76) 48%, transparent 100%)',
+                  boxShadow: '0 0 16px rgba(196,151,74,0.24)',
+                  transformOrigin: 'left center',
+                }}
+                variants={{
+                  rest: { opacity: 0, scaleX: 0.12, x: '-14%', rotate: -4 },
+                  hover: {
+                    opacity: [0, 0.92, 0],
+                    scaleX: [0.12, 1, 0.2],
+                    x: ['-14%', '42%'],
+                    rotate: -4,
+                    transition: {
+                      duration: 0.82,
+                      ease: [0.22, 1, 0.36, 1],
+                      delay: 0.1,
+                    },
+                  },
+                }}
+              />
+            )}
+
+            <NameHoverSpark x="8%" y="-12px" size={9} color="#F4D58D" delay={0.04} />
+            <NameHoverSpark x="48%" y="calc(100% + 5px)" size={7} color="#7EE7F2" delay={0.16} />
+            <NameHoverSpark x="79%" y="-10px" size={10} color="#F4D58D" delay={0.26} />
+          </>
+        )}
 
         {!reduceMotion && (
           <>
@@ -249,7 +414,7 @@ export function HeroText() {
           </>
         )}
 
-      </div>
+      </motion.div>
 
       {/* ── Statement ───────────────────────────────────────────────────── */}
       <motion.p
