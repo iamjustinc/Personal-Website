@@ -152,8 +152,8 @@ function FloatingCaseVisual({ project }: { project: Project }) {
         <motion.div
           animate={{ y: [0, -8, 0], rotate: [-2, -1, -2] }}
           transition={{ duration: 8.5, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute left-[6%] top-[11%] h-[60%] w-[58%] overflow-hidden"
-          style={{ boxShadow: '0 18px 54px rgba(0,0,0,0.24)' }}
+          className="absolute left-[6%] top-[11%] h-[60%] w-[58%] rounded-2xl overflow-hidden"
+          style={{ boxShadow: '0 18px 54px rgba(0,0,0,0.36)' }}
         >
           <Image
             src={landingShot}
@@ -169,8 +169,8 @@ function FloatingCaseVisual({ project }: { project: Project }) {
         <motion.div
           animate={{ y: [0, 10, 0], rotate: [2, 1, 2] }}
           transition={{ duration: 7.4, repeat: Infinity, ease: 'easeInOut', delay: 0.4 }}
-          className="absolute right-[7%] bottom-[8%] h-[54%] w-[62%] overflow-hidden"
-          style={{ boxShadow: '0 24px 64px rgba(0,0,0,0.28)' }}
+          className="absolute right-[7%] bottom-[8%] h-[54%] w-[62%] rounded-2xl overflow-hidden"
+          style={{ boxShadow: '0 24px 64px rgba(0,0,0,0.38)' }}
         >
           <Image
             src={interfaceShot}

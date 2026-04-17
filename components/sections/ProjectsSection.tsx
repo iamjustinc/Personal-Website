@@ -56,9 +56,9 @@ function FloatingProjectVisual({
         <motion.div
           animate={{ y: [0, -10, 0], rotate: [-2, -1, -2] }}
           transition={{ duration: 8.5, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute left-[8%] top-[10%] h-[68%] w-[58%] overflow-hidden"
+          className="absolute left-[8%] top-[10%] h-[68%] w-[58%] rounded-2xl overflow-hidden"
           style={{
-            boxShadow: '0 22px 60px rgba(0,0,0,0.26)',
+            boxShadow: '0 22px 60px rgba(0,0,0,0.36)',
           }}
         >
           <Image
@@ -66,7 +66,7 @@ function FloatingProjectVisual({
             alt={`${project.name} landing view`}
             fill
             sizes="(max-width: 1024px) 100vw, 420px"
-            className="object-contain object-center"
+            className="object-cover object-top"
             priority={priority}
           />
         </motion.div>
@@ -77,9 +77,9 @@ function FloatingProjectVisual({
           animate={{ y: [0, 12, 0], rotate: [2.2, 1.1, 2.2] }}
           transition={{ duration: 7.5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
           whileHover={{ y: -4, scale: 1.01 }}
-          className="absolute right-[7%] bottom-[10%] h-[56%] w-[60%] overflow-hidden"
+          className="absolute right-[7%] bottom-[10%] h-[56%] w-[60%] rounded-2xl overflow-hidden"
           style={{
-            boxShadow: '0 28px 72px rgba(0,0,0,0.30)',
+            boxShadow: '0 28px 72px rgba(0,0,0,0.40)',
           }}
         >
           <Image
@@ -87,7 +87,7 @@ function FloatingProjectVisual({
             alt={`${project.name} interface view`}
             fill
             sizes="(max-width: 1024px) 100vw, 460px"
-            className="object-contain object-center"
+            className="object-cover object-center"
           />
         </motion.div>
       )}

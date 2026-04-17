@@ -108,16 +108,19 @@ function CompactLink({
   href,
   icon: Icon,
   label,
+  download,
 }: {
   href: string
   icon: LucideIcon
   label: string
+  download?: string
 }) {
   return (
     <a
       href={href}
-      target={href.startsWith('http') ? '_blank' : undefined}
-      rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+      download={download}
+      target={!download && href.startsWith('http') ? '_blank' : undefined}
+      rel={!download && href.startsWith('http') ? 'noopener noreferrer' : undefined}
       className="group inline-flex items-center gap-2 text-sm transition-colors duration-200 hover:text-text-base"
       style={{ color: '#A8C5D1' }}
     >
@@ -136,11 +139,13 @@ function ActionCard({
   icon: Icon,
   title,
   body,
+  download,
 }: {
   href: string
   icon: LucideIcon
   title: string
   body: string
+  download?: string
 }) {
   const isExternal = href.startsWith('http') || href.startsWith('mailto')
 
@@ -148,8 +153,9 @@ function ActionCard({
     <HoverSparkle className="block">
       <motion.a
         href={href}
-        target={isExternal && !href.startsWith('mailto') ? '_blank' : undefined}
-        rel={isExternal && !href.startsWith('mailto') ? 'noopener noreferrer' : undefined}
+        download={download}
+        target={!download && isExternal && !href.startsWith('mailto') ? '_blank' : undefined}
+        rel={!download && isExternal && !href.startsWith('mailto') ? 'noopener noreferrer' : undefined}
         whileHover={{ y: -4, scale: 1.01 }}
         className="group block rounded-[22px] border p-5 transition-all duration-200"
         style={{
@@ -264,7 +270,7 @@ function ContactPageLayout() {
           <div className="mt-8 flex flex-wrap items-center gap-6">
             <CompactLink href={siteConfig.linkedinUrl} icon={Linkedin} label="LinkedIn" />
             <CompactLink href={siteConfig.githubUrl} icon={Github} label="GitHub" />
-            <CompactLink href={siteConfig.resumeUrl} icon={Download} label="Résumé" />
+            <CompactLink href={siteConfig.resumeUrl} download="Justin-Chang-Resume.pdf" icon={Download} label="Résumé" />
           </div>
 
           <SectionFooter showThanks={false} />
@@ -323,6 +329,7 @@ function ContactPageLayout() {
               />
               <ActionCard
                 href={siteConfig.resumeUrl}
+                download="Justin-Chang-Resume.pdf"
                 icon={Download}
                 title="Download résumé"
                 body="A quick way to review experience, projects, and technical range."
