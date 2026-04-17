@@ -330,7 +330,7 @@ export default function AboutPage() {
                 </span>
               </div>
 
-              <h1 className="group/name relative inline-block font-display text-hero text-text-base leading-none text-balance">
+              <h1 className="group/name relative inline-block font-display text-[clamp(3rem,6.2vw,6.5rem)] text-text-base leading-[0.92] tracking-[-0.03em] text-balance max-w-[9ch]">
                 <span className="relative z-10">
                   I turn messy technical systems into{' '}
                   <span style={{ color: '#4A9FAE' }}>usable workflows, demos, and decisions.</span>
