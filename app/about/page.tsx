@@ -294,7 +294,7 @@ export default function AboutPage() {
                 <StarMark size="xs" color="#4A9FAE" className="opacity-60" />
               </motion.div>
 
-              <div className="scale-[0.84] sm:scale-[0.92] lg:scale-100 origin-center">
+              <div className="scale-[0.62] sm:scale-[0.68] lg:scale-[0.72] origin-center">
                 <HeroVisual />
               </div>
             </div>
@@ -310,7 +310,7 @@ export default function AboutPage() {
           >
             <motion.div variants={fadeUp}>
               <div
-                className="inline-flex items-center gap-2 rounded-full px-3.5 py-1 mb-5"
+                className="inline-flex items-center gap-2 rounded-full px-3 py-1 mb-4"
                 style={{
                   background: 'rgba(15,122,122,0.08)',
                   border: '1px solid rgba(15,122,122,0.22)',
@@ -323,44 +323,44 @@ export default function AboutPage() {
                   <StarMark size="xs" color="#4A9FAE" className="opacity-70" />
                 </motion.div>
                 <span
-                  className="font-mono text-[10px] uppercase tracking-[0.12em]"
+                  className="font-mono text-[9px] uppercase tracking-[0.12em]"
                   style={{ color: '#4A9FAE' }}
                 >
                   Early-career solutions engineering
                 </span>
               </div>
 
-              <h1 className="group/name relative inline-block font-display text-3xl sm:text-4xl lg:text-[3.35rem] xl:text-[3.8rem] text-text-base leading-[0.94] tracking-[-0.03em] max-w-[11ch]">
-  <span className="relative z-10">
-    I turn complexity into{' '}
-    <span style={{ color: '#4A9FAE' }}>clear demos and decisions.</span>
-  </span>
-  {!shouldReduce && (
-    <motion.span
-      aria-hidden
-      className="pointer-events-none absolute left-0 right-0 top-[52%] z-0 h-[18%] rounded-full blur-xl"
-      style={{
-        background:
-          'linear-gradient(90deg, transparent, rgba(74,159,174,0.16), rgba(196,151,74,0.10), transparent)',
-      }}
-      animate={{ opacity: [0.18, 0.42, 0.18], x: ['-2%', '2%', '-2%'] }}
-      transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut' }}
-    />
-  )}
-  {!shouldReduce && (
-    <motion.span
-      aria-hidden
-      className="pointer-events-none absolute -right-4 top-2 opacity-0 transition-opacity duration-300 group-hover/name:opacity-100"
-      animate={{ rotate: [0, 18, 0], scale: [0.88, 1.12, 0.88] }}
-      transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
-    >
-      <StarMark size="xs" color="#C4974A" />
-    </motion.span>
-  )}
-</h1>
+              <h1 className="group/name relative inline-block max-w-[580px] font-sans text-[22px] font-semibold leading-snug text-text-base sm:text-[24px] lg:text-[26px]">
+                <span className="relative z-10">
+                  I turn technical complexity into{' '}
+                  <span style={{ color: '#4A9FAE' }}>clear demos and decisions.</span>
+                </span>
+                {!shouldReduce && (
+                  <motion.span
+                    aria-hidden
+                    className="pointer-events-none absolute left-0 right-0 top-[58%] z-0 h-[22%] rounded-full blur-xl"
+                    style={{
+                      background:
+                        'linear-gradient(90deg, transparent, rgba(74,159,174,0.10), rgba(196,151,74,0.06), transparent)',
+                    }}
+                    animate={{ opacity: [0.12, 0.30, 0.12], x: ['-2%', '2%', '-2%'] }}
+                    transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut' }}
+                  />
+                )}
+                {!shouldReduce && (
+                  <motion.span
+                    aria-hidden
+                    className="pointer-events-none absolute -right-3 top-1 opacity-0 transition-opacity duration-300 group-hover/name:opacity-100"
+                    animate={{ rotate: [0, 18, 0], scale: [0.78, 1.02, 0.78] }}
+                    transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
+                  >
+                    <StarMark size="xs" color="#C4974A" />
+                  </motion.span>
+                )}
+              </h1>
 
               <p
-                className="mt-6 font-sans text-[17px] leading-8 max-w-[56ch]"
+                className="mt-4 max-w-[56ch] font-sans text-[14.5px] leading-7"
                 style={{ color: '#A8C5D1' }}
               >
                 I&apos;m an early-career Solutions Engineering candidate who builds AI/data tools,
