@@ -18,16 +18,71 @@ import { cn } from '@/lib/utils'
 
 type NavItem = { id: string; label: string; number: string }
 
+type CaseStudyCopy = {
+  tagline: string
+  outcome?: string
+  overview: string
+  problem: string
+  users?: string
+  solution: string
+  impact: string
+  buildNotes?: string
+  reflection?: string
+}
+
+const kestrelCaseStudyCopy: CaseStudyCopy = {
+  tagline:
+    'AI decision engine that turns a target role into readiness scores, skill gaps, resume edits, and a next-step roadmap.',
+  outcome:
+    'Turns fragmented job prep into a clear readiness view: what matches, what is missing, what to improve, and what to do next.',
+  overview:
+    'Kestrel is a role-readiness decision engine for early-career candidates. A user brings a job description and profile; the product extracts requirements, scores fit, surfaces strengths and gaps, and turns the result into a practical roadmap.',
+  problem:
+    'Early-career candidates often prep from scattered signals: job posts, resume edits, advice threads, and vague role expectations. The result is repeated resume tweaking without a reliable sense of readiness or which PM, SE, or SWE gaps matter first.',
+  users:
+    'Built for early-career candidates targeting PM, Solutions Engineering, and SWE-adjacent roles who need to translate their experience into role requirements without guessing which gaps matter most.',
+  solution:
+    'Kestrel parses the target description, extracts the core requirements, compares them against the user profile, then returns a readiness score, matched strengths, ranked gaps, resume improvement prompts, and a next-step roadmap in a card-based dashboard.',
+  impact:
+    'Instead of leaving users with another generic checklist, Kestrel gives them a decision view: what to lead with, what to fix first, and how to explain their fit with more confidence.',
+  buildNotes:
+    'The hard part was normalizing messy job descriptions into consistent, usable output. I used a staged AI pipeline with typed schemas so requirements, scores, gaps, and roadmap items stayed structured enough to render clearly and compare across roles.',
+  reflection:
+    'The strongest product decision was restraint. Kestrel became more useful when I reduced output noise and prioritized the few signals that change a user\'s next action: fit, gaps, resume edits, and roadmap.',
+}
+
+function getCaseStudyCopy(project: Project): CaseStudyCopy {
+  if (project.slug === 'kestrel') return kestrelCaseStudyCopy
+
+  return {
+    tagline: project.tagline,
+    outcome: project.outcome,
+    overview: project.overview ?? project.summary,
+    problem: project.problem,
+    users: project.users,
+    solution: project.solution,
+    impact: project.impact,
+    buildNotes: project.buildNotes,
+    reflection: project.reflection,
+  }
+}
+
 // ── Fact strip ───────────────────────────────────────────────────────────────
 
-function FactStrip({ project }: { project: Project }) {
+function FactStrip({ project, enhanced = false }: { project: Project; enhanced?: boolean }) {
   const facts = [
     { label: 'Year', value: String(project.year) },
     { label: 'Role', value: project.role },
     { label: 'Stack', value: project.stack.slice(0, 4).join(' · ') },
   ]
   return (
-    <div style={{ borderColor: 'rgba(15,122,122,0.10)' }} className="border-b">
+    <div
+      style={{
+        borderColor: enhanced ? `${project.panelAccentColor}1F` : 'rgba(15,122,122,0.10)',
+        boxShadow: enhanced ? `inset 0 1px 0 ${project.panelAccentColor}12` : undefined,
+      }}
+      className="border-b"
+    >
       <div className="max-w-[1180px] mx-auto px-6 py-4">
         <div className="flex flex-wrap gap-x-8 gap-y-2">
           {facts.map((f) => (
@@ -52,7 +107,15 @@ function FactStrip({ project }: { project: Project }) {
 
 // ── Sticky side nav ───────────────────────────────────────────────────────────
 
-function SideNav({ items, accent }: { items: NavItem[]; accent: string }) {
+function SideNav({
+  items,
+  accent,
+  enhanced = false,
+}: {
+  items: NavItem[]
+  accent: string
+  enhanced?: boolean
+}) {
   const [activeId, setActiveId] = useState(items[0]?.id ?? '')
 
   useEffect(() => {
@@ -106,23 +169,39 @@ function SideNav({ items, accent }: { items: NavItem[]; accent: string }) {
                 ? 'bg-[rgba(15,122,122,0.10)]'
                 : 'hover:bg-[rgba(15,122,122,0.06)]',
             )}
+            style={
+              enhanced && isActive
+                ? {
+                    background: `linear-gradient(90deg, ${accent}1A, rgba(15,122,122,0.04))`,
+                    boxShadow: `0 0 24px ${accent}10`,
+                  }
+                : undefined
+            }
           >
             <span
               className="font-mono text-[9px] tabular-nums shrink-0 transition-opacity duration-200"
-              style={{ color: accent, opacity: isActive ? 0.6 : 0.22 }}
+              style={{ color: accent, opacity: isActive ? (enhanced ? 0.82 : 0.6) : 0.22 }}
             >
               {item.number}
             </span>
             <span
               className="font-mono text-[10.5px] uppercase tracking-[0.09em] transition-colors duration-200 leading-none"
-              style={{ color: isActive ? accent : '#5A8A9A' }}
+              style={{
+                color: isActive ? (enhanced ? '#D7EEF1' : accent) : '#5A8A9A',
+              }}
             >
               {item.label}
             </span>
             {isActive && (
               <div
-                className="ml-auto h-1 w-1 rounded-full shrink-0"
-                style={{ background: accent }}
+                className={cn(
+                  'ml-auto rounded-full shrink-0',
+                  enhanced ? 'h-1.5 w-1.5' : 'h-1 w-1',
+                )}
+                style={{
+                  background: accent,
+                  boxShadow: enhanced ? `0 0 14px ${accent}99` : undefined,
+                }}
               />
             )}
           </a>
@@ -139,12 +218,14 @@ function CaseSection({
   number,
   title,
   accent,
+  enhanced = false,
   children,
 }: {
   id: string
   number: string
   title: string
   accent: string
+  enhanced?: boolean
   children: React.ReactNode
 }) {
   const reduceMotion = useReducedMotion()
@@ -157,26 +238,48 @@ function CaseSection({
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: '-4%' }}
-      className="scroll-mt-24 py-10"
-      style={{ borderTop: '1px solid rgba(15,122,122,0.10)' }}
+      className="relative scroll-mt-24 py-10"
+      style={
+        enhanced
+          ? {
+              borderTop: '1px solid transparent',
+              background: `linear-gradient(90deg, ${accent}2E, rgba(196,151,74,0.14), transparent 68%) top / 100% 1px no-repeat`,
+            }
+          : { borderTop: '1px solid rgba(15,122,122,0.10)' }
+      }
     >
+      {enhanced && (
+        <div
+          className="pointer-events-none absolute -left-6 top-8 h-24 w-24 rounded-full blur-3xl"
+          style={{ background: `${accent}0D` }}
+          aria-hidden
+        />
+      )}
+
       <div className="flex items-center gap-3 mb-6">
         <span
           className="font-mono text-[10px] tabular-nums select-none shrink-0"
-          style={{ color: accent, opacity: 0.38 }}
+          style={{ color: accent, opacity: enhanced ? 0.62 : 0.38 }}
         >
           {number}
         </span>
         <StarMark size="xs" color={accent} className="opacity-55 shrink-0" />
         <span
           className="font-mono text-[10.5px] uppercase tracking-[0.14em]"
-          style={{ color: accent }}
+          style={{
+            color: enhanced ? '#D7EEF1' : accent,
+            textShadow: enhanced ? `0 0 20px ${accent}24` : undefined,
+          }}
         >
           {title}
         </span>
         <div
           className="h-px flex-1"
-          style={{ background: 'rgba(15,122,122,0.10)' }}
+          style={{
+            background: enhanced
+              ? `linear-gradient(90deg, ${accent}42, rgba(196,151,74,0.18), transparent)`
+              : 'rgba(15,122,122,0.10)',
+          }}
           aria-hidden
         />
       </div>
@@ -197,17 +300,42 @@ function Prose({ children }: { children: React.ReactNode }) {
 }
 
 /** Accent callout block — star + body text in a tinted pill. */
-function Callout({ children, accent }: { children: React.ReactNode; accent: string }) {
+function Callout({
+  children,
+  accent,
+  enhanced = false,
+}: {
+  children: React.ReactNode
+  accent: string
+  enhanced?: boolean
+}) {
   return (
     <div
-      className="flex items-start gap-3 px-5 py-4 rounded-[18px]"
+      className={cn(
+        'flex items-start gap-3 px-5 py-4 rounded-[18px]',
+        enhanced && 'relative overflow-hidden transition-transform duration-300 hover:-translate-y-0.5',
+      )}
       style={{
-        background: `${accent}0C`,
-        border: `1px solid ${accent}22`,
+        background: enhanced
+          ? `radial-gradient(circle at 8% 0%, ${accent}18, transparent 38%), ${accent}0D`
+          : `${accent}0C`,
+        border: `1px solid ${enhanced ? `${accent}38` : `${accent}22`}`,
+        boxShadow: enhanced ? `0 18px 46px rgba(0,0,0,0.24), 0 0 34px ${accent}0C` : undefined,
       }}
     >
-      <StarMark size="xs" color={accent} className="opacity-50 mt-0.5 shrink-0" />
-      <p className="font-sans text-[14px] leading-relaxed" style={{ color: '#B8D0DC' }}>
+      {enhanced && (
+        <div
+          className="pointer-events-none absolute inset-x-5 top-0 h-px"
+          style={{ background: `linear-gradient(90deg, transparent, ${accent}88, transparent)` }}
+          aria-hidden
+        />
+      )}
+      <StarMark
+        size="xs"
+        color={accent}
+        className={cn(enhanced ? 'opacity-60' : 'opacity-50', 'mt-0.5 shrink-0')}
+      />
+      <p className="relative font-sans text-[14px] leading-relaxed" style={{ color: '#B8D0DC' }}>
         {children}
       </p>
     </div>
@@ -220,29 +348,47 @@ function ScreenshotBlock({
   alt,
   accent,
   caption,
+  enhanced = false,
 }: {
   src: string
   alt: string
   accent: string
   caption?: string
+  enhanced?: boolean
 }) {
+  const reduceMotion = useReducedMotion()
+
   return (
     <div className="mt-6 space-y-2.5">
       <div
-        className="relative w-full overflow-hidden rounded-[14px]"
+        className="group relative w-full overflow-hidden rounded-[14px]"
         style={{
           aspectRatio: '1.85 / 1',
-          background: 'rgba(10,22,40,0.28)',
-          border: `1px solid ${accent}18`,
-          boxShadow: '0 18px 52px rgba(0,0,0,0.32)',
+          background: enhanced
+            ? `radial-gradient(circle at 20% 10%, ${accent}12, rgba(10,22,40,0.30) 42%, rgba(10,22,40,0.44))`
+            : 'rgba(10,22,40,0.28)',
+          border: `1px solid ${enhanced ? `${accent}2C` : `${accent}18`}`,
+          boxShadow: enhanced
+            ? `0 22px 62px rgba(0,0,0,0.38), 0 0 40px ${accent}0A`
+            : '0 18px 52px rgba(0,0,0,0.32)',
         }}
       >
+        {enhanced && (
+          <div
+            className="pointer-events-none absolute inset-x-4 top-0 z-10 h-px opacity-80"
+            style={{ background: `linear-gradient(90deg, transparent, ${accent}88, transparent)` }}
+            aria-hidden
+          />
+        )}
         <Image
           src={src}
           alt={alt}
           fill
           sizes="(max-width: 768px) 100vw, 900px"
-          className="object-contain object-center"
+          className={cn(
+            'object-contain object-center',
+            enhanced && !reduceMotion && 'transition-transform duration-700 group-hover:scale-[1.012]',
+          )}
         />
       </div>
       {caption && (
@@ -276,6 +422,8 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
   const stagger = useMotionSafe(staggerContainer(0.1))
   const up = useMotionSafe(fadeUp)
   const inn = useMotionSafe(fadeIn)
+  const isKestrelCaseStudy = project.slug === 'kestrel'
+  const caseCopy = getCaseStudyCopy(project)
 
   // Build ordered nav items, assigning sequential section numbers
   let n = 0
@@ -285,15 +433,15 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
   const navItems: NavItem[] = [
     { id: 'overview',       label: 'Overview',   number: fmt() },
     { id: 'problem',        label: 'Problem',    number: fmt() },
-    ...(has(project.users)
+    ...(has(caseCopy.users)
       ? [{ id: 'users', label: 'Users', number: fmt() }]
       : []),
     { id: 'solution',       label: 'Solution',   number: fmt() },
     { id: 'impact',         label: 'Impact',     number: fmt() },
-    ...(has(project.buildNotes)
+    ...(has(caseCopy.buildNotes)
       ? [{ id: 'technical-build', label: 'Technical', number: fmt() }]
       : []),
-    ...(has(project.reflection)
+    ...(has(caseCopy.reflection)
       ? [{ id: 'reflection', label: 'Reflection', number: fmt() }]
       : []),
     { id: 'demo-links',     label: 'Links',      number: fmt() },
@@ -302,7 +450,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
   // Helper: get a section's number by id
   const sn = (id: string) => navItems.find((item) => item.id === id)?.number ?? '—'
 
-  const overviewText = project.overview ?? project.summary
+  const overviewText = caseCopy.overview
 
   return (
     <main className="bg-bg min-h-screen pt-16">
@@ -317,6 +465,16 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
           borderBottom: '1px solid rgba(15,122,122,0.10)',
         }}
       >
+        {isKestrelCaseStudy && (
+          <div
+            className="pointer-events-none absolute inset-x-0 top-0 h-px"
+            style={{
+              background: `linear-gradient(90deg, transparent, ${project.panelAccentColor}55, rgba(196,151,74,0.25), transparent)`,
+            }}
+            aria-hidden
+          />
+        )}
+
         <div className="absolute top-0 right-0 pointer-events-none overflow-hidden" aria-hidden>
           <WatermarkStar
             size={520}
@@ -359,8 +517,12 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
               className="relative min-h-[360px] lg:min-h-[520px] rounded-[22px] overflow-hidden"
               style={{
                 background: `linear-gradient(155deg, ${project.panelAccentColor}10 0%, rgba(10,22,40,0.12) 40%, rgba(10,22,40,0.68) 100%)`,
-                border: '1px solid rgba(15,122,122,0.14)',
-                boxShadow: '0 4px 32px rgba(0,0,0,0.28)',
+                border: isKestrelCaseStudy
+                  ? `1px solid ${project.panelAccentColor}24`
+                  : '1px solid rgba(15,122,122,0.14)',
+                boxShadow: isKestrelCaseStudy
+                  ? `0 20px 70px rgba(0,0,0,0.38), 0 0 44px ${project.panelAccentColor}0A`
+                  : '0 4px 32px rgba(0,0,0,0.28)',
               }}
             >
               <ProjectFloatingScreenshots
@@ -422,17 +584,26 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                 className="font-sans text-[17px] leading-[1.65] mt-5"
                 style={{ color: '#A8C5D1' }}
               >
-                {project.tagline}
+                {caseCopy.tagline}
               </motion.p>
 
               {/* Outcome callout */}
-              {project.outcome && (
+              {caseCopy.outcome && (
                 <motion.div variants={up} className="mt-5">
                   <div
                     className="flex items-start gap-2.5 px-4 py-3 rounded-[15px]"
                     style={{
-                      background: `${project.panelAccentColor}0C`,
-                      border: `1px solid ${project.panelAccentColor}20`,
+                      background: isKestrelCaseStudy
+                        ? `radial-gradient(circle at 8% 0%, ${project.panelAccentColor}18, transparent 42%), ${project.panelAccentColor}0D`
+                        : `${project.panelAccentColor}0C`,
+                      border: `1px solid ${
+                        isKestrelCaseStudy
+                          ? `${project.panelAccentColor}34`
+                          : `${project.panelAccentColor}20`
+                      }`,
+                      boxShadow: isKestrelCaseStudy
+                        ? `0 16px 44px rgba(0,0,0,0.22), 0 0 32px ${project.panelAccentColor}0A`
+                        : undefined,
                     }}
                   >
                     <StarMark
@@ -444,7 +615,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                       className="font-sans text-[13.5px] leading-relaxed"
                       style={{ color: '#A8C5D1' }}
                     >
-                      {project.outcome}
+                      {caseCopy.outcome}
                     </p>
                   </div>
                 </motion.div>
@@ -506,7 +677,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
           FACT STRIP
       ════════════════════════════════════════ */}
       <motion.div variants={inn} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-        <FactStrip project={project} />
+        <FactStrip project={project} enhanced={isKestrelCaseStudy} />
       </motion.div>
 
       {/* ════════════════════════════════════════
@@ -517,7 +688,11 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
 
           {/* ── Sticky side nav (lg+ only) ── */}
           <aside className="hidden lg:block sticky top-24 self-start pt-10">
-            <SideNav items={navItems} accent={project.panelAccentColor} />
+            <SideNav
+              items={navItems}
+              accent={project.panelAccentColor}
+              enhanced={isKestrelCaseStudy}
+            />
           </aside>
 
           {/* ── Content rail ── */}
@@ -533,6 +708,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
               number={sn('overview')}
               title="Overview"
               accent={project.panelAccentColor}
+              enhanced={isKestrelCaseStudy}
             >
               <Prose>{overviewText}</Prose>
             </CaseSection>
@@ -547,12 +723,23 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
               number={sn('problem')}
               title="Problem"
               accent={project.panelAccentColor}
+              enhanced={isKestrelCaseStudy}
             >
               <div
-                className="pl-5"
-                style={{ borderLeft: `2px solid ${project.panelAccentColor}35` }}
+                className={cn(
+                  'pl-5',
+                  isKestrelCaseStudy && 'rounded-r-[18px] py-1 transition-colors duration-300',
+                )}
+                style={{
+                  borderLeft: `2px solid ${project.panelAccentColor}${
+                    isKestrelCaseStudy ? '55' : '35'
+                  }`,
+                  background: isKestrelCaseStudy
+                    ? `linear-gradient(90deg, ${project.panelAccentColor}0A, transparent 58%)`
+                    : undefined,
+                }}
               >
-                <Prose>{project.problem}</Prose>
+                <Prose>{caseCopy.problem}</Prose>
               </div>
             </CaseSection>
 
@@ -561,14 +748,15 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
               USERS (optional) — plain prose
               ─────────────────────────────────
             */}
-            {project.users && (
+            {caseCopy.users && (
               <CaseSection
                 id="users"
                 number={sn('users')}
                 title="Users"
                 accent={project.panelAccentColor}
+                enhanced={isKestrelCaseStudy}
               >
-                <Prose>{project.users}</Prose>
+                <Prose>{caseCopy.users}</Prose>
               </CaseSection>
             )}
 
@@ -582,14 +770,16 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
               number={sn('solution')}
               title="Solution"
               accent={project.panelAccentColor}
+              enhanced={isKestrelCaseStudy}
             >
-              <Prose>{project.solution}</Prose>
+              <Prose>{caseCopy.solution}</Prose>
               {project.screenshots?.[1] && (
                 <ScreenshotBlock
                   src={project.screenshots[1]}
                   alt={`${project.name} interface`}
                   accent={project.panelAccentColor}
                   caption={`${project.name} — interface`}
+                  enhanced={isKestrelCaseStudy}
                 />
               )}
             </CaseSection>
@@ -604,13 +794,16 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
               number={sn('impact')}
               title="Impact"
               accent={project.panelAccentColor}
+              enhanced={isKestrelCaseStudy}
             >
-              {project.outcome && (
+              {caseCopy.outcome && (
                 <div className="mb-5">
-                  <Callout accent={project.panelAccentColor}>{project.outcome}</Callout>
+                  <Callout accent={project.panelAccentColor} enhanced={isKestrelCaseStudy}>
+                    {caseCopy.outcome}
+                  </Callout>
                 </div>
               )}
-              <Prose>{project.impact}</Prose>
+              <Prose>{caseCopy.impact}</Prose>
             </CaseSection>
 
             {/*
@@ -618,12 +811,13 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
               TECHNICAL BUILD (optional) — stack row + prose
               ─────────────────────────────────
             */}
-            {project.buildNotes && (
+            {caseCopy.buildNotes && (
               <CaseSection
                 id="technical-build"
                 number={sn('technical-build')}
                 title="Technical Build"
                 accent={project.panelAccentColor}
+                enhanced={isKestrelCaseStudy}
               >
                 {/* Full stack row */}
                 <div className="flex flex-wrap gap-1.5 mb-5">
@@ -631,7 +825,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                     <StackPill key={s} label={s} accent={project.panelAccentColor} />
                   ))}
                 </div>
-                <Prose>{project.buildNotes}</Prose>
+                <Prose>{caseCopy.buildNotes}</Prose>
               </CaseSection>
             )}
 
@@ -640,15 +834,26 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
               REFLECTION (optional) — indented / quote feel
               ─────────────────────────────────
             */}
-            {project.reflection && (
+            {caseCopy.reflection && (
               <CaseSection
                 id="reflection"
                 number={sn('reflection')}
                 title="Reflection"
                 accent={project.panelAccentColor}
+                enhanced={isKestrelCaseStudy}
               >
-                <div className="pl-5" style={{ borderLeft: `1px solid rgba(15,122,122,0.20)` }}>
-                  <Prose>{project.reflection}</Prose>
+                <div
+                  className={cn('pl-5', isKestrelCaseStudy && 'rounded-r-[18px] py-1')}
+                  style={{
+                    borderLeft: `1px solid ${
+                      isKestrelCaseStudy ? `${project.panelAccentColor}40` : 'rgba(15,122,122,0.20)'
+                    }`,
+                    background: isKestrelCaseStudy
+                      ? `linear-gradient(90deg, ${project.panelAccentColor}08, transparent 62%)`
+                      : undefined,
+                  }}
+                >
+                  <Prose>{caseCopy.reflection}</Prose>
                 </div>
               </CaseSection>
             )}
@@ -663,6 +868,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
               number={sn('demo-links')}
               title="Demo &amp; Links"
               accent={project.panelAccentColor}
+              enhanced={isKestrelCaseStudy}
             >
               <div className="flex flex-wrap gap-3">
                 <HoverSparkle className="inline-flex">
