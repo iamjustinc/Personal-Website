@@ -225,7 +225,7 @@ function SectionFooter({ showThanks = true }: { showThanks?: boolean }) {
         </p>
         {showThanks && (
           <p className="mt-2 text-sm" style={{ color: 'rgba(168,197,209,0.50)' }}>
-            Thanks for stopping by — built with a lot of iteration and care.
+            Thanks for stopping by! This was built with a lot care :D
           </p>
         )}
       </div>

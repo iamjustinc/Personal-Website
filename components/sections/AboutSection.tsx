@@ -1,401 +1,339 @@
 'use client'
 
 import { motion, useReducedMotion } from 'framer-motion'
-import Image from 'next/image'
 import { Section } from '@/components/ui/Section'
 import { StarMark } from '@/components/ui/StarMark'
 import { WatermarkStar } from '@/components/ui/WatermarkStar'
 import { fadeUp, fadeIn, staggerContainer, useMotionSafe } from '@/lib/motion'
-import { siteConfig } from '@/data/site'
-
-const strengths = [
-  {
-    title: 'Discovery-first',
-    body: 'I start by understanding the workflow, where friction appears, and what the user or buyer needs to believe.',
-  },
-  {
-    title: 'Demo-oriented',
-    body: 'I turn technical depth into clear walkthroughs, structured narratives, and customer-facing product value.',
-  },
-  {
-    title: 'Workflow clarity',
-    body: 'I like simplifying messy systems into flows people can understand, adopt, and act on.',
-  },
-  {
-    title: 'Stakeholder communication',
-    body: 'I explain architecture, tradeoffs, and outputs clearly for non-technical audiences without flattening the nuance.',
-  },
-]
 
 const proofPoints = [
   {
     value: '30K+',
     label: 'records analyzed',
+    detail: 'model-ready workflows built from messy operational data',
   },
   {
     value: '70%',
     label: 'analysis time reduced',
+    detail: 'manual review compressed into clearer decision paths',
   },
   {
     value: '63%',
     label: 'completion lift',
+    detail: 'systems thinking applied to improve follow-through',
   },
   {
-    value: 'Demos',
-    label: 'for non-technical teams',
+    value: 'Live',
+    label: 'technical demos delivered',
+    detail: 'AI products translated into customer-facing walkthroughs',
   },
 ]
 
+const strengths = [
+  {
+    title: 'Tailored technical demos',
+    body: 'I make product value obvious by connecting features to the workflow a customer actually cares about.',
+  },
+  {
+    title: 'Discovery-first workflow thinking',
+    body: 'I look for the friction, decision points, and adoption blockers before jumping into the solution.',
+  },
+  {
+    title: 'Stakeholder-ready communication',
+    body: 'I can explain architecture, tradeoffs, and AI outputs across technical and non-technical audiences.',
+  },
+  {
+    title: 'Complexity translated into value',
+    body: 'I turn AI, data, and system behavior into business outcomes people can understand and act on.',
+  },
+]
+
+const starParticles = [
+  { left: '8%', top: '18%', size: 'xs' as const, color: '#C4974A', delay: 0 },
+  { left: '18%', top: '72%', size: 'xs' as const, color: '#7EE7F2', delay: 0.7 },
+  { left: '36%', top: '14%', size: 'xs' as const, color: '#4A9FAE', delay: 1.4 },
+  { left: '64%', top: '80%', size: 'sm' as const, color: '#C4974A', delay: 0.35 },
+  { left: '82%', top: '24%', size: 'xs' as const, color: '#7EE7F2', delay: 1.05 },
+  { left: '92%', top: '64%', size: 'xs' as const, color: '#4A9FAE', delay: 1.75 },
+]
+
 export function AboutSection() {
+  const shouldReduce = useReducedMotion()
   const stagger = useMotionSafe(staggerContainer(0.08))
   const up = useMotionSafe(fadeUp)
   const inn = useMotionSafe(fadeIn)
-  const shouldReduce = useReducedMotion()
-  const portrait = siteConfig.portraitSrc ?? siteConfig.photoSrc
 
   return (
     <Section id="about" className="relative overflow-hidden">
       <div
         aria-hidden
-        className="absolute top-[-10%] right-[-8%] pointer-events-none"
-        style={{ opacity: 0.04 }}
-      >
-        <WatermarkStar size={500} color="#4A9FAE" direction={-1} duration={220} opacity={1} />
-      </div>
-
-      <div
-        aria-hidden
-        className="absolute left-[-10%] top-[10%] h-[420px] w-[420px] rounded-full blur-3xl pointer-events-none"
+        className="absolute left-[-18%] top-[8%] h-[520px] w-[520px] rounded-full blur-3xl pointer-events-none"
         style={{
           background:
-            'radial-gradient(circle, rgba(74,159,174,0.10) 0%, rgba(74,159,174,0.04) 38%, transparent 72%)',
+            'radial-gradient(circle, rgba(74,159,174,0.13) 0%, rgba(15,122,122,0.05) 42%, transparent 72%)',
         }}
       />
 
-      <div className="grid xl:grid-cols-[0.95fr_1.05fr] gap-14 lg:gap-20 items-start relative">
-        <div>
-          <motion.div
-            variants={inn}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            <div
-              className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-6"
-              style={{
-                background: 'rgba(15,122,122,0.08)',
-                border: '1px solid rgba(15,122,122,0.22)',
+      <div
+        aria-hidden
+        className="absolute right-[-12%] top-[-18%] pointer-events-none"
+        style={{ opacity: 0.04 }}
+      >
+        <WatermarkStar size={620} color="#4A9FAE" direction={-1} duration={260} opacity={1} />
+      </div>
+
+      <motion.div
+        variants={inn}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-8%' }}
+        className="relative mx-auto flex max-w-[760px] flex-col items-center text-center"
+      >
+        <div
+          className="mb-5 inline-flex items-center gap-2 rounded-full px-4 py-1.5"
+          style={{
+            background: 'rgba(15,122,122,0.08)',
+            border: '1px solid rgba(15,122,122,0.22)',
+          }}
+        >
+          <StarMark size="xs" color="#C4974A" className="opacity-85" />
+          <span className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-text-muted">
+            Why me
+          </span>
+        </div>
+
+        <h2 className="font-display text-h1 leading-tight text-text-base text-balance">
+          Built for <span style={{ color: '#4A9FAE' }}>Solutions Engineering</span>
+        </h2>
+
+        <p
+          className="mt-5 max-w-[620px] font-sans text-[16px] leading-7"
+          style={{ color: '#A8C5D1' }}
+        >
+          I turn technical complexity into clear demos, workflow clarity, and stakeholder value
+          people can understand quickly.
+        </p>
+      </motion.div>
+
+      <motion.div
+        variants={stagger}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-8%' }}
+        className="relative mt-12 overflow-hidden rounded-[30px]"
+        style={{
+          background:
+            'linear-gradient(135deg, rgba(15,42,61,0.72) 0%, rgba(10,33,50,0.48) 52%, rgba(8,27,42,0.70) 100%)',
+          border: '1px solid rgba(74,159,174,0.16)',
+          boxShadow: '0 18px 58px rgba(0,0,0,0.24), inset 0 1px 0 rgba(255,255,255,0.03)',
+        }}
+      >
+        <div
+          aria-hidden
+          className="absolute inset-y-5 left-1/4 hidden w-px bg-[rgba(74,159,174,0.12)] lg:block"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-y-5 left-1/2 hidden w-px bg-[rgba(74,159,174,0.12)] lg:block"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-y-5 left-3/4 hidden w-px bg-[rgba(74,159,174,0.12)] lg:block"
+        />
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+          {proofPoints.map((item, index) => (
+            <motion.div
+              key={item.label}
+              variants={up}
+              whileHover={shouldReduce ? {} : { y: -4 }}
+              transition={{ duration: 0.22 }}
+              className="group relative min-h-[168px] p-6 sm:p-7"
+            >
+              <div className="mb-5 flex items-center justify-between gap-3">
+                <span
+                  className="font-mono text-[10px] uppercase tracking-[0.14em]"
+                  style={{ color: '#7FAFBB' }}
+                >
+                  Proof {String(index + 1).padStart(2, '0')}
+                </span>
+                <StarMark
+                  size="xs"
+                  color={index % 2 === 0 ? '#C4974A' : '#4A9FAE'}
+                  className="opacity-70 transition-opacity duration-200 group-hover:opacity-100"
+                />
+              </div>
+
+              <div className="font-display text-[42px] leading-none text-text-base sm:text-[46px]">
+                {item.value}
+              </div>
+
+              <p
+                className="mt-2 font-mono text-[10.5px] uppercase tracking-[0.12em]"
+                style={{ color: '#7EE7F2' }}
+              >
+                {item.label}
+              </p>
+
+              <p className="mt-4 font-sans text-[13.5px] leading-6" style={{ color: '#8FB2BE' }}>
+                {item.detail}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
+
+      <motion.div
+        variants={up}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-8%' }}
+        className="relative mt-8 overflow-hidden rounded-[34px] p-6 sm:p-8 lg:p-10"
+        style={{
+          background:
+            'linear-gradient(145deg, rgba(13,30,53,0.94) 0%, rgba(15,42,61,0.78) 44%, rgba(8,27,42,0.96) 100%)',
+          border: '1px solid rgba(74,159,174,0.18)',
+          boxShadow:
+            '0 26px 74px rgba(0,0,0,0.34), inset 0 1px 0 rgba(255,255,255,0.04)',
+        }}
+      >
+        <div
+          aria-hidden
+          className="absolute right-[-10%] top-[-22%] h-[360px] w-[360px] rounded-full blur-3xl"
+          style={{
+            background:
+              'radial-gradient(circle, rgba(196,151,74,0.14) 0%, rgba(74,159,174,0.06) 42%, transparent 70%)',
+          }}
+        />
+
+        <motion.div
+          aria-hidden
+          className="absolute inset-y-0 w-[34%] -skew-x-12"
+          style={{
+            left: '-42%',
+            background:
+              'linear-gradient(90deg, transparent 0%, rgba(126,231,242,0.06) 42%, rgba(196,151,74,0.08) 52%, transparent 100%)',
+          }}
+          animate={shouldReduce ? {} : { x: ['0%', '430%'] }}
+          transition={{
+            duration: 9,
+            repeat: Infinity,
+            ease: 'easeInOut',
+            repeatDelay: 1.6,
+          }}
+        />
+
+        <div aria-hidden className="absolute inset-0 overflow-hidden">
+          {starParticles.map((star) => (
+            <motion.div
+              key={`${star.left}-${star.top}`}
+              className="absolute"
+              style={{ left: star.left, top: star.top }}
+              animate={
+                shouldReduce
+                  ? {}
+                  : {
+                      opacity: [0.22, 0.9, 0.22],
+                      scale: [0.9, 1.16, 0.9],
+                      y: [0, -4, 0],
+                    }
+              }
+              transition={{
+                duration: 3.4,
+                repeat: Infinity,
+                ease: 'easeInOut',
+                delay: star.delay,
               }}
             >
-              <StarMark size="xs" color="#4A9FAE" className="opacity-70" />
-              <span className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-text-muted">
-                About
+              <StarMark size={star.size} color={star.color} className="opacity-70" />
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="relative grid gap-9 lg:grid-cols-[0.9fr_1.35fr] lg:gap-12">
+          <div className="max-w-[460px]">
+            <div className="mb-4 flex items-center gap-2">
+              <StarMark size="xs" color="#C4974A" className="opacity-85" />
+              <span
+                className="font-mono text-[10.5px] uppercase tracking-[0.14em]"
+                style={{ color: '#7FAFBB' }}
+              >
+                Recruiter signal
               </span>
             </div>
 
-            <h2 className="font-display text-h1 text-text-base leading-tight text-balance">
-              How I <span style={{ color: '#4A9FAE' }}>work</span>
-            </h2>
+            <h3 className="font-display text-[34px] leading-[1.05] text-text-base sm:text-[42px]">
+              Why recruiters remember me
+            </h3>
 
-            <p
-              className="mt-5 max-w-[52ch] font-sans text-[16px] leading-7"
-              style={{ color: '#A8C5D1' }}
-            >
-              I am strongest when technical systems need to become clear, convincing, and usable.
-              My value is translating complexity into better demos, better workflows, and better decisions.
+            <p className="mt-5 font-sans text-[15px] leading-7" style={{ color: '#A8C5D1' }}>
+              I sit at the intersection of demo craft, technical fluency, and business translation.
             </p>
-          </motion.div>
+          </div>
 
           <motion.div
             variants={stagger}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: '-10%' }}
-            className="mt-10 grid sm:grid-cols-2 gap-4"
+            viewport={{ once: true, margin: '-8%' }}
+            className="grid gap-4 sm:grid-cols-2"
           >
-            {strengths.map((item, i) => (
+            {strengths.map((item, index) => (
               <motion.div
                 key={item.title}
                 variants={up}
-                whileHover={shouldReduce ? {} : { y: -4, scale: 1.01 }}
-                transition={{ duration: 0.2 }}
-                className="group rounded-[26px] p-5"
+                whileHover={shouldReduce ? {} : { y: -5 }}
+                transition={{ duration: 0.22 }}
+                className="group rounded-[24px] p-5"
                 style={{
                   background:
-                    'linear-gradient(180deg, rgba(10,33,50,0.70) 0%, rgba(8,27,42,0.56) 100%)',
+                    'linear-gradient(180deg, rgba(10,33,50,0.64) 0%, rgba(8,27,42,0.48) 100%)',
                   border: '1px solid rgba(74,159,174,0.14)',
                   boxShadow:
-                    '0 12px 32px rgba(0,0,0,0.14), inset 0 1px 0 rgba(255,255,255,0.02)',
+                    '0 14px 34px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.025)',
                 }}
               >
-                <div className="flex items-center gap-2 mb-3">
-                  <motion.div
-                    animate={
-                      shouldReduce
-                        ? {}
-                        : i % 2 === 0
-                          ? { rotate: [0, 8, 0] }
-                          : { scale: [1, 1.08, 1] }
-                    }
-                    transition={{
-                      duration: 3 + i * 0.4,
-                      repeat: Infinity,
-                      ease: 'easeInOut',
-                    }}
-                  >
-                    <StarMark size="xs" color={i % 2 === 0 ? '#4A9FAE' : '#C4974A'} className="opacity-80" />
-                  </motion.div>
-
+                <div className="mb-4 flex items-center justify-between gap-3">
                   <span
                     className="font-mono text-[10px] uppercase tracking-[0.14em]"
                     style={{ color: '#7FAFBB' }}
                   >
-                    Key strength
+                    {String(index + 1).padStart(2, '0')}
                   </span>
+                  <motion.div
+                    animate={
+                      shouldReduce
+                        ? {}
+                        : index % 2 === 0
+                          ? { rotate: [0, 12, 0] }
+                          : { scale: [1, 1.13, 1] }
+                    }
+                    transition={{
+                      duration: 3.2 + index * 0.35,
+                      repeat: Infinity,
+                      ease: 'easeInOut',
+                    }}
+                  >
+                    <StarMark
+                      size="xs"
+                      color={index % 2 === 0 ? '#4A9FAE' : '#C4974A'}
+                      className="opacity-75 transition-opacity duration-200 group-hover:opacity-100"
+                    />
+                  </motion.div>
                 </div>
 
-                <h3 className="font-sans text-[22px] leading-[1.15] font-semibold text-text-base">
+                <h4 className="font-sans text-[18px] font-semibold leading-snug text-text-base">
                   {item.title}
-                </h3>
+                </h4>
 
-                <p
-                  className="mt-3 font-sans text-[14.5px] leading-6"
-                  style={{ color: '#8FB2BE' }}
-                >
+                <p className="mt-3 font-sans text-[13.5px] leading-6" style={{ color: '#8FB2BE' }}>
                   {item.body}
                 </p>
               </motion.div>
             ))}
           </motion.div>
-
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-10%' }}
-            className="mt-10 grid grid-cols-2 lg:grid-cols-4 gap-4"
-          >
-            {proofPoints.map((item) => (
-              <motion.div
-                key={item.label}
-                variants={up}
-                whileHover={shouldReduce ? {} : { y: -3 }}
-                className="rounded-[22px] p-4"
-                style={{
-                  background: 'rgba(10,33,50,0.44)',
-                  border: '1px solid rgba(74,159,174,0.12)',
-                }}
-              >
-                <div className="flex items-center gap-2 mb-2">
-                  <StarMark size="xs" color="#C4974A" className="opacity-70" />
-                  <span
-                    className="font-mono text-[10px] uppercase tracking-[0.14em]"
-                    style={{ color: '#7FAFBB' }}
-                  >
-                    Proof
-                  </span>
-                </div>
-
-                <div className="font-display text-[28px] leading-none text-text-base">
-                  {item.value}
-                </div>
-
-                <p
-                  className="mt-2 font-sans text-[13px] leading-5"
-                  style={{ color: '#8FB2BE' }}
-                >
-                  {item.label}
-                </p>
-              </motion.div>
-            ))}
-          </motion.div>
         </div>
-
-        {portrait && (
-          <motion.div
-            variants={up}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="hidden xl:flex flex-col items-center xl:sticky xl:top-28"
-          >
-            <div
-              className="relative flex items-center justify-center"
-              style={{ width: 360, height: 360 }}
-            >
-              <div
-                aria-hidden
-                className="absolute pointer-events-none"
-                style={{
-                  width: 370,
-                  height: 370,
-                  borderRadius: '50%',
-                  background: 'radial-gradient(circle, rgba(15,122,122,0.18) 0%, transparent 72%)',
-                  top: '50%',
-                  left: '50%',
-                  transform: 'translate(-50%, -50%)',
-                }}
-              />
-
-              <motion.div
-                aria-hidden
-                className="absolute pointer-events-none"
-                style={{
-                  width: 328,
-                  height: 328,
-                  borderRadius: '50%',
-                  border: '1px dashed rgba(74,159,174,0.18)',
-                }}
-                animate={shouldReduce ? {} : { rotate: 360 }}
-                transition={{
-                  duration: 34,
-                  repeat: Infinity,
-                  ease: 'linear',
-                }}
-              />
-
-              <motion.div
-                aria-hidden
-                className="absolute pointer-events-none"
-                style={{
-                  width: 290,
-                  height: 290,
-                  borderRadius: '50%',
-                  border: '1px solid rgba(196,151,74,0.16)',
-                }}
-                animate={shouldReduce ? {} : { rotate: -360 }}
-                transition={{
-                  duration: 24,
-                  repeat: Infinity,
-                  ease: 'linear',
-                }}
-              />
-
-              <div
-                className="portrait-float"
-                style={{ width: 250, height: 250, position: 'relative', zIndex: 10 }}
-              >
-                <div
-                  className="portrait-glow"
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    borderRadius: '50%',
-                    overflow: 'hidden',
-                    position: 'relative',
-                    boxShadow:
-                      '0 0 0 6px rgba(15,122,122,0.18), 0 0 36px rgba(74,159,174,0.18)',
-                  }}
-                >
-                  <Image
-                    src={portrait}
-                    alt="Justin Chang"
-                    fill
-                    sizes="250px"
-                    className="object-cover object-top"
-                  />
-                  <div
-                    style={{
-                      position: 'absolute',
-                      inset: 0,
-                      background: 'linear-gradient(160deg, rgba(15,122,122,0.08) 0%, transparent 60%)',
-                      borderRadius: '50%',
-                    }}
-                  />
-                </div>
-              </div>
-
-              <motion.div
-                aria-hidden
-                style={{ position: 'absolute', top: 42, right: 64, zIndex: 20 }}
-                animate={shouldReduce ? {} : { y: [0, -7, 0], opacity: [0.7, 1, 0.7] }}
-                transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
-              >
-                <StarMark size="sm" color="#C4974A" className="opacity-90" />
-              </motion.div>
-
-              <motion.div
-                aria-hidden
-                style={{ position: 'absolute', bottom: 56, left: 40, zIndex: 20 }}
-                animate={shouldReduce ? {} : { scale: [1, 1.14, 1], opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
-              >
-                <StarMark size="xs" color="#7EE7F2" className="opacity-90" />
-              </motion.div>
-
-              <motion.div
-                aria-hidden
-                className="absolute pointer-events-none"
-                style={{
-                  width: 314,
-                  height: 314,
-                  top: '50%',
-                  left: '50%',
-                  marginLeft: -157,
-                  marginTop: -157,
-                  zIndex: 18,
-                }}
-                animate={shouldReduce ? {} : { rotate: 360 }}
-                transition={{ duration: 18, repeat: Infinity, ease: 'linear' }}
-              >
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    width: 12,
-                    height: 12,
-                    marginLeft: -6,
-                    marginTop: -6,
-                    transform: 'rotate(146deg) translateY(-157px)',
-                  }}
-                >
-                  <div
-                    style={{
-                      width: 12,
-                      height: 12,
-                      borderRadius: '50%',
-                      background:
-                        'radial-gradient(circle at 32% 30%, #FFF5D9 0%, #E2BC69 34%, #C4974A 68%, #8E6320 100%)',
-                      boxShadow: '0 0 10px rgba(196,151,74,0.42)',
-                    }}
-                  />
-                </div>
-              </motion.div>
-            </div>
-
-            <motion.div
-              variants={up}
-              whileHover={shouldReduce ? {} : { y: -4 }}
-              className="mt-6 w-full max-w-[390px] rounded-[28px] p-6"
-              style={{
-                background: 'rgba(15,42,61,0.56)',
-                border: '1px solid rgba(15,122,122,0.16)',
-                boxShadow: '0 18px 40px rgba(0,0,0,0.16)',
-              }}
-            >
-              <div className="flex items-start gap-3">
-                <StarMark size="xs" color="#4A9FAE" className="opacity-70 mt-1 shrink-0" />
-                <div>
-                  <p
-                    className="font-mono text-[10px] uppercase tracking-[0.14em]"
-                    style={{ color: '#7FAFBB' }}
-                  >
-                    Recruiter signal
-                  </p>
-                  <p
-                    className="mt-2 font-sans text-[15px] leading-7"
-                    style={{ color: '#A8C5D1' }}
-                  >
-                    Open to early-career Solutions Engineering roles where I can combine technical depth,
-                    demos, stakeholder communication, and workflow thinking.
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </div>
+      </motion.div>
     </Section>
   )
 }
