@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { ProjectFloatingScreenshots } from '@/components/projects/ProjectFloatingScreenshots'
 import { Section } from '@/components/ui/Section'
 import { StarMark } from '@/components/ui/StarMark'
@@ -10,20 +10,46 @@ import { projects } from '@/data/projects'
 import { fadeUp, fadeIn, staggerContainer, useMotionSafe } from '@/lib/motion'
 import { cn } from '@/lib/utils'
 
-// Truncates to the first sentence if it fits, otherwise hard-trims.
-function shortenText(text: string | undefined, max = 120) {
-  if (!text) return ''
-  const clean = text.replace(/\s+/g, ' ').trim()
-  const first = clean.match(/.*?[.!?](\s|$)/)?.[0]?.trim()
-  if (first && first.length <= max) return first
-  if (clean.length <= max) return clean
-  const trimmed = clean.slice(0, max)
-  return `${trimmed.slice(0, Math.max(trimmed.lastIndexOf(' '), max - 18)).trim()}…`
+const projectSpotlights: Record<
+  string,
+  {
+    description: string
+    metrics: { value: string; label: string; detail: string }[]
+  }
+> = {
+  kestrel: {
+    description:
+      'Turns messy job descriptions into readiness scores, skill gaps, and a roadmap candidates can act on.',
+    metrics: [
+      { value: '1 JD', label: 'to roadmap', detail: 'from role text to next steps' },
+      { value: '4', label: 'fit signals', detail: 'score, strengths, gaps, plan' },
+      { value: '5', label: 'stacked views', detail: 'built for demo clarity' },
+    ],
+  },
+  quail: {
+    description:
+      'Turns high-volume email into a prioritized action pipeline so busy users know what needs attention first.',
+    metrics: [
+      { value: '1 inbox', label: 'to pipeline', detail: 'workflow compression' },
+      { value: '3', label: 'priority signals', detail: 'sender, urgency, context' },
+      { value: '4', label: 'action lanes', detail: 'triage users can scan' },
+    ],
+  },
+  chirpie: {
+    description:
+      'Turns multi-source news into concise, source-aware digests with context, confidence, and a conversational flow.',
+    metrics: [
+      { value: '3+', label: 'source streams', detail: 'inputs unified into one feed' },
+      { value: '4', label: 'trust cues', detail: 'source, context, confidence' },
+      { value: '1', label: 'chat digest', detail: 'repeatable reading loop' },
+    ],
+  },
 }
 
 // ── Section ──────────────────────────────────────────────────────────────────
 
 export function ProjectsSection() {
+  const shouldReduce = useReducedMotion()
   const stagger = useMotionSafe(staggerContainer(0.14))
   const up = useMotionSafe(fadeUp)
   const inn = useMotionSafe(fadeIn)
@@ -58,9 +84,9 @@ export function ProjectsSection() {
           </span>
         </div>
         <h2 className="font-display text-h1 text-text-base">Selected Work</h2>
-        <p className="font-sans text-text-muted mt-3 max-w-[540px]" style={{ fontSize: '15px' }}>
-          Three products built end-to-end to show product thinking, implementation, and technical
-          communication.
+        <p className="font-sans text-text-muted mt-3 max-w-[560px]" style={{ fontSize: '15px' }}>
+          Three AI products built end-to-end to show demo craft, workflow thinking, and technical
+          execution.
         </p>
       </motion.div>
 
@@ -70,88 +96,160 @@ export function ProjectsSection() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: '-8%' }}
-        className="flex flex-col gap-8"
+        className="flex flex-col gap-9"
       >
         {visibleProjects.map((project, index) => {
           const isReversed = index % 2 === 1
-          const shortTagline = shortenText(project.tagline, 100)
-          const shortOutcome = shortenText(project.outcome, 88)
+          const spotlight = projectSpotlights[project.slug] ?? {
+            description: project.tagline,
+            metrics: [
+              { value: 'AI', label: 'workflow', detail: 'product system' },
+              { value: '1', label: 'demo path', detail: 'clear walkthrough' },
+              { value: '3', label: 'signals', detail: 'focused value proof' },
+            ],
+          }
 
           return (
             <motion.div
               key={project.slug}
               variants={up}
-              whileHover={{
-                y: -5,
-                boxShadow: '0 24px 68px rgba(0,0,0,0.64), 0 0 0 1px rgba(15,122,122,0.28)',
-              }}
-              transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
-              className={cn('grid lg:grid-cols-2 gap-0 rounded-2xl overflow-hidden cursor-default')}
+              whileHover={
+                shouldReduce
+                  ? {}
+                  : {
+                      y: -7,
+                      boxShadow: `0 30px 76px rgba(0,0,0,0.66), 0 0 0 1px ${project.panelAccentColor}42`,
+                    }
+              }
+              transition={{ duration: 0.34, ease: [0.22, 1, 0.36, 1] }}
+              className={cn(
+                'group relative grid overflow-hidden rounded-[28px] cursor-default lg:grid-cols-[1.04fr_0.96fr]',
+              )}
               style={{
-                background: 'rgba(15,42,61,0.60)',
-                border: '1px solid rgba(15,122,122,0.14)',
-                boxShadow: '0 4px 32px rgba(0,0,0,0.30)',
+                background:
+                  'linear-gradient(145deg, rgba(15,42,61,0.70) 0%, rgba(10,33,50,0.58) 54%, rgba(8,27,42,0.82) 100%)',
+                border: `1px solid ${project.panelAccentColor}26`,
+                boxShadow: '0 16px 48px rgba(0,0,0,0.34), inset 0 1px 0 rgba(255,255,255,0.025)',
               }}
             >
+              <div
+                aria-hidden
+                className="absolute inset-x-0 top-0 h-px"
+                style={{
+                  background: `linear-gradient(90deg, transparent 0%, ${project.panelAccentColor}66 26%, rgba(196,151,74,0.46) 62%, transparent 100%)`,
+                }}
+              />
+
+              <motion.div
+                aria-hidden
+                className="absolute inset-y-0 w-[28%] -skew-x-12 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                style={{
+                  left: '-38%',
+                  background: `linear-gradient(90deg, transparent 0%, ${project.panelAccentColor}12 48%, rgba(196,151,74,0.08) 58%, transparent 100%)`,
+                }}
+                animate={shouldReduce ? {} : { x: ['0%', '520%'] }}
+                transition={{
+                  duration: 8.5,
+                  repeat: Infinity,
+                  repeatDelay: 2,
+                  ease: 'easeInOut',
+                }}
+              />
+
+              <motion.div
+                aria-hidden
+                className="absolute left-5 top-5 z-20"
+                animate={
+                  shouldReduce
+                    ? {}
+                    : { opacity: [0.32, 0.78, 0.32], scale: [0.95, 1.12, 0.95] }
+                }
+                transition={{
+                  duration: 3.2 + index * 0.35,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                }}
+              >
+                <StarMark size="xs" color="#C4974A" className="opacity-80" />
+              </motion.div>
+
+              <motion.div
+                aria-hidden
+                className="absolute bottom-6 right-6 z-20"
+                animate={
+                  shouldReduce
+                    ? {}
+                    : { opacity: [0.22, 0.64, 0.22], y: [0, -5, 0] }
+                }
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                  delay: 0.4 + index * 0.2,
+                }}
+              >
+                <StarMark size="xs" color={project.panelAccentColor} className="opacity-70" />
+              </motion.div>
+
               {/* ── Media ── */}
               <div
                 className={cn(
-                  'relative overflow-hidden min-h-[320px] lg:min-h-[500px]',
+                  'relative min-h-[320px] overflow-hidden sm:min-h-[390px] lg:min-h-[560px]',
                   isReversed ? 'lg:order-2' : 'lg:order-1',
                 )}
               >
-                {/* Very light panel tint — screenshots should read as product UI, not posters */}
                 <div
                   className="absolute inset-0"
                   style={{
-                    background: `linear-gradient(155deg, ${project.panelAccentColor}10 0%, rgba(10,22,40,0.10) 40%, rgba(10,22,40,0.65) 100%)`,
+                    background: `radial-gradient(circle at 28% 28%, ${project.panelAccentColor}18 0%, transparent 50%), linear-gradient(155deg, ${project.panelAccentColor}10 0%, rgba(10,22,40,0.12) 42%, rgba(10,22,40,0.72) 100%)`,
                   }}
-                />
-                <ProjectFloatingScreenshots
-                  project={project}
-                  priority={index === 0}
-                  imageSizes="(max-width: 1024px) 100vw, 520px"
                 />
 
-                {/* Project index badge */}
+                <motion.div
+                  className="absolute inset-0"
+                  whileHover={shouldReduce ? {} : { scale: 1.018 }}
+                  transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <ProjectFloatingScreenshots
+                    project={project}
+                    priority={index === 0}
+                    imageSizes="(max-width: 1024px) 100vw, 560px"
+                  />
+                </motion.div>
+
                 <div
-                  className="absolute top-4 right-4 flex items-center gap-1.5 rounded-full px-3 py-1 z-20"
+                  className="absolute top-4 right-4 z-20 flex items-center gap-1.5 rounded-full px-3 py-1"
                   style={{
-                    background: 'rgba(13,30,53,0.85)',
+                    background: 'rgba(13,30,53,0.86)',
                     backdropFilter: 'blur(12px)',
-                    border: `1px solid ${project.panelAccentColor}28`,
+                    border: `1px solid ${project.panelAccentColor}30`,
+                    boxShadow: '0 8px 22px rgba(0,0,0,0.18)',
                   }}
                 >
-                  <StarMark size="xs" color={project.panelAccentColor} className="opacity-65" />
+                  <StarMark size="xs" color={project.panelAccentColor} className="opacity-75" />
                   <span className="font-mono text-[9.5px] uppercase tracking-wider text-text-muted">
-                    {String(index + 1).padStart(2, '0')}
+                    Case {String(index + 1).padStart(2, '0')}
                   </span>
                 </div>
               </div>
 
-              {/* ── Text ──
-                  flex-col with NO justify-center: content stacks from top, no overflow risk.
-                  mt-auto on CTA row: always rendered at the card bottom regardless of content height.
-                  Stack pills: kept per spec.
-                  Layout math (lg): min-h 500px − py-9 72px = 428px available.
-                  Content ≈ 328px → 100px headroom → Demo is always visible.
-              ── */}
+              {/* ── Content ── */}
               <div
                 className={cn(
-                  'flex flex-col px-7 lg:px-10 py-7 lg:py-9',
+                  'relative z-10 flex flex-col px-7 py-8 sm:px-8 lg:px-10 lg:py-10',
                   isReversed ? 'lg:order-1' : 'lg:order-2',
                 )}
               >
                 {/* Category tags */}
-                <div className="flex flex-wrap gap-1.5 mb-3">
+                <div className="mb-4 flex flex-wrap gap-1.5">
                   {project.tags.slice(0, 3).map((tag) => (
                     <span
                       key={tag}
                       className="font-mono text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full"
                       style={{
-                        background: `${project.panelAccentColor}12`,
-                        border: `1px solid ${project.panelAccentColor}24`,
-                        color: '#A8C5D1',
+                        background: `${project.panelAccentColor}14`,
+                        border: `1px solid ${project.panelAccentColor}30`,
+                        color: '#B8DDE6',
                       }}
                     >
                       {tag}
@@ -159,63 +257,111 @@ export function ProjectsSection() {
                   ))}
                 </div>
 
-                {/* Title */}
                 <h3 className="font-display text-h1 text-text-base leading-tight">
                   {project.name}
                 </h3>
 
-                {/* Meta */}
-                <p className="font-mono text-[10.5px] text-text-muted mt-2 tracking-wider uppercase">
-                  {project.year} · {project.role}
-                </p>
-
-                {/* Tagline */}
                 <p
-                  className="font-sans mt-3 leading-relaxed"
-                  style={{ fontSize: '14.5px', color: '#A8C5D1' }}
+                  className="mt-3 max-w-[560px] font-sans text-[15px] leading-7"
+                  style={{ color: '#B8D0DC' }}
                 >
-                  {shortTagline}
+                  {spotlight.description}
                 </p>
 
-                {/* Outcome callout */}
-                {shortOutcome && (
-                  <div
-                    className="mt-3 inline-flex items-start gap-2 self-start px-3.5 py-2 rounded-btn"
-                    style={{
-                      background: `${project.panelAccentColor}0E`,
-                      border: `1px solid ${project.panelAccentColor}20`,
-                    }}
-                  >
-                    <StarMark
-                      size="xs"
-                      color={project.panelAccentColor}
-                      className="opacity-50 mt-0.5 shrink-0"
-                    />
-                    <span className="font-sans text-[13px] leading-snug text-text-muted">
-                      {shortOutcome}
-                    </span>
-                  </div>
-                )}
-
-                {/* Stack pills — kept per spec */}
-                <div className="flex flex-wrap gap-1.5 mt-3">
-                  {project.stack.slice(0, 5).map((s) => (
-                    <span
-                      key={s}
-                      className="font-mono text-[9.5px] px-2 py-0.5 rounded"
+                {/* Impact metrics */}
+                <div className="mt-6 grid grid-cols-3 gap-2.5">
+                  {spotlight.metrics.map((metric, metricIndex) => (
+                    <motion.div
+                      key={`${project.slug}-${metric.label}`}
+                      whileHover={
+                        shouldReduce
+                          ? {}
+                          : {
+                              y: -3,
+                              backgroundColor: 'rgba(15,42,61,0.72)',
+                            }
+                      }
+                      transition={{ duration: 0.2 }}
+                      className="group/stat relative overflow-hidden rounded-[18px] px-3 py-3 sm:px-4"
                       style={{
-                        background: 'rgba(15,42,61,0.80)',
-                        border: '1px solid rgba(15,122,122,0.12)',
-                        color: '#6A9BAA',
+                        background:
+                          'linear-gradient(180deg, rgba(10,33,50,0.70) 0%, rgba(8,27,42,0.54) 100%)',
+                        border: `1px solid ${project.panelAccentColor}24`,
+                        boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.025)',
                       }}
                     >
-                      {s}
-                    </span>
+                      <div
+                        aria-hidden
+                        className="absolute inset-x-0 top-0 h-px opacity-60"
+                        style={{
+                          background:
+                            metricIndex === 1
+                              ? 'linear-gradient(90deg, transparent, rgba(196,151,74,0.55), transparent)'
+                              : `linear-gradient(90deg, transparent, ${project.panelAccentColor}66, transparent)`,
+                        }}
+                      />
+                      <div className="font-display text-[25px] leading-none text-text-base sm:text-[30px]">
+                        {metric.value}
+                      </div>
+                      <p
+                        className="mt-2 font-mono text-[9.5px] uppercase tracking-[0.11em]"
+                        style={{ color: metricIndex === 1 ? '#D8B76E' : '#7EE7F2' }}
+                      >
+                        {metric.label}
+                      </p>
+                      <p
+                        className="mt-2 hidden font-sans text-[12px] leading-5 text-text-muted opacity-70 sm:block"
+                      >
+                        {metric.detail}
+                      </p>
+                    </motion.div>
                   ))}
                 </div>
 
-                {/* CTAs — mt-auto guarantees bottom render even when content is short */}
-                <div className="mt-auto pt-6 flex flex-wrap gap-2">
+                {/* Stack pills */}
+                <div className="mt-6">
+                  <div className="mb-2 flex items-center gap-2">
+                    <StarMark size="xs" color={project.panelAccentColor} className="opacity-70" />
+                    <span
+                      className="font-mono text-[9.5px] uppercase tracking-[0.14em]"
+                      style={{ color: '#7FAFBB' }}
+                    >
+                      Build stack
+                    </span>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2">
+                    {project.stack.slice(0, 5).map((s, stackIndex) => (
+                      <motion.span
+                        key={s}
+                        whileHover={shouldReduce ? {} : { y: -2 }}
+                        transition={{ duration: 0.18 }}
+                        className="font-mono text-[10px] px-2.5 py-1 rounded-full"
+                        style={{
+                          background:
+                            stackIndex === 0
+                              ? `${project.panelAccentColor}1F`
+                              : 'rgba(15,42,61,0.82)',
+                          border:
+                            stackIndex === 0
+                              ? `1px solid ${project.panelAccentColor}42`
+                              : '1px solid rgba(74,159,174,0.22)',
+                          color: stackIndex === 0 ? '#D5F7FA' : '#9CC5D0',
+                          boxShadow:
+                            stackIndex === 0 ? `0 0 18px ${project.panelAccentColor}12` : 'none',
+                        }}
+                      >
+                        {s}
+                      </motion.span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* CTAs */}
+                <div
+                  className="mt-auto flex flex-wrap gap-2.5 pt-7"
+                  style={{ borderTop: '1px solid rgba(74,159,174,0.12)' }}
+                >
                   <HoverSparkle className="inline-flex">
                     <StarburstButton
                       href={`/projects/${project.slug}`}
