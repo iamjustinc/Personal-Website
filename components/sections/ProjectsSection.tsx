@@ -245,7 +245,7 @@ export function ProjectsSection() {
                         variant="secondary"
                         size="sm"
                       >
-                        Try It Live ↗
+                        Try It Out
                       </StarburstButton>
                     </HoverSparkle>
                   )}

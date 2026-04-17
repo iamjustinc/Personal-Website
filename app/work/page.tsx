@@ -222,7 +222,7 @@ function WorkProjectCard({
                   variant="secondary"
                   size="md"
                 >
-                  Try It Live ↗
+                  Try It Out
                 </StarburstButton>
               </HoverSparkle>
             )}

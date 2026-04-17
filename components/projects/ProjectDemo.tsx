@@ -210,7 +210,7 @@ export function ProjectDemo({ project }: { project: Project }) {
                 variant="primary"
                 size="md"
               >
-                Try It Live ↗
+                Try It Out
               </StarburstButton>
             </HoverSparkle>
           ) : null}

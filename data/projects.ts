@@ -28,6 +28,7 @@ export const projects: Project[] = [
     thumbnail: kestrelLanding.src,
     screenshots: [kestrelLanding.src, kestrelInterface.src],
     panelAccentColor: '#2A8B87',
+    liveUrl: 'https://kestrel-resume.vercel.app/',
 
     overview:
       'Kestrel helps candidates understand role fit faster. Users submit a job description and profile, then receive a readiness score, aligned strengths, ranked skill gaps, and a practical roadmap.',
@@ -76,6 +77,7 @@ export const projects: Project[] = [
     thumbnail: quailLanding.src,
     screenshots: [quailLanding.src, quailInterface.src],
     panelAccentColor: '#5E9FD4',
+    liveUrl: 'https://quail-mail.vercel.app/',
 
     overview:
       'Quail Mail is an AI workflow tool for people who deal with too much email. It classifies messages, surfaces what matters, and helps users move from inbox overload to clear next steps.',
@@ -124,6 +126,7 @@ export const projects: Project[] = [
     thumbnail: chirpieLanding.src,
     screenshots: [chirpieLanding.src, chirpieInterface.src],
     panelAccentColor: '#62BDB8',
+    liveUrl: 'https://chirpie-news.vercel.app/',
 
     overview:
       'Chirpie is an AI-native news companion that turns high-volume reporting into structured, chat-style digests with context, confidence, and clear attribution.',
