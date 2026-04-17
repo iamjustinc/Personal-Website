@@ -8,8 +8,31 @@ import { WatermarkStar } from '@/components/ui/WatermarkStar'
 import { fadeUp, fadeIn, staggerContainer, useMotionSafe } from '@/lib/motion'
 import { siteConfig } from '@/data/site'
 
+const workStatements = [
+  'I do my best work where technical systems need to become clear for the people using, evaluating, or buying them. I like breaking down how a system works, where the workflow gets stuck, and what needs to be made easier to understand.',
+  'That is why Solutions Engineering fits me so well. I enjoy translating technical depth into tailored demos, structured workflows, and clear explanations that help non-technical stakeholders see the value quickly.',
+  'My background has been shaped by data systems, dashboards, and AI-powered workflows, but the common thread is always the same: take something complex, make it usable, and communicate it in a way that supports better decisions.',
+  'I am especially strong in early-career SE environments where technical credibility, curiosity, communication, and customer understanding all matter.'
+]
+
+const workHighlights = [
+  'Discovery and workflow mapping',
+  'Technical demos and storytelling',
+  'AI workflows and full-stack prototyping',
+  'Dashboard and systems communication',
+  'Stakeholder-facing problem solving',
+  'Translating complexity into business value',
+]
+
+const proofPoints = [
+  '30K+ records analyzed in health AI systems',
+  '70% manual analysis time reduced',
+  '63% completion lift from workflow redesign',
+  'Delivered demos to non-technical stakeholders',
+]
+
 export function AboutSection() {
-  const stagger = useMotionSafe(staggerContainer(0.10))
+  const stagger = useMotionSafe(staggerContainer(0.1))
   const up = useMotionSafe(fadeUp)
   const inn = useMotionSafe(fadeIn)
   const shouldReduce = useReducedMotion()
@@ -25,7 +48,7 @@ export function AboutSection() {
         <WatermarkStar size={480} color="#4A9FAE" direction={-1} duration={200} opacity={1} />
       </div>
 
-      <div className="grid md:grid-cols-[55fr_45fr] gap-16 lg:gap-20 items-start relative">
+      <div className="grid md:grid-cols-[58fr_42fr] gap-16 lg:gap-20 items-start relative">
         <div>
           <motion.div
             variants={inn}
@@ -46,9 +69,17 @@ export function AboutSection() {
               </span>
             </div>
 
-            <h2 className="font-display text-h1 text-text-base leading-tight">
+            <h2 className="font-display text-h1 text-text-base leading-tight text-balance">
               How I <span style={{ color: '#4A9FAE' }}>work</span>
             </h2>
+
+            <p
+              className="mt-5 max-w-[58ch] font-sans text-[16px] leading-7"
+              style={{ color: '#8FB2BE' }}
+            >
+              My approach is simple: understand the workflow, identify what matters most,
+              and make the system easier to explain, demonstrate, and act on.
+            </p>
           </motion.div>
 
           <motion.div
@@ -58,11 +89,11 @@ export function AboutSection() {
             viewport={{ once: true, margin: '-10%' }}
             className="mt-10 flex flex-col gap-6"
           >
-            {siteConfig.aboutStatements.map((statement, i) => (
+            {workStatements.map((statement, i) => (
               <motion.p
                 key={i}
                 variants={up}
-                className="font-sans text-base leading-relaxed"
+                className="font-sans text-[16px] leading-8 max-w-[64ch]"
                 style={{ color: '#A8C5D1' }}
               >
                 {statement}
@@ -70,28 +101,56 @@ export function AboutSection() {
             ))}
           </motion.div>
 
-          {siteConfig.aboutHighlights && siteConfig.aboutHighlights.length > 0 && (
-            <motion.div
-              variants={stagger}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-10%' }}
-              className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3"
-            >
-              {siteConfig.aboutHighlights.map((highlight, i) => (
-                <motion.div
-                  key={i}
-                  variants={up}
-                  className="flex items-center gap-2.5"
-                >
-                  <StarMark size="xs" color="#0F7A7A" className="opacity-65 shrink-0" />
-                  <span className="font-sans text-sm" style={{ color: '#7AABB8' }}>
-                    {highlight}
-                  </span>
-                </motion.div>
-              ))}
-            </motion.div>
-          )}
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-10%' }}
+            className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3"
+          >
+            {workHighlights.map((highlight, i) => (
+              <motion.div
+                key={i}
+                variants={up}
+                className="flex items-center gap-2.5"
+              >
+                <StarMark size="xs" color="#0F7A7A" className="opacity-65 shrink-0" />
+                <span className="font-sans text-sm" style={{ color: '#7AABB8' }}>
+                  {highlight}
+                </span>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-10%' }}
+            className="mt-10 grid sm:grid-cols-2 gap-4"
+          >
+            {proofPoints.map((item) => (
+              <motion.div
+                key={item}
+                variants={up}
+                className="rounded-[20px] px-4 py-4"
+                style={{
+                  background: 'rgba(10,33,50,0.44)',
+                  border: '1px solid rgba(74,159,174,0.12)',
+                }}
+              >
+                <div className="flex items-start gap-2.5">
+                  <StarMark size="xs" color="#C4974A" className="opacity-70 mt-1 shrink-0" />
+                  <p
+                    className="font-sans text-[14px] leading-6"
+                    style={{ color: '#A8C5D1' }}
+                  >
+                    {item}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
 
         {portrait && (
@@ -102,7 +161,10 @@ export function AboutSection() {
             viewport={{ once: true }}
             className="hidden md:flex flex-col items-center"
           >
-            <div className="relative flex items-center justify-center" style={{ width: 280, height: 300 }}>
+            <div
+              className="relative flex items-center justify-center"
+              style={{ width: 280, height: 300 }}
+            >
               <div
                 aria-hidden
                 className="absolute pointer-events-none"
@@ -120,10 +182,23 @@ export function AboutSection() {
               <div
                 aria-hidden
                 className="absolute pointer-events-none halo-spin"
-                style={{ width: 246, height: 246, top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}
+                style={{
+                  width: 246,
+                  height: 246,
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                }}
               >
                 <svg width="246" height="246" viewBox="0 0 246 246" fill="none">
-                  <circle cx="123" cy="123" r="120" stroke="rgba(15,122,122,0.18)" strokeWidth="1" strokeDasharray="3 10" />
+                  <circle
+                    cx="123"
+                    cy="123"
+                    r="120"
+                    stroke="rgba(15,122,122,0.18)"
+                    strokeWidth="1"
+                    strokeDasharray="3 10"
+                  />
                 </svg>
               </div>
 
@@ -133,7 +208,13 @@ export function AboutSection() {
               >
                 <div
                   className="portrait-glow"
-                  style={{ width: '100%', height: '100%', borderRadius: '50%', overflow: 'hidden', position: 'relative' }}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    borderRadius: '50%',
+                    overflow: 'hidden',
+                    position: 'relative',
+                  }}
                 >
                   <Image
                     src={portrait}
@@ -153,7 +234,6 @@ export function AboutSection() {
                 </div>
               </div>
 
-              {/* Small orbiting gold satellite */}
               <motion.div
                 aria-hidden
                 className="absolute pointer-events-none"
@@ -228,7 +308,6 @@ export function AboutSection() {
                 </div>
               </motion.div>
 
-              {/* Small teal sparkle */}
               <motion.div
                 aria-hidden
                 className="absolute pointer-events-none"
@@ -317,7 +396,8 @@ export function AboutSection() {
                   className="font-sans text-[15px] leading-6 text-pretty"
                   style={{ color: '#A8C5D1' }}
                 >
-                  Open to early-career SE + PM roles where I can turn technical systems into customer value.
+                  Open to early-career Solutions Engineering roles where I can turn technical systems
+                  into clear demos, better workflows, and business value.
                 </p>
               </div>
             </motion.div>

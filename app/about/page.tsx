@@ -11,39 +11,39 @@ import { fadeUp, fadeIn, staggerContainer } from '@/lib/motion'
 import { HeroVisual } from '@/components/hero/HeroVisual'
 
 const signalPills = [
-  'AI workflows',
+  'Discovery',
   'Technical demos',
-  'Dashboard design',
+  'Workflow design',
   'Stakeholder communication',
-  'Full-stack prototyping',
-  'Product judgment',
+  'AI + data systems',
+  'Business value',
 ]
 
 const valueCards = [
   {
     eyebrow: 'What I do best',
-    title: 'I turn technical complexity into clear decisions, usable workflows, and convincing demos.',
+    title: 'I turn technical systems into clear demos, usable workflows, and decisions people can act on.',
     body:
-      'My strongest work lives at the intersection of systems thinking, communication, and product execution — where architecture needs to become something a user, stakeholder, or customer can actually understand and act on.',
+      'My strongest work sits between system depth and user clarity. I like taking architecture, data flows, and model behavior, then shaping them into something a stakeholder, teammate, or customer can quickly understand.',
   },
   {
-    eyebrow: 'Why SE + PM',
-    title: 'I’m strongest in roles where technical credibility and user judgment both matter.',
+    eyebrow: 'Why solutions engineering',
+    title: 'I am strongest in roles where technical credibility and communication both matter.',
     body:
-      'I like understanding how a system works, where it breaks, what matters most to the user, and how to shape the clearest solution around that. That is why Solutions Engineering and technical Product roles both make sense for me.',
+      'I enjoy understanding how a system works, what is blocking the workflow, and how to explain the right solution clearly. That is why early-career Solutions Engineering feels like the most natural fit for me.',
   },
   {
     eyebrow: 'What I optimize for',
-    title: 'I care less about shipping features in isolation and more about making products easier to trust, adopt, and use.',
+    title: 'I focus on making products easier to understand, trust, and adopt.',
     body:
-      'That means better workflow design, better communication, and better product decisions — not just building something functional, but building something people can quickly understand and believe in.',
+      'That usually means stronger workflow design, clearer technical storytelling, and better stakeholder alignment. I care about helping people see both how something works and why it matters.',
   },
 ]
 
 const proofStats = [
   {
     value: '30K+',
-    label: 'records analyzed in health AI systems',
+    label: 'records analyzed across health AI systems',
   },
   {
     value: '70%',
@@ -54,45 +54,45 @@ const proofStats = [
     label: 'completion lift from workflow redesign',
   },
   {
-    value: '3',
-    label: 'AI product demos built for real user workflows',
+    value: '200+',
+    label: 'fMRI sessions supported through scalable data pipelines',
   },
 ]
 
 const capabilityCards = [
   {
-    title: 'Solutions Engineering',
+    title: 'Solution Discovery',
     body:
-      'Explaining product capability through tailored demos, structured workflows, and clear technical storytelling that connects system depth to customer value.',
+      'I like starting with the workflow, where users get blocked, what stakeholders need to understand, and what technical constraints actually matter.',
   },
   {
-    title: 'Product Thinking',
+    title: 'Technical Demonstration',
     body:
-      'Breaking messy problems into leverage points, then shaping the simplest solution that improves the user experience and the business outcome.',
+      'I build demos that explain system value clearly, not just feature output. The goal is to make technical depth feel legible and persuasive.',
   },
   {
-    title: 'AI Systems + Workflow Design',
+    title: 'AI + Workflow Systems',
     body:
-      'Designing systems where models, structured outputs, interface logic, and human judgment work together instead of fighting each other.',
+      'I have hands-on experience building AI-powered workflows, structured outputs, dashboards, and full-stack prototypes that support real decisions.',
   },
   {
-    title: 'Technical Communication',
+    title: 'Stakeholder Communication',
     body:
-      'Making architecture, tradeoffs, and system behavior legible to non-technical stakeholders without flattening the complexity that matters.',
+      'I am comfortable translating technical analysis, tradeoffs, and system behavior for non-technical audiences without losing the important nuance.',
   },
 ]
 
 const quickProof = [
-  'Built predictive systems and dashboards for stakeholder decision-making in health AI environments.',
-  'Designed workflow tools and data systems that improved reliability, planning, and operational efficiency.',
-  'Built and demoed AI products across inbox triage, career intelligence, and personalized news workflows.',
-  'Comfortable working across Python, SQL, TypeScript, Next.js, APIs, and user-facing system design.',
+  'Led predictive systems work across 30K+ records and turned model outputs into dashboards and stakeholder-facing workflows.',
+  'Reduced manual analysis time by 70% through end-to-end Python and R pipeline development.',
+  'Improved completion rates by 63% by redesigning workflow and scheduling systems across 100+ sessions.',
+  'Delivered technical demos and stakeholder-facing explanations for clinicians, research teams, and non-technical audiences.',
 ]
 
 const currentFocus = [
-  'Open to early-career Solutions Engineering and technical Product roles.',
-  'Especially interested in AI, workflow, platform, and customer-facing product environments.',
-  'Best fit where I can combine technical depth, communication, and product execution.',
+  'Targeting early-career Solutions Engineering roles in AI, workflow, platform, and customer-facing product environments.',
+  'Best fit where I can combine technical depth, demos, communication, and problem solving.',
+  'Also bring strong product judgment, but Solutions Engineering is the clearest first-role positioning for my experience.',
 ]
 
 export default function AboutPage() {
@@ -173,7 +173,7 @@ export default function AboutPage() {
                   className="font-mono text-[10px] uppercase tracking-[0.12em]"
                   style={{ color: '#4A9FAE' }}
                 >
-                  Solutions Engineering + Product Management
+                  Early-Career Solutions Engineering
                 </span>
               </div>
 
@@ -186,9 +186,10 @@ export default function AboutPage() {
                 className="mt-6 font-sans text-[17px] leading-8 max-w-[60ch]"
                 style={{ color: '#A8C5D1' }}
               >
-                I’m strongest where technical depth, user clarity, and business context meet.
-                I like taking systems that feel messy or abstract and turning them into workflows,
-                demos, and product experiences that people can understand, trust, and act on.
+                I build and explain technical systems in ways people can understand and act on.
+                My experience spans AI workflows, dashboards, data systems, and full-stack demos,
+                but the throughline is always the same: make complexity clearer, more usable,
+                and more valuable for the people on the other side of it.
               </p>
             </motion.div>
 
