@@ -92,6 +92,29 @@ function Callout({
   )
 }
 
+function SectionScreenshot({
+  src,
+  alt,
+  accent,
+}: {
+  src: string
+  alt: string
+  accent: string
+}) {
+  return (
+    <div
+      className="mt-6 relative w-full overflow-hidden rounded-2xl"
+      style={{
+        aspectRatio: '16/9',
+        border: `1px solid ${accent}18`,
+        boxShadow: '0 16px 48px rgba(0,0,0,0.32)',
+      }}
+    >
+      <Image src={src} alt={alt} fill className="object-cover object-top" />
+    </div>
+  )
+}
+
 function FactStrip({ project }: { project: Project }) {
   const facts = [
     { label: 'Year', value: String(project.year) },
@@ -130,59 +153,73 @@ function FloatingCaseVisual({ project }: { project: Project }) {
   const interfaceShot = project.screenshots?.[1]
 
   return (
-    <div className="relative h-[360px] md:h-[460px] lg:h-[540px] overflow-hidden">
+    <div className="absolute inset-0 overflow-hidden">
+      {/* Ambient glow */}
       <div
         className="absolute inset-0"
         style={{
-          background: `linear-gradient(155deg, ${project.panelAccentColor}10 0%, rgba(10,22,40,0.18) 45%, rgba(10,22,40,0.74) 100%)`,
+          background: `radial-gradient(circle at 28% 28%, ${project.panelAccentColor}18 0%, rgba(10,22,40,0) 50%)`,
         }}
       />
 
-      <div
-        className="absolute left-[6%] top-[10%] h-[62%] w-[60%]"
-        style={{ background: `linear-gradient(180deg, ${project.panelAccentColor}08 0%, transparent 100%)` }}
-      />
+      {/* Slow rotating star */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 130, repeat: Infinity, ease: 'linear' }}
+          style={{ opacity: 0.035 }}
+        >
+          <StarMark size="2xl" color={project.panelAccentColor} />
+        </motion.div>
+      </div>
 
-      <div
-        className="absolute right-[9%] bottom-[12%] h-[54%] w-[56%]"
-        style={{ background: `linear-gradient(180deg, rgba(255,255,255,0.03) 0%, transparent 100%)` }}
-      />
-
+      {/* Landing screenshot — large, fills upper-left */}
       {landingShot && (
         <motion.div
-          animate={{ y: [0, -8, 0], rotate: [-2, -1, -2] }}
+          animate={{ y: [0, -9, 0], rotate: [-2, -1, -2] }}
           transition={{ duration: 8.5, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute left-[6%] top-[11%] h-[60%] w-[58%] rounded-2xl overflow-hidden"
-          style={{ boxShadow: '0 18px 54px rgba(0,0,0,0.36)' }}
+          className="absolute left-[2%] top-[4%] h-[76%] w-[68%] rounded-2xl overflow-hidden"
+          style={{ boxShadow: '0 20px 56px rgba(0,0,0,0.44)' }}
         >
           <Image
             src={landingShot}
-            alt={`${project.name} landing`}
+            alt={`${project.name} landing view`}
             fill
-            className="object-cover object-left-top"
+            sizes="(max-width: 1024px) 100vw, 560px"
+            className="object-cover object-top"
             priority
           />
         </motion.div>
       )}
 
+      {/* Interface screenshot — slightly smaller, floats lower-right */}
       {interfaceShot && (
         <motion.div
-          animate={{ y: [0, 10, 0], rotate: [2, 1, 2] }}
-          transition={{ duration: 7.4, repeat: Infinity, ease: 'easeInOut', delay: 0.4 }}
-          className="absolute right-[7%] bottom-[8%] h-[54%] w-[62%] rounded-2xl overflow-hidden"
-          style={{ boxShadow: '0 24px 64px rgba(0,0,0,0.38)' }}
+          animate={{ y: [0, 11, 0], rotate: [2.2, 1.1, 2.2] }}
+          transition={{ duration: 7.5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
+          whileHover={{ y: -4, scale: 1.01 }}
+          className="absolute right-[2%] bottom-[3%] h-[60%] w-[68%] rounded-2xl overflow-hidden"
+          style={{ boxShadow: '0 26px 64px rgba(0,0,0,0.50)' }}
         >
           <Image
             src={interfaceShot}
-            alt={`${project.name} interface`}
+            alt={`${project.name} interface view`}
             fill
-            className="object-cover object-top"
+            sizes="(max-width: 1024px) 100vw, 560px"
+            className="object-cover object-center"
           />
         </motion.div>
       )}
 
+      {/* Accent glow under front card */}
+      <div
+        className="absolute right-[10%] bottom-[2%] h-10 w-[42%] blur-2xl rounded-full pointer-events-none"
+        style={{ background: `${project.panelAccentColor}28` }}
+      />
+
+      {/* Corner marks */}
       <div className="absolute top-4 left-4 pointer-events-none">
-        <StarMark size="xs" color={project.panelAccentColor} className="opacity-45" />
+        <StarMark size="xs" color={project.panelAccentColor} className="opacity-40" />
       </div>
       <div className="absolute bottom-4 right-4 pointer-events-none">
         <StarMark size="xs" color="#C4974A" className="opacity-40" />
@@ -216,6 +253,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
 
   return (
     <main className="bg-bg min-h-screen pt-16">
+      {/* ── Hero band ── */}
       <div
         className="relative overflow-hidden"
         style={{
@@ -233,6 +271,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
         </div>
 
         <div className="max-w-[1180px] mx-auto px-6 py-14 lg:py-18">
+          {/* Back link */}
           <motion.div variants={inn} initial="hidden" animate="visible">
             <Link
               href="/#projects"
@@ -255,11 +294,23 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
             </Link>
           </motion.div>
 
-          <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-0 rounded-[28px] overflow-hidden border border-[rgba(15,122,122,0.14)] bg-[rgba(15,42,61,0.56)]">
-            <div className="relative min-h-[360px] lg:min-h-[540px]">
+          {/* Hero grid — open layout, visual gets its own card */}
+          <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-8 lg:gap-14 items-start">
+
+            {/* ── Visual column ── */}
+            <div
+              className="relative min-h-[360px] lg:min-h-[540px] rounded-[24px] overflow-hidden"
+              style={{
+                background: `linear-gradient(155deg, ${project.panelAccentColor}14 0%, rgba(10,22,40,0.18) 40%, rgba(10,22,40,0.72) 100%)`,
+                border: '1px solid rgba(15,122,122,0.14)',
+                boxShadow: '0 4px 32px rgba(0,0,0,0.30)',
+              }}
+            >
               <FloatingCaseVisual project={project} />
+
+              {/* Case Study badge */}
               <div
-                className="absolute top-6 right-6 flex items-center gap-1.5 rounded-full px-3 py-1 z-20"
+                className="absolute top-5 right-5 flex items-center gap-1.5 rounded-full px-3 py-1 z-20"
                 style={{
                   background: 'rgba(13,30,53,0.85)',
                   backdropFilter: 'blur(12px)',
@@ -268,23 +319,26 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
               >
                 <StarMark size="xs" color={project.panelAccentColor} className="opacity-65" />
                 <span className="font-mono text-[9.5px] uppercase tracking-wider text-text-muted">
-                  01
+                  Case Study
                 </span>
               </div>
             </div>
 
+            {/* ── Text column — open, no card wrapper ── */}
             <motion.div
               variants={stagger}
               initial="hidden"
               animate="visible"
-              className="flex flex-col justify-center p-8 lg:p-12"
+              className="flex flex-col pt-1 lg:pt-3"
             >
+              {/* Tags */}
               <motion.div variants={inn} className="flex flex-wrap gap-2 mb-5">
                 {project.tags.map((tag) => (
                   <Tag key={tag} label={tag} variant="category" />
                 ))}
               </motion.div>
 
+              {/* Title */}
               <motion.h1
                 variants={up}
                 className="font-display text-h1 text-text-base leading-none"
@@ -292,6 +346,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                 {project.name}
               </motion.h1>
 
+              {/* Meta */}
               <motion.p
                 variants={up}
                 className="font-mono text-[11px] text-text-muted mt-3 tracking-wider uppercase"
@@ -299,36 +354,23 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                 {project.year} · {project.role}
               </motion.p>
 
+              {/* Tagline — no width cap */}
               <motion.p
                 variants={up}
-                className="font-sans text-[17px] leading-[1.65] mt-6 max-w-[26ch]"
+                className="font-sans text-[17px] leading-[1.65] mt-6"
                 style={{ color: '#A8C5D1' }}
               >
                 {project.tagline}
               </motion.p>
 
+              {/* Outcome callout */}
               {project.outcome && (
                 <motion.div variants={up}>
                   <Callout accent={project.panelAccentColor}>{project.outcome}</Callout>
                 </motion.div>
               )}
 
-              <motion.div variants={inn} className="flex flex-wrap gap-1.5 mt-6">
-                {project.stack.slice(0, 5).map((s) => (
-                  <span
-                    key={s}
-                    className="font-mono text-[10px] px-2.5 py-1 rounded-btn"
-                    style={{
-                      background: 'rgba(15,42,61,0.80)',
-                      border: '1px solid rgba(15,122,122,0.14)',
-                      color: '#6A9BAA',
-                    }}
-                  >
-                    {s}
-                  </span>
-                ))}
-              </motion.div>
-
+              {/* CTAs */}
               <motion.div variants={inn} className="flex flex-wrap gap-2.5 mt-8">
                 <HoverSparkle className="inline-flex">
                   <StarburstButton href={`/projects/${project.slug}/demo`} variant="primary" size="md">
@@ -369,10 +411,12 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
         </div>
       </div>
 
+      {/* ── Fact strip ── */}
       <motion.div variants={inn} initial="hidden" whileInView="visible" viewport={{ once: true }}>
         <FactStrip project={project} />
       </motion.div>
 
+      {/* ── Case study body ── */}
       <div className="max-w-[860px] mx-auto px-6 pt-4 pb-28">
         <CaseSection number={sn.overview} title="Overview" accent={project.panelAccentColor}>
           <Prose>{overviewText}</Prose>
@@ -390,6 +434,13 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
 
         <CaseSection number={sn.solution} title="Solution" accent={project.panelAccentColor}>
           <Prose>{project.solution}</Prose>
+          {project.screenshots?.[1] && (
+            <SectionScreenshot
+              src={project.screenshots[1]}
+              alt={`${project.name} interface`}
+              accent={project.panelAccentColor}
+            />
+          )}
         </CaseSection>
 
         <CaseSection number={sn.impact} title="Impact" accent={project.panelAccentColor}>
