@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { StarMark } from '@/components/ui/StarMark'
 import type { Project } from '@/types/project'
 import { cn } from '@/lib/utils'
@@ -26,8 +26,10 @@ export function ProjectFloatingScreenshots({
   showWatermark = false,
   className,
 }: ProjectFloatingScreenshotsProps) {
+  const shouldReduce = useReducedMotion()
   const landingShot = project.screenshots?.[0] || project.thumbnail
   const interfaceShot = project.screenshots?.[1]
+  const floatViewport = { amount: 0.18 }
 
   return (
     <div className={cn('absolute inset-0 overflow-hidden', className)}>
@@ -41,7 +43,9 @@ export function ProjectFloatingScreenshots({
       {showWatermark && (
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
           <motion.div
-            animate={{ rotate: 360 }}
+            initial={false}
+            whileInView={shouldReduce ? {} : { rotate: 360 }}
+            viewport={floatViewport}
             transition={{ duration: 130, repeat: Infinity, ease: 'linear' }}
             style={{ opacity: 0.028 }}
           >
@@ -52,7 +56,9 @@ export function ProjectFloatingScreenshots({
 
       {landingShot && (
         <motion.div
-          animate={{ y: [0, -8, 0], rotate: [-1.4, -0.45, -1.4] }}
+          initial={false}
+          whileInView={shouldReduce ? {} : { y: [0, -8, 0], rotate: [-1.4, -0.45, -1.4] }}
+          viewport={floatViewport}
           transition={{ duration: 9.5, repeat: Infinity, ease: 'easeInOut' }}
           className="absolute left-[1%] top-[8%] w-[94%] aspect-[1.86/1] rounded-2xl overflow-hidden"
           style={{ boxShadow: '0 22px 58px rgba(0,0,0,0.48)' }}
@@ -70,7 +76,9 @@ export function ProjectFloatingScreenshots({
 
       {interfaceShot && (
         <motion.div
-          animate={{ y: [0, 9, 0], rotate: [1.8, 0.8, 1.8] }}
+          initial={false}
+          whileInView={shouldReduce ? {} : { y: [0, 9, 0], rotate: [1.8, 0.8, 1.8] }}
+          viewport={floatViewport}
           transition={{ duration: 8.5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
           className="absolute right-[1%] bottom-[7%] z-10 w-[90%] aspect-[1.86/1] rounded-2xl overflow-hidden"
           style={{ boxShadow: '0 28px 66px rgba(0,0,0,0.54)' }}

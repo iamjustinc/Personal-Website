@@ -57,6 +57,18 @@ body {
 
 /* ── Halo ring slow spin ──────────────────────────────────────────────────── */
 
+@keyframes watermark-spin {
+  from { transform: rotate(0deg);   }
+  to   { transform: rotate(360deg); }
+}
+
+.watermark-star {
+  animation-name: watermark-spin;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+
 @keyframes halo-spin {
   from { transform: rotate(0deg);   }
   to   { transform: rotate(360deg); }
@@ -67,7 +79,10 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .halo-spin { animation: none; }
+  .watermark-star,
+  .halo-spin {
+    animation: none !important;
+  }
 }
 
 /* ── Shooting star ────────────────────────────────────────────────────────── */
@@ -92,6 +107,13 @@ body {
   100% { opacity: 0; transform: translateX(480px)  scaleX(0);   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .shooting-star {
+    display: none;
+    animation: none !important;
+  }
+}
+
 /* ── Angular clip-path button ─────────────────────────────────────────────── */
 
 .btn-angular {
@@ -112,4 +134,3 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .portrait-glow { animation: none; box-shadow: 0 0 0 2px rgba(15,122,122,0.45), 0 0 0 8px rgba(15,122,122,0.10); }
 }
-

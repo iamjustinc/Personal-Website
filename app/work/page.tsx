@@ -131,16 +131,8 @@ function WorkProjectCard({
       />
 
       {!reduceMotion && (
-        <motion.div
-          className="pointer-events-none absolute -left-1/2 top-0 h-full w-1/2 opacity-35 blur-2xl"
-          animate={{ x: ['-10%', '330%'] }}
-          transition={{
-            duration: 8.5 + index,
-            repeat: Infinity,
-            repeatType: 'mirror',
-            ease: 'easeInOut',
-            delay: index * 0.7,
-          }}
+        <div
+          className="pointer-events-none absolute -left-1/2 top-0 h-full w-1/2 opacity-0 blur-2xl transition-[opacity,transform] duration-[1400ms] ease-out group-hover:translate-x-[330%] group-hover:opacity-35"
           style={{
             background: `linear-gradient(90deg, transparent, ${project.panelAccentColor}24, rgba(196,151,74,0.12), transparent)`,
           }}

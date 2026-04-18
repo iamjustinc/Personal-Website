@@ -1,6 +1,3 @@
-'use client'
-
-import { motion, useReducedMotion } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
 interface WatermarkStarProps {
@@ -29,17 +26,15 @@ export function WatermarkStar({
   className,
   opacity = 0.045,
 }: WatermarkStarProps) {
-  const shouldReduce = useReducedMotion()
-
   return (
-    <motion.div
-      className={cn('pointer-events-none select-none shrink-0', className)}
-      style={{ width: size, height: size, opacity }}
-      animate={shouldReduce ? {} : { rotate: direction * 360 }}
-      transition={shouldReduce ? {} : {
-        duration,
-        repeat: Infinity,
-        ease: 'linear',
+    <div
+      className={cn('watermark-star pointer-events-none select-none shrink-0', className)}
+      style={{
+        width: size,
+        height: size,
+        opacity,
+        animationDuration: `${duration}s`,
+        animationDirection: direction === 1 ? 'normal' : 'reverse',
       }}
     >
       <svg
@@ -63,6 +58,6 @@ export function WatermarkStar({
           transform="rotate(45 50 50)"
         />
       </svg>
-    </motion.div>
+    </div>
   )
 }

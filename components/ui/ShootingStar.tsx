@@ -1,7 +1,3 @@
-'use client'
-
-import { useReducedMotion } from 'framer-motion'
-
 interface ShootingStarProps {
   startX?: string
   startY?: string
@@ -25,9 +21,6 @@ export function ShootingStar({
   duration = 14,
   delay = 0,
 }: ShootingStarProps) {
-  const shouldReduce = useReducedMotion()
-  if (shouldReduce) return null
-
   return (
     <div
       aria-hidden

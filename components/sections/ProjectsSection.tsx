@@ -137,19 +137,12 @@ export function ProjectsSection() {
                 }}
               />
 
-              <motion.div
+              <div
                 aria-hidden
-                className="absolute inset-y-0 w-[28%] -skew-x-12 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                className="absolute inset-y-0 w-[28%] -skew-x-12 opacity-0 transition-[opacity,transform] duration-[1200ms] ease-out group-hover:translate-x-[520%] group-hover:opacity-100"
                 style={{
                   left: '-38%',
                   background: `linear-gradient(90deg, transparent 0%, ${project.panelAccentColor}12 48%, rgba(196,151,74,0.08) 58%, transparent 100%)`,
-                }}
-                animate={shouldReduce ? {} : { x: ['0%', '520%'] }}
-                transition={{
-                  duration: 8.5,
-                  repeat: Infinity,
-                  repeatDelay: 2,
-                  ease: 'easeInOut',
                 }}
               />
 
@@ -209,7 +202,6 @@ export function ProjectsSection() {
                 >
                   <ProjectFloatingScreenshots
                     project={project}
-                    priority={index === 0}
                     imageSizes="(max-width: 1024px) 100vw, 560px"
                   />
                 </motion.div>

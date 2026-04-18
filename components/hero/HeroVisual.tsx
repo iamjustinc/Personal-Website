@@ -98,7 +98,8 @@ export function HeroVisual() {
                 src={siteConfig.portraitSrc}
                 alt="Justin Chang"
                 fill
-                sizes="272px"
+                sizes="(max-width: 767px) 1px, 272px"
+                quality={72}
                 className="object-cover object-top"
                 priority
               />

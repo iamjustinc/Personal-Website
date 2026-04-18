@@ -8,9 +8,10 @@
  * and defers to HoverSparkle's own cursor + trail system. On inputs/textareas/selects
  * the native cursor is restored.
  *
- * PERF: All hot-path work is synchronous DOM mutation — no React state, no re-renders.
+ * PERF: Hot-path work is DOM mutation only — no React state or re-renders
+ * after activation. Pointer movement is coalesced through requestAnimationFrame.
  *
- * Position: written directly to style.transform on every mousemove.
+ * Position: written directly to style.transform once per animation frame.
  * Visibility: only re-evaluated when e.target changes (skips closest() traversal
  *             for every pixel of movement within the same element).
  * Opacity:   only written to the DOM when the value actually changes.
@@ -20,21 +21,35 @@ import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 
 export function GlobalStarCursor() {
-  const [mounted, setMounted] = useState(false)
+  const [enabled, setEnabled] = useState(false)
   const cursorRef    = useRef<HTMLDivElement>(null)
   // Cached state for the visibility optimisation — avoids DOM traversal and
   // style writes when neither the hovered element nor the hidden state changes.
   const lastTargetRef = useRef<EventTarget | null>(null)
   const isHiddenRef   = useRef(true) // start hidden until first mousemove
+  const rafRef        = useRef<number | null>(null)
+  const pointRef      = useRef({ x: 0, y: 0 })
 
   useEffect(() => {
-    setMounted(true)
+    const pointerQuery = window.matchMedia('(pointer: fine)')
+    const motionQuery  = window.matchMedia('(prefers-reduced-motion: reduce)')
 
-    // Only activate on fine-pointer (mouse / trackpad) devices
-    const isFinePointer      = window.matchMedia('(pointer: fine)').matches
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const update = () => {
+      setEnabled(pointerQuery.matches && !motionQuery.matches)
+    }
 
-    if (!isFinePointer || prefersReducedMotion) return
+    update()
+    pointerQuery.addEventListener('change', update)
+    motionQuery.addEventListener('change', update)
+
+    return () => {
+      pointerQuery.removeEventListener('change', update)
+      motionQuery.removeEventListener('change', update)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!enabled) return
 
     // Suppress native cursor globally; restore on text inputs so the
     // beam cursor still appears there (the custom cursor also hides itself
@@ -47,14 +62,26 @@ export function GlobalStarCursor() {
     ].join(' ')
     document.head.appendChild(style)
 
+    const flushCursor = () => {
+      rafRef.current = null
+      const el = cursorRef.current
+      if (!el) return
+
+      const { x, y } = pointRef.current
+      el.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`
+    }
+
     const onMove = (e: MouseEvent) => {
       const el = cursorRef.current
       if (!el) return
 
       // ── Position ──────────────────────────────────────────────────────────
-      // Synchronous style.transform write — GPU-composited, zero layout cost,
-      // no React scheduler, no rAF delay. Tightest possible cursor tracking.
-      el.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`
+      // Coalesce high-frequency mousemove events into one compositor-friendly
+      // transform write per animation frame.
+      pointRef.current = { x: e.clientX, y: e.clientY }
+      if (rafRef.current === null) {
+        rafRef.current = window.requestAnimationFrame(flushCursor)
+      }
 
       // ── Visibility ────────────────────────────────────────────────────────
       // Only re-check when the hovered element changes. Moving within the same
@@ -65,7 +92,7 @@ export function GlobalStarCursor() {
         const target = e.target as Element | null
         const shouldHide =
           !!target?.closest('[data-hover-sparkle]') ||
-          !!target?.closest('input, textarea, select')
+          !!target?.closest('input, textarea, select, [contenteditable="true"]')
 
         // Only write style.opacity when the value actually changes — prevents
         // redundant style system work on every mousemove within a zone.
@@ -91,11 +118,17 @@ export function GlobalStarCursor() {
     return () => {
       document.removeEventListener('mousemove', onMove)
       document.removeEventListener('mouseleave', onLeave)
+      if (rafRef.current !== null) {
+        window.cancelAnimationFrame(rafRef.current)
+        rafRef.current = null
+      }
+      lastTargetRef.current = null
+      isHiddenRef.current = true
       style.remove()
     }
-  }, [])
+  }, [enabled])
 
-  if (!mounted) return null
+  if (!enabled) return null
 
   return createPortal(
     <div

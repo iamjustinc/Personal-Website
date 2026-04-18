@@ -28,6 +28,8 @@ export function HoverSparkle({ children, className }: HoverSparkleProps) {
   const cursorRef      = useRef<HTMLDivElement>(null)
   const lastSpawnRef   = useRef(0)
   const timeoutIdsRef  = useRef<number[]>([])
+  const rafRef         = useRef<number | null>(null)
+  const pointRef       = useRef({ x: 0, y: 0 })
   const [isTouch, setIsTouch] = useState(false)
   const [sparks,  setSparks]  = useState<Spark[]>([])
   const [mounted, setMounted] = useState(false)
@@ -42,16 +44,35 @@ export function HoverSparkle({ children, className }: HoverSparkleProps) {
     media.addEventListener('change', update)
 
     return () => {
+      const timeoutIds = timeoutIdsRef.current
       media.removeEventListener('change', update)
-      timeoutIdsRef.current.forEach(window.clearTimeout)
+      timeoutIds.forEach(window.clearTimeout)
+      if (rafRef.current !== null) {
+        window.cancelAnimationFrame(rafRef.current)
+      }
     }
   }, [])
+
+  const writeCursorPosition = (clientX: number, clientY: number) => {
+    pointRef.current = { x: clientX, y: clientY }
+
+    if (rafRef.current !== null) return
+
+    rafRef.current = window.requestAnimationFrame(() => {
+      rafRef.current = null
+      const el = cursorRef.current
+      if (!el) return
+
+      const { x, y } = pointRef.current
+      el.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`
+    })
+  }
 
   const spawnSpark = (clientX: number, clientY: number, force = false) => {
     if (reduceMotion || isTouch || !hostRef.current) return
 
     const now = performance.now()
-    if (!force && now - lastSpawnRef.current < 70) return
+    if (!force && now - lastSpawnRef.current < 120) return
     lastSpawnRef.current = now
 
     const rect = hostRef.current.getBoundingClientRect()
@@ -66,10 +87,11 @@ export function HoverSparkle({ children, className }: HoverSparkleProps) {
       scale:  0.85 + Math.random() * 0.35,
     }
 
-    setSparks((prev) => [...prev.slice(-10), spark])
+    setSparks((prev) => [...prev.slice(-5), spark])
 
     const timeoutId = window.setTimeout(() => {
       setSparks((prev) => prev.filter((item) => item.id !== spark.id))
+      timeoutIdsRef.current = timeoutIdsRef.current.filter((id) => id !== timeoutId)
     }, 520)
 
     timeoutIdsRef.current.push(timeoutId)
@@ -87,8 +109,8 @@ export function HoverSparkle({ children, className }: HoverSparkleProps) {
         if (showCustomCursor) {
           const el = cursorRef.current
           if (el) {
-            // Synchronous DOM write — bypasses React scheduler entirely
-            el.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`
+            // Coalesced DOM write — bypasses React state and runs once per frame.
+            writeCursorPosition(e.clientX, e.clientY)
             el.style.opacity   = '1'
           }
         }
@@ -96,9 +118,8 @@ export function HoverSparkle({ children, className }: HoverSparkleProps) {
       }}
       onMouseMove={(e) => {
         if (showCustomCursor) {
-          const el = cursorRef.current
           // Position only — no setState, no re-render, no scheduler latency
-          if (el) el.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`
+          writeCursorPosition(e.clientX, e.clientY)
         }
         spawnSpark(e.clientX, e.clientY)
       }}
@@ -155,9 +176,10 @@ export function HoverSparkle({ children, className }: HoverSparkleProps) {
         Custom cursor — portaled to document.body to escape any ancestor transform context.
 
         PERF: The div is rendered unconditionally (when showCustomCursor) so the ref is
-        always attached and ready. Position is written directly to style.transform — no
-        setState, no reconciliation, no scheduler delay. The element starts at opacity 0
-        and is made visible/invisible via direct style.opacity writes on enter/leave.
+        always attached and ready. Position is coalesced to one direct style.transform
+        write per animation frame — no setState and no reconciliation on pointer move.
+        The element starts at opacity 0 and is made visible/invisible via direct
+        style.opacity writes on enter/leave.
 
         willChange: 'transform' promotes this element to its own GPU compositor layer
         so transform updates are handled entirely off the main thread.
@@ -175,6 +197,7 @@ export function HoverSparkle({ children, className }: HoverSparkleProps) {
               // Initial centering offset — JS overwrites the full translate on every move
               transform:  'translate(-50%, -50%)',
               willChange: 'transform',
+              transition: 'opacity 0.08s ease',
             }}
           >
             {/* Soft glow halo */}
