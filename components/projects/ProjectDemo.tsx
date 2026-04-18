@@ -155,7 +155,7 @@ export function ProjectDemo({ project }: { project: Project }) {
                 className="font-mono text-[10.5px] uppercase tracking-[0.12em]"
                 style={{ color: project.panelAccentColor }}
               >
-                Screenshots
+                Preview
               </span>
               <div
                 className="h-px flex-1"
