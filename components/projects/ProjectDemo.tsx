@@ -12,8 +12,10 @@ import { fadeUp, fadeIn, staggerContainer, useMotionSafe } from '@/lib/motion'
 
 const kestrelDemoVideos = {
   quick: '/videos/projects/kestrel/kestrel-quick.mp4',
-  full: '/videos/projects/kestrel/kestrel-full.mp4',
 } as const
+
+const kestrelFullWalkthroughUrl =
+  'https://www.linkedin.com/posts/jjustin-chang_buildinpublic-solutionsengineering-productmanagement-ugcPost-7448104114703527936-W0CI?utm_source=share&utm_medium=member_desktop&rcm=ACoAAC8kyn8BgbHl-T6FxSq__vvSg2wW3sCT8SM'
 
 export function ProjectDemo({ project }: { project: Project }) {
   const stagger = useMotionSafe(staggerContainer(0.10))
@@ -185,56 +187,50 @@ export function ProjectDemo({ project }: { project: Project }) {
                 </video>
               </div>
 
-              <details
-                className="group mt-4 overflow-hidden rounded-2xl"
+              <a
+                href={kestrelFullWalkthroughUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Watch full 5:13 walkthrough on LinkedIn"
+                className="group mt-4 flex items-center justify-between gap-4 rounded-2xl px-4 py-3 transition duration-200 hover:-translate-y-0.5 hover:bg-white/[0.025]"
                 style={{
                   background: 'rgba(7,20,36,0.46)',
                   border: `1px solid ${project.panelAccentColor}18`,
+                  boxShadow: '0 12px 26px rgba(0,0,0,0.18)',
                 }}
               >
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-4 py-3 transition-colors duration-200 hover:bg-white/[0.025]">
-                  <div>
-                    <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-text-base">
-                      Watch full 5:13 walkthrough
-                    </p>
-                    <p className="mt-1 font-sans text-[12px] text-text-muted">
-                      Secondary deep dive with the full product flow.
-                    </p>
-                  </div>
-                  <span
-                    className="grid h-8 w-8 shrink-0 place-items-center rounded-full font-mono text-[14px]"
-                    style={{
-                      color: project.panelAccentColor,
-                      background: `${project.panelAccentColor}10`,
-                      border: `1px solid ${project.panelAccentColor}22`,
-                    }}
-                    aria-hidden
-                  >
-                    +
-                  </span>
-                </summary>
-                <div className="px-4 pb-4">
-                  <div
-                    className="overflow-hidden rounded-xl"
-                    style={{
-                      background: 'rgba(0,0,0,0.34)',
-                      border: `1px solid ${project.panelAccentColor}18`,
-                      aspectRatio: '16 / 9',
-                    }}
-                  >
-                    <video
-                      controls
-                      playsInline
-                      preload="metadata"
-                      className="h-full w-full object-contain"
-                      aria-label="Kestrel full walkthrough video"
-                    >
-                      <source src={kestrelDemoVideos.full} type="video/mp4" />
-                      Your browser does not support the video tag.
-                    </video>
-                  </div>
+                <div>
+                  <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-text-base">
+                    Watch full 5:13 walkthrough
+                  </p>
+                  <p className="mt-1 font-sans text-[12px] text-text-muted">
+                    Full walkthrough with the complete product flow and demo narrative.
+                  </p>
                 </div>
-              </details>
+                <span
+                  className="grid h-8 w-8 shrink-0 place-items-center rounded-full transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  style={{
+                    color: project.panelAccentColor,
+                    background: `${project.panelAccentColor}10`,
+                    border: `1px solid ${project.panelAccentColor}22`,
+                  }}
+                  aria-hidden
+                >
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M7 17L17 7" />
+                    <path d="M8 7h9v9" />
+                  </svg>
+                </span>
+              </a>
             </div>
           ) : (
             /* Placeholder — swap for an iframe or video when ready */
