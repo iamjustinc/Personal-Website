@@ -10,10 +10,16 @@ import { Tag } from '@/components/ui/Tag'
 import type { Project } from '@/types/project'
 import { fadeUp, fadeIn, staggerContainer, useMotionSafe } from '@/lib/motion'
 
+const kestrelDemoVideos = {
+  quick: '/videos/projects/kestrel/kestrel-quick.mp4',
+  full: '/videos/projects/kestrel/kestrel-full.mp4',
+} as const
+
 export function ProjectDemo({ project }: { project: Project }) {
   const stagger = useMotionSafe(staggerContainer(0.10))
   const up      = useMotionSafe(fadeUp)
   const inn     = useMotionSafe(fadeIn)
+  const hasKestrelVideoDemo = project.slug === 'kestrel'
 
   return (
     <main className="bg-bg min-h-screen pt-16">
@@ -110,6 +116,125 @@ export function ProjectDemo({ project }: { project: Project }) {
                 allowFullScreen
                 title={`${project.name} demo`}
               />
+            </div>
+          ) : hasKestrelVideoDemo ? (
+            <div
+              className="relative w-full overflow-hidden rounded-2xl p-4 sm:p-5"
+              style={{
+                background: 'linear-gradient(145deg, rgba(9,26,44,0.92), rgba(12,39,56,0.72))',
+                border: `1px solid ${project.panelAccentColor}26`,
+                boxShadow: '0 18px 55px rgba(0,0,0,0.42)',
+              }}
+            >
+              <div
+                className="pointer-events-none absolute -right-20 -top-24 h-56 w-56 rounded-full blur-3xl"
+                style={{ background: `${project.panelAccentColor}1C` }}
+                aria-hidden
+              />
+              <div
+                className="pointer-events-none absolute left-8 top-10 h-px w-28 rotate-12"
+                style={{ background: `linear-gradient(90deg, transparent, ${project.panelAccentColor}44, transparent)` }}
+                aria-hidden
+              />
+
+              <div className="relative mb-4">
+                <div>
+                  <div
+                    className="mb-3 inline-flex items-center gap-2 rounded-full px-3 py-1.5"
+                    style={{
+                      background: `${project.panelAccentColor}12`,
+                      border: `1px solid ${project.panelAccentColor}28`,
+                    }}
+                  >
+                    <StarMark size="xs" color={project.panelAccentColor} className="opacity-75" />
+                    <span
+                      className="font-mono text-[10px] uppercase tracking-[0.12em]"
+                      style={{ color: project.panelAccentColor }}
+                    >
+                      Quick demo
+                    </span>
+                  </div>
+                  <h2 className="font-display text-[28px] leading-none text-text-base sm:text-[34px]">
+                    90-sec walkthrough
+                  </h2>
+                  <p className="mt-3 max-w-[620px] font-sans text-[14px] leading-relaxed text-text-muted sm:text-[15px]">
+                    Watch how Kestrel turns a target job description into readiness signals, explainable gaps, and next steps.
+                  </p>
+                </div>
+              </div>
+
+              <div
+                className="relative overflow-hidden rounded-[18px]"
+                style={{
+                  background: 'rgba(0,0,0,0.34)',
+                  border: `1px solid ${project.panelAccentColor}22`,
+                  boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.05), 0 18px 40px rgba(0,0,0,0.34)',
+                  aspectRatio: '16 / 9',
+                }}
+              >
+                <video
+                  controls
+                  muted
+                  playsInline
+                  preload="metadata"
+                  className="h-full w-full object-contain"
+                  aria-label="Kestrel quick demo video"
+                >
+                  <source src={kestrelDemoVideos.quick} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+
+              <details
+                className="group mt-4 overflow-hidden rounded-2xl"
+                style={{
+                  background: 'rgba(7,20,36,0.46)',
+                  border: `1px solid ${project.panelAccentColor}18`,
+                }}
+              >
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-4 py-3 transition-colors duration-200 hover:bg-white/[0.025]">
+                  <div>
+                    <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-text-base">
+                      Watch full 5:13 walkthrough
+                    </p>
+                    <p className="mt-1 font-sans text-[12px] text-text-muted">
+                      Secondary deep dive with the full product flow.
+                    </p>
+                  </div>
+                  <span
+                    className="grid h-8 w-8 shrink-0 place-items-center rounded-full font-mono text-[14px]"
+                    style={{
+                      color: project.panelAccentColor,
+                      background: `${project.panelAccentColor}10`,
+                      border: `1px solid ${project.panelAccentColor}22`,
+                    }}
+                    aria-hidden
+                  >
+                    +
+                  </span>
+                </summary>
+                <div className="px-4 pb-4">
+                  <div
+                    className="overflow-hidden rounded-xl"
+                    style={{
+                      background: 'rgba(0,0,0,0.34)',
+                      border: `1px solid ${project.panelAccentColor}18`,
+                      aspectRatio: '16 / 9',
+                    }}
+                  >
+                    <video
+                      controls
+                      playsInline
+                      preload="metadata"
+                      className="h-full w-full object-contain"
+                      aria-label="Kestrel full walkthrough video"
+                    >
+                      <source src={kestrelDemoVideos.full} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+                </div>
+              </details>
             </div>
           ) : (
             /* Placeholder — swap for an iframe or video when ready */
