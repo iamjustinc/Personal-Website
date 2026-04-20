@@ -84,8 +84,9 @@ export function HeroVisual() {
             className="portrait-float relative"
             style={{ width: 272, height: 272, zIndex: 10 }}
           >
+            {/* Glow ring — opacity-pulsed for compositor safety (no box-shadow repaint) */}
+            <div aria-hidden className="portrait-glow-ring" />
             <div
-              className="portrait-glow"
               style={{
                 width: '100%',
                 height: '100%',
@@ -117,9 +118,9 @@ export function HeroVisual() {
         )}
 
         {/* Main gold satellite with faint glowing trail */}
-        <motion.div
+        <div
           aria-hidden
-          className="absolute pointer-events-none"
+          className={`absolute pointer-events-none${!shouldReduce ? ' orbit-cw-20' : ''}`}
           style={{
             width: 328,
             height: 328,
@@ -129,16 +130,6 @@ export function HeroVisual() {
             marginTop: -164,
             zIndex: 20,
           }}
-          animate={shouldReduce ? {} : { rotate: 360 }}
-          transition={
-            shouldReduce
-              ? {}
-              : {
-                  duration: 20,
-                  repeat: Infinity,
-                  ease: 'linear',
-                }
-          }
         >
           <div
             style={{
@@ -191,12 +182,12 @@ export function HeroVisual() {
               }}
             />
           </div>
-        </motion.div>
+        </div>
 
         {/* Small teal satellite */}
-        <motion.div
+        <div
           aria-hidden
-          className="absolute pointer-events-none"
+          className={`absolute pointer-events-none${!shouldReduce ? ' orbit-ccw-28' : ''}`}
           style={{
             width: 296,
             height: 296,
@@ -206,16 +197,6 @@ export function HeroVisual() {
             marginTop: -148,
             zIndex: 19,
           }}
-          animate={shouldReduce ? {} : { rotate: -360 }}
-          transition={
-            shouldReduce
-              ? {}
-              : {
-                  duration: 28,
-                  repeat: Infinity,
-                  ease: 'linear',
-                }
-          }
         >
           <div
             style={{
@@ -251,12 +232,12 @@ export function HeroVisual() {
               }}
             />
           </div>
-        </motion.div>
+        </div>
 
         {/* Tiny aqua sparkle */}
-        <motion.div
+        <div
           aria-hidden
-          className="absolute pointer-events-none"
+          className={`absolute pointer-events-none${!shouldReduce ? ' orbit-cw-34' : ''}`}
           style={{
             width: 350,
             height: 350,
@@ -266,16 +247,6 @@ export function HeroVisual() {
             marginTop: -175,
             zIndex: 18,
           }}
-          animate={shouldReduce ? {} : { rotate: 360 }}
-          transition={
-            shouldReduce
-              ? {}
-              : {
-                  duration: 34,
-                  repeat: Infinity,
-                  ease: 'linear',
-                }
-          }
         >
           <div
             style={{
@@ -309,12 +280,12 @@ export function HeroVisual() {
               }}
             />
           </div>
-        </motion.div>
+        </div>
 
         {/* Tiny gold sparkle */}
-        <motion.div
+        <div
           aria-hidden
-          className="absolute pointer-events-none"
+          className={`absolute pointer-events-none${!shouldReduce ? ' orbit-ccw-24' : ''}`}
           style={{
             width: 312,
             height: 312,
@@ -324,16 +295,6 @@ export function HeroVisual() {
             marginTop: -156,
             zIndex: 18,
           }}
-          animate={shouldReduce ? {} : { rotate: -360 }}
-          transition={
-            shouldReduce
-              ? {}
-              : {
-                  duration: 24,
-                  repeat: Infinity,
-                  ease: 'linear',
-                }
-          }
         >
           <div
             style={{
@@ -368,35 +329,32 @@ export function HeroVisual() {
               }}
             />
           </div>
-        </motion.div>
+        </div>
 
-        {/* Orbital star marks */}
-        <motion.div
+        {/* Orbital star marks — CSS bob animations (compositor-safe, no JS RAF) */}
+        <div
           aria-hidden
-          animate={shouldReduce ? {} : { y: [0, -4, 0] }}
-          transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+          className={!shouldReduce ? 'star-bob-1' : undefined}
           style={{ position: 'absolute', top: 28, right: 24, zIndex: 20 }}
         >
           <StarMark size="sm" color="#4A9FAE" className="opacity-70" />
-        </motion.div>
+        </div>
 
-        <motion.div
+        <div
           aria-hidden
-          animate={shouldReduce ? {} : { y: [0, 4, 0] }}
-          transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}
+          className={!shouldReduce ? 'star-bob-2' : undefined}
           style={{ position: 'absolute', left: 10, top: '48%', zIndex: 20 }}
         >
           <StarMark size="xs" color="#C4974A" className="opacity-55" />
-        </motion.div>
+        </div>
 
-        <motion.div
+        <div
           aria-hidden
-          animate={shouldReduce ? {} : { y: [0, -3, 0] }}
-          transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut', delay: 0.8 }}
+          className={!shouldReduce ? 'star-bob-3' : undefined}
           style={{ position: 'absolute', bottom: 34, left: 30, zIndex: 20 }}
         >
           <StarMark size="xs" color="#4A9FAE" className="opacity-40" />
-        </motion.div>
+        </div>
 
         <div
           aria-hidden
@@ -417,8 +375,7 @@ export function HeroVisual() {
             key={panel.slug}
             className="flex items-center gap-1.5 rounded-full px-3 py-1.5"
             style={{
-              background: 'rgba(13,30,53,0.75)',
-              backdropFilter: 'blur(12px)',
+              background: 'rgba(13,30,53,0.90)',
               border: `1px solid ${panel.accentColor}30`,
             }}
           >

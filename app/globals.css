@@ -157,17 +157,99 @@ body {
   filter: drop-shadow(0 0 5px var(--eyebrow-icon-glow, rgba(196, 151, 74, 0.26)));
 }
 
-/* ── Glow pulse (used on portrait ring) ──────────────────────────────────── */
+/* ── Portrait glow ring ───────────────────────────────────────────────────── */
+/* Opacity animation is compositor-accelerated; avoids the repaint cost of    */
+/* animating box-shadow directly.                                              */
 
-@keyframes glow-pulse {
-  0%, 100% { box-shadow: 0 0 0 2px rgba(15,122,122,0.45), 0 0 0 8px rgba(15,122,122,0.10), 0 0 40px rgba(15,122,122,0.20); }
-  50%       { box-shadow: 0 0 0 2px rgba(15,122,122,0.60), 0 0 0 8px rgba(15,122,122,0.16), 0 0 56px rgba(15,122,122,0.28); }
+@keyframes glow-ring-pulse {
+  0%, 100% { opacity: 0.65; }
+  50%       { opacity: 1;    }
 }
 
-.portrait-glow {
-  animation: glow-pulse 4s ease-in-out infinite;
+.portrait-glow-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  /* Static box-shadow; animated via opacity above */
+  box-shadow:
+    0 0 0 2px rgba(15,122,122,0.55),
+    0 0 0 8px rgba(15,122,122,0.14),
+    0 0 52px rgba(15,122,122,0.26);
+  pointer-events: none;
+  z-index: 1;
+  animation: glow-ring-pulse 4s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .portrait-glow { animation: none; box-shadow: 0 0 0 2px rgba(15,122,122,0.45), 0 0 0 8px rgba(15,122,122,0.10); }
+  .portrait-glow-ring { animation: none; opacity: 0.75; }
+}
+
+/* ── Orbital animations (replaces Framer Motion repeat:Infinity on hero) ──── */
+/* CSS animations run on the compositor thread; Framer Motion rotate repeats  */
+/* run on the JS main thread via RAF.                                          */
+
+.orbit-cw-20  { animation: watermark-spin 20s linear infinite; will-change: transform; }
+.orbit-ccw-28 { animation: watermark-spin 28s linear infinite reverse; will-change: transform; }
+.orbit-cw-34  { animation: watermark-spin 34s linear infinite; will-change: transform; }
+.orbit-ccw-24 { animation: watermark-spin 24s linear infinite reverse; will-change: transform; }
+
+/* ── Star bob animations (replaces Framer Motion y:[0,-4,0] repeats) ─────── */
+
+@keyframes star-bob {
+  0%, 100% { transform: translateY(0px);  }
+  50%       { transform: translateY(-4px); }
+}
+
+@keyframes star-bob-down {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(4px); }
+}
+
+/* star-bob-1: top-right, 4s, no delay */
+.star-bob-1 { animation: star-bob      4.0s ease-in-out infinite; }
+/* star-bob-2: left, 5s, 1.5s delay — bobs down */
+.star-bob-2 { animation: star-bob-down 5.0s ease-in-out 1.5s infinite; }
+/* star-bob-3: bottom-left, 4.5s, 0.8s delay */
+.star-bob-3 { animation: star-bob      4.5s ease-in-out 0.8s infinite; }
+
+/* ── Sweep beam keyframes (replaces Framer Motion animate:{x:[...]} loops) ── */
+/* Full cycle time = travel duration + repeatDelay so opacity stays 0 during  */
+/* the "pause" phase without any JS involvement.                               */
+
+/* Background atmospheric sweep: 18s travel + 5s gap = 23s cycle */
+@keyframes sweep-bg {
+  0%   { transform: translateX(0%);    opacity: 0; }
+  4%   { opacity: 1; }
+  74%  { opacity: 0; }
+  78%  { transform: translateX(520%); opacity: 0; }
+  100% { transform: translateX(0%);   opacity: 0; }
+}
+.sweep-beam-slow { animation: sweep-bg 23s ease-in-out infinite; }
+
+/* Proof-panel quick sweep: 2.2s travel + 10s gap = 12.2s cycle */
+@keyframes sweep-panel {
+  0%   { transform: translateX(0%);    opacity: 0; }
+  3%   { opacity: 1; }
+  15%  { opacity: 0; }
+  18%  { transform: translateX(650%); opacity: 0; }
+  100% { transform: translateX(0%);   opacity: 0; }
+}
+.sweep-beam-fast { animation: sweep-panel 12.2s ease-in-out infinite; }
+
+/* Case-study card shimmer sweep: 6s travel + 8s gap = 14s cycle */
+@keyframes sweep-card {
+  0%   { transform: translateX(0%);    opacity: 0; }
+  4%   { opacity: 1; }
+  39%  { opacity: 0; }
+  43%  { transform: translateX(520%); opacity: 0; }
+  100% { transform: translateX(0%);   opacity: 0; }
+}
+.sweep-beam-card { animation: sweep-card 14s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .orbit-cw-20, .orbit-ccw-28, .orbit-cw-34, .orbit-ccw-24,
+  .star-bob-1, .star-bob-2, .star-bob-3,
+  .sweep-beam-slow, .sweep-beam-fast, .sweep-beam-card {
+    animation: none !important;
+  }
 }

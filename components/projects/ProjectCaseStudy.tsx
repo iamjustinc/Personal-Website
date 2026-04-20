@@ -445,17 +445,13 @@ function FactStrip({ project, enhanced = false }: { project: Project; enhanced?:
     >
       {/* Subtle shimmer sweep */}
       {enhanced && (
-        <motion.div
-          className="pointer-events-none absolute inset-y-0 -skew-x-12"
+        <div
+          className="sweep-beam-card pointer-events-none absolute inset-y-0 -skew-x-12"
           style={{
             width: '30%',
             left: '-40%',
             background: `linear-gradient(90deg, transparent, ${project.panelAccentColor}0A, transparent)`,
           }}
-          initial={false}
-          whileInView={{ x: ['0%', '520%'] }}
-          viewport={{ amount: 0.45 }}
-          transition={{ duration: 6, repeat: Infinity, repeatDelay: 8, ease: 'easeInOut' }}
           aria-hidden
         />
       )}

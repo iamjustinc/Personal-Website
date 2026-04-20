@@ -135,19 +135,12 @@ export default function AboutPage() {
 
       {!shouldReduce && (
         <>
-          <motion.div
+          <div
             aria-hidden
-            className="pointer-events-none absolute inset-y-[4%] -left-[34%] z-0 w-[28%] -skew-x-12 blur-2xl"
+            className="sweep-beam-slow pointer-events-none absolute inset-y-[4%] -left-[34%] z-0 w-[28%] -skew-x-12 blur-2xl"
             style={{
               background:
                 'linear-gradient(90deg, transparent, rgba(74,159,174,0.045), rgba(196,151,74,0.026), transparent)',
-            }}
-            animate={{ x: ['0%', '520%'] }}
-            transition={{
-              duration: 18,
-              repeat: Infinity,
-              repeatDelay: 5,
-              ease: 'easeInOut',
             }}
           />
 
@@ -506,21 +499,14 @@ export default function AboutPage() {
 
           {/* Periodic sweep beam across panel */}
           {!shouldReduce && (
-            <motion.div
+            <div
               aria-hidden
-              className="pointer-events-none absolute inset-y-0 -skew-x-12 z-0"
+              className="sweep-beam-fast pointer-events-none absolute inset-y-0 -skew-x-12 z-0"
               style={{
                 width: '20%',
                 left: '-25%',
                 background:
                   'linear-gradient(90deg, transparent, rgba(74,159,174,0.05), transparent)',
-              }}
-              animate={{ x: ['0%', '650%'] }}
-              transition={{
-                duration: 2.2,
-                repeat: Infinity,
-                repeatDelay: 10,
-                ease: [0.22, 1, 0.36, 1],
               }}
             />
           )}

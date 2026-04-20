@@ -20,7 +20,7 @@ type HoverSparkleProps = {
   className?: string
 }
 
-const SPARK_INTERVAL_MS = 180
+const SPARK_INTERVAL_MS = 240
 const SPARK_LIFETIME_MS = 460
 const MAX_SPARKS = 4
 const MIN_SPARK_DISTANCE = 14
@@ -178,7 +178,7 @@ export function HoverSparkle({ children, className }: HoverSparkleProps) {
 
                 {/* sparkle core */}
                 <span className="absolute right-0 top-1/2 h-2.5 w-2.5 -translate-y-1/2">
-                  <span className="absolute inset-0 rounded-full bg-[#F4D58D] opacity-70 blur-[2px]" />
+                  <span className="absolute inset-0 rounded-full bg-[#F4D58D] opacity-70" />
                   <span className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 rounded-full bg-[#F4D58D]" />
                   <span className="absolute left-0 top-1/2 h-px w-full -translate-y-1/2 rounded-full bg-[#F4D58D]" />
                 </span>
