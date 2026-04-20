@@ -89,6 +89,56 @@ export function Hero() {
             opacity={0.36}
             className="hidden lg:block"
           />
+          <ShootingStar
+            startX="6%"
+            startY="9%"
+            angle={33}
+            duration={24}
+            delay={-20.5}
+            scale={0.52}
+            opacity={0.30}
+            className="hidden md:block"
+          />
+          <ShootingStar
+            startX="46%"
+            startY="2%"
+            angle={28}
+            duration={20}
+            delay={-5.7}
+            scale={0.60}
+            opacity={0.34}
+            className="hidden sm:block"
+          />
+          <ShootingStar
+            startX="66%"
+            startY="31%"
+            angle={39}
+            duration={22}
+            delay={-16.1}
+            scale={0.58}
+            opacity={0.32}
+            className="hidden lg:block"
+          />
+          <ShootingStar
+            startX="90%"
+            startY="7%"
+            angle={30}
+            duration={26}
+            delay={-9.3}
+            scale={0.48}
+            opacity={0.28}
+            className="hidden md:block"
+          />
+          <ShootingStar
+            startX="18%"
+            startY="24%"
+            angle={35}
+            duration={19}
+            delay={-2.6}
+            scale={0.54}
+            opacity={0.31}
+            className="hidden lg:block"
+          />
         </div>
 
         <StarField
