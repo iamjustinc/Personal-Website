@@ -6,7 +6,7 @@ import { siteConfig } from '@/data/site'
 /**
  * Panel composition rules:
  *
- * Three panels arranged in a loose diagonal — top-right to bottom-center-right.
+ * Three panels arranged in a loose diagonal from top-right to bottom-center-right.
  * They overlap to create genuine depth, not just a spread layout.
  *
  * Depth hierarchy (visual "closeness"):
@@ -15,7 +15,7 @@ import { siteConfig } from '@/data/site'
  *   Panel C (sm, z-10) → lightest shadow, background, feels farthest
  *
  * Float animations use different speeds and phase offsets so they
- * never move in sync — which would look mechanical.
+ * never move in sync, which would look mechanical.
  *
  * Entrance delays are staggered so panels reveal sequentially
  * rather than all appearing at once.
@@ -27,7 +27,7 @@ export function HeroFloatingPanels() {
   return (
     <div className="relative w-full h-[500px]">
 
-      {/* Panel A — large, top right, closest to viewer */}
+      {/* Panel A: large, top right, closest to viewer */}
       {panels[0] && (
         <FloatingPanel
           projectName={panels[0].projectName}
@@ -41,7 +41,7 @@ export function HeroFloatingPanels() {
         />
       )}
 
-      {/* Panel B — medium, mid-left, overlaps A slightly at its bottom edge */}
+      {/* Panel B: medium, mid-left, overlaps A slightly at its bottom edge */}
       {panels[1] && (
         <FloatingPanel
           projectName={panels[1].projectName}
@@ -55,7 +55,7 @@ export function HeroFloatingPanels() {
         />
       )}
 
-      {/* Panel C — small, lower right, reads as background element */}
+      {/* Panel C: small, lower right, reads as background element */}
       {panels[2] && (
         <FloatingPanel
           projectName={panels[2].projectName}

@@ -113,11 +113,13 @@ export function ProjectComingSoon({
           <motion.div variants={stagger} initial="hidden" animate="visible">
             <motion.div
               variants={inn}
-              className="mb-5 inline-flex items-center gap-2 rounded-full px-4 py-1.5"
+              className="section-eyebrow mb-5 inline-flex items-center gap-2 rounded-full px-4 py-1.5"
               style={{
-                background: `${project.panelAccentColor}12`,
-                border: `1px solid ${project.panelAccentColor}2F`,
-              }}
+                '--eyebrow-border': `${project.panelAccentColor}42`,
+                '--eyebrow-shadow': `${project.panelAccentColor}14`,
+                '--eyebrow-glint': `${project.panelAccentColor}88`,
+                '--eyebrow-icon-glow': `${project.panelAccentColor}36`,
+              } as React.CSSProperties}
             >
               <StarMark size="xs" color="#C4974A" className="opacity-80" />
               <span
@@ -212,12 +214,14 @@ export function ProjectComingSoon({
             />
 
             <div
-              className="absolute left-5 top-5 z-20 inline-flex items-center gap-2 rounded-full px-3.5 py-1.5"
+              className="section-eyebrow absolute left-5 top-5 z-20 inline-flex items-center gap-2 rounded-full px-3.5 py-1.5"
               style={{
-                background: 'rgba(8,18,30,0.78)',
                 backdropFilter: 'blur(14px)',
-                border: `1px solid ${project.panelAccentColor}32`,
-              }}
+                '--eyebrow-border': `${project.panelAccentColor}3D`,
+                '--eyebrow-shadow': `${project.panelAccentColor}12`,
+                '--eyebrow-glint': `${project.panelAccentColor}72`,
+                '--eyebrow-icon-glow': `${project.panelAccentColor}30`,
+              } as React.CSSProperties}
             >
               <span
                 className="h-2 w-2 rounded-full"

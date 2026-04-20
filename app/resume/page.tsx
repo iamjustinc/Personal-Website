@@ -116,7 +116,7 @@ function SectionDivider({ children }: { children: React.ReactNode }) {
   )
 }
 
-// ── Highlighted description — metrics glow gold ─────────────────────────────
+// ── Highlighted description: metrics glow gold ──────────────────────────────
 
 function HighlightedDescription({ text }: { text: string }) {
   // Matches: 30K+  70%  63%  200+  100+  (not plain years like 2024)
@@ -146,7 +146,7 @@ function TimelineEntry({
   index: number
 }) {
   const reduceMotion = useReducedMotion()
-  const [before, after] = item.period.split(' — ')
+  const [before, after] = item.period.split(' to ')
   const accentColor   = item.current ? '#C4974A' : '#0F7A7A'
   const accentBright  = item.current ? '#E8B055' : '#4A9FAE'
   const description = resumeExperienceCopyByRole[item.role] ?? item.description
@@ -158,7 +158,7 @@ function TimelineEntry({
       className="grid items-start"
       style={{ gridTemplateColumns: '68px 22px 1fr' }}
     >
-      {/* Year column — hidden; date now lives inside the card */}
+      {/* Year column hidden; date now lives inside the card */}
       <div className="pt-2 pr-3 text-right">
         <span
           className="font-mono text-[10px] leading-snug"

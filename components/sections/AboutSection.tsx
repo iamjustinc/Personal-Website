@@ -152,11 +152,7 @@ export function AboutSection() {
         className="relative mx-auto flex max-w-[800px] flex-col items-center text-center"
       >
         <div
-          className="mb-5 inline-flex items-center gap-2 rounded-full px-4 py-1.5"
-          style={{
-            background: 'rgba(15,122,122,0.08)',
-            border: '1px solid rgba(15,122,122,0.22)',
-          }}
+          className="section-eyebrow mb-5 inline-flex items-center gap-2 rounded-full px-4 py-1.5"
         >
           <StarMark size="xs" color="#C4974A" className="opacity-85" />
           <span className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-text-muted">

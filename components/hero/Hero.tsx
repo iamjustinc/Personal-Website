@@ -3,7 +3,7 @@ import { HeroVisual } from './HeroVisual'
 import { StarMark } from '@/components/ui/StarMark'
 
 /**
- * Hero section — cinematic dark opening.
+ * Hero section: cinematic dark opening.
  * Left: editorial text stack + CTAs.
  * Right: Kestrel large frame + Quail/Chirpie secondary tiles.
  *
@@ -15,7 +15,7 @@ export function Hero() {
       id="hero"
       className="min-h-svh flex items-center pt-20 pb-16 relative"
     >
-      {/* Subtle ambient stars — left-side atmosphere only */}
+      {/* Subtle ambient stars: left-side atmosphere only */}
       <div aria-hidden className="absolute inset-0 pointer-events-none select-none">
         <div className="absolute top-[20%] left-[2%] text-accent opacity-[0.08]">
           <StarMark size="md" />

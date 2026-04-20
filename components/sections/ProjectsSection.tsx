@@ -69,11 +69,7 @@ export function ProjectsSection() {
         className="mb-14 flex flex-col items-center text-center"
       >
         <div
-          className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-4"
-          style={{
-            background: 'rgba(15,122,122,0.08)',
-            border: '1px solid rgba(15,122,122,0.22)',
-          }}
+          className="section-eyebrow mb-4 inline-flex items-center gap-2 rounded-full px-4 py-1.5"
         >
           <StarMark size="xs" color="#C4974A" className="opacity-80" />
           <span className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-text-muted">

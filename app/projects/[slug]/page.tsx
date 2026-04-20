@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props) {
     }
   }
   return {
-    title: `${project.name} — Case Study | Justin Chang`,
+    title: `${project.name} | Case Study | Justin Chang`,
     description: project.tagline,
   }
 }

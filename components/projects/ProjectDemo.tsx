@@ -55,11 +55,13 @@ export function ProjectDemo({ project }: { project: Project }) {
           {/* Eyebrow */}
           <motion.div variants={inn} className="mb-4">
             <div
-              className="inline-flex items-center gap-2 rounded-full px-3.5 py-1.5"
+              className="section-eyebrow inline-flex items-center gap-2 rounded-full px-3.5 py-1.5"
               style={{
-                background: `${project.panelAccentColor}14`,
-                border: `1px solid ${project.panelAccentColor}30`,
-              }}
+                '--eyebrow-border': `${project.panelAccentColor}42`,
+                '--eyebrow-shadow': `${project.panelAccentColor}14`,
+                '--eyebrow-glint': `${project.panelAccentColor}88`,
+                '--eyebrow-icon-glow': `${project.panelAccentColor}36`,
+              } as React.CSSProperties}
             >
               <StarMark size="xs" color={project.panelAccentColor} className="opacity-70" />
               <span
@@ -143,11 +145,13 @@ export function ProjectDemo({ project }: { project: Project }) {
               <div className="relative mb-4">
                 <div>
                   <div
-                    className="mb-3 inline-flex items-center gap-2 rounded-full px-3 py-1.5"
+                    className="section-eyebrow mb-3 inline-flex items-center gap-2 rounded-full px-3 py-1.5"
                     style={{
-                      background: `${project.panelAccentColor}12`,
-                      border: `1px solid ${project.panelAccentColor}28`,
-                    }}
+                      '--eyebrow-border': `${project.panelAccentColor}3D`,
+                      '--eyebrow-shadow': `${project.panelAccentColor}12`,
+                      '--eyebrow-glint': `${project.panelAccentColor}77`,
+                      '--eyebrow-icon-glow': `${project.panelAccentColor}32`,
+                    } as React.CSSProperties}
                   >
                     <StarMark size="xs" color={project.panelAccentColor} className="opacity-75" />
                     <span
@@ -235,7 +239,7 @@ export function ProjectDemo({ project }: { project: Project }) {
               </a>
             </div>
           ) : (
-            /* Placeholder — swap for an iframe or video when ready */
+            /* Placeholder: swap for an iframe or video when ready */
             <div
               className="w-full flex flex-col items-center justify-center py-24 rounded-2xl"
               style={{

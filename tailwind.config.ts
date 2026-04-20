@@ -10,7 +10,7 @@ const config: Config = {
     extend: {
       colors: {
         // ── Dark ocean system ───────────────────────────────────────────────
-        bg:              '#0A1628',  // deep ocean navy — page base
+        bg:              '#0A1628',  // deep ocean navy, page base
         'bg-mid':        '#0D1E35',  // mid-depth layer
         surface:         '#0F2A3D',  // panel / card surface
         'surface-muted': '#0B1F31',  // recessed surface
@@ -26,10 +26,10 @@ const config: Config = {
         accent:         '#0F7A7A',  // primary teal
         'accent-bright':'#4A9FAE',  // lighter aqua (gradient pair)
         'accent-hover': '#0E6B6B',  // pressed teal
-        gold:           '#C4974A',  // dune gold — selective highlight
+        gold:           '#C4974A',  // dune gold, selective highlight
         'gold-muted':   '#E8D5AE',  // soft gold tint
 
-        // accent-sub used as direct rgba — see lib/utils.ts
+        // accent-sub used as direct rgba; see lib/utils.ts
         link: '#4A9FAE',
       },
       fontFamily: {

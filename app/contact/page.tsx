@@ -3,7 +3,7 @@ import { ContactSection } from '@/components/sections/ContactSection'
 import { siteConfig } from '@/data/site'
 
 export const metadata: Metadata = {
-  title: `Contact — ${siteConfig.name}`,
+  title: `Contact | ${siteConfig.name}`,
   description: siteConfig.currentlyOpen,
 }
 

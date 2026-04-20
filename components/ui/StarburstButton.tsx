@@ -138,7 +138,7 @@ export function StarburstButton({
           {children}
         </motion.span>
 
-        {/* Burst particles — outside clip-path so they're fully visible */}
+        {/* Burst particles outside clip-path so they're fully visible */}
         <AnimatePresence>
           {bursting &&
             BURST.map((d, i) => (

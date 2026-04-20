@@ -28,7 +28,7 @@ const MIN_SPARK_DISTANCE = 14
 export function HoverSparkle({ children, className }: HoverSparkleProps) {
   const reduceMotion = useReducedMotion()
   const hostRef        = useRef<HTMLDivElement>(null)
-  // Direct ref to the portal cursor DOM node — position is written via style mutation,
+  // Direct ref to the portal cursor DOM node. Position is written via style mutation,
   // never via React state, so cursor tracks the pointer with zero scheduling delay.
   const cursorRef      = useRef<HTMLDivElement>(null)
   const lastSpawnRef   = useRef(0)
@@ -39,7 +39,7 @@ export function HoverSparkle({ children, className }: HoverSparkleProps) {
   const [isTouch, setIsTouch] = useState(false)
   const [sparks,  setSparks]  = useState<Spark[]>([])
   const [mounted, setMounted] = useState(false)
-  // ↑ cursorPos state removed — position is now a direct DOM write, not React state.
+  // cursorPos state removed. Position is now a direct DOM write, not React state.
 
   useEffect(() => {
     setMounted(true)
@@ -125,7 +125,7 @@ export function HoverSparkle({ children, className }: HoverSparkleProps) {
         if (showCustomCursor) {
           const el = cursorRef.current
           if (el) {
-            // Coalesced DOM write — bypasses React state and runs once per frame.
+            // Coalesced DOM write bypasses React state and runs once per frame.
             writeCursorPosition(e.clientX, e.clientY)
             el.style.opacity   = '1'
           }
@@ -134,7 +134,7 @@ export function HoverSparkle({ children, className }: HoverSparkleProps) {
       }}
       onMouseMove={(e) => {
         if (showCustomCursor) {
-          // Position only — no setState, no re-render, no scheduler latency
+          // Position only: no setState, no re-render, no scheduler latency
           writeCursorPosition(e.clientX, e.clientY)
         }
         spawnSpark(e.clientX, e.clientY)
@@ -189,11 +189,11 @@ export function HoverSparkle({ children, className }: HoverSparkleProps) {
       </div>
 
       {/*
-        Custom cursor — portaled to document.body to escape any ancestor transform context.
+        Custom cursor portaled to document.body to escape any ancestor transform context.
 
         PERF: The div is rendered unconditionally (when showCustomCursor) so the ref is
         always attached and ready. Position is coalesced to one direct style.transform
-        write per animation frame — no setState and no reconciliation on pointer move.
+        write per animation frame with no setState and no reconciliation on pointer move.
         The element starts at opacity 0 and is made visible/invisible via direct
         style.opacity writes on enter/leave.
 
@@ -210,7 +210,7 @@ export function HoverSparkle({ children, className }: HoverSparkleProps) {
               top:        0,
               left:       0,
               opacity:    0,
-              // Initial centering offset — JS overwrites the full translate on every move
+              // Initial centering offset. JS overwrites the full translate on every move
               transform:  'translate(-50%, -50%)',
               willChange: 'transform',
               transition: 'opacity 0.08s ease',

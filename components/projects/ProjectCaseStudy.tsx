@@ -53,11 +53,11 @@ const kestrelCaseStudyCopy: CaseStudyCopy = {
     'Turns fragmented career preparation into one interpretable decision surface: what matches, what is missing, what to improve first, and what to do next.',
 
   overview:
-    'Kestrel is a role-readiness decision engine for early-career candidates. A user brings a target job description and their background; the product extracts role requirements, evaluates fit, surfaces strengths alongside ranked gaps, and converts the result into a concrete roadmap they can act on immediately. The product is not about generating more career advice — it is about making the right next action obvious.',
+    'Kestrel is a role-readiness decision engine for early-career candidates. A user brings a target job description and their background; the product extracts role requirements, evaluates fit, surfaces strengths alongside ranked gaps, and converts the result into a concrete roadmap they can act on immediately. The product is not about generating more career advice. It is about making the right next action obvious.',
 
   pmInsight: {
     label: 'Key Product Decision',
-    body: 'Kestrel could have been a chatbot. The decision to build a structured card-based dashboard instead was the core product bet. Conversation allows for vagueness — a ranked, card-based output forces the system to be explicit about what it found, why it matters, and what to do first. Ranking is a harder problem than advising, and it is also more useful. That distinction shaped every design decision that followed.',
+    body: 'Kestrel could have been a chatbot. The decision to build a structured card-based dashboard instead was the core product bet. Conversation allows for vagueness. A ranked, card-based output forces the system to be explicit about what it found, why it matters, and what to do first. Ranking is a harder problem than advising, and it is also more useful. That distinction shaped every design decision that followed.',
   },
 
   overviewCards: [
@@ -67,16 +67,16 @@ const kestrelCaseStudyCopy: CaseStudyCopy = {
     },
     {
       title: 'Product Bet',
-      body: 'One structured output surface that ranks what changes the outcome — fit score, skill gaps, resume edits, roadmap — in priority order, beats a conversational interface that advises without ranking.',
+      body: 'One structured output surface that ranks what changes the outcome, including fit score, skill gaps, resume edits, and roadmap, beats a conversational interface that advises without ranking.',
     },
   ],
 
   problem:
-    'Early-career candidates targeting PM, Solutions Engineering, and adjacent roles prepare from scattered signals: job posts, resume edits, advice threads, and vague role expectations. That cycle produces effort without direction — repeated resume tweaks before the most important gaps are even identified, and no reliable way to judge when preparation is actually sufficient.',
+    'Early-career candidates targeting PM, Solutions Engineering, and adjacent roles prepare from scattered signals: job posts, resume edits, advice threads, and vague role expectations. That cycle produces effort without direction, including repeated resume tweaks before the most important gaps are even identified and no reliable way to judge when preparation is actually sufficient.',
 
   problemBullets: [
     'Job descriptions conflate hard requirements with soft preferences and filler language. Candidates cannot reliably distinguish which gaps are disqualifying versus negotiable.',
-    'Most candidates improve their resume in isolation — before knowing which specific capability gaps to close. The effort often moves in the wrong direction.',
+    'Most candidates improve their resume in isolation before knowing which specific capability gaps to close. The effort often moves in the wrong direction.',
     'Available AI tools return generic guidance. They advise but do not rank. They list but do not prioritize. They generate output without helping users decide what to do first.',
   ],
 
@@ -95,7 +95,7 @@ const kestrelCaseStudyCopy: CaseStudyCopy = {
   ],
 
   solution:
-    'Kestrel parses the job description, extracts its core requirements into structured role signals, compares those signals against the user profile, and returns a readiness score, matched strengths, ranked skill gaps, resume improvement prompts, and a prioritized next-step roadmap — all in a card-based dashboard designed for fast scanning and clear interpretation.',
+    'Kestrel parses the job description, extracts its core requirements into structured role signals, compares those signals against the user profile, and returns a readiness score, matched strengths, ranked skill gaps, resume improvement prompts, and a prioritized next-step roadmap in a card-based dashboard designed for fast scanning and clear interpretation.',
 
   solutionCards: [
     {
@@ -104,11 +104,11 @@ const kestrelCaseStudyCopy: CaseStudyCopy = {
     },
     {
       title: 'Ranked Gap Analysis',
-      body: 'Compares extracted requirements against the user profile and returns a ranked view: what is strong, what is marginal, and what is missing — ordered by likely impact on the application outcome.',
+      body: 'Compares extracted requirements against the user profile and returns a ranked view: what is strong, what is marginal, and what is missing, ordered by likely impact on the application outcome.',
     },
     {
       title: 'Roadmap Generation',
-      body: 'Converts the gap analysis into a concrete, sequenced action plan — so users leave with a specific order of operations, not a general list of things to improve.',
+      body: 'Converts the gap analysis into a concrete, sequenced action plan so users leave with a specific order of operations, not a general list of things to improve.',
     },
   ],
 
@@ -122,7 +122,7 @@ const kestrelCaseStudyCopy: CaseStudyCopy = {
     },
     {
       title: 'Product Signal',
-      body: 'The value is not more advice. The value is making the next action obvious — and making that action specific to a real role, not a generic profile.',
+      body: 'The value is not more advice. The value is making the next action obvious and specific to a real role, not a generic profile.',
     },
   ],
 
@@ -132,7 +132,7 @@ const kestrelCaseStudyCopy: CaseStudyCopy = {
   buildCards: [
     {
       title: 'Structured Extraction',
-      body: 'Typed output schemas constrained the AI pipeline to return requirements in a consistent shape — critical for rendering, ranking, and comparing results across different job descriptions.',
+      body: 'Typed output schemas constrained the AI pipeline to return requirements in a consistent shape, which is critical for rendering, ranking, and comparing results across different job descriptions.',
     },
     {
       title: 'Explainability by Design',
@@ -141,7 +141,7 @@ const kestrelCaseStudyCopy: CaseStudyCopy = {
   ],
 
   reflection:
-    'The strongest product decision was restraint. An early version tried to generate polished resume sections. That was the wrong level of abstraction — candidates needed to know what to fix and why, not to have AI write it for them. Once the output narrowed to fit score, ranked gaps, resume direction, and roadmap, the product felt more credible, more trusted, and significantly more actionable.',
+    'The strongest product decision was restraint. An early version tried to generate polished resume sections. That was the wrong level of abstraction. Candidates needed to know what to fix and why, not to have AI write it for them. Once the output narrowed to fit score, ranked gaps, resume direction, and roadmap, the product felt more credible, more trusted, and significantly more actionable.',
 
   reflectionCards: [
     {
@@ -150,11 +150,11 @@ const kestrelCaseStudyCopy: CaseStudyCopy = {
     },
     {
       title: 'What Remained',
-      body: 'Score, gaps, resume direction, roadmap — in ranked order, specific to the role. Once the scope narrowed to those four outputs, the product felt like a tool rather than a demo.',
+      body: 'Score, gaps, resume direction, and roadmap appear in ranked order, specific to the role. Once the scope narrowed to those four outputs, the product felt like a tool rather than a demo.',
     },
   ],
 
-  screenshotCaption: 'Kestrel — decision dashboard',
+  screenshotCaption: 'Kestrel decision dashboard',
 }
 
 // ── Chirpie ──────────────────────────────────────────────────────────────────
@@ -163,14 +163,14 @@ const chirpieCaseStudyCopy: CaseStudyCopy = {
   tagline:
     'Conversational news product that turns multi-source reporting into source-aware, personalized digests with a natural path to go deeper.',
   outcome:
-    'Makes news faster to enter without stripping out the trust signals users still need — source attribution, supporting context, tone calibration, and a clear path to more depth when a story matters.',
+    'Makes news faster to enter without stripping out the trust signals users still need: source attribution, supporting context, tone calibration, and a clear path to more depth when a story matters.',
 
   overview:
-    'Chirpie is a chat-first news companion built around a specific product insight: the real problem with news consumption is not the content quality or the source availability — it is the entry cost. Browsing a feed is too effortful to start casually. Chirpie redesigns the entry point rather than the news itself, delivering structured digests that feel conversational and light while keeping credibility signals visible.',
+    'Chirpie is a chat-first news companion built around a specific product insight: the real problem with news consumption is not the content quality or the source availability. It is the entry cost. Browsing a feed is too effortful to start casually. Chirpie redesigns the entry point rather than the news itself, delivering structured digests that feel conversational and light while keeping credibility signals visible.',
 
   pmInsight: {
     label: 'Core Product Insight',
-    body: 'The tension in conversational news is that delight and trust often compete. A playful, chat-style format can feel like it is obscuring serious information. Chirpie resolves this by treating source attribution, confidence signals, and tone control as first-class product features — not as footnotes or disclaimers. Making the product feel lighter without making it feel less credible was the central design challenge, and the resolution shaped the entire interaction architecture.',
+    body: 'The tension in conversational news is that delight and trust often compete. A playful, chat-style format can feel like it is obscuring serious information. Chirpie resolves this by treating source attribution, confidence signals, and tone control as first-class product features, not footnotes or disclaimers. Making the product feel lighter without making it feel less credible was the central design challenge, and the resolution shaped the entire interaction architecture.',
   },
 
   overviewCards: [
@@ -180,16 +180,16 @@ const chirpieCaseStudyCopy: CaseStudyCopy = {
     },
     {
       title: 'Format Bet',
-      body: 'A chat-native digest lowers the friction of engagement without collapsing the credibility of the content — if trust signals are treated as design requirements rather than secondary details.',
+      body: 'A chat-native digest lowers the friction of engagement without collapsing the credibility of the content when trust signals are treated as design requirements rather than secondary details.',
     },
   ],
 
   problem:
-    'Most news products are optimized for browsing at scale, not conversational consumption. Users face volume-first feeds, generic topic personalization, and AI summary tools that can flatten nuance or strip attribution to stay brief. The result is a format that often feels either too dense to enter or too shallow to trust — and rarely both easy and credible at the same time.',
+    'Most news products are optimized for browsing at scale, not conversational consumption. Users face volume-first feeds, generic topic personalization, and AI summary tools that can flatten nuance or strip attribution to stay brief. The result is a format that often feels either too dense to enter or too shallow to trust, and rarely both easy and credible at the same time.',
 
   problemBullets: [
     'Feeds are organized by recency and algorithmic relevance, not by what actually deserves a user\'s attention. The format creates friction before the content even loads.',
-    'AI summary products often remove attribution to achieve brevity. That makes the output feel more confident than the source material actually justifies — which erodes trust over time.',
+    'AI summary products often remove attribution to achieve brevity. That makes the output feel more confident than the source material actually justifies, which erodes trust over time.',
     'There is no natural path to more depth in most digest products. Once a user has the headline, the door to context closes. Follow-up requires leaving the product entirely.',
   ],
 
@@ -199,34 +199,34 @@ const chirpieCaseStudyCopy: CaseStudyCopy = {
   userCards: [
     {
       title: 'Primary Audience',
-      body: 'Users who want a faster, calmer entry into the news — not another high-volume feed to manage, but a lightweight way to stay informed without the usual effort cost.',
+      body: 'Users who want a faster, calmer entry into the news, not another high-volume feed to manage, but a lightweight way to stay informed without the usual effort cost.',
     },
     {
       title: 'Job To Be Done',
-      body: 'Give me the gist first, show me what it is based on, and let me go deeper only when I actually want to — without leaving the product to do it.',
+      body: 'Give me the gist first, show me what it is based on, and let me go deeper only when I actually want to without leaving the product to do it.',
     },
   ],
 
   solution:
-    'Chirpie transforms multi-source reporting into chat-native digests that feel light to enter but carry enough structure to feel trustworthy. Source attribution and confidence framing stay visible. Follow-up questions are supported natively. Tone and pacing adapt to the story type. The product is not summarizing articles — it is redesigning the format of news consumption around conversational sequencing and low-friction depth.',
+    'Chirpie transforms multi-source reporting into chat-native digests that feel light to enter but carry enough structure to feel trustworthy. Source attribution and confidence framing stay visible. Follow-up questions are supported natively. Tone and pacing adapt to the story type. The product is not summarizing articles. It is redesigning the format of news consumption around conversational sequencing and low-friction depth.',
 
   solutionCards: [
     {
       title: 'Format Transformation',
-      body: 'Reporting becomes a chat-native digest — not a feed of article cards, not a chatbot with a prompt box. The structure is familiar enough to scan quickly but different enough to feel lower-effort than standard browsing.',
+      body: 'Reporting becomes a chat-native digest, not a feed of article cards and not a chatbot with a prompt box. The structure is familiar enough to scan quickly but different enough to feel lower-effort than standard browsing.',
     },
     {
       title: 'Trust Architecture',
-      body: 'Source links, attribution framing, and confidence cues are surfaced as first-class product elements — visible and legible without being intrusive or interrupting the reading flow.',
+      body: 'Source links, attribution framing, and confidence cues are surfaced as first-class product elements that stay visible and legible without being intrusive or interrupting the reading flow.',
     },
     {
       title: 'Depth on Demand',
-      body: 'Users can follow up on individual stories to go deeper, ask for context, or explore related angles — making the experience extensible without requiring a new tool or a context switch.',
+      body: 'Users can follow up on individual stories to go deeper, ask for context, or explore related angles, making the experience extensible without requiring a new tool or a context switch.',
     },
   ],
 
   impact:
-    'Chirpie reduces the effort required to start engaging with the news while keeping the credibility layer visible and accessible. Users can move quickly through the digest, understand what each summary is based on, and decide which stories deserve deeper attention — making the product feel both easier to enter on any given day and worth returning to consistently.',
+    'Chirpie reduces the effort required to start engaging with the news while keeping the credibility layer visible and accessible. Users can move quickly through the digest, understand what each summary is based on, and decide which stories deserve deeper attention, making the product feel both easier to enter on any given day and worth returning to consistently.',
 
   impactCards: [
     {
@@ -235,7 +235,7 @@ const chirpieCaseStudyCopy: CaseStudyCopy = {
     },
     {
       title: 'Trust Outcome',
-      body: 'Because sources stay visible and confidence framing is explicit, users can assess what they are reading without needing to back-verify. That makes the product feel worth returning to — not just worth trying.',
+      body: 'Because sources stay visible and confidence framing is explicit, users can assess what they are reading without needing to back-verify. That makes the product feel worth returning to, not just worth trying.',
     },
   ],
 
@@ -245,7 +245,7 @@ const chirpieCaseStudyCopy: CaseStudyCopy = {
   buildCards: [
     {
       title: 'Summary Boundaries',
-      body: 'The pipeline was constrained to produce summaries that acknowledged the limits of the source material — not just the gist, but the confidence level of the gist. That constraint kept outputs from overstating.',
+      body: 'The pipeline was constrained to produce summaries that acknowledged the limits of the source material, including not just the gist, but the confidence level of the gist. That constraint kept outputs from overstating.',
     },
     {
       title: 'Source-Aware Architecture',
@@ -254,7 +254,7 @@ const chirpieCaseStudyCopy: CaseStudyCopy = {
   ],
 
   reflection:
-    'Chirpie works best when the delight is atmospheric rather than performative. The product became stronger when personality stopped competing with usability and started supporting it. The clearest lesson was that a conversational interface only earns trust when the interaction model is genuinely useful — not when it is stylistically interesting.',
+    'Chirpie works best when the delight is atmospheric rather than performative. The product became stronger when personality stopped competing with usability and started supporting it. The clearest lesson was that a conversational interface only earns trust when the interaction model is genuinely useful, not merely stylistically interesting.',
 
   reflectionCards: [
     {
@@ -267,7 +267,7 @@ const chirpieCaseStudyCopy: CaseStudyCopy = {
     },
   ],
 
-  screenshotCaption: 'Chirpie — digest interface',
+  screenshotCaption: 'Chirpie digest interface',
 }
 
 // ── Quail ────────────────────────────────────────────────────────────────────
@@ -279,31 +279,31 @@ const quailCaseStudyCopy: CaseStudyCopy = {
     'Reduces the cognitive cost of managing email by helping users see what deserves attention now, what can wait, and what can be handled or deferred without fully reopening each thread.',
 
   overview:
-    'Quail is an inbox intelligence product built around a specific diagnosis: email overload is not primarily a volume problem — it is a prioritization and attention-management problem. Inboxes are organized chronologically, but people work by urgency and importance. Quail reinterprets the inbox as a triage surface, giving users a faster, more decision-oriented entry point into their messages without removing the context or control they rely on.',
+    'Quail is an inbox intelligence product built around a specific diagnosis: email overload is not primarily a volume problem. It is a prioritization and attention-management problem. Inboxes are organized chronologically, but people work by urgency and importance. Quail reinterprets the inbox as a triage surface, giving users a faster, more decision-oriented entry point into their messages without removing the context or control they rely on.',
 
   pmInsight: {
     label: 'Key Design Tradeoff',
-    body: 'The harder product problem was not building intelligent prioritization — it was making that prioritization legible. When automation is opaque, users stop trusting it and revert to manual scanning, which defeats the entire purpose. Quail shows its scoring logic because trust is a more difficult product problem than ranking. A recommendation that explains itself is always more useful than a confident one that does not.',
+    body: 'The harder product problem was not building intelligent prioritization. It was making that prioritization legible. When automation is opaque, users stop trusting it and revert to manual scanning, which defeats the entire purpose. Quail shows its scoring logic because trust is a more difficult product problem than ranking. A recommendation that explains itself is always more useful than a confident one that does not.',
   },
 
   overviewCards: [
     {
       title: 'Product Thesis',
-      body: 'Email overload is a prioritization problem disguised as a volume problem. Quail does not try to reduce email — it separates reading from deciding, so users can act faster on what actually matters.',
+      body: 'Email overload is a prioritization problem disguised as a volume problem. Quail does not try to reduce email. It separates reading from deciding, so users can act faster on what actually matters.',
     },
     {
       title: 'Design Principle',
-      body: 'Effective inbox assistance earns trust before it earns automation. The system shows its work so users stay in control — making the product assistive rather than authoritative.',
+      body: 'Effective inbox assistance earns trust before it earns automation. The system shows its work so users stay in control, making the product assistive rather than authoritative.',
     },
   ],
 
   problem:
-    'Most email clients are built for reading and sorting, not for deciding. Users spend too much time opening individual threads just to determine whether action is required, then lose track of what they evaluated, and then rescan the same inbox again later. The friction is not just the number of messages — it is the repeated cognitive cost of reprioritizing on every open.',
+    'Most email clients are built for reading and sorting, not for deciding. Users spend too much time opening individual threads just to determine whether action is required, then lose track of what they evaluated, and then rescan the same inbox again later. The friction is not just the number of messages. It is the repeated cognitive cost of reprioritizing on every open.',
 
   problemBullets: [
-    'A chronological inbox creates no persistent signal of urgency. Every time a user opens their email, they must re-evaluate what matters now versus what mattered yesterday — from scratch.',
+    'A chronological inbox creates no persistent signal of urgency. Every time a user opens their email, they must re-evaluate what matters now versus what mattered yesterday from scratch.',
     'Opening a thread to determine whether action is needed is itself a time cost. For high-volume users, that cost compounds across dozens of messages and multiple sessions each day.',
-    'Most automated prioritization is opaque. When users cannot understand why a message was surfaced or ranked, they distrust the system and revert to manual scanning — reintroducing exactly the friction the tool was supposed to eliminate.',
+    'Most automated prioritization is opaque. When users cannot understand why a message was surfaced or ranked, they distrust the system and revert to manual scanning, reintroducing exactly the friction the tool was supposed to eliminate.',
   ],
 
   users:
@@ -312,21 +312,21 @@ const quailCaseStudyCopy: CaseStudyCopy = {
   userCards: [
     {
       title: 'Primary Audience',
-      body: 'People managing dense, high-stakes inboxes where the cost of missing something urgent is real — and where the overhead of staying on top of everything is already too high.',
+      body: 'People managing dense, high-stakes inboxes where the cost of missing something urgent is real, and where the overhead of staying on top of everything is already too high.',
     },
     {
       title: 'Job To Be Done',
-      body: 'Tell me what needs attention right now, show me why you think so, and let me handle the rest on my own terms — without making me reread my entire inbox to feel confident I am not missing something.',
+      body: 'Tell me what needs attention right now, show me why you think so, and let me handle the rest on my own terms without making me reread my entire inbox to feel confident I am not missing something.',
     },
   ],
 
   solution:
-    'Quail reinterprets the inbox as a triage surface. It scores and organizes incoming messages by urgency, sender context, and actionability — surfacing compact thread summaries, reasoning cues, and faster response pathways so users can make triage decisions without opening every email individually.',
+    'Quail reinterprets the inbox as a triage surface. It scores and organizes incoming messages by urgency, sender context, and actionability, surfacing compact thread summaries, reasoning cues, and faster response pathways so users can make triage decisions without opening every email individually.',
 
   solutionCards: [
     {
       title: 'Triage Logic',
-      body: 'Scores incoming messages across urgency, sender context, and likely action type — grouping and surfacing what matters now without burying lower-priority items entirely.',
+      body: 'Scores incoming messages across urgency, sender context, and likely action type, grouping and surfacing what matters now without burying lower-priority items entirely.',
     },
     {
       title: 'Compact Summaries',
@@ -334,7 +334,7 @@ const quailCaseStudyCopy: CaseStudyCopy = {
     },
     {
       title: 'Reasoning Transparency',
-      body: 'Surfaces why a message was ranked or flagged — keeping the scoring logic interpretable and giving users the confidence to trust the triage view rather than second-guess it.',
+      body: 'Surfaces why a message was ranked or flagged, keeping the scoring logic interpretable and giving users the confidence to trust the triage view rather than second-guess it.',
     },
   ],
 
@@ -344,7 +344,7 @@ const quailCaseStudyCopy: CaseStudyCopy = {
   impactCards: [
     {
       title: 'User Shift',
-      body: 'Users stop spending mental energy rediscovering what is urgent on every session and start spending it acting on what they already know matters — a meaningful shift in how attention gets used.',
+      body: 'Users stop spending mental energy rediscovering what is urgent on every session and start spending it acting on what they already know matters. That creates a meaningful shift in how attention gets used.',
     },
     {
       title: 'Product Signal',
@@ -353,7 +353,7 @@ const quailCaseStudyCopy: CaseStudyCopy = {
   ],
 
   buildNotes:
-    'The hard part was balancing intelligence with trust and control. A system that ranks and summarizes but cannot explain its reasoning creates a new form of inbox anxiety — users start wondering what it missed. I designed the scoring output around human-readable urgency cues and kept the reasoning visible in the UI, which made the product feel trustworthy in practice rather than just technically capable.',
+    'The hard part was balancing intelligence with trust and control. A system that ranks and summarizes but cannot explain its reasoning creates a new form of inbox anxiety. Users start wondering what it missed. I designed the scoring output around human-readable urgency cues and kept the reasoning visible in the UI, which made the product feel trustworthy in practice rather than just technically capable.',
 
   buildCards: [
     {
@@ -372,7 +372,7 @@ const quailCaseStudyCopy: CaseStudyCopy = {
   reflectionCards: [
     {
       title: 'What I Learned',
-      body: 'Making the system\'s reasoning legible built more trust than any additional feature. Users needed to understand the system before they would rely on it — and once they did, the automation became genuinely useful.',
+      body: 'Making the system\'s reasoning legible built more trust than any additional feature. Users needed to understand the system before they would rely on it. Once they did, the automation became genuinely useful.',
     },
     {
       title: 'Product Constraint',
@@ -380,7 +380,7 @@ const quailCaseStudyCopy: CaseStudyCopy = {
     },
   ],
 
-  screenshotCaption: 'Quail — inbox triage interface',
+  screenshotCaption: 'Quail inbox triage interface',
 }
 
 // ── Copy resolver ─────────────────────────────────────────────────────────────
@@ -407,7 +407,7 @@ function getCaseStudyCopy(project: Project): CaseStudyCopy {
     impactCards: [],
     buildCards: [],
     reflectionCards: [],
-    screenshotCaption: `${project.name} — interface`,
+    screenshotCaption: `${project.name} interface`,
   }
 }
 
@@ -556,7 +556,7 @@ function SideNav({
               }}
               className="group relative flex items-center gap-2.5 rounded-lg px-3 py-2 transition-colors duration-200 overflow-hidden"
             >
-              {/* Animated sliding background — layoutId makes it glide between items */}
+              {/* Animated sliding background: layoutId makes it glide between items */}
               {isActive && (
                 <motion.div
                   layoutId="sidenav-bg"
@@ -605,7 +605,7 @@ function SideNav({
                 {item.label}
               </span>
 
-              {/* Active indicator — twinkling star or dot */}
+              {/* Active indicator: twinkling star or dot */}
               <div
                 className={cn(
                   'ml-auto shrink-0 transition-all duration-300',
@@ -836,7 +836,7 @@ function Callout({
   )
 }
 
-// ── PmInsight — featured key product decision block ───────────────────────────
+// ── PmInsight: featured key product decision block ───────────────────────────
 
 function PmInsight({
   label,
@@ -1254,7 +1254,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
     { id: 'demo-links',      label: 'Links',      number: fmt() },
   ]
 
-  const sn = (id: string) => navItems.find((item) => item.id === id)?.number ?? '—'
+  const sn = (id: string) => navItems.find((item) => item.id === id)?.number ?? 'not available'
 
   // Hero floating star positions
   const heroStars = [
@@ -1367,12 +1367,14 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
 
               {/* Badge */}
               <div
-                className="absolute top-5 right-5 flex items-center gap-1.5 rounded-full px-3 py-1 z-20"
+                className="section-eyebrow absolute top-5 right-5 z-20 flex items-center gap-1.5 rounded-full px-3 py-1"
                 style={{
-                  background: 'rgba(13,30,53,0.88)',
                   backdropFilter: 'blur(12px)',
-                  border: `1px solid ${project.panelAccentColor}28`,
-                }}
+                  '--eyebrow-border': `${project.panelAccentColor}38`,
+                  '--eyebrow-shadow': `${project.panelAccentColor}12`,
+                  '--eyebrow-glint': `${project.panelAccentColor}72`,
+                  '--eyebrow-icon-glow': `${project.panelAccentColor}30`,
+                } as React.CSSProperties}
               >
                 <StarMark size="xs" color={project.panelAccentColor} className="opacity-65" />
                 <span className="font-mono text-[9.5px] uppercase tracking-wider text-text-muted">
@@ -1591,7 +1593,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                   src={project.screenshots[1]}
                   alt={`${project.name} interface`}
                   accent={project.panelAccentColor}
-                  caption={caseCopy.screenshotCaption ?? `${project.name} — interface`}
+                  caption={caseCopy.screenshotCaption ?? `${project.name} interface`}
                   enhanced={isEnhancedCaseStudy}
                 />
               )}

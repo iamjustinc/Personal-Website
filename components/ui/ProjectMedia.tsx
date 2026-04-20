@@ -9,7 +9,7 @@ interface ProjectMediaProps {
   accentColor: string
   projectName: string
   className?: string
-  /** Prioritize loading — use true for above-the-fold images (featured card). */
+  /** Prioritize loading for above-the-fold images, such as a featured card. */
   priority?: boolean
   /** Image sizes hint for srcset. Defaults to a responsive 50vw/100vw split. */
   sizes?: string
@@ -20,7 +20,7 @@ interface ProjectMediaProps {
 /**
  * Unified project media component.
  * Renders a next/image when src is provided, falls back to PlaceholderImage.
- * Always fills its parent container — parent must be relative + have defined dimensions.
+ * Always fills its parent container. Parent must be relative and have defined dimensions.
  */
 export function ProjectMedia({
   src,

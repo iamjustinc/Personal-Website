@@ -50,7 +50,7 @@ export function WatermarkStar({
           fill={color}
           opacity="1"
         />
-        {/* Secondary 4-pointed star rotated 45° — creates 8-pointed effect */}
+        {/* Secondary 4-pointed star rotated 45° creates the 8-pointed effect */}
         <path
           d="M50,4 L55.5,44.5 L96,50 L55.5,55.5 L50,96 L44.5,55.5 L4,50 L44.5,44.5 Z"
           fill={color}

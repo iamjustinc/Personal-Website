@@ -8,7 +8,7 @@
  * and defers to HoverSparkle's own cursor + trail system. On inputs/textareas/selects
  * the native cursor is restored.
  *
- * PERF: Hot-path work is DOM mutation only — no React state or re-renders
+ * PERF: Hot-path work is DOM mutation only with no React state or re-renders
  * after activation. Pointer movement is coalesced through requestAnimationFrame.
  *
  * Position: written directly to style.transform once per animation frame.
@@ -23,7 +23,7 @@ import { createPortal } from 'react-dom'
 export function GlobalStarCursor() {
   const [enabled, setEnabled] = useState(false)
   const cursorRef    = useRef<HTMLDivElement>(null)
-  // Cached state for the visibility optimisation — avoids DOM traversal and
+  // Cached state for the visibility optimisation avoids DOM traversal and
   // style writes when neither the hovered element nor the hidden state changes.
   const lastTargetRef = useRef<EventTarget | null>(null)
   const isHiddenRef   = useRef(true) // start hidden until first mousemove
@@ -53,7 +53,7 @@ export function GlobalStarCursor() {
 
     // Suppress native cursor globally; restore on text inputs so the
     // beam cursor still appears there (the custom cursor also hides itself
-    // on inputs — see onMove below).
+    // on inputs; see onMove below).
     const style = document.createElement('style')
     style.dataset.globalStarCursor = '1'
     style.textContent = [
@@ -95,7 +95,7 @@ export function GlobalStarCursor() {
           !!target?.closest('[data-hover-sparkle]') ||
           !!target?.closest('input, textarea, select, [contenteditable="true"]')
 
-        // Only write style.opacity when the value actually changes — prevents
+        // Only write style.opacity when the value actually changes, preventing
         // redundant style system work on every mousemove within a zone.
         if (shouldHide !== isHiddenRef.current) {
           isHiddenRef.current    = shouldHide
@@ -140,12 +140,12 @@ export function GlobalStarCursor() {
         top:           0,
         left:          0,
         pointerEvents: 'none',
-        // Sit just below HoverSparkle's z-[9999] — they are never simultaneously
+        // Sit just below HoverSparkle's z-[9999]. They are never simultaneously
         // visible, but this ensures correct layering if timing ever overlaps.
         zIndex:        9998,
         // Start invisible; first mousemove reveals it at the correct position
         opacity:       0,
-        // Only transition opacity — position updates must be instant to track the cursor
+        // Only transition opacity. Position updates must be instant to track the cursor
         transition:    'opacity 0.1s ease',
         willChange:    'transform',
       }}
@@ -166,7 +166,7 @@ export function GlobalStarCursor() {
         }}
       />
 
-      {/* 4-pointed star — identical path, fill, and size to HoverSparkle cursor */}
+      {/* 4-pointed star with identical path, fill, and size to HoverSparkle cursor */}
       <svg
         width="28"
         height="28"

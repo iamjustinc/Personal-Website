@@ -48,7 +48,7 @@ export type Project = {
   panelAccentColor: string  // Hex. Color dot on hero floating panel badge.
 
   // ── Links ───────────────────────────────────────────────────────────────────
-  liveUrl?: string          // External production URL — "Try It Out" CTA
+  liveUrl?: string          // External production URL for "Try It Out" CTA
   demoUrl?: string          // Embed URL (Loom / YouTube) for /demo page
   githubUrl?: string
 

@@ -8,7 +8,7 @@ export const dmSerifDisplay = DM_Serif_Display({
 })
 
 /**
- * Satoshi placeholder — this is Plus Jakarta Sans standing in until
+ * Satoshi placeholder: this is Plus Jakarta Sans standing in until
  * you download Satoshi from fontshare.com and self-host it.
  *
  * To swap in Satoshi:

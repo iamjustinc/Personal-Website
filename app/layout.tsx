@@ -11,7 +11,7 @@ import { siteConfig } from '@/data/site'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: `${siteConfig.name} — Portfolio`,
+  title: `${siteConfig.name} | Portfolio`,
   description: siteConfig.heroStatement,
   icons: {
     icon: [{ url: '/star.png', type: 'image/png' }],
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     apple: '/star.png',
   },
   openGraph: {
-    title: `${siteConfig.name} — Portfolio`,
+    title: `${siteConfig.name} | Portfolio`,
     description: siteConfig.heroStatement,
     type: 'website',
   },
@@ -34,7 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="bg-bg text-text-base font-sans antialiased">
 
         {/* ── Global atmosphere ─────────────────────────────────────────────
-            Fixed layer — persists across all sections during scroll.
+            Fixed layer persists across all sections during scroll.
             Stars are intentionally visible but never distracting.        */}
         <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden>
 
@@ -50,22 +50,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             }}
           />
 
-          {/* Primary watermark star — upper right, clockwise, more visible */}
+          {/* Primary watermark star: upper right, clockwise, more visible */}
           <div className="absolute top-[-10%] right-[-6%]">
             <WatermarkStar size={860} color="#0F7A7A" direction={1} duration={250} opacity={0.065} />
           </div>
 
-          {/* Secondary watermark star — lower left, CCW, larger */}
+          {/* Secondary watermark star: lower left, CCW, larger */}
           <div className="absolute bottom-[-20%] left-[-14%]">
             <WatermarkStar size={1060} color="#4A9FAE" direction={-1} duration={310} opacity={0.038} />
           </div>
 
-          {/* Tertiary star — mid-page right, small, slow */}
+          {/* Tertiary star: mid-page right, small, slow */}
           <div className="absolute top-[42%] right-[2%]">
             <WatermarkStar size={280} color="#C4974A" direction={1} duration={180} opacity={0.055} />
           </div>
 
-          {/* Shooting stars — negative delays phase each into its cycle immediately.
+          {/* Shooting stars: negative delays phase each into its cycle immediately.
               Stars 1+3 fire on load; stars 2, 4, 5 fire within ~4-5 seconds.    */}
           <div className="absolute inset-0">
             <ShootingStar startX="7%" startY="16%" angle={30} duration={12} delay={-2} />
@@ -77,12 +77,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </div>
 
         <div className="relative z-10">
-          {/* Global logo — non-floating, appears on every page */}
+          {/* Global logo: non-floating, appears on every page */}
           <div className="absolute top-5 left-0 right-0 z-20 pointer-events-none">
             <div className="mx-auto flex w-full max-w-[1180px] px-5">
               <Link
                 href="/"
-                aria-label={`${siteConfig.name} — home`}
+                aria-label={`${siteConfig.name} home`}
                 className="pointer-events-auto relative block h-12 w-[148px] overflow-visible"
               >
                 {siteConfig.logoSrc ? (

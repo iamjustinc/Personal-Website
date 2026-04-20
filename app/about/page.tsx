@@ -114,7 +114,7 @@ export default function AboutPage() {
         }}
       />
 
-      {/* Bottom-right gold glow — depth layer */}
+      {/* Bottom-right gold glow: depth layer */}
       <div
         aria-hidden
         className="absolute right-[-6%] bottom-[6%] h-[400px] w-[400px] rounded-full blur-3xl pointer-events-none"
@@ -221,11 +221,7 @@ export default function AboutPage() {
           className="flex justify-center mb-12"
         >
           <div
-            className="inline-flex items-center gap-2 rounded-full px-4 py-1.5"
-            style={{
-              background: 'rgba(15,122,122,0.08)',
-              border: '1px solid rgba(15,122,122,0.22)',
-            }}
+            className="section-eyebrow inline-flex items-center gap-2 rounded-full px-4 py-1.5"
           >
             <motion.div
               animate={shouldReduce ? {} : { rotate: [0, 12, 0], opacity: [0.7, 1, 0.7] }}
@@ -448,11 +444,7 @@ export default function AboutPage() {
           className="text-center mb-8"
         >
           <div
-            className="inline-flex items-center gap-2 rounded-full px-4 py-1.5"
-            style={{
-              background: 'rgba(15,122,122,0.08)',
-              border: '1px solid rgba(15,122,122,0.22)',
-            }}
+            className="section-eyebrow inline-flex items-center gap-2 rounded-full px-4 py-1.5"
           >
             <motion.div
               animate={shouldReduce ? {} : { rotate: [0, -12, 0], opacity: [0.7, 1, 0.7] }}
@@ -662,11 +654,7 @@ export default function AboutPage() {
           className="text-center mb-8"
         >
           <div
-            className="inline-flex items-center gap-2 rounded-full px-4 py-1.5"
-            style={{
-              background: 'rgba(15,122,122,0.08)',
-              border: '1px solid rgba(15,122,122,0.22)',
-            }}
+            className="section-eyebrow inline-flex items-center gap-2 rounded-full px-4 py-1.5"
           >
             <motion.div
               animate={shouldReduce ? {} : { rotate: [0, 12, 0], opacity: [0.7, 1, 0.7] }}

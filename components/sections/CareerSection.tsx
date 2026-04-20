@@ -37,7 +37,7 @@ const ambientStars = [
 ]
 
 /**
- * Career section — cinematic vertical timeline.
+ * Career section: cinematic vertical timeline.
  *
  * Each career item is a milestone on the journey. The left side shows
  * a vertical timeline line with a star marker at each entry.
@@ -99,11 +99,7 @@ export function CareerSection() {
         className="mb-14"
       >
         <div
-          className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-5"
-          style={{
-            background: 'rgba(15,122,122,0.08)',
-            border: '1px solid rgba(15,122,122,0.22)',
-          }}
+          className="section-eyebrow mb-5 inline-flex items-center gap-2 rounded-full px-4 py-1.5"
         >
           <StarMark size="xs" color="#C4974A" className="opacity-80" />
           <span className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-text-muted">

@@ -18,7 +18,7 @@ interface FloatingPanelProps {
   className?: string
   /** Entrance delay in seconds. */
   delay?: number
-  /** Tailwind shadow class — varies per panel to simulate depth. */
+  /** Tailwind shadow class that varies per panel to simulate depth. */
   shadowClass?: string
   /** Optional real screenshot path. Falls back to PlaceholderImage. */
   imageSrc?: string
@@ -66,7 +66,7 @@ export function FloatingPanel({
             shadowClass,
           )}
         >
-          {/* Project badge — top right, frosted */}
+          {/* Project badge: top right, frosted */}
           <div
             className="absolute top-2.5 right-2.5 z-10 flex items-center gap-1.5 rounded-full px-2 py-0.5"
             style={{
@@ -84,7 +84,7 @@ export function FloatingPanel({
             </span>
           </div>
 
-          {/* Content — next/image when src provided, placeholder fallback */}
+          {/* Content: next/image when src provided, placeholder fallback */}
           {imageSrc ? (
             <Image
               src={imageSrc}

@@ -4,7 +4,7 @@ import path from 'path'
 
 const DOWNLOAD_NAME = 'Justin-Chang-Resume.pdf'
 
-// Candidates in priority order — root first (where it actually lives),
+// Candidates in priority order, root first (where it actually lives),
 // then public/ in case it gets moved there later.
 const CANDIDATES = [
   path.resolve(process.cwd(), 'RESUME.pdf'),
@@ -21,7 +21,7 @@ export async function GET() {
       buffer = await readFile(filePath)
       break
     } catch {
-      // not found at this path — try next
+      // not found at this path, try next
     }
   }
 

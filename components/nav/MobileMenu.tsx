@@ -31,7 +31,7 @@ const navItems = [
 export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const pathname = usePathname()
 
-  // Flat animation index — primary links + sub-links each get their own stagger slot
+  // Flat animation index: primary links + sub-links each get their own stagger slot
   let animIdx = 0
 
   return (

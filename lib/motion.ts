@@ -28,7 +28,7 @@ export const fadeUpLg: Variants = {
   },
 }
 
-// For hero headings — more dramatic lift, slightly longer
+// For hero headings: more dramatic lift, slightly longer
 export const fadeUpHero: Variants = {
   hidden: { opacity: 0, y: 28 },
   visible: {
@@ -52,7 +52,7 @@ export const staggerContainer = (staggerChildren = 0.08): Variants => ({
   visible: { transition: { staggerChildren } },
 })
 
-// No-op variants — used when prefers-reduced-motion is active
+// No-op variants used when prefers-reduced-motion is active
 const noopVariants: Variants = { hidden: {}, visible: {} }
 
 /**

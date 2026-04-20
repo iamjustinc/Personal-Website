@@ -97,7 +97,7 @@ export function Nav() {
                           )}
 
                           {projects ? (
-                            // ── Portfolio — clickable link + hover dropdown ──
+                            // ── Portfolio: clickable link + hover dropdown ──
                             <div
                               className="relative"
                               onMouseEnter={() => setOpenDropdown(label)}

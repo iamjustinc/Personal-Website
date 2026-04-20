@@ -19,7 +19,7 @@ const sizeMap: Record<StarSize, number> = {
 }
 
 /**
- * 4-pointed star mark — the recurring motif across the portfolio.
+ * 4-pointed star mark, the recurring motif across the portfolio.
  * Small sizes (xs–lg) for UI accents, xl–2xl for decorative elements.
  */
 export function StarMark({ size = 'sm', className, color = 'currentColor' }: StarMarkProps) {

@@ -7,11 +7,11 @@ interface ShootingStarProps {
 }
 
 /**
- * Shooting star — travels diagonally across the viewport.
+ * Shooting star travels diagonally across the viewport.
  *
  * The outer div is a zero-size anchor point at (startX, startY).
  * It is rotated `angle` degrees around that point (transform-origin: 0 0).
- * The inner element animates translateX — movement in the rotated axis.
+ * The inner element animates translateX for movement in the rotated axis.
  * This avoids transform conflicts between the angle rotation and the motion.
  */
 export function ShootingStar({
