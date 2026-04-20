@@ -50,6 +50,45 @@ export function Hero() {
             opacity={0.42}
             className="hidden sm:block"
           />
+          <ShootingStar
+            startX="13%"
+            startY="6%"
+            angle={29}
+            duration={21}
+            delay={-7.8}
+            scale={0.64}
+            opacity={0.38}
+            className="hidden sm:block"
+          />
+          <ShootingStar
+            startX="55%"
+            startY="20%"
+            angle={34}
+            duration={15.5}
+            delay={-1.2}
+            scale={0.78}
+            opacity={0.46}
+          />
+          <ShootingStar
+            startX="72%"
+            startY="4%"
+            angle={25}
+            duration={23}
+            delay={-18.4}
+            scale={0.56}
+            opacity={0.34}
+            className="hidden md:block"
+          />
+          <ShootingStar
+            startX="28%"
+            startY="30%"
+            angle={38}
+            duration={18}
+            delay={-12.9}
+            scale={0.68}
+            opacity={0.36}
+            className="hidden lg:block"
+          />
         </div>
 
         <StarField
