@@ -207,7 +207,9 @@ export function AboutSection() {
             background:
               'linear-gradient(90deg, transparent 0%, rgba(126,231,242,0.045) 48%, rgba(196,151,74,0.06) 56%, transparent 100%)',
           }}
-          animate={shouldReduce ? {} : { x: ['0%', '520%'] }}
+          initial={false}
+          whileInView={shouldReduce ? {} : { x: ['0%', '520%'] }}
+          viewport={{ amount: 0.35 }}
           transition={{
             duration: 8.5,
             repeat: Infinity,
@@ -262,14 +264,16 @@ export function AboutSection() {
                   Signal {String(index + 1).padStart(2, '0')}
                 </span>
                 <motion.div
-                  animate={
+                  initial={false}
+                  whileInView={
                     shouldReduce
                       ? {}
                       : {
                           opacity: [0.55, 1, 0.55],
                           scale: [1, 1.12, 1],
-                        }
+                      }
                   }
+                  viewport={{ amount: 0.6 }}
                   transition={{
                     duration: 3.2 + index * 0.25,
                     repeat: Infinity,
@@ -348,7 +352,9 @@ export function AboutSection() {
             stroke="rgba(126,231,242,0.45)"
             strokeWidth="0.16"
             strokeDasharray="1 2.4"
-            animate={shouldReduce ? {} : { pathLength: [0.35, 1, 0.35], opacity: [0.16, 0.46, 0.16] }}
+            initial={false}
+            whileInView={shouldReduce ? {} : { pathLength: [0.35, 1, 0.35], opacity: [0.16, 0.46, 0.16] }}
+            viewport={{ amount: 0.3 }}
             transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
           />
           <motion.path
@@ -357,7 +363,9 @@ export function AboutSection() {
             stroke="rgba(196,151,74,0.34)"
             strokeWidth="0.16"
             strokeDasharray="1 2.2"
-            animate={shouldReduce ? {} : { pathLength: [0.45, 1, 0.45], opacity: [0.12, 0.38, 0.12] }}
+            initial={false}
+            whileInView={shouldReduce ? {} : { pathLength: [0.45, 1, 0.45], opacity: [0.12, 0.38, 0.12] }}
+            viewport={{ amount: 0.3 }}
             transition={{ duration: 9.5, repeat: Infinity, ease: 'easeInOut', delay: 0.8 }}
           />
         </svg>
@@ -370,7 +378,9 @@ export function AboutSection() {
             background:
               'linear-gradient(90deg, transparent 0%, rgba(126,231,242,0.055) 42%, rgba(196,151,74,0.08) 52%, transparent 100%)',
           }}
-          animate={shouldReduce ? {} : { x: ['0%', '430%'] }}
+          initial={false}
+          whileInView={shouldReduce ? {} : { x: ['0%', '430%'] }}
+          viewport={{ amount: 0.3 }}
           transition={{
             duration: 9,
             repeat: Infinity,
@@ -385,7 +395,8 @@ export function AboutSection() {
               key={`${star.left}-${star.top}`}
               className="absolute"
               style={{ left: star.left, top: star.top }}
-              animate={
+              initial={false}
+              whileInView={
                 shouldReduce
                   ? {}
                   : {
@@ -394,6 +405,7 @@ export function AboutSection() {
                       y: [0, -4, 0],
                     }
               }
+              viewport={{ amount: 0.3 }}
               transition={{
                 duration: 3.4,
                 repeat: Infinity,
@@ -481,13 +493,15 @@ export function AboutSection() {
                     Fit {String(index + 1).padStart(2, '0')}
                   </span>
                   <motion.div
-                    animate={
+                    initial={false}
+                    whileInView={
                       shouldReduce
                         ? {}
                         : index % 2 === 0
                           ? { rotate: [0, 12, 0] }
                           : { scale: [1, 1.13, 1] }
                     }
+                    viewport={{ amount: 0.6 }}
                     transition={{
                       duration: 3.2 + index * 0.35,
                       repeat: Infinity,

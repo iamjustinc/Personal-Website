@@ -20,6 +20,11 @@ type HoverSparkleProps = {
   className?: string
 }
 
+const SPARK_INTERVAL_MS = 180
+const SPARK_LIFETIME_MS = 460
+const MAX_SPARKS = 4
+const MIN_SPARK_DISTANCE = 14
+
 export function HoverSparkle({ children, className }: HoverSparkleProps) {
   const reduceMotion = useReducedMotion()
   const hostRef        = useRef<HTMLDivElement>(null)
@@ -27,6 +32,7 @@ export function HoverSparkle({ children, className }: HoverSparkleProps) {
   // never via React state, so cursor tracks the pointer with zero scheduling delay.
   const cursorRef      = useRef<HTMLDivElement>(null)
   const lastSpawnRef   = useRef(0)
+  const lastSparkPointRef = useRef({ x: 0, y: 0 })
   const timeoutIdsRef  = useRef<number[]>([])
   const rafRef         = useRef<number | null>(null)
   const pointRef       = useRef({ x: 0, y: 0 })
@@ -54,7 +60,8 @@ export function HoverSparkle({ children, className }: HoverSparkleProps) {
   }, [])
 
   const writeCursorPosition = (clientX: number, clientY: number) => {
-    pointRef.current = { x: clientX, y: clientY }
+    pointRef.current.x = clientX
+    pointRef.current.y = clientY
 
     if (rafRef.current !== null) return
 
@@ -72,8 +79,17 @@ export function HoverSparkle({ children, className }: HoverSparkleProps) {
     if (reduceMotion || isTouch || !hostRef.current) return
 
     const now = performance.now()
-    if (!force && now - lastSpawnRef.current < 120) return
+    if (!force && now - lastSpawnRef.current < SPARK_INTERVAL_MS) return
+
+    const moveX = clientX - lastSparkPointRef.current.x
+    const moveY = clientY - lastSparkPointRef.current.y
+    if (!force && moveX * moveX + moveY * moveY < MIN_SPARK_DISTANCE * MIN_SPARK_DISTANCE) {
+      return
+    }
+
     lastSpawnRef.current = now
+    lastSparkPointRef.current.x = clientX
+    lastSparkPointRef.current.y = clientY
 
     const rect = hostRef.current.getBoundingClientRect()
 
@@ -87,12 +103,12 @@ export function HoverSparkle({ children, className }: HoverSparkleProps) {
       scale:  0.85 + Math.random() * 0.35,
     }
 
-    setSparks((prev) => [...prev.slice(-5), spark])
+    setSparks((prev) => [...prev.slice(-(MAX_SPARKS - 1)), spark])
 
     const timeoutId = window.setTimeout(() => {
       setSparks((prev) => prev.filter((item) => item.id !== spark.id))
       timeoutIdsRef.current = timeoutIdsRef.current.filter((id) => id !== timeoutId)
-    }, 520)
+    }, SPARK_LIFETIME_MS)
 
     timeoutIdsRef.current.push(timeoutId)
   }
@@ -146,7 +162,7 @@ export function HoverSparkle({ children, className }: HoverSparkleProps) {
                 rotate:  spark.rotate + 18,
               }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.52, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: SPARK_LIFETIME_MS / 1000, ease: [0.22, 1, 0.36, 1] }}
             >
               <div className="relative h-3 w-5">
                 {/* little shooting-star trail */}

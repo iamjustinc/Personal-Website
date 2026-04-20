@@ -71,11 +71,13 @@ export function CareerSection() {
             key={`${star.left}-${star.top}`}
             className="absolute"
             style={{ left: star.left, top: star.top }}
-            animate={
+            initial={false}
+            whileInView={
               shouldReduce
                 ? undefined
                 : { opacity: [0.16, 0.72, 0.16], scale: [0.85, 1.18, 0.85] }
             }
+            viewport={{ amount: 0.25 }}
             transition={{
               duration: 4.2,
               repeat: Infinity,
@@ -111,7 +113,7 @@ export function CareerSection() {
 
         <h2 className="font-display text-h1 text-text-base leading-tight">
           Technical ownership across{' '}
-          <span style={{ color: '#4A9FAE' }}>system</span>
+          <span style={{ color: '#4A9FAE' }}>systems</span>
         </h2>
         <p
           className="font-sans mt-3 max-w-[560px] leading-relaxed"
@@ -163,7 +165,8 @@ export function CareerSection() {
                   {/* Star node */}
                   <motion.div
                     className="relative z-10 flex items-center justify-center mt-1"
-                    animate={
+                    initial={false}
+                    whileInView={
                       shouldReduce
                         ? undefined
                         : {
@@ -177,9 +180,10 @@ export function CareerSection() {
                                   '0 0 10px rgba(74,159,174,0.14)',
                                   '0 0 22px rgba(74,159,174,0.28)',
                                   '0 0 10px rgba(74,159,174,0.14)',
-                                ],
+                            ],
                           }
                     }
+                    viewport={{ amount: 0.65 }}
                     transition={{
                       duration: item.current ? 3 : 4.4,
                       repeat: Infinity,
@@ -232,35 +236,21 @@ export function CareerSection() {
                   />
 
                   {!shouldReduce && (
-                    <motion.div
+                    <div
                       aria-hidden
-                      className="pointer-events-none absolute inset-y-0 -left-1/3 w-1/3 -skew-x-12 opacity-0 blur-sm transition-opacity duration-300 group-hover:opacity-100"
-                      animate={{ x: ['0%', '430%'] }}
-                      transition={{
-                        duration: 5.8,
-                        repeat: Infinity,
-                        repeatDelay: 2.8,
-                        ease: 'easeInOut',
-                        delay: index * 0.22,
-                      }}
+                      className="pointer-events-none absolute inset-y-0 -left-1/3 w-1/3 -skew-x-12 opacity-0 blur-sm transition-[opacity,transform] duration-700 ease-out group-hover:translate-x-[430%] group-hover:opacity-100"
                       style={{
                         background: `linear-gradient(90deg, transparent, ${accent}16, rgba(196,151,74,0.09), transparent)`,
                       }}
                     />
                   )}
 
-                  <motion.div
+                  <div
                     aria-hidden
-                    className="pointer-events-none absolute right-5 top-5 opacity-0 transition-opacity duration-300 group-hover:opacity-80"
-                    animate={
-                      shouldReduce
-                        ? undefined
-                        : { rotate: [0, 18, 0], scale: [0.92, 1.12, 0.92] }
-                    }
-                    transition={{ duration: 3.4, repeat: Infinity, ease: 'easeInOut', delay: index * 0.2 }}
+                    className="pointer-events-none absolute right-5 top-5 opacity-0 transition-[opacity,transform] duration-500 ease-out group-hover:rotate-12 group-hover:scale-110 group-hover:opacity-80"
                   >
                     <StarMark size="xs" color={item.current ? '#C4974A' : accent} />
-                  </motion.div>
+                  </div>
 
                   {/* Header row */}
                   <div className="relative flex flex-wrap items-start justify-between gap-3 mb-3">

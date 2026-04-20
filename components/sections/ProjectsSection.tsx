@@ -149,11 +149,13 @@ export function ProjectsSection() {
               <motion.div
                 aria-hidden
                 className="absolute left-5 top-5 z-20"
-                animate={
+                initial={false}
+                whileInView={
                   shouldReduce
                     ? {}
                     : { opacity: [0.32, 0.78, 0.32], scale: [0.95, 1.12, 0.95] }
                 }
+                viewport={{ amount: 0.35 }}
                 transition={{
                   duration: 3.2 + index * 0.35,
                   repeat: Infinity,
@@ -166,11 +168,13 @@ export function ProjectsSection() {
               <motion.div
                 aria-hidden
                 className="absolute bottom-6 right-6 z-20"
-                animate={
+                initial={false}
+                whileInView={
                   shouldReduce
                     ? {}
                     : { opacity: [0.22, 0.64, 0.22], y: [0, -5, 0] }
                 }
+                viewport={{ amount: 0.35 }}
                 transition={{
                   duration: 4,
                   repeat: Infinity,
