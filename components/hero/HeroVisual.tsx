@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { EASING } from '@/lib/motion'
 import { WatermarkStar } from '@/components/ui/WatermarkStar'
 import { StarMark } from '@/components/ui/StarMark'
+import { Starburst } from '@/components/ui/Starburst'
 import { siteConfig } from '@/data/site'
 
 export function HeroVisual() {
@@ -37,9 +38,56 @@ export function HeroVisual() {
         <div
           aria-hidden
           className="absolute pointer-events-none"
+          style={{
+            width: 404,
+            height: 284,
+            top: '48%',
+            left: '50%',
+            transform: 'translate(-50%, -50%) rotate(-13deg)',
+          }}
+        >
+          <svg width="404" height="284" viewBox="0 0 404 284" fill="none">
+            <ellipse
+              cx="202"
+              cy="142"
+              rx="194"
+              ry="74"
+              stroke="rgba(126,231,242,0.13)"
+              strokeWidth="1"
+              strokeDasharray="2 16"
+            />
+          </svg>
+        </div>
+
+        <div
+          aria-hidden
+          className="absolute pointer-events-none"
           style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}
         >
           <WatermarkStar size={340} color="#0F7A7A" direction={1} duration={90} opacity={0.07} />
+        </div>
+
+        <div aria-hidden className="absolute -left-7 top-12 z-20 pointer-events-none">
+          <Starburst
+            size="sm"
+            color="#F4D58D"
+            opacity={0.72}
+            pulse={!shouldReduce}
+            delay={0.6}
+            duration={6.4}
+          />
+        </div>
+
+        <div aria-hidden className="absolute right-[-18px] bottom-24 z-20 pointer-events-none">
+          <Starburst
+            size="sm"
+            color="#7EE7F2"
+            haloColor="#4A9FAE"
+            opacity={0.52}
+            pulse={!shouldReduce}
+            delay={2.2}
+            duration={7.1}
+          />
         </div>
 
         <div

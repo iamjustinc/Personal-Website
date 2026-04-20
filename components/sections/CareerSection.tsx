@@ -3,6 +3,8 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { Section } from '@/components/ui/Section'
 import { StarMark } from '@/components/ui/StarMark'
+import { StarField } from '@/components/ui/StarField'
+import { Constellation } from '@/components/ui/Constellation'
 import { EASING, fadeUp, fadeIn, staggerContainer, useMotionSafe } from '@/lib/motion'
 import { siteConfig } from '@/data/site'
 import { cn } from '@/lib/utils'
@@ -66,6 +68,36 @@ export function CareerSection() {
           className="absolute bottom-20 right-[8%] h-64 w-64 rounded-full blur-3xl"
           style={{ background: 'rgba(196,151,74,0.055)' }}
         />
+        <StarField
+          className="opacity-75"
+          stars={[
+            { x: '6%', y: '34%', size: 1, color: '#7EE7F2', opacity: 0.28, halo: 1.1 },
+            { x: '21%', y: '88%', size: 1.3, color: '#F4D58D', opacity: 0.30, halo: 1.3 },
+            { x: '48%', y: '7%', size: 1, color: '#E6EEF2', opacity: 0.24, halo: 1 },
+            { x: '64%', y: '58%', size: 1, color: '#7EE7F2', opacity: 0.24, halo: 1 },
+            { x: '89%', y: '28%', size: 1.4, color: '#C4974A', opacity: 0.28, halo: 1.2, twinkle: true, delay: 2.1, duration: 6 },
+          ]}
+        />
+        <div className="absolute right-[6%] top-[24%] hidden lg:block">
+          <Constellation
+            width={96}
+            height={132}
+            color="#4A9FAE"
+            lineOpacity={0.18}
+            pointOpacity={0.56}
+            points={[
+              { x: 12, y: 18, size: 1.2 },
+              { x: 58, y: 34, size: 1.5 },
+              { x: 38, y: 78, size: 1.1, twinkle: true, delay: 1.6 },
+              { x: 82, y: 118, size: 1.3 },
+            ]}
+            connections={[
+              [0, 1],
+              [1, 2],
+              [2, 3],
+            ]}
+          />
+        </div>
         {ambientStars.map((star) => (
           <motion.span
             key={`${star.left}-${star.top}`}

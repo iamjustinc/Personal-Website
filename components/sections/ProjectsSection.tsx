@@ -4,6 +4,8 @@ import { motion, useReducedMotion } from 'framer-motion'
 import { ProjectFloatingScreenshots } from '@/components/projects/ProjectFloatingScreenshots'
 import { Section } from '@/components/ui/Section'
 import { StarMark } from '@/components/ui/StarMark'
+import { StarField } from '@/components/ui/StarField'
+import { Constellation } from '@/components/ui/Constellation'
 import { StarburstButton } from '@/components/ui/StarburstButton'
 import { HoverSparkle } from '@/components/ui/HoverSparkle'
 import { projects } from '@/data/projects'
@@ -133,6 +135,44 @@ export function ProjectsSection() {
                 }}
               />
 
+              <StarField
+                className="z-0 opacity-85"
+                stars={[
+                  { x: '7%', y: '17%', size: 1.3, color: '#F4D58D', opacity: 0.42, halo: 1.5 },
+                  { x: '14%', y: '73%', size: 1, color: '#7EE7F2', opacity: 0.30, halo: 1.2, twinkle: true, delay: 1.5, duration: 5.4 },
+                  { x: '36%', y: '10%', size: 1, color: '#E6EEF2', opacity: 0.28, halo: 1.1 },
+                  { x: '63%', y: '22%', size: 1.5, color: project.panelAccentColor, opacity: 0.34, halo: 1.4 },
+                  { x: '78%', y: '76%', size: 1, color: '#F4D58D', opacity: 0.28, halo: 1.2 },
+                  { x: '93%', y: '44%', size: 1.3, color: '#7EE7F2', opacity: 0.30, halo: 1.2, twinkle: true, delay: 3.2, duration: 6.2 },
+                ]}
+              />
+
+              <div
+                aria-hidden
+                className="pointer-events-none absolute right-8 top-10 z-10 hidden lg:block"
+              >
+                <Constellation
+                  width={150}
+                  height={88}
+                  color={project.panelAccentColor}
+                  lineOpacity={0.22}
+                  pointOpacity={0.68}
+                  points={[
+                    { x: 10, y: 52, size: 1.4 },
+                    { x: 42, y: 18, size: 1.7, twinkle: true, delay: 0.8 + index * 0.3 },
+                    { x: 86, y: 30, size: 1.3 },
+                    { x: 126, y: 10, size: 1.5 },
+                    { x: 142, y: 68, size: 1.1 },
+                  ]}
+                  connections={[
+                    [0, 1],
+                    [1, 2],
+                    [2, 3],
+                    [2, 4],
+                  ]}
+                />
+              </div>
+
               <div
                 aria-hidden
                 className="absolute inset-y-0 w-[28%] -skew-x-12 opacity-0 transition-[opacity,transform] duration-[1200ms] ease-out group-hover:translate-x-[520%] group-hover:opacity-100"
@@ -194,6 +234,30 @@ export function ProjectsSection() {
                     background: `radial-gradient(circle at 28% 28%, ${project.panelAccentColor}18 0%, transparent 50%), linear-gradient(155deg, ${project.panelAccentColor}10 0%, rgba(10,22,40,0.12) 42%, rgba(10,22,40,0.72) 100%)`,
                   }}
                 />
+
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute bottom-7 left-7 z-10 hidden sm:block"
+                >
+                  <Constellation
+                    width={118}
+                    height={72}
+                    color="#C4974A"
+                    lineOpacity={0.20}
+                    pointOpacity={0.58}
+                    points={[
+                      { x: 8, y: 60, size: 1.1 },
+                      { x: 34, y: 30, size: 1.4 },
+                      { x: 70, y: 18, size: 1.1 },
+                      { x: 108, y: 46, size: 1.3 },
+                    ]}
+                    connections={[
+                      [0, 1],
+                      [1, 2],
+                      [2, 3],
+                    ]}
+                  />
+                </div>
 
                 <motion.div
                   className="absolute inset-0"

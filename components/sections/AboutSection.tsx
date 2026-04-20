@@ -12,6 +12,8 @@ import {
 import { Section } from '@/components/ui/Section'
 import { StarMark } from '@/components/ui/StarMark'
 import { WatermarkStar } from '@/components/ui/WatermarkStar'
+import { StarField } from '@/components/ui/StarField'
+import { Constellation } from '@/components/ui/Constellation'
 import { fadeUp, fadeIn, staggerContainer, useMotionSafe } from '@/lib/motion'
 
 type ProofPoint = {
@@ -195,6 +197,18 @@ export function AboutSection() {
           }}
         />
 
+        <StarField
+          className="opacity-75"
+          stars={[
+            { x: '6%', y: '18%', size: 1.4, color: '#F4D58D', opacity: 0.34, halo: 1.4 },
+            { x: '18%', y: '82%', size: 1, color: '#7EE7F2', opacity: 0.28, halo: 1.2, twinkle: true, delay: 1.1, duration: 5.2 },
+            { x: '39%', y: '12%', size: 1, color: '#E6EEF2', opacity: 0.24, halo: 1 },
+            { x: '58%', y: '78%', size: 1.3, color: '#C4974A', opacity: 0.28, halo: 1.2 },
+            { x: '81%', y: '16%', size: 1, color: '#7EE7F2', opacity: 0.26, halo: 1.1 },
+            { x: '94%', y: '66%', size: 1.4, color: '#E6EEF2', opacity: 0.24, halo: 1.1, twinkle: true, delay: 3.4, duration: 6.1 },
+          ]}
+        />
+
         <motion.div
           aria-hidden
           className="absolute inset-y-0 w-[28%] -skew-x-12"
@@ -335,6 +349,43 @@ export function AboutSection() {
               'radial-gradient(circle, rgba(126,231,242,0.08) 0%, rgba(15,122,122,0.04) 42%, transparent 72%)',
           }}
         />
+
+        <StarField
+          className="opacity-80"
+          stars={[
+            { x: '8%', y: '24%', size: 1.5, color: '#F4D58D', opacity: 0.40, halo: 1.5 },
+            { x: '15%', y: '67%', size: 1, color: '#7EE7F2', opacity: 0.30, halo: 1.2 },
+            { x: '28%', y: '12%', size: 1, color: '#E6EEF2', opacity: 0.26, halo: 1 },
+            { x: '44%', y: '84%', size: 1.4, color: '#7EE7F2', opacity: 0.30, halo: 1.2, twinkle: true, delay: 0.9, duration: 5.7 },
+            { x: '72%', y: '20%', size: 1, color: '#C4974A', opacity: 0.28, halo: 1.2 },
+            { x: '88%', y: '58%', size: 1.3, color: '#E6EEF2', opacity: 0.26, halo: 1.1 },
+            { x: '95%', y: '32%', size: 1, color: '#7EE7F2', opacity: 0.24, halo: 1 },
+          ]}
+        />
+
+        <div
+          aria-hidden
+          className="pointer-events-none absolute right-[8%] top-[18%] hidden lg:block"
+        >
+          <Constellation
+            width={130}
+            height={92}
+            color="#C4974A"
+            lineOpacity={0.22}
+            pointOpacity={0.62}
+            points={[
+              { x: 8, y: 76, size: 1.2 },
+              { x: 34, y: 28, size: 1.6, twinkle: true, delay: 1.3 },
+              { x: 74, y: 18, size: 1.2 },
+              { x: 120, y: 44, size: 1.4 },
+            ]}
+            connections={[
+              [0, 1],
+              [1, 2],
+              [2, 3],
+            ]}
+          />
+        </div>
 
         <svg
           aria-hidden

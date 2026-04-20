@@ -1,6 +1,9 @@
 import { HeroText } from './HeroText'
 import { HeroVisual } from './HeroVisual'
 import { StarMark } from '@/components/ui/StarMark'
+import { StarField } from '@/components/ui/StarField'
+import { Constellation } from '@/components/ui/Constellation'
+import { Starburst } from '@/components/ui/Starburst'
 
 /**
  * Hero section: cinematic dark opening.
@@ -15,13 +18,87 @@ export function Hero() {
       id="hero"
       className="min-h-svh flex items-center pt-20 pb-16 relative"
     >
-      {/* Subtle ambient stars: left-side atmosphere only */}
+      {/* Hero atmosphere: richest star density on the site, kept behind content */}
       <div aria-hidden className="absolute inset-0 pointer-events-none select-none">
+        <StarField
+          className="opacity-95"
+          stars={[
+            { x: '4%', y: '22%', size: 1.5, color: '#F4D58D', opacity: 0.50, halo: 1.9 },
+            { x: '7%', y: '54%', size: 1, color: '#7EE7F2', opacity: 0.40, halo: 1.4, twinkle: true, delay: 0.4, duration: 4.8 },
+            { x: '10%', y: '73%', size: 2.2, color: '#7EE7F2', opacity: 0.44, halo: 2.4 },
+            { x: '16%', y: '29%', size: 1, color: '#A8C5D1', opacity: 0.34, halo: 1.2 },
+            { x: '24%', y: '18%', size: 1.5, color: '#7EE7F2', opacity: 0.42, halo: 1.5 },
+            { x: '33%', y: '80%', size: 1, color: '#E6EEF2', opacity: 0.32, halo: 1.2 },
+            { x: '41%', y: '38%', size: 1.2, color: '#F4D58D', opacity: 0.36, halo: 1.5 },
+            { x: '48%', y: '70%', size: 1, color: '#7EE7F2', opacity: 0.30, halo: 1.2, twinkle: true, delay: 2.2, duration: 5.4 },
+            { x: '58%', y: '17%', size: 1, color: '#E6EEF2', opacity: 0.28, halo: 1.1 },
+            { x: '70%', y: '28%', size: 1.8, color: '#7EE7F2', opacity: 0.34, halo: 1.6 },
+            { x: '76%', y: '55%', size: 1, color: '#A8C5D1', opacity: 0.28, halo: 1.1 },
+            { x: '84%', y: '19%', size: 1.2, color: '#F4D58D', opacity: 0.40, halo: 1.8, twinkle: true, delay: 3.1, duration: 6 },
+            { x: '89%', y: '45%', size: 1, color: '#7EE7F2', opacity: 0.30, halo: 1.1 },
+            { x: '94%', y: '73%', size: 1.5, color: '#E6EEF2', opacity: 0.28, halo: 1.3 },
+          ]}
+        />
+
         <div className="absolute top-[20%] left-[2%] text-accent opacity-[0.08]">
           <StarMark size="md" />
         </div>
         <div className="absolute bottom-[20%] left-[6%] opacity-[0.06]" style={{ color: '#C4974A' }}>
           <StarMark size="sm" />
+        </div>
+
+        <div className="absolute left-[10%] top-[33%] hidden sm:block">
+          <Starburst size="md" color="#F4D58D" opacity={0.54} pulse delay={0.4} duration={6.5} />
+        </div>
+        <div className="absolute right-[14%] top-[16%] hidden lg:block">
+          <Starburst size="sm" color="#7EE7F2" haloColor="#4A9FAE" opacity={0.48} pulse delay={2.1} duration={7.2} />
+        </div>
+        <div className="absolute right-[7%] bottom-[22%] hidden lg:block">
+          <Starburst size="sm" color="#E6EEF2" haloColor="#7EE7F2" opacity={0.34} />
+        </div>
+
+        <svg
+          className="absolute right-[3%] top-[23%] hidden h-[280px] w-[460px] opacity-[0.24] lg:block"
+          viewBox="0 0 460 280"
+          fill="none"
+        >
+          <path
+            d="M24 190 C112 92 235 44 428 72"
+            stroke="rgba(126,231,242,0.48)"
+            strokeWidth="1"
+            strokeDasharray="2 12"
+            strokeLinecap="round"
+          />
+          <path
+            d="M112 226 C202 138 304 116 444 146"
+            stroke="rgba(196,151,74,0.34)"
+            strokeWidth="1"
+            strokeDasharray="1 14"
+            strokeLinecap="round"
+          />
+        </svg>
+
+        <div className="absolute right-[12%] top-[31%] hidden lg:block">
+          <Constellation
+            width={210}
+            height={116}
+            color="#7EE7F2"
+            lineOpacity={0.24}
+            pointOpacity={0.76}
+            points={[
+              { x: 12, y: 82, size: 1.3 },
+              { x: 52, y: 42, size: 1.9, twinkle: true, delay: 0.8 },
+              { x: 104, y: 28, size: 1.5 },
+              { x: 152, y: 56, size: 1.2 },
+              { x: 198, y: 22, size: 1.6 },
+            ]}
+            connections={[
+              [0, 1],
+              [1, 2],
+              [2, 3],
+              [3, 4],
+            ]}
+          />
         </div>
       </div>
 

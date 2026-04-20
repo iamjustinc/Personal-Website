@@ -6,6 +6,7 @@ import { Nav } from '@/components/nav/Nav'
 import { WatermarkStar } from '@/components/ui/WatermarkStar'
 import { ShootingStar } from '@/components/ui/ShootingStar'
 import { StarMark } from '@/components/ui/StarMark'
+import { StarField } from '@/components/ui/StarField'
 import { GlobalStarCursor } from '@/components/ui/GlobalStarCursor'
 import { siteConfig } from '@/data/site'
 import './globals.css'
@@ -50,9 +51,29 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             }}
           />
 
+          <StarField
+            className="opacity-75"
+            stars={[
+              { x: '5%', y: '18%', size: 1.5, color: '#F4D58D', opacity: 0.34, halo: 1.5 },
+              { x: '12%', y: '48%', size: 1, color: '#7EE7F2', opacity: 0.30, halo: 1.2, twinkle: true, delay: 1.1, duration: 5.8 },
+              { x: '18%', y: '78%', size: 1.5, color: '#A8C5D1', opacity: 0.24, halo: 1.1 },
+              { x: '31%', y: '12%', size: 1, color: '#7EE7F2', opacity: 0.28, halo: 1.2 },
+              { x: '44%', y: '68%', size: 1.5, color: '#E6EEF2', opacity: 0.22, halo: 1 },
+              { x: '58%', y: '24%', size: 1, color: '#C4974A', opacity: 0.28, halo: 1.3 },
+              { x: '67%', y: '84%', size: 1.5, color: '#7EE7F2', opacity: 0.26, halo: 1.2, twinkle: true, delay: 2.8, duration: 6.2 },
+              { x: '82%', y: '36%', size: 1, color: '#E6EEF2', opacity: 0.24, halo: 1 },
+              { x: '92%', y: '72%', size: 1.5, color: '#F4D58D', opacity: 0.30, halo: 1.4 },
+            ]}
+          />
+
           {/* Primary watermark star: upper right, clockwise, more visible */}
           <div className="absolute top-[-10%] right-[-6%]">
             <WatermarkStar size={860} color="#0F7A7A" direction={1} duration={250} opacity={0.065} />
+          </div>
+
+          {/* Deep-sky watermark: low left, quiet depth while scrolling */}
+          <div className="absolute bottom-[-28%] left-[-20%]">
+            <WatermarkStar size={760} color="#4A9FAE" direction={-1} duration={320} opacity={0.032} />
           </div>
 
           {/* Tertiary star: mid-page right, small, slow */}
