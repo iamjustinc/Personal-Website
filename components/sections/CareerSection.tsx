@@ -111,11 +111,11 @@ export function CareerSection() {
 
         <h2 className="font-display text-h1 text-text-base leading-tight">
           Technical ownership across{' '}
-          <span style={{ color: '#4A9FAE' }}>systems and workflows</span>
+          <span style={{ color: '#4A9FAE' }}>system</span>
         </h2>
         <p
           className="font-sans mt-3 max-w-[560px] leading-relaxed"
-          style={{ fontSize: '15px', color: '#A8C5D1' }}
+          style={{ fontSize: '12px', color: '#A8C5D1' }}
         >
           Across research, operations, and product work, I have built pipelines, dashboards,
           walkthroughs, and workflow systems that help stakeholders understand what to do next.
