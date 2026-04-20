@@ -42,7 +42,7 @@ const proofPoints: ProofPoint[] = [
     detail: 'Improved completion after redesigning recruitment and scheduling flows.',
   },
   {
-    textValue: 'Walkthrough-led',
+    textValue: 'Technical Demo',
     label: 'product walkthroughs',
     detail: 'Used walkthroughs to explain workflow, AI behavior, and next steps.',
   },
