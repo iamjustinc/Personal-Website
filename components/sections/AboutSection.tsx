@@ -12,8 +12,9 @@ import {
 import { Section } from '@/components/ui/Section'
 import { StarMark } from '@/components/ui/StarMark'
 import { WatermarkStar } from '@/components/ui/WatermarkStar'
-import { StarField } from '@/components/ui/StarField'
+import { StarField, type StarFieldStar } from '@/components/ui/StarField'
 import { Constellation } from '@/components/ui/Constellation'
+import { Starburst } from '@/components/ui/Starburst'
 import { fadeUp, fadeIn, staggerContainer, useMotionSafe } from '@/lib/motion'
 
 type ProofPoint = {
@@ -69,14 +70,19 @@ const strengths = [
   },
 ]
 
-const starParticles = [
-  { left: '7%', top: '20%', size: 'xs' as const, color: '#C4974A', delay: 0 },
-  { left: '16%', top: '73%', size: 'xs' as const, color: '#7EE7F2', delay: 0.7 },
-  { left: '33%', top: '13%', size: 'xs' as const, color: '#4A9FAE', delay: 1.4 },
-  { left: '57%', top: '76%', size: 'sm' as const, color: '#C4974A', delay: 0.35 },
-  { left: '78%', top: '22%', size: 'xs' as const, color: '#7EE7F2', delay: 1.05 },
-  { left: '91%', top: '62%', size: 'xs' as const, color: '#4A9FAE', delay: 1.75 },
-]
+/**
+ * starParticles replaced with StarField CSS twinkle — saves 6 main-thread
+ * Framer Motion repeat:Infinity loops while producing the same visual result.
+ * Positions map directly from the original left/top percentages.
+ */
+const starParticleField = [
+  { x: '7%',  y: '20%', size: 1.5, color: '#C4974A', opacity: 0.52, halo: 1.6, twinkle: true, delay: 0,    duration: 3.4 },
+  { x: '16%', y: '73%', size: 1.3, color: '#7EE7F2', opacity: 0.44, halo: 1.4, twinkle: true, delay: 0.7,  duration: 3.4 },
+  { x: '33%', y: '13%', size: 1.2, color: '#4A9FAE', opacity: 0.40, halo: 1.3, twinkle: true, delay: 1.4,  duration: 3.4 },
+  { x: '57%', y: '76%', size: 1.8, color: '#C4974A', opacity: 0.48, halo: 1.8, twinkle: true, delay: 0.35, duration: 3.4 },
+  { x: '78%', y: '22%', size: 1.3, color: '#7EE7F2', opacity: 0.42, halo: 1.4, twinkle: true, delay: 1.05, duration: 3.4 },
+  { x: '91%', y: '62%', size: 1.2, color: '#4A9FAE', opacity: 0.38, halo: 1.3, twinkle: true, delay: 1.75, duration: 3.4 },
+] satisfies StarFieldStar[]
 
 function MetricValue({
   value,
@@ -146,6 +152,35 @@ export function AboutSection() {
         <WatermarkStar size={620} color="#4A9FAE" direction={-1} duration={260} opacity={1} />
       </div>
 
+      {/* Section-level starbursts — teal upper-right, gold lower-left */}
+      <div className="pointer-events-none absolute right-[16%] top-[3%] hidden lg:block">
+        <Starburst size="md" color="#7EE7F2" haloColor="#4A9FAE" opacity={0.38} pulse delay={1.6} duration={7.4} />
+      </div>
+      <div className="pointer-events-none absolute left-[3%] top-[28%] hidden sm:block">
+        <Starburst size="sm" color="#F4D58D" opacity={0.40} pulse delay={3.2} duration={6.8} />
+      </div>
+
+      {/* Second constellation — left margin, teal 4-point, mirrors right-side one */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-[2%] bottom-[14%] hidden lg:block"
+      >
+        <Constellation
+          width={88}
+          height={56}
+          color="#7EE7F2"
+          lineOpacity={0.18}
+          pointOpacity={0.58}
+          points={[
+            { x: 8,  y: 44, size: 1.2 },
+            { x: 38, y: 18, size: 1.6, twinkle: true, delay: 1.8 },
+            { x: 72, y: 34, size: 1.1 },
+            { x: 82, y: 8,  size: 1.3 },
+          ]}
+          connections={[[0, 1], [1, 2], [2, 3]]}
+        />
+      </div>
+
       <motion.div
         variants={inn}
         initial="hidden"
@@ -198,14 +233,21 @@ export function AboutSection() {
         />
 
         <StarField
-          className="opacity-75"
+          className="opacity-78"
           stars={[
-            { x: '6%', y: '18%', size: 1.4, color: '#F4D58D', opacity: 0.34, halo: 1.4 },
-            { x: '18%', y: '82%', size: 1, color: '#7EE7F2', opacity: 0.28, halo: 1.2, twinkle: true, delay: 1.1, duration: 5.2 },
-            { x: '39%', y: '12%', size: 1, color: '#E6EEF2', opacity: 0.24, halo: 1 },
+            { x: '6%',  y: '18%', size: 1.4, color: '#F4D58D', opacity: 0.34, halo: 1.4 },
+            { x: '18%', y: '82%', size: 1.0, color: '#7EE7F2', opacity: 0.28, halo: 1.2, twinkle: true, delay: 1.1, duration: 5.2 },
+            { x: '39%', y: '12%', size: 1.0, color: '#E6EEF2', opacity: 0.24, halo: 1.0 },
             { x: '58%', y: '78%', size: 1.3, color: '#C4974A', opacity: 0.28, halo: 1.2 },
-            { x: '81%', y: '16%', size: 1, color: '#7EE7F2', opacity: 0.26, halo: 1.1 },
+            { x: '81%', y: '16%', size: 1.0, color: '#7EE7F2', opacity: 0.26, halo: 1.1 },
             { x: '94%', y: '66%', size: 1.4, color: '#E6EEF2', opacity: 0.24, halo: 1.1, twinkle: true, delay: 3.4, duration: 6.1 },
+            /* — density fill — */
+            { x: '28%', y: '44%', size: 1.1, color: '#A8C5D1', opacity: 0.22, halo: 1.0 },
+            { x: '46%', y: '36%', size: 1.0, color: '#7EE7F2', opacity: 0.26, halo: 1.1 },
+            { x: '62%', y: '56%', size: 1.2, color: '#F4D58D', opacity: 0.28, halo: 1.2 },
+            { x: '75%', y: '88%', size: 1.0, color: '#A8C5D1', opacity: 0.22, halo: 1.0 },
+            { x: '88%', y: '42%', size: 1.1, color: '#E6EEF2', opacity: 0.22, halo: 1.0 },
+            { x: '14%', y: '46%', size: 1.0, color: '#C4974A', opacity: 0.24, halo: 1.1 },
           ]}
         />
 
@@ -351,15 +393,22 @@ export function AboutSection() {
         />
 
         <StarField
-          className="opacity-80"
+          className="opacity-82"
           stars={[
-            { x: '8%', y: '24%', size: 1.5, color: '#F4D58D', opacity: 0.40, halo: 1.5 },
-            { x: '15%', y: '67%', size: 1, color: '#7EE7F2', opacity: 0.30, halo: 1.2 },
-            { x: '28%', y: '12%', size: 1, color: '#E6EEF2', opacity: 0.26, halo: 1 },
+            { x: '8%',  y: '24%', size: 1.5, color: '#F4D58D', opacity: 0.40, halo: 1.5 },
+            { x: '15%', y: '67%', size: 1.0, color: '#7EE7F2', opacity: 0.30, halo: 1.2 },
+            { x: '28%', y: '12%', size: 1.0, color: '#E6EEF2', opacity: 0.26, halo: 1.0 },
             { x: '44%', y: '84%', size: 1.4, color: '#7EE7F2', opacity: 0.30, halo: 1.2, twinkle: true, delay: 0.9, duration: 5.7 },
-            { x: '72%', y: '20%', size: 1, color: '#C4974A', opacity: 0.28, halo: 1.2 },
+            { x: '72%', y: '20%', size: 1.0, color: '#C4974A', opacity: 0.28, halo: 1.2 },
             { x: '88%', y: '58%', size: 1.3, color: '#E6EEF2', opacity: 0.26, halo: 1.1 },
-            { x: '95%', y: '32%', size: 1, color: '#7EE7F2', opacity: 0.24, halo: 1 },
+            { x: '95%', y: '32%', size: 1.0, color: '#7EE7F2', opacity: 0.24, halo: 1.0 },
+            /* — density fill — */
+            { x: '35%', y: '48%', size: 1.1, color: '#7EE7F2', opacity: 0.24, halo: 1.0 },
+            { x: '52%', y: '66%', size: 1.0, color: '#A8C5D1', opacity: 0.22, halo: 1.0 },
+            { x: '60%', y: '36%', size: 1.2, color: '#F4D58D', opacity: 0.28, halo: 1.2 },
+            { x: '80%', y: '78%', size: 1.0, color: '#E6EEF2', opacity: 0.24, halo: 1.0 },
+            { x: '18%', y: '36%', size: 1.1, color: '#C4974A', opacity: 0.26, halo: 1.1 },
+            { x: '68%', y: '52%', size: 1.0, color: '#7EE7F2', opacity: 0.22, halo: 1.0 },
           ]}
         />
 
@@ -436,34 +485,12 @@ export function AboutSection() {
           }}
         />
 
-        <div aria-hidden className="absolute inset-0 overflow-hidden">
-          {starParticles.map((star) => (
-            <motion.div
-              key={`${star.left}-${star.top}`}
-              className="absolute"
-              style={{ left: star.left, top: star.top }}
-              initial={false}
-              whileInView={
-                shouldReduce
-                  ? {}
-                  : {
-                      opacity: [0.2, 0.82, 0.2],
-                      scale: [0.9, 1.16, 0.9],
-                      y: [0, -4, 0],
-                    }
-              }
-              viewport={{ amount: 0.3 }}
-              transition={{
-                duration: 3.4,
-                repeat: Infinity,
-                ease: 'easeInOut',
-                delay: star.delay,
-              }}
-            >
-              <StarMark size={star.size} color={star.color} className="opacity-70" />
-            </motion.div>
-          ))}
-        </div>
+        {/*
+          CSS-driven sparkle field: replaces 6 always-running Framer Motion
+          repeat:Infinity loops. starfield-twinkle is compositor-eligible
+          (opacity-only), costs zero JS, and looks equivalent at scroll speed.
+        */}
+        <StarField stars={starParticleField} />
 
         <div className="relative grid gap-9 lg:grid-cols-[0.88fr_1.38fr] lg:gap-12">
           <div className="max-w-[470px]">

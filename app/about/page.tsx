@@ -4,6 +4,10 @@ import { motion, useReducedMotion } from 'framer-motion'
 import { Section } from '@/components/ui/Section'
 import { StarMark } from '@/components/ui/StarMark'
 import { WatermarkStar } from '@/components/ui/WatermarkStar'
+import { StarField } from '@/components/ui/StarField'
+import { Constellation } from '@/components/ui/Constellation'
+import { Starburst } from '@/components/ui/Starburst'
+import { ShootingStar } from '@/components/ui/ShootingStar'
 import { StarburstButton } from '@/components/ui/StarburstButton'
 import { HoverSparkle } from '@/components/ui/HoverSparkle'
 import { siteConfig } from '@/data/site'
@@ -25,7 +29,7 @@ const proofStats = [
   },
   {
     value: '63%',
-    label: 'completion increase',
+    label: 'workflow increase',
     body: 'scheduling workflow redesign across 100+ sessions',
   },
   {
@@ -66,31 +70,17 @@ const compactSignals = [
   'Decision support',
 ]
 
-const pageSparkles = [
-  { x: '18%', y: '30%', delay: 0.2, dur: 4.6, color: '#4A9FAE' },
-  { x: '78%', y: '34%', delay: 1.4, dur: 5.2, color: '#C4974A' },
-  { x: '68%', y: '58%', delay: 2.2, dur: 4.9, color: '#7EE7F2' },
-  { x: '22%', y: '76%', delay: 3.0, dur: 5.6, color: '#C4974A' },
-]
-
-const constellationLinks = [
-  { left: '12%', top: '33%', width: 118, rotate: 18, opacity: 0.12 },
-  { left: '71%', top: '39%', width: 96, rotate: -24, opacity: 0.10 },
-  { left: '18%', top: '81%', width: 132, rotate: -12, opacity: 0.11 },
-]
+/**
+ * pageSparkles, heroStars, constellationLinks REMOVED.
+ * Those 11 Framer Motion repeat:Infinity loops (always running, never
+ * paused) are replaced below with static StarField + Constellation
+ * components — same visual result, zero main-thread JS cost.
+ */
 
 // ── Page ──────────────────────────────────────────────────────────────────────
 
 export default function AboutPage() {
   const shouldReduce = useReducedMotion()
-
-  // Fixed constellation positions for hero zone
-  const heroStars = [
-    { x: '7%',  y: '24%', delay: 0,    dur: 3.4, color: '#4A9FAE' },
-    { x: '95%', y: '36%', delay: 1.3,  dur: 4.1, color: '#C4974A' },
-    { x: '88%', y: '80%', delay: 0.7,  dur: 3.8, color: '#4A9FAE' },
-    { x: '11%', y: '90%', delay: 2.0,  dur: 3.2, color: '#7EE7F2' },
-  ]
 
   return (
     <main className="pt-16 min-h-screen relative overflow-hidden">
@@ -133,73 +123,112 @@ export default function AboutPage() {
         }}
       />
 
+      {/* ── Atmospheric starfield — replaces 11 FM repeat:Infinity loops ──
+          Static CSS twinkle; compositor-eligible opacity animation; zero JS. */}
+      <StarField
+        className="z-0"
+        stars={[
+          /* hero zone (upper half) */
+          { x: '7%',  y: '9%',  size: 1.5, color: '#4A9FAE', opacity: 0.36, halo: 1.5 },
+          { x: '18%', y: '28%', size: 1.3, color: '#4A9FAE', opacity: 0.32, halo: 1.4, twinkle: true, delay: 0.2,  duration: 4.6 },
+          { x: '78%', y: '32%', size: 1.5, color: '#C4974A', opacity: 0.38, halo: 1.6, twinkle: true, delay: 1.4,  duration: 5.2 },
+          { x: '68%', y: '56%', size: 1.3, color: '#7EE7F2', opacity: 0.34, halo: 1.4, twinkle: true, delay: 2.2,  duration: 4.9 },
+          { x: '95%', y: '34%', size: 1.2, color: '#C4974A', opacity: 0.32, halo: 1.3 },
+          { x: '88%', y: '78%', size: 1.2, color: '#4A9FAE', opacity: 0.30, halo: 1.2 },
+          { x: '11%', y: '88%', size: 1.3, color: '#7EE7F2', opacity: 0.34, halo: 1.3, twinkle: true, delay: 2.0,  duration: 3.2 },
+          /* proof / strengths zone (lower half) */
+          { x: '22%', y: '74%', size: 1.2, color: '#C4974A', opacity: 0.32, halo: 1.3, twinkle: true, delay: 3.0,  duration: 5.6 },
+          { x: '3%',  y: '44%', size: 1.0, color: '#F4D58D', opacity: 0.28, halo: 1.1 },
+          { x: '54%', y: '18%', size: 1.0, color: '#E6EEF2', opacity: 0.24, halo: 1.0 },
+          { x: '42%', y: '82%', size: 1.1, color: '#A8C5D1', opacity: 0.26, halo: 1.0 },
+          { x: '86%', y: '92%', size: 1.0, color: '#E6EEF2', opacity: 0.22, halo: 1.0 },
+          { x: '66%', y: '12%', size: 1.2, color: '#F4D58D', opacity: 0.28, halo: 1.2 },
+          { x: '34%', y: '52%', size: 1.0, color: '#7EE7F2', opacity: 0.24, halo: 1.0 },
+          { x: '76%', y: '66%', size: 1.1, color: '#C4974A', opacity: 0.26, halo: 1.1 },
+          { x: '48%', y: '96%', size: 1.0, color: '#A8C5D1', opacity: 0.22, halo: 1.0 },
+          { x: '14%', y: '62%', size: 1.1, color: '#4A9FAE', opacity: 0.28, halo: 1.1 },
+          { x: '92%', y: '56%', size: 1.0, color: '#E6EEF2', opacity: 0.24, halo: 1.0 },
+        ]}
+      />
+
+      {/* ── Constellations — replaces the 3 FM-animated horizontal lines ──
+          Real SVG constellations with dashed connections; pure static cost. */}
+      <div aria-hidden className="pointer-events-none absolute left-[10%] top-[30%] z-0 hidden md:block">
+        <Constellation
+          width={118}
+          height={64}
+          color="#4A9FAE"
+          lineOpacity={0.20}
+          pointOpacity={0.60}
+          points={[
+            { x: 6,  y: 52, size: 1.3 },
+            { x: 38, y: 18, size: 1.8, twinkle: true, delay: 0.6 },
+            { x: 78, y: 36, size: 1.3 },
+            { x: 112, y: 10, size: 1.4 },
+          ]}
+          connections={[[0, 1], [1, 2], [2, 3]]}
+        />
+      </div>
+      <div aria-hidden className="pointer-events-none absolute right-[8%] top-[36%] z-0 hidden lg:block">
+        <Constellation
+          width={96}
+          height={52}
+          color="#C4974A"
+          lineOpacity={0.18}
+          pointOpacity={0.58}
+          points={[
+            { x: 6,  y: 44, size: 1.2 },
+            { x: 40, y: 12, size: 1.6 },
+            { x: 80, y: 32, size: 1.2 },
+            { x: 90, y: 8,  size: 1.0 },
+          ]}
+          connections={[[0, 1], [1, 2], [2, 3]]}
+        />
+      </div>
+      <div aria-hidden className="pointer-events-none absolute left-[14%] top-[78%] z-0 hidden md:block">
+        <Constellation
+          width={132}
+          height={56}
+          color="#7EE7F2"
+          lineOpacity={0.16}
+          pointOpacity={0.54}
+          points={[
+            { x: 8,   y: 46, size: 1.2 },
+            { x: 46,  y: 14, size: 1.5, twinkle: true, delay: 1.4 },
+            { x: 88,  y: 34, size: 1.1 },
+            { x: 122, y: 6,  size: 1.3 },
+          ]}
+          connections={[[0, 1], [1, 2], [2, 3]]}
+        />
+      </div>
+
+      {/* ── Starbursts — dreamy/luminous accents for the About page mood ── */}
+      <div className="pointer-events-none absolute right-[4%] top-[8%] z-0 hidden lg:block">
+        <Starburst size="md" color="#4A9FAE" haloColor="#7EE7F2" opacity={0.42} pulse delay={1.2} duration={7.0} />
+      </div>
+      <div className="pointer-events-none absolute left-[2%] bottom-[18%] z-0 hidden md:block">
+        <Starburst size="sm" color="#C4974A" haloColor="#F4D58D" opacity={0.38} pulse delay={3.4} duration={6.4} />
+      </div>
+
+      {/* ── Single shooting star — slow, dreamy, left-side arc ── */}
       {!shouldReduce && (
-        <>
-          <div
-            aria-hidden
-            className="sweep-beam-slow pointer-events-none absolute inset-y-[4%] -left-[34%] z-0 w-[28%] -skew-x-12 blur-2xl"
-            style={{
-              background:
-                'linear-gradient(90deg, transparent, rgba(74,159,174,0.045), rgba(196,151,74,0.026), transparent)',
-            }}
-          />
-
-          {pageSparkles.map((sparkle) => (
-            <motion.div
-              key={`${sparkle.x}-${sparkle.y}`}
-              aria-hidden
-              className="pointer-events-none absolute z-0"
-              style={{ left: sparkle.x, top: sparkle.y }}
-              animate={{ opacity: [0.05, 0.24, 0.05], scale: [0.76, 1.08, 0.76] }}
-              transition={{
-                duration: sparkle.dur,
-                repeat: Infinity,
-                ease: 'easeInOut',
-                delay: sparkle.delay,
-              }}
-            >
-              <StarMark size="xs" color={sparkle.color} />
-            </motion.div>
-          ))}
-
-          {constellationLinks.map((link) => (
-            <motion.div
-              key={`${link.left}-${link.top}`}
-              aria-hidden
-              className="pointer-events-none absolute z-0 h-px origin-left"
-              style={{
-                left: link.left,
-                top: link.top,
-                width: link.width,
-                rotate: `${link.rotate}deg`,
-                opacity: link.opacity,
-                background:
-                  'linear-gradient(90deg, transparent, rgba(126,231,242,0.44), rgba(196,151,74,0.30), transparent)',
-              }}
-              animate={{ opacity: [link.opacity * 0.55, link.opacity, link.opacity * 0.55] }}
-              transition={{
-                duration: 5.8,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }}
-            />
-          ))}
-        </>
+        <ShootingStar
+          startX="6%" startY="22%" angle={28} duration={18} delay={-7.2}
+          scale={0.82} opacity={0.44}
+        />
       )}
 
-      {/* Floating constellation stars in hero zone */}
-      {!shouldReduce && heroStars.map((star, i) => (
-        <motion.div
-          key={i}
+      {/* Sweep beam — existing, CSS-only, kept as-is */}
+      {!shouldReduce && (
+        <div
           aria-hidden
-          className="pointer-events-none absolute z-0"
-          style={{ left: star.x, top: star.y }}
-          animate={{ opacity: [0.05, 0.26, 0.05], scale: [0.75, 1.05, 0.75] }}
-          transition={{ duration: star.dur, repeat: Infinity, ease: 'easeInOut', delay: star.delay }}
-        >
-          <StarMark size="xs" color={star.color} />
-        </motion.div>
-      ))}
+          className="sweep-beam-slow pointer-events-none absolute inset-y-[4%] -left-[34%] z-0 w-[28%] -skew-x-12 blur-2xl"
+          style={{
+            background:
+              'linear-gradient(90deg, transparent, rgba(74,159,174,0.045), rgba(196,151,74,0.026), transparent)',
+          }}
+        />
+      )}
 
       {/* ══════════════════════════════════
           HERO

@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
 import { siteConfig } from '@/data/site'
 import { StarMark } from '@/components/ui/StarMark'
+import { StarField } from '@/components/ui/StarField'
 import { Constellation } from '@/components/ui/Constellation'
 import { fadeUp, staggerContainer, useMotionSafe } from '@/lib/motion'
 
@@ -65,6 +66,39 @@ export function CapabilityStrip() {
           backdropFilter: 'blur(10px)',
         }}
       >
+        {/* Ambient star field — 5 quiet pinpoints, 1 twinkle, zero cost */}
+        <StarField
+          className="opacity-55"
+          stars={[
+            { x: '4%',  y: '24%', size: 1.2, color: '#7EE7F2', opacity: 0.32, halo: 1.3 },
+            { x: '9%',  y: '78%', size: 1.0, color: '#F4D58D', opacity: 0.26, halo: 1.1 },
+            { x: '51%', y: '14%', size: 1.0, color: '#A8C5D1', opacity: 0.22, halo: 1.0 },
+            { x: '76%', y: '86%', size: 1.1, color: '#E6EEF2', opacity: 0.24, halo: 1.0 },
+            { x: '96%', y: '44%', size: 1.2, color: '#C4974A', opacity: 0.28, halo: 1.2,
+              twinkle: true, delay: 2.4, duration: 6.2 },
+          ]}
+        />
+
+        {/* Left-side marker constellation — gold, 3-point, quiet counterpart to right */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute left-6 bottom-4 hidden md:block"
+        >
+          <Constellation
+            width={72}
+            height={28}
+            color="#C4974A"
+            lineOpacity={0.18}
+            pointOpacity={0.58}
+            points={[
+              { x: 6,  y: 20, size: 1.2 },
+              { x: 32, y: 8,  size: 1.5 },
+              { x: 66, y: 18, size: 1.1 },
+            ]}
+            connections={[[0, 1], [1, 2]]}
+          />
+        </div>
+
         {/*
           Architectural "connection diagram" — a 4-point constellation that
           echoes the capability row beneath it. Static, tucked to the top-right,

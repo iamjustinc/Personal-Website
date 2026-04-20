@@ -18,6 +18,7 @@ import { Section } from '@/components/ui/Section'
 import { StarMark } from '@/components/ui/StarMark'
 import { StarField } from '@/components/ui/StarField'
 import { Constellation } from '@/components/ui/Constellation'
+import { Starburst } from '@/components/ui/Starburst'
 import { HoverSparkle } from '@/components/ui/HoverSparkle'
 import { staggerContainer, fadeUp, useMotionSafe } from '@/lib/motion'
 import { siteConfig } from '@/data/site'
@@ -457,19 +458,24 @@ export function ContactSection({ mode = 'section' }: ContactSectionProps) {
       <StarField
         className="z-0"
         stars={[
-          { x: '7%',  y: '18%', size: 2,   color: '#E6EEF2', opacity: 0.55, halo: 2 },
+          { x: '7%',  y: '18%', size: 2.0, color: '#E6EEF2', opacity: 0.55, halo: 2.0 },
           { x: '22%', y: '62%', size: 1.5, color: '#A8C5D1', opacity: 0.42, halo: 1.4 },
           { x: '38%', y: '88%', size: 1.5, color: '#E6EEF2', opacity: 0.38, halo: 1.4 },
-          { x: '74%', y: '12%', size: 2.5, color: '#F4D58D', opacity: 0.50, halo: 2, twinkle: true, delay: 0,   duration: 5.2 },
+          { x: '74%', y: '12%', size: 2.5, color: '#F4D58D', opacity: 0.50, halo: 2.0, twinkle: true, delay: 0,   duration: 5.2 },
           { x: '91%', y: '58%', size: 1.8, color: '#7EE7F2', opacity: 0.45, halo: 1.8, twinkle: true, delay: 2.4, duration: 4.6 },
+          /* — quiet density fill: distant, restrained — */
+          { x: '12%', y: '38%', size: 1.4, color: '#F4D58D', opacity: 0.40, halo: 1.4 },
+          { x: '46%', y: '26%', size: 1.3, color: '#A8C5D1', opacity: 0.36, halo: 1.2 },
+          { x: '62%', y: '76%', size: 1.5, color: '#7EE7F2', opacity: 0.38, halo: 1.5 },
+          { x: '83%', y: '36%', size: 1.0, color: '#E6EEF2', opacity: 0.30, halo: 1.0 },
+          { x: '28%', y: '82%', size: 1.2, color: '#A8C5D1', opacity: 0.32, halo: 1.2 },
         ]}
       />
 
       {/*
-        Tiny 3-point constellation in the left margin. Static; reads as a
-        quiet observational marker in the page's quietest corner. Small
-        enough to only register on close attention — the "designed, not
-        stamped" beat.
+        Left constellation — quiet teal 3-point marker. Static.
+        Right constellation — gold 3-point, bilaterally balanced.
+        Together: "two stars watching from either side." Contact = departure.
       */}
       <div
         aria-hidden
@@ -486,11 +492,33 @@ export function ContactSection({ mode = 'section' }: ContactSectionProps) {
             { x: 30, y: 14, size: 1.8 },
             { x: 58, y: 34, size: 1.2 },
           ]}
-          connections={[
-            [0, 1],
-            [1, 2],
-          ]}
+          connections={[[0, 1], [1, 2]]}
         />
+      </div>
+
+      {/* Right margin constellation — gold, distant, quiet */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute right-[4%] bottom-[28%] z-0 hidden md:block"
+      >
+        <Constellation
+          width={72}
+          height={52}
+          color="#F4D58D"
+          lineOpacity={0.18}
+          pointOpacity={0.56}
+          points={[
+            { x: 8,  y: 44, size: 1.2 },
+            { x: 34, y: 20, size: 1.6 },
+            { x: 66, y: 38, size: 1.1, twinkle: true, delay: 1.8 },
+          ]}
+          connections={[[0, 1], [1, 2]]}
+        />
+      </div>
+
+      {/* Faint starburst — upper-right, soft presence, like a distant star */}
+      <div className="pointer-events-none absolute right-[10%] top-[14%] hidden lg:block">
+        <Starburst size="sm" color="#E6EEF2" haloColor="#A8C5D1" opacity={0.26} pulse delay={2.8} duration={8.0} />
       </div>
 
       <motion.div

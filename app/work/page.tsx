@@ -4,10 +4,12 @@ import { motion, useReducedMotion, type Variants } from 'framer-motion'
 import { ProjectFloatingScreenshots } from '@/components/projects/ProjectFloatingScreenshots'
 import { Section } from '@/components/ui/Section'
 import { StarMark } from '@/components/ui/StarMark'
+import { StarField } from '@/components/ui/StarField'
+import { Constellation } from '@/components/ui/Constellation'
+import { Starburst } from '@/components/ui/Starburst'
 import { StarburstButton } from '@/components/ui/StarburstButton'
 import { HoverSparkle } from '@/components/ui/HoverSparkle'
 import { WatermarkStar } from '@/components/ui/WatermarkStar'
-import { Constellation } from '@/components/ui/Constellation'
 import { projects } from '@/data/projects'
 import type { Project } from '@/types/project'
 import { EASING, fadeIn } from '@/lib/motion'
@@ -388,12 +390,54 @@ export default function WorkPage() {
     .filter((project): project is Project => Boolean(project))
 
   return (
-    <main className="pt-16 min-h-screen">
-      <Section paddingY="lg">
-        <div className="absolute top-32 right-0 pointer-events-none overflow-hidden" aria-hidden>
-          <WatermarkStar size={480} opacity={0.03} direction={-1} />
-        </div>
+    <main className="pt-16 min-h-screen relative overflow-hidden">
+      {/* ── Work page atmosphere: architectural, directional, per-project ── */}
 
+      <div className="absolute top-32 right-0 pointer-events-none overflow-hidden" aria-hidden>
+        <WatermarkStar size={480} opacity={0.03} direction={-1} />
+      </div>
+
+      {/* Teal glow — upper-left */}
+      <div
+        aria-hidden
+        className="absolute left-[-6%] top-[4%] h-[420px] w-[420px] rounded-full blur-3xl pointer-events-none"
+        style={{ background: 'radial-gradient(circle, rgba(15,122,122,0.08) 0%, rgba(74,159,174,0.03) 44%, transparent 72%)' }}
+      />
+      {/* Gold glow — lower-right */}
+      <div
+        aria-hidden
+        className="absolute right-[-4%] bottom-[8%] h-[360px] w-[360px] rounded-full blur-3xl pointer-events-none"
+        style={{ background: 'radial-gradient(circle, rgba(196,151,74,0.06) 0%, transparent 68%)' }}
+      />
+
+      {/* Full-page starfield — 12 stars, 2 twinkle, bilaterally spread */}
+      <StarField
+        className="z-0"
+        stars={[
+          { x: '2%',  y: '8%',  size: 1.5, color: '#F4D58D', opacity: 0.34, halo: 1.5 },
+          { x: '4%',  y: '38%', size: 1.2, color: '#7EE7F2', opacity: 0.28, halo: 1.2, twinkle: true, delay: 1.4, duration: 5.8 },
+          { x: '3%',  y: '68%', size: 1.0, color: '#A8C5D1', opacity: 0.26, halo: 1.0 },
+          { x: '5%',  y: '92%', size: 1.1, color: '#E6EEF2', opacity: 0.24, halo: 1.0 },
+          { x: '96%', y: '12%', size: 1.4, color: '#C4974A', opacity: 0.32, halo: 1.4 },
+          { x: '97%', y: '42%', size: 1.0, color: '#E6EEF2', opacity: 0.26, halo: 1.0 },
+          { x: '95%', y: '70%', size: 1.3, color: '#7EE7F2', opacity: 0.30, halo: 1.3, twinkle: true, delay: 2.8, duration: 6.4 },
+          { x: '98%', y: '92%', size: 1.0, color: '#A8C5D1', opacity: 0.24, halo: 1.0 },
+          { x: '46%', y: '4%',  size: 1.2, color: '#F4D58D', opacity: 0.28, halo: 1.2 },
+          { x: '54%', y: '96%', size: 1.0, color: '#7EE7F2', opacity: 0.22, halo: 1.0 },
+          { x: '22%', y: '6%',  size: 1.1, color: '#E6EEF2', opacity: 0.26, halo: 1.0 },
+          { x: '78%', y: '94%', size: 1.1, color: '#C4974A', opacity: 0.24, halo: 1.0 },
+        ]}
+      />
+
+      {/* Starburst anchors — upper-right and lower-left */}
+      <div className="pointer-events-none absolute right-[2%] top-[8%] z-0 hidden lg:block">
+        <Starburst size="md" color="#C4974A" haloColor="#F4D58D" opacity={0.36} pulse delay={0.8} duration={7.2} />
+      </div>
+      <div className="pointer-events-none absolute left-[2%] bottom-[12%] z-0 hidden lg:block">
+        <Starburst size="sm" color="#7EE7F2" haloColor="#4A9FAE" opacity={0.30} />
+      </div>
+
+      <Section paddingY="lg">
         {/*
           Page-anchor constellation — 5 points in a loose arc, placed in the
           header's empty air. Reads as the page's identity marker (like a
@@ -417,12 +461,49 @@ export default function WorkPage() {
               { x: 104, y: 36, size: 1.4 },
               { x: 132, y: 58, size: 1.2 },
             ]}
-            connections={[
-              [0, 1],
-              [1, 2],
-              [2, 3],
-              [3, 4],
+            connections={[[0, 1], [1, 2], [2, 3], [3, 4]]}
+          />
+        </div>
+
+        {/* Mid-page teal constellation — between card 1 and 2 */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute right-[12%] top-[38%] hidden lg:block"
+        >
+          <Constellation
+            width={108}
+            height={62}
+            color="#7EE7F2"
+            lineOpacity={0.20}
+            pointOpacity={0.60}
+            points={[
+              { x: 6,  y: 52, size: 1.2 },
+              { x: 38, y: 18, size: 1.6, twinkle: true, delay: 1.2 },
+              { x: 78, y: 36, size: 1.2 },
+              { x: 102, y: 8, size: 1.4 },
             ]}
+            connections={[[0, 1], [1, 2], [2, 3]]}
+          />
+        </div>
+
+        {/* Lower-page constellation — between card 2 and 3, left side */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute left-[10%] top-[64%] hidden lg:block"
+        >
+          <Constellation
+            width={88}
+            height={54}
+            color="#4A9FAE"
+            lineOpacity={0.18}
+            pointOpacity={0.56}
+            points={[
+              { x: 6,  y: 44, size: 1.2 },
+              { x: 34, y: 14, size: 1.5 },
+              { x: 68, y: 32, size: 1.1 },
+              { x: 82, y: 6,  size: 1.3 },
+            ]}
+            connections={[[0, 1], [1, 2], [2, 3]]}
           />
         </div>
 

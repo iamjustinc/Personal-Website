@@ -14,8 +14,8 @@ import { ShootingStar } from '@/components/ui/ShootingStar'
  * PERF NOTE — compositor layer budget:
  *   ShootingStars (4)  × will-change:transform,opacity  =  4 layers
  *   Twinkling stars (3) — no will-change on tiny spans   =  0 promoted
- *   Starbursts (3) — opacity-only pulse, no will-change  =  0 promoted
- *   Constellations + arc SVG — fully static              =  0
+ *   Starbursts (4) — opacity-only pulse, no will-change  =  0 promoted
+ *   Constellations + arc SVGs — fully static             =  0
  *   Depth glow pools — static CSS backgrounds            =  0
  *   ──────────────────────────────────────────────────────────────────
  *   Hero-specific layers: 4  (vs 20+ before)
@@ -120,6 +120,9 @@ export function Hero() {
             { x: '27%', y: '48%', size: 1.0, color: '#7EE7F2', opacity: 0.26, halo: 1.0 },
             { x: '33%', y: '80%', size: 1.0, color: '#E6EEF2', opacity: 0.32, halo: 1.2 },
             { x: '3%',  y: '88%', size: 1.5, color: '#7EE7F2', opacity: 0.36, halo: 1.4 },
+            /* ─ A–C bridge: center-left fill ─ */
+            { x: '31%', y: '56%', size: 1.1, color: '#A8C5D1', opacity: 0.24, halo: 1.1 },
+            { x: '37%', y: '72%', size: 1.0, color: '#7EE7F2', opacity: 0.22, halo: 1.0 },
 
             /* ─ Cluster B: upper center + right ─ */
             { x: '41%', y: '38%', size: 1.2, color: '#F4D58D', opacity: 0.36, halo: 1.5 },
@@ -130,6 +133,9 @@ export function Hero() {
             { x: '84%', y: '19%', size: 1.2, color: '#F4D58D', opacity: 0.40, halo: 1.8,
               twinkle: true, delay: 3.1, duration: 6.0 },
             { x: '96%', y: '14%', size: 1.5, color: '#E6EEF2', opacity: 0.40, halo: 1.6 },
+            /* ─ B center fill ─ */
+            { x: '48%', y: '34%', size: 1.0, color: '#E6EEF2', opacity: 0.22, halo: 1.0 },
+            { x: '53%', y: '50%', size: 1.1, color: '#A8C5D1', opacity: 0.26, halo: 1.1 },
 
             /* ─ Cluster C: lower band + far edges ─ */
             { x: '48%', y: '70%', size: 1.0, color: '#7EE7F2', opacity: 0.30, halo: 1.2 },
@@ -141,6 +147,11 @@ export function Hero() {
             { x: '91%', y: '30%', size: 1.3, color: '#E6EEF2', opacity: 0.24, halo: 1.1,
               twinkle: true, delay: 1.7, duration: 5.8 },
             { x: '94%', y: '73%', size: 1.5, color: '#E6EEF2', opacity: 0.28, halo: 1.3 },
+            /* ─ Far-right lower fill ─ */
+            { x: '87%', y: '62%', size: 1.0, color: '#7EE7F2', opacity: 0.24, halo: 1.0 },
+            { x: '83%', y: '80%', size: 1.2, color: '#F4D58D', opacity: 0.26, halo: 1.2 },
+            { x: '68%', y: '76%', size: 1.0, color: '#A8C5D1', opacity: 0.22, halo: 1.0 },
+            { x: '61%', y: '60%', size: 1.1, color: '#E6EEF2', opacity: 0.20, halo: 1.0 },
           ]}
         />
 
@@ -164,6 +175,34 @@ export function Hero() {
         <div className="absolute right-[7%] bottom-[22%] hidden lg:block">
           <Starburst size="sm" color="#E6EEF2" haloColor="#7EE7F2" opacity={0.34} />
         </div>
+        {/* Fourth starburst: large luminous anchor, lower-center — purely static */}
+        <div className="absolute left-[43%] bottom-[14%] hidden lg:block">
+          <Starburst size="lg" color="#C4974A" haloColor="#F4D58D" opacity={0.18} />
+        </div>
+
+        {/* ── Lower-left orbital arc ─────────────────────────────────────
+            Mirror echo of the upper-right arc family — anchors the lower
+            quadrant. Lighter opacity for perceived depth (further away). */}
+        <svg
+          className="absolute left-[0%] bottom-[6%] hidden h-[200px] w-[360px] opacity-[0.14] lg:block"
+          viewBox="0 0 360 200"
+          fill="none"
+        >
+          <path
+            d="M6 194 C82 138 168 118 354 152"
+            stroke="rgba(196,151,74,0.44)"
+            strokeWidth="0.9"
+            strokeDasharray="2 16"
+            strokeLinecap="round"
+          />
+          <path
+            d="M20 158 C106 106 202 96 352 124"
+            stroke="rgba(74,159,174,0.28)"
+            strokeWidth="0.7"
+            strokeDasharray="1.5 20"
+            strokeLinecap="round"
+          />
+        </svg>
 
         {/* ── Orbital arc traces ──────────────────────────────────────────
             Two faint dashed curves. Completely static SVG — zero cost.

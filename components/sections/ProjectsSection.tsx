@@ -7,6 +7,7 @@ import { StarMark } from '@/components/ui/StarMark'
 import { StarField } from '@/components/ui/StarField'
 import { Constellation } from '@/components/ui/Constellation'
 import { StarburstButton } from '@/components/ui/StarburstButton'
+import { Starburst } from '@/components/ui/Starburst'
 import { HoverSparkle } from '@/components/ui/HoverSparkle'
 import { projects } from '@/data/projects'
 import { fadeUp, fadeIn, staggerContainer, useMotionSafe } from '@/lib/motion'
@@ -61,7 +62,27 @@ export function ProjectsSection() {
   )
 
   return (
-    <Section id="projects" paddingY="lg">
+    <Section id="projects" paddingY="lg" className="relative overflow-hidden">
+      {/* Section-level atmosphere: sparse bilateral stars + starburst anchors */}
+      <div aria-hidden className="pointer-events-none absolute inset-0">
+        <StarField
+          stars={[
+            { x: '2%',  y: '8%',  size: 1.5, color: '#F4D58D', opacity: 0.32, halo: 1.5 },
+            { x: '5%',  y: '54%', size: 1.2, color: '#7EE7F2', opacity: 0.26, halo: 1.2 },
+            { x: '8%',  y: '88%', size: 1.0, color: '#A8C5D1', opacity: 0.22, halo: 1.0 },
+            { x: '92%', y: '16%', size: 1.4, color: '#C4974A', opacity: 0.30, halo: 1.4, twinkle: true, delay: 1.4, duration: 5.8 },
+            { x: '96%', y: '62%', size: 1.2, color: '#E6EEF2', opacity: 0.24, halo: 1.1 },
+            { x: '95%', y: '88%', size: 1.0, color: '#7EE7F2', opacity: 0.22, halo: 1.0 },
+          ]}
+        />
+        <div className="absolute left-[1%] top-[10%] hidden lg:block">
+          <Starburst size="md" color="#C4974A" opacity={0.36} pulse delay={0.6} duration={6.8} />
+        </div>
+        <div className="absolute right-[1%] bottom-[10%] hidden lg:block">
+          <Starburst size="sm" color="#7EE7F2" haloColor="#4A9FAE" opacity={0.30} />
+        </div>
+      </div>
+
       {/* Heading */}
       <motion.div
         variants={inn}
@@ -136,14 +157,19 @@ export function ProjectsSection() {
               />
 
               <StarField
-                className="z-0 opacity-85"
+                className="z-0 opacity-88"
                 stars={[
-                  { x: '7%', y: '17%', size: 1.3, color: '#F4D58D', opacity: 0.42, halo: 1.5 },
-                  { x: '14%', y: '73%', size: 1, color: '#7EE7F2', opacity: 0.30, halo: 1.2, twinkle: true, delay: 1.5, duration: 5.4 },
-                  { x: '36%', y: '10%', size: 1, color: '#E6EEF2', opacity: 0.28, halo: 1.1 },
+                  { x: '7%',  y: '17%', size: 1.3, color: '#F4D58D',              opacity: 0.42, halo: 1.5 },
+                  { x: '14%', y: '73%', size: 1.0, color: '#7EE7F2',              opacity: 0.30, halo: 1.2, twinkle: true, delay: 1.5, duration: 5.4 },
+                  { x: '36%', y: '10%', size: 1.0, color: '#E6EEF2',              opacity: 0.28, halo: 1.1 },
                   { x: '63%', y: '22%', size: 1.5, color: project.panelAccentColor, opacity: 0.34, halo: 1.4 },
-                  { x: '78%', y: '76%', size: 1, color: '#F4D58D', opacity: 0.28, halo: 1.2 },
-                  { x: '93%', y: '44%', size: 1.3, color: '#7EE7F2', opacity: 0.30, halo: 1.2, twinkle: true, delay: 3.2, duration: 6.2 },
+                  { x: '78%', y: '76%', size: 1.0, color: '#F4D58D',              opacity: 0.28, halo: 1.2 },
+                  { x: '93%', y: '44%', size: 1.3, color: '#7EE7F2',              opacity: 0.30, halo: 1.2, twinkle: true, delay: 3.2, duration: 6.2 },
+                  /* — card density fill — */
+                  { x: '24%', y: '42%', size: 1.1, color: '#A8C5D1',              opacity: 0.24, halo: 1.0 },
+                  { x: '50%', y: '58%', size: 1.0, color: '#E6EEF2',              opacity: 0.22, halo: 1.0 },
+                  { x: '72%', y: '36%', size: 1.2, color: project.panelAccentColor, opacity: 0.26, halo: 1.1 },
+                  { x: '86%', y: '88%', size: 1.0, color: '#A8C5D1',              opacity: 0.22, halo: 1.0 },
                 ]}
               />
 

@@ -4,6 +4,9 @@ import { motion, useReducedMotion } from 'framer-motion'
 import { Section } from '@/components/ui/Section'
 import { StarMark } from '@/components/ui/StarMark'
 import { WatermarkStar } from '@/components/ui/WatermarkStar'
+import { StarField } from '@/components/ui/StarField'
+import { Constellation } from '@/components/ui/Constellation'
+import { Starburst } from '@/components/ui/Starburst'
 import { StarburstButton } from '@/components/ui/StarburstButton'
 import { HoverSparkle } from '@/components/ui/HoverSparkle'
 import { siteConfig } from '@/data/site'
@@ -361,12 +364,86 @@ export default function ResumePage() {
     .sort((a, b) => a.order - b.order)
 
   return (
-    <main className="min-h-screen pt-16">
+    <main className="min-h-screen pt-16 relative overflow-hidden">
+      {/* ── Resume page atmosphere: sharp, calm, elegant celestial ── */}
+
+      {/* Watermark */}
+      <div className="absolute right-0 top-24 overflow-hidden pointer-events-none" aria-hidden>
+        <WatermarkStar size={460} opacity={0.028} direction={-1} />
+      </div>
+
+      {/* Teal depth glow — upper-left */}
+      <div
+        aria-hidden
+        className="absolute left-[-8%] top-[6%] h-[400px] w-[400px] rounded-full blur-3xl pointer-events-none"
+        style={{ background: 'radial-gradient(circle, rgba(15,122,122,0.07) 0%, rgba(74,159,174,0.03) 44%, transparent 72%)' }}
+      />
+      {/* Gold depth glow — lower-right */}
+      <div
+        aria-hidden
+        className="absolute right-[-6%] bottom-[10%] h-[300px] w-[300px] rounded-full blur-3xl pointer-events-none"
+        style={{ background: 'radial-gradient(circle, rgba(196,151,74,0.06) 0%, transparent 68%)' }}
+      />
+
+      {/* Static star field — 10 restrained pinpoints, 2 twinkle, zero animation cost */}
+      <StarField
+        className="z-0"
+        stars={[
+          { x: '2%',  y: '12%', size: 1.5, color: '#F4D58D', opacity: 0.38, halo: 1.5 },
+          { x: '5%',  y: '46%', size: 1.2, color: '#7EE7F2', opacity: 0.30, halo: 1.2, twinkle: true, delay: 1.2, duration: 5.6 },
+          { x: '4%',  y: '78%', size: 1.0, color: '#A8C5D1', opacity: 0.26, halo: 1.0 },
+          { x: '96%', y: '8%',  size: 1.4, color: '#C4974A', opacity: 0.32, halo: 1.4 },
+          { x: '97%', y: '34%', size: 1.0, color: '#E6EEF2', opacity: 0.24, halo: 1.0 },
+          { x: '95%', y: '62%', size: 1.3, color: '#7EE7F2', opacity: 0.30, halo: 1.3, twinkle: true, delay: 3.0, duration: 6.2 },
+          { x: '98%', y: '84%', size: 1.0, color: '#A8C5D1', opacity: 0.24, halo: 1.0 },
+          { x: '48%', y: '4%',  size: 1.1, color: '#E6EEF2', opacity: 0.26, halo: 1.0 },
+          { x: '52%', y: '94%', size: 1.0, color: '#7EE7F2', opacity: 0.22, halo: 1.0 },
+          { x: '26%', y: '6%',  size: 1.2, color: '#F4D58D', opacity: 0.28, halo: 1.2 },
+        ]}
+      />
+
+      {/* Header constellation — gold 4-point, anchors the name block */}
+      <div aria-hidden className="pointer-events-none absolute left-[2%] top-[18%] hidden md:block">
+        <Constellation
+          width={96}
+          height={58}
+          color="#C4974A"
+          lineOpacity={0.22}
+          pointOpacity={0.62}
+          points={[
+            { x: 6,  y: 50, size: 1.3 },
+            { x: 34, y: 18, size: 1.8, twinkle: true, delay: 0.4 },
+            { x: 70, y: 32, size: 1.2 },
+            { x: 90, y: 8,  size: 1.4 },
+          ]}
+          connections={[[0, 1], [1, 2], [2, 3]]}
+        />
+      </div>
+
+      {/* Experience constellation — teal, mid-page right, navigational marker */}
+      <div aria-hidden className="pointer-events-none absolute right-[2%] top-[42%] hidden md:block">
+        <Constellation
+          width={72}
+          height={96}
+          color="#4A9FAE"
+          lineOpacity={0.18}
+          pointOpacity={0.56}
+          points={[
+            { x: 12, y: 10,  size: 1.2 },
+            { x: 58, y: 28,  size: 1.5 },
+            { x: 36, y: 66,  size: 1.1, twinkle: true, delay: 1.6 },
+            { x: 64, y: 88,  size: 1.3 },
+          ]}
+          connections={[[0, 1], [1, 2], [2, 3]]}
+        />
+      </div>
+
+      {/* Starburst — upper-right, faint teal, anchors the page */}
+      <div className="pointer-events-none absolute right-[3%] top-[6%] hidden lg:block">
+        <Starburst size="sm" color="#4A9FAE" haloColor="#7EE7F2" opacity={0.32} pulse delay={1.8} duration={7.8} />
+      </div>
+
       <Section paddingY="lg">
-        {/* Watermark */}
-        <div className="absolute right-0 top-24 overflow-hidden pointer-events-none" aria-hidden>
-          <WatermarkStar size={460} opacity={0.028} direction={-1} />
-        </div>
 
         <div className="mx-auto max-w-[820px]">
 

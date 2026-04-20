@@ -5,6 +5,7 @@ import { Section } from '@/components/ui/Section'
 import { StarMark } from '@/components/ui/StarMark'
 import { StarField } from '@/components/ui/StarField'
 import { Constellation } from '@/components/ui/Constellation'
+import { Starburst } from '@/components/ui/Starburst'
 import { EASING, fadeUp, fadeIn, staggerContainer, useMotionSafe } from '@/lib/motion'
 import { siteConfig } from '@/data/site'
 import { cn } from '@/lib/utils'
@@ -31,11 +32,15 @@ const careerTagsByRole: Record<string, string[]> = {
 }
 
 const ambientStars = [
-  { left: '9%', top: '14%', delay: 0, color: '#C4974A' },
+  { left: '9%',  top: '14%', delay: 0,   color: '#C4974A' },
   { left: '86%', top: '10%', delay: 0.7, color: '#4A9FAE' },
   { left: '76%', top: '42%', delay: 1.4, color: '#C4974A' },
   { left: '14%', top: '72%', delay: 2.1, color: '#4A9FAE' },
   { left: '92%', top: '82%', delay: 2.8, color: '#62BDB8' },
+  /* extra ambient — fills bilateral emptiness in the timeline */
+  { left: '42%', top: '44%', delay: 3.5, color: '#7EE7F2' },
+  { left: '28%', top: '28%', delay: 4.2, color: '#C4974A' },
+  { left: '68%', top: '68%', delay: 0.3, color: '#4A9FAE' },
 ]
 
 /**
@@ -69,15 +74,29 @@ export function CareerSection() {
           style={{ background: 'rgba(196,151,74,0.055)' }}
         />
         <StarField
-          className="opacity-75"
+          className="opacity-78"
           stars={[
-            { x: '6%', y: '34%', size: 1, color: '#7EE7F2', opacity: 0.28, halo: 1.1 },
+            { x: '6%',  y: '34%', size: 1.0, color: '#7EE7F2', opacity: 0.28, halo: 1.1 },
             { x: '21%', y: '88%', size: 1.3, color: '#F4D58D', opacity: 0.30, halo: 1.3 },
-            { x: '48%', y: '7%', size: 1, color: '#E6EEF2', opacity: 0.24, halo: 1 },
-            { x: '64%', y: '58%', size: 1, color: '#7EE7F2', opacity: 0.24, halo: 1 },
-            { x: '89%', y: '28%', size: 1.4, color: '#C4974A', opacity: 0.28, halo: 1.2, twinkle: true, delay: 2.1, duration: 6 },
+            { x: '48%', y: '7%',  size: 1.0, color: '#E6EEF2', opacity: 0.24, halo: 1.0 },
+            { x: '64%', y: '58%', size: 1.0, color: '#7EE7F2', opacity: 0.24, halo: 1.0 },
+            { x: '89%', y: '28%', size: 1.4, color: '#C4974A', opacity: 0.28, halo: 1.2, twinkle: true, delay: 2.1, duration: 6.0 },
+            /* — bilateral density fill — */
+            { x: '12%', y: '16%', size: 1.2, color: '#F4D58D', opacity: 0.32, halo: 1.3 },
+            { x: '4%',  y: '62%', size: 1.0, color: '#A8C5D1', opacity: 0.26, halo: 1.0 },
+            { x: '34%', y: '44%', size: 1.1, color: '#7EE7F2', opacity: 0.24, halo: 1.1 },
+            { x: '56%', y: '76%', size: 1.0, color: '#E6EEF2', opacity: 0.22, halo: 1.0 },
+            { x: '72%', y: '18%', size: 1.3, color: '#C4974A', opacity: 0.30, halo: 1.3 },
+            { x: '82%', y: '68%', size: 1.0, color: '#7EE7F2', opacity: 0.26, halo: 1.0 },
+            { x: '94%', y: '46%', size: 1.1, color: '#A8C5D1', opacity: 0.24, halo: 1.0 },
           ]}
         />
+        {/* Starburst anchor — upper-right, teal, soft pulse */}
+        <div className="absolute right-[3%] top-[6%] hidden sm:block">
+          <Starburst size="sm" color="#4A9FAE" haloColor="#7EE7F2" opacity={0.42} pulse delay={0.8} duration={7.6} />
+        </div>
+
+        {/* Right-side constellation — teal, 4-point vertical */}
         <div className="absolute right-[6%] top-[24%] hidden lg:block">
           <Constellation
             width={96}
@@ -86,18 +105,55 @@ export function CareerSection() {
             lineOpacity={0.18}
             pointOpacity={0.56}
             points={[
-              { x: 12, y: 18, size: 1.2 },
-              { x: 58, y: 34, size: 1.5 },
-              { x: 38, y: 78, size: 1.1, twinkle: true, delay: 1.6 },
+              { x: 12, y: 18,  size: 1.2 },
+              { x: 58, y: 34,  size: 1.5 },
+              { x: 38, y: 78,  size: 1.1, twinkle: true, delay: 1.6 },
               { x: 82, y: 118, size: 1.3 },
             ]}
-            connections={[
-              [0, 1],
-              [1, 2],
-              [2, 3],
-            ]}
+            connections={[[0, 1], [1, 2], [2, 3]]}
           />
         </div>
+
+        {/* Left-side constellation — gold, 4-point, mirrors right side */}
+        <div className="absolute left-[2%] bottom-[26%] hidden lg:block">
+          <Constellation
+            width={78}
+            height={58}
+            color="#C4974A"
+            lineOpacity={0.18}
+            pointOpacity={0.60}
+            points={[
+              { x: 6,  y: 50, size: 1.2 },
+              { x: 28, y: 22, size: 1.5 },
+              { x: 58, y: 38, size: 1.1 },
+              { x: 72, y: 14, size: 1.3 },
+            ]}
+            connections={[[0, 1], [1, 2], [2, 3]]}
+          />
+        </div>
+
+        {/* Faint orbital arc — right side lower, echoes the timeline rail direction */}
+        <svg
+          className="absolute right-[2%] bottom-[16%] hidden opacity-[0.16] lg:block"
+          style={{ width: 200, height: 140 }}
+          viewBox="0 0 200 140"
+          fill="none"
+        >
+          <path
+            d="M8 132 C58 88 118 72 194 108"
+            stroke="rgba(126,231,242,0.44)"
+            strokeWidth="0.8"
+            strokeDasharray="2 12"
+            strokeLinecap="round"
+          />
+          <path
+            d="M14 100 C68 64 128 54 196 80"
+            stroke="rgba(196,151,74,0.28)"
+            strokeWidth="0.6"
+            strokeDasharray="1.5 16"
+            strokeLinecap="round"
+          />
+        </svg>
         {ambientStars.map((star) => (
           <motion.span
             key={`${star.left}-${star.top}`}
