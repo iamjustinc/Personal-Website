@@ -43,7 +43,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2, ease: EASING }}
           className="fixed inset-0 z-40 flex flex-col"
-          style={{ background: 'rgba(10,22,40,0.97)', backdropFilter: 'blur(24px)' }}
+          style={{ background: 'rgba(10,22,40,0.97)', backdropFilter: 'blur(18px)' }}
         >
           {/* Top bar */}
           <div className="h-16 flex items-center justify-between px-6">

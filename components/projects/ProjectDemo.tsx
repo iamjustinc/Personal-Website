@@ -114,6 +114,7 @@ export function ProjectDemo({ project }: { project: Project }) {
               <iframe
                 src={project.demoUrl}
                 className="w-full h-full"
+                loading="lazy"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
                 title={`${project.name} demo`}
@@ -178,7 +179,8 @@ export function ProjectDemo({ project }: { project: Project }) {
                   controls
                   muted
                   playsInline
-                  preload="metadata"
+                  preload="none"
+                  poster={project.screenshots[0]}
                   className="h-full w-full object-contain"
                   aria-label="Kestrel quick demo video"
                 >

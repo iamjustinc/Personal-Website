@@ -578,20 +578,13 @@ export default function AboutPage() {
 
                   {/* Hover light sweep */}
                   {!shouldReduce && (
-                    <motion.div
+                    <div
                       aria-hidden
-                      className="pointer-events-none absolute inset-y-0 -skew-x-12 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      className="pointer-events-none absolute inset-y-0 -skew-x-12 opacity-0 transition-[opacity,transform] duration-700 ease-out group-hover:translate-x-[420%] group-hover:opacity-100"
                       style={{
                         width: '52%',
                         left: '-62%',
                         background: `linear-gradient(90deg, transparent, ${accentColor}0E, transparent)`,
-                      }}
-                      animate={{ x: ['0%', '420%'] }}
-                      transition={{
-                        duration: 1.1,
-                        repeat: Infinity,
-                        repeatDelay: 0.6,
-                        ease: 'easeInOut',
                       }}
                     />
                   )}
@@ -825,20 +818,13 @@ export default function AboutPage() {
 
                     {/* Hover light sweep */}
                     {!shouldReduce && (
-                      <motion.div
+                      <div
                         aria-hidden
-                        className="pointer-events-none absolute inset-y-0 -skew-x-12 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        className="pointer-events-none absolute inset-y-0 -skew-x-12 opacity-0 transition-[opacity,transform] duration-700 ease-out group-hover:translate-x-[400%] group-hover:opacity-100"
                         style={{
                           width: '55%',
                           left: '-65%',
                           background: `linear-gradient(90deg, transparent, ${accentColor}0E, transparent)`,
-                        }}
-                        animate={{ x: ['0%', '400%'] }}
-                        transition={{
-                          duration: 1.2,
-                          repeat: Infinity,
-                          repeatDelay: 0.8,
-                          ease: 'easeInOut',
                         }}
                       />
                     )}
@@ -929,7 +915,9 @@ export default function AboutPage() {
             <motion.div
               aria-hidden
               className="pointer-events-none absolute right-7 top-7"
-              animate={{ opacity: [0.08, 0.44, 0.08], scale: [0.78, 1.08, 0.78] }}
+              initial={false}
+              whileInView={{ opacity: [0.08, 0.44, 0.08], scale: [0.78, 1.08, 0.78] }}
+              viewport={{ amount: 0.65 }}
               transition={{ duration: 4.4, repeat: Infinity, ease: 'easeInOut' }}
             >
               <StarMark size="xs" color="#C4974A" />
@@ -974,4 +962,3 @@ export default function AboutPage() {
     </main>
   )
 }
-

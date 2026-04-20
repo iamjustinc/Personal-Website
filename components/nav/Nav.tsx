@@ -39,8 +39,8 @@ export function Nav() {
 
   const navShellStyle = {
     background: 'rgba(10,24,44,0.82)',
-    backdropFilter: 'blur(36px) saturate(180%)',
-    WebkitBackdropFilter: 'blur(36px) saturate(180%)',
+    backdropFilter: 'blur(22px) saturate(150%)',
+    WebkitBackdropFilter: 'blur(22px) saturate(150%)',
     border: '1px solid rgba(15,122,122,0.28)',
     boxShadow:
       '0 8px 48px rgba(0,0,0,0.60), 0 0 0 1px rgba(15,122,122,0.08) inset, 0 1px 0 rgba(255,255,255,0.05) inset, 0 0 24px rgba(15,122,122,0.05)',
@@ -48,8 +48,8 @@ export function Nav() {
 
   const dropdownShellStyle = {
     background: 'rgba(8,20,38,0.97)',
-    backdropFilter: 'blur(36px) saturate(180%)',
-    WebkitBackdropFilter: 'blur(36px) saturate(180%)',
+    backdropFilter: 'blur(22px) saturate(150%)',
+    WebkitBackdropFilter: 'blur(22px) saturate(150%)',
     border: '1px solid rgba(15,122,122,0.22)',
     boxShadow: '0 12px 40px rgba(0,0,0,0.65), 0 0 0 1px rgba(15,122,122,0.06) inset',
   } as const

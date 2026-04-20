@@ -78,7 +78,8 @@ export function GlobalStarCursor() {
       // ── Position ──────────────────────────────────────────────────────────
       // Coalesce high-frequency mousemove events into one compositor-friendly
       // transform write per animation frame.
-      pointRef.current = { x: e.clientX, y: e.clientY }
+      pointRef.current.x = e.clientX
+      pointRef.current.y = e.clientY
       if (rafRef.current === null) {
         rafRef.current = window.requestAnimationFrame(flushCursor)
       }

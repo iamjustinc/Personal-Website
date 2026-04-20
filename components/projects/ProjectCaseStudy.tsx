@@ -452,7 +452,9 @@ function FactStrip({ project, enhanced = false }: { project: Project; enhanced?:
             left: '-40%',
             background: `linear-gradient(90deg, transparent, ${project.panelAccentColor}0A, transparent)`,
           }}
-          animate={{ x: ['0%', '520%'] }}
+          initial={false}
+          whileInView={{ x: ['0%', '520%'] }}
+          viewport={{ amount: 0.45 }}
           transition={{ duration: 6, repeat: Infinity, repeatDelay: 8, ease: 'easeInOut' }}
           aria-hidden
         />
@@ -810,7 +812,9 @@ function Callout({
           {!reduceMotion && (
             <motion.div
               className="pointer-events-none absolute inset-0 rounded-[18px]"
-              animate={{ opacity: [0, 0.5, 0] }}
+              initial={false}
+              whileInView={{ opacity: [0, 0.5, 0] }}
+              viewport={{ amount: 0.65 }}
               transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}
               style={{ boxShadow: `inset 0 0 32px ${accent}14` }}
               aria-hidden
@@ -894,7 +898,9 @@ function PmInsight({
           key={i}
           className="pointer-events-none absolute"
           style={{ left: star.x, top: star.y }}
-          animate={{ opacity: [0.08, 0.38, 0.08], scale: [0.7, 1.1, 0.7] }}
+          initial={false}
+          whileInView={{ opacity: [0.08, 0.38, 0.08], scale: [0.7, 1.1, 0.7] }}
+          viewport={{ amount: 0.65 }}
           transition={{ duration: star.dur, repeat: Infinity, ease: 'easeInOut', delay: star.delay }}
           aria-hidden
         >
@@ -965,15 +971,13 @@ function ScreenshotBlock({
 
         {/* Hover shimmer sweep */}
         {!reduceMotion && (
-          <motion.div
-            className="pointer-events-none absolute inset-y-0 z-10 opacity-0 group-hover:opacity-100 -skew-x-12 transition-opacity duration-300"
+          <div
+            className="pointer-events-none absolute inset-y-0 z-10 -skew-x-12 opacity-0 transition-[opacity,transform] duration-700 ease-out group-hover:translate-x-[500%] group-hover:opacity-100"
             style={{
               width: '35%',
               left: '-40%',
               background: `linear-gradient(90deg, transparent, ${accent}14, transparent)`,
             }}
-            animate={{ x: ['0%', '500%'] }}
-            transition={{ duration: 1.4, repeat: Infinity, repeatDelay: 1.2, ease: 'easeInOut' }}
             aria-hidden
           />
         )}
@@ -1097,15 +1101,13 @@ function InsightGrid({
 
             {/* Hover light sweep */}
             {!reduceMotion && (
-              <motion.div
-                className="pointer-events-none absolute inset-y-0 -skew-x-12 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+              <div
+                className="pointer-events-none absolute inset-y-0 -skew-x-12 opacity-0 transition-[opacity,transform] duration-700 ease-out group-hover:translate-x-[450%] group-hover:opacity-100"
                 style={{
                   width: '45%',
                   left: '-55%',
                   background: `linear-gradient(90deg, transparent, ${accent}12, transparent)`,
                 }}
-                animate={{ x: ['0%', '450%'] }}
-                transition={{ duration: 1.1, repeat: Infinity, repeatDelay: 0.6, ease: 'easeInOut' }}
                 aria-hidden
               />
             )}
@@ -1305,7 +1307,9 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
             key={i}
             className="pointer-events-none absolute z-0"
             style={{ left: star.x, top: star.y }}
-            animate={{ opacity: [0.06, 0.28, 0.06], scale: [0.7, 1.0, 0.7] }}
+            initial={false}
+            whileInView={{ opacity: [0.06, 0.28, 0.06], scale: [0.7, 1.0, 0.7] }}
+            viewport={{ amount: 0.35 }}
             transition={{ duration: star.dur, repeat: Infinity, ease: 'easeInOut', delay: star.delay }}
             aria-hidden
           >

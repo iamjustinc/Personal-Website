@@ -177,7 +177,9 @@ function TimelineEntry({
         />
         {item.current ? (
           <motion.div
-            animate={reduceMotion ? {} : { opacity: [0.6, 1, 0.6], scale: [0.86, 1.12, 0.86] }}
+            initial={false}
+            whileInView={reduceMotion ? {} : { opacity: [0.6, 1, 0.6], scale: [0.86, 1.12, 0.86] }}
+            viewport={{ amount: 0.7 }}
             transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
           >
             <StarMark size="xs" color="#C4974A" className="opacity-90" />
@@ -220,7 +222,9 @@ function TimelineEntry({
         {/* ── Animated top-edge shimmer line ── */}
         <motion.div
           className="pointer-events-none absolute inset-x-0 top-0 h-px"
-          animate={reduceMotion ? {} : { opacity: [0.4, 0.95, 0.4] }}
+          initial={false}
+          whileInView={reduceMotion ? {} : { opacity: [0.4, 0.95, 0.4] }}
+          viewport={{ amount: 0.7 }}
           transition={{
             duration: 3.0,
             repeat: Infinity,
@@ -244,7 +248,9 @@ function TimelineEntry({
               left: '-50%',
               background: `linear-gradient(90deg, transparent 0%, ${accentBright}0E 45%, ${accentBright}16 52%, ${accentBright}0E 58%, transparent 100%)`,
             }}
-            animate={{ x: ['0%', '380%'] }}
+            initial={false}
+            whileInView={{ x: ['0%', '380%'] }}
+            viewport={{ amount: 0.7 }}
             transition={{
               duration: 1.6,
               repeat: Infinity,
@@ -260,7 +266,9 @@ function TimelineEntry({
         {!reduceMotion && (
           <motion.div
             className="pointer-events-none absolute bottom-3.5 right-3.5"
-            animate={{ opacity: [0.12, 0.55, 0.12], scale: [0.78, 1.08, 0.78] }}
+            initial={false}
+            whileInView={{ opacity: [0.12, 0.55, 0.12], scale: [0.78, 1.08, 0.78] }}
+            viewport={{ amount: 0.7 }}
             transition={{
               duration: 3.8 + index * 0.4,
               repeat: Infinity,

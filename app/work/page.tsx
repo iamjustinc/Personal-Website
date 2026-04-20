@@ -146,11 +146,13 @@ function WorkProjectCard({
 
       <motion.div
         className="pointer-events-none absolute right-7 top-7 z-20"
-        animate={
+        initial={false}
+        whileInView={
           reduceMotion
             ? undefined
             : { opacity: [0.2, 0.85, 0.2], scale: [0.85, 1.18, 0.85], rotate: [0, 18, 0] }
         }
+        viewport={{ amount: 0.35 }}
         transition={{ duration: 3.8, repeat: Infinity, ease: 'easeInOut', delay: index * 0.35 }}
       >
         <StarMark size="xs" color="#C4974A" />
@@ -264,11 +266,13 @@ function WorkProjectCard({
               >
                 <motion.div
                   className="absolute inset-x-2 top-0 h-px"
-                  animate={
+                  initial={false}
+                  whileInView={
                     reduceMotion
                       ? undefined
                       : { opacity: metricIndex === 1 ? [0.2, 0.85, 0.2] : [0.15, 0.48, 0.15] }
                   }
+                  viewport={{ amount: 0.65 }}
                   transition={{
                     duration: 3.2,
                     repeat: Infinity,
