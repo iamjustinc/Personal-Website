@@ -16,6 +16,8 @@ import {
 } from 'lucide-react'
 import { Section } from '@/components/ui/Section'
 import { StarMark } from '@/components/ui/StarMark'
+import { StarField } from '@/components/ui/StarField'
+import { Constellation } from '@/components/ui/Constellation'
 import { HoverSparkle } from '@/components/ui/HoverSparkle'
 import { staggerContainer, fadeUp, useMotionSafe } from '@/lib/motion'
 import { siteConfig } from '@/data/site'
@@ -445,6 +447,51 @@ export function ContactSection({ mode = 'section' }: ContactSectionProps) {
         style={{ background: 'rgba(74,159,174,0.06)' }}
         aria-hidden
       />
+
+      {/*
+        Distant starfield — scattered, asymmetrical pinpoints across the
+        negative space. Only 2 of 5 twinkle; the rest are static anchors
+        suggesting depth without motion. Treatment: "calm night-sky before
+        dawn," differentiated from every other section on the site.
+      */}
+      <StarField
+        className="z-0"
+        stars={[
+          { x: '7%',  y: '18%', size: 2,   color: '#E6EEF2', opacity: 0.55, halo: 2 },
+          { x: '22%', y: '62%', size: 1.5, color: '#A8C5D1', opacity: 0.42, halo: 1.4 },
+          { x: '38%', y: '88%', size: 1.5, color: '#E6EEF2', opacity: 0.38, halo: 1.4 },
+          { x: '74%', y: '12%', size: 2.5, color: '#F4D58D', opacity: 0.50, halo: 2, twinkle: true, delay: 0,   duration: 5.2 },
+          { x: '91%', y: '58%', size: 1.8, color: '#7EE7F2', opacity: 0.45, halo: 1.8, twinkle: true, delay: 2.4, duration: 4.6 },
+        ]}
+      />
+
+      {/*
+        Tiny 3-point constellation in the left margin. Static; reads as a
+        quiet observational marker in the page's quietest corner. Small
+        enough to only register on close attention — the "designed, not
+        stamped" beat.
+      */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-[3%] top-[40%] z-0 hidden md:block"
+      >
+        <Constellation
+          width={64}
+          height={48}
+          color="#4A9FAE"
+          lineOpacity={0.20}
+          pointOpacity={0.65}
+          points={[
+            { x: 6,  y: 38, size: 1.4 },
+            { x: 30, y: 14, size: 1.8 },
+            { x: 58, y: 34, size: 1.2 },
+          ]}
+          connections={[
+            [0, 1],
+            [1, 2],
+          ]}
+        />
+      </div>
 
       <motion.div
         variants={stagger}

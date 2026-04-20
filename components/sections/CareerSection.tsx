@@ -137,6 +137,19 @@ export function CareerSection() {
           }}
         />
 
+        {/*
+          Drifting starlight spark — one gentle point of light travels down the
+          timeline on a slow 14s loop. "Directional / living" motion that
+          belongs to this section only. Uses compositor-safe CSS animation
+          (translateY + opacity), zero JS cost.
+        */}
+        {!shouldReduce && (
+          <div
+            aria-hidden
+            className="timeline-drift-spark hidden md:block"
+          />
+        )}
+
         {/* Items */}
         <motion.div
           variants={stagger}

@@ -7,6 +7,7 @@ import { StarMark } from '@/components/ui/StarMark'
 import { StarburstButton } from '@/components/ui/StarburstButton'
 import { HoverSparkle } from '@/components/ui/HoverSparkle'
 import { WatermarkStar } from '@/components/ui/WatermarkStar'
+import { Constellation } from '@/components/ui/Constellation'
 import { projects } from '@/data/projects'
 import type { Project } from '@/types/project'
 import { EASING, fadeIn } from '@/lib/motion'
@@ -391,6 +392,38 @@ export default function WorkPage() {
       <Section paddingY="lg">
         <div className="absolute top-32 right-0 pointer-events-none overflow-hidden" aria-hidden>
           <WatermarkStar size={480} opacity={0.03} direction={-1} />
+        </div>
+
+        {/*
+          Page-anchor constellation — 5 points in a loose arc, placed in the
+          header's empty air. Reads as the page's identity marker (like a
+          navigational star). Larger + one more point than CapabilityStrip's
+          line-like constellation so the two feel related but distinct.
+        */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute left-[14%] top-28 hidden md:block"
+        >
+          <Constellation
+            width={140}
+            height={72}
+            color="#C4974A"
+            lineOpacity={0.26}
+            pointOpacity={0.70}
+            points={[
+              { x: 8,   y: 44, size: 1.4 },
+              { x: 38,  y: 22, size: 2.2, twinkle: true, delay: 0.4 },
+              { x: 72,  y: 14, size: 1.6 },
+              { x: 104, y: 36, size: 1.4 },
+              { x: 132, y: 58, size: 1.2 },
+            ]}
+            connections={[
+              [0, 1],
+              [1, 2],
+              [2, 3],
+              [3, 4],
+            ]}
+          />
         </div>
 
         <motion.div

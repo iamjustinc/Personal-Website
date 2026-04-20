@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
 import { siteConfig } from '@/data/site'
 import { StarMark } from '@/components/ui/StarMark'
+import { Constellation } from '@/components/ui/Constellation'
 import { fadeUp, staggerContainer, useMotionSafe } from '@/lib/motion'
 
 const columnMap: Record<number, string> = {
@@ -55,6 +56,7 @@ export function CapabilityStrip() {
       />
 
       <div
+        className="relative"
         style={{
           borderTop: '1px solid rgba(15,122,122,0.14)',
           borderBottom: '1px solid rgba(15,122,122,0.10)',
@@ -63,7 +65,36 @@ export function CapabilityStrip() {
           backdropFilter: 'blur(10px)',
         }}
       >
-        <div className="mx-auto max-w-[1200px] px-6">
+        {/*
+          Architectural "connection diagram" — a 4-point constellation that
+          echoes the capability row beneath it. Static, tucked to the top-right,
+          reads as a navigational marker, not a sparkle. One point twinkles.
+        */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute right-6 top-4 hidden md:block"
+        >
+          <Constellation
+            width={110}
+            height={32}
+            color="#4A9FAE"
+            lineOpacity={0.22}
+            pointOpacity={0.7}
+            points={[
+              { x: 6,   y: 22, size: 1.4 },
+              { x: 34,  y: 10, size: 1.8, twinkle: true, delay: 0 },
+              { x: 68,  y: 20, size: 1.4 },
+              { x: 104, y: 8,  size: 1.2 },
+            ]}
+            connections={[
+              [0, 1],
+              [1, 2],
+              [2, 3],
+            ]}
+          />
+        </div>
+
+        <div className="relative mx-auto max-w-[1200px] px-6">
           <motion.div
             variants={stagger}
             initial="hidden"

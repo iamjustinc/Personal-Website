@@ -253,3 +253,65 @@ body {
     animation: none !important;
   }
 }
+
+/* ── Celestial twinkle & drift ────────────────────────────────────────────── */
+/* Used by StarField and Constellation primitives. Opacity-only so it runs    */
+/* on the compositor; each instance staggered via inline animation-delay to   */
+/* avoid "breathing in unison" across a field.                                 */
+
+@keyframes starfield-twinkle {
+  0%, 100% { opacity: 0.18; }
+  50%       { opacity: 0.92; }
+}
+
+.starfield-twinkle {
+  animation: starfield-twinkle 4.5s ease-in-out infinite;
+  will-change: opacity;
+}
+
+@keyframes constellation-twinkle {
+  0%, 100% { opacity: 0.32; }
+  50%       { opacity: 1;    }
+}
+
+.constellation-twinkle {
+  animation: constellation-twinkle 3.8s ease-in-out infinite;
+  will-change: opacity;
+}
+
+/* ── Timeline drift spark (CareerSection) ─────────────────────────────────── */
+/* A single gentle starlight travels down the career timeline on a slow loop. */
+/* Owned by the timeline container's CSS position so it never detaches from   */
+/* the vertical rail.                                                          */
+
+.timeline-drift-spark {
+  position: absolute;
+  left: 18px;
+  top: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #F4D58D 0%, rgba(244,213,141,0.55) 45%, transparent 72%);
+  box-shadow: 0 0 14px rgba(244,213,141,0.55), 0 0 28px rgba(196,151,74,0.26);
+  pointer-events: none;
+  animation: timeline-drift-bounded 14s ease-in-out 2s infinite;
+  will-change: transform, opacity;
+}
+
+/* Keyframe uses 100% of the nearest positioned ancestor (the timeline       */
+/* container), keeping the spark bounded to the timeline height.              */
+@keyframes timeline-drift-bounded {
+  0%   { transform: translate(-50%, 0);       opacity: 0; }
+  6%   { opacity: 1;   }
+  94%  { opacity: 0.9; }
+  100% { transform: translate(-50%, calc(100% - 6px)); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .starfield-twinkle,
+  .constellation-twinkle,
+  .timeline-drift-spark {
+    animation: none !important;
+  }
+  .timeline-drift-spark { opacity: 0; }
+}
