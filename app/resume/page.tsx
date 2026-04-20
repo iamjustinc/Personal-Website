@@ -16,25 +16,25 @@ const impactMetrics = [
   { value: '30K+', label: 'records modeled',       accent: '#2A8B87' },
   { value: '70%',  label: 'analysis time reduced', accent: '#4A9FAE' },
   { value: '63%',  label: 'completion increase',   accent: '#0F7A7A' },
-  { value: '3',    label: 'AI solution demos',     accent: '#C4974A' },
+  { value: '3',    label: 'AI workflow tools',     accent: '#C4974A' },
 ]
 
-const resumeRoleTag = 'Solutions Engineering Candidate'
+const resumeRoleTag = 'Technical Systems + Product Workflows'
 
 const resumeSummary =
-  'Early-career Solutions Engineering candidate designing and demonstrating AI-powered workflows, dashboards, and full-stack solutions for non-technical stakeholders.'
+  'Early-career technical systems builder designing AI-powered workflows, dashboards, and full-stack tools for stakeholders who need clearer decisions.'
 
 // ── SE-focused skill groups ─────────────────────────────────────────────────
 
 const skillGroups = [
   {
-    label: 'Solutioning & Demos',
+    label: 'Solutioning & Workflows',
     accent: '#4A9FAE',
     items: [
-      'Live demo flows',
+      'Product walkthrough flows',
       'AI workflow design',
       'Technical value translation',
-      'Discovery-to-demo thinking',
+      'Discovery-to-workflow thinking',
     ],
   },
   {
@@ -62,8 +62,8 @@ const skillGroups = [
 // ── Header signal phrases ───────────────────────────────────────────────────
 
 const signalPhrases = [
-  'Solutions Engineering',
-  'Technical Demos',
+  'Technical Systems',
+  'Product Walkthroughs',
   'Workflow Translation',
   'Data Pipelines',
   'Decision Support',
@@ -75,28 +75,28 @@ const resumeExperienceCopyByRole: Record<string, string> = {
   'Senior Project Lead':
     'Re-architected recruitment and scheduling workflows across 100+ sessions, increasing completion 63% and improving operational dashboard clarity for downstream analysis.',
   'Intern Data Analyst':
-    'Built Python/R pipelines across 200+ fMRI sessions, reduced manual analysis time 70%, and demoed outputs and tradeoffs to non-technical research stakeholders.',
+    'Built Python/R pipelines across 200+ fMRI sessions, reduced manual analysis time 70%, and walked non-technical research stakeholders through outputs and tradeoffs.',
   'Research Data Analyst':
     'Standardized PETRUSHKA operations with Excel, R, SQL, and Tableau tracking systems, reducing coordination friction across patients and cross-functional teams.',
   'Independent Product Builder':
-    'Built Kestrel, Quail Mail, and Chirpie as SE-style solution demos: structured AI outputs, prioritization logic, attribution, explainability, and guided dashboard flows.',
+    'Built Kestrel, Quail Mail, and Chirpie as AI-powered workflow tools: structured outputs, prioritization logic, attribution, explainability, and guided dashboard flows.',
 }
 
 const resumeExperienceTagsByRole: Record<string, string[]> = {
   'Project Lead & Data Analyst': ['Decision Support', 'Risk Dashboards', 'Stakeholder Translation'],
   'Senior Project Lead': ['Workflow Redesign', 'Operational Dashboards', 'Coordination Systems'],
-  'Intern Data Analyst': ['Python/R Pipelines', 'Technical Demos', 'Stakeholder Readouts'],
+  'Intern Data Analyst': ['Python/R Pipelines', 'Technical Walkthroughs', 'Stakeholder Readouts'],
   'Research Data Analyst': ['Tracking Systems', 'SQL + Tableau', 'Cross-Functional Ops'],
-  'Independent Product Builder': ['AI Solution Demos', 'OpenAI Workflows', 'Explainability'],
+  'Independent Product Builder': ['AI Workflow Tools', 'OpenAI Workflows', 'Explainability'],
 }
 
 const resumeProjectDescriptions: Record<string, string> = {
   kestrel:
-    'Live AI decision-support demo that maps a job description into readiness signals, explainable gaps, and a guided dashboard workflow.',
+    'Live AI decision-support tool that maps a job description into readiness signals, explainable gaps, and a guided dashboard workflow.',
   chirpie:
-    'Coming-soon news demo using multi-source ingestion, schema-constrained outputs, attribution, and explainable summaries.',
+    'Coming-soon news tool using multi-source ingestion, schema-constrained outputs, attribution, and explainable summaries.',
   quail:
-    'Coming-soon inbox triage demo around prioritization logic, action lanes, and production email delivery.',
+    'Coming-soon inbox triage tool around prioritization logic, action lanes, and production email delivery.',
 }
 
 // ── Section divider ─────────────────────────────────────────────────────────
@@ -595,7 +595,7 @@ export default function ResumePage() {
             viewport={{ once: true }}
             className="mb-4"
           >
-            <SectionDivider>Solution Demos</SectionDivider>
+            <SectionDivider>Product Systems</SectionDivider>
           </motion.div>
 
           <motion.div

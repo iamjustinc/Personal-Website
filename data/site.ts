@@ -2,9 +2,9 @@ import type { SiteConfig } from '@/types/site'
 
 export const siteConfig: SiteConfig = {
   name: 'Justin Chang',
-  roleTag: 'Solutions Engineering + Product Management',
+  roleTag: 'Technical Systems + Product Workflows',
   heroStatement:
-    'I turn complex systems, AI workflows, and data into clear demos, decisions, and usable products.',
+    'I turn technical complexity, AI systems, and data into clear workflows, decisions, and usable products.',
   resumeUrl: '/api/resume',
 
   logoSrc: '/images/justin-logo.png',
@@ -13,9 +13,9 @@ export const siteConfig: SiteConfig = {
   showCapabilityStrip: true,
   capabilities: [
     {
-      label: 'SOLUTIONS ENGINEERING',
+      label: 'TECHNICAL SYSTEMS',
       description:
-        'I turn AI workflows, APIs, and technical systems into clear demos, decision tools, and customer-ready solutions.',
+        'I turn AI workflows, APIs, and technical systems into clear walkthroughs, decision tools, and user-ready solutions.',
     },
     {
       label: 'TECHNICAL COMMUNICATION',
@@ -31,14 +31,14 @@ export const siteConfig: SiteConfig = {
 
   aboutStatements: [
     'I’m strongest where technical complexity meets user clarity. I like understanding how a system works, where it breaks, and how to make it more usable.',
-    'That is why Solutions Engineering and Product roles both make sense for me — they sit at the intersection of technical depth, user empathy, and business context.',
+    'That is why technical product, data, and customer-facing systems roles make sense for me — they sit at the intersection of technical depth, user empathy, and business context.',
     'I approach messy problems by mapping the workflow first, finding the leverage point, then building the simplest thing that actually helps people move faster.',
     'I’m looking for early-career roles where technical credibility, communication, and product judgment all matter.',
   ],
 
   aboutHighlights: [
     'AI workflow design and integration',
-    'Solutions Engineering and pre-sales',
+    'Technical systems and product workflows',
     'Full-stack product development',
     'Technical to non-technical communication',
   ],
@@ -93,6 +93,6 @@ export const siteConfig: SiteConfig = {
   linkedinUrl: 'https://linkedin.com/in/jjustin-chang',
   githubUrl: 'https://github.com/iamjustinc',
   currentlyOpen:
-  'Open to early-career SE + PM roles focused on technical systems and customer value.',
+  'Open to early-career roles focused on technical systems, product workflows, and stakeholder value.',
   copyrightName: 'Justin Chang',
 }

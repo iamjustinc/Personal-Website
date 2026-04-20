@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next"
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'

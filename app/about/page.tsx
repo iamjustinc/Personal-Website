@@ -30,15 +30,15 @@ const proofStats = [
   },
   {
     value: '3',
-    label: 'AI workflow demos',
-    body: 'career, inbox, and news systems framed for walkthroughs',
+    label: 'AI workflow systems',
+    body: 'career, inbox, and news systems with clear walkthrough paths',
   },
 ]
 
 const strengths = [
   {
     number: '01',
-    title: 'Tailored technical demos',
+    title: 'Tailored product walkthroughs',
     body: 'I tailor walkthroughs around the user workflow, decision criteria, and what needs to be believed.',
   },
   {
@@ -59,8 +59,8 @@ const strengths = [
 ]
 
 const compactSignals = [
-  'Solutions Engineering',
-  'Technical demos',
+  'Technical systems',
+  'Product walkthroughs',
   'Workflow translation',
   'Stakeholder clarity',
   'Decision support',
@@ -326,14 +326,14 @@ export default function AboutPage() {
                   className="font-mono text-[9px] uppercase tracking-[0.12em]"
                   style={{ color: '#4A9FAE' }}
                 >
-                  Early-career solutions engineering
+                  Early-career technical systems
                 </span>
               </div>
 
               <h1 className="group/name relative inline-block max-w-[580px] font-sans text-[22px] font-semibold leading-snug text-text-base sm:text-[24px] lg:text-[26px]">
                 <span className="relative z-10">
                   I turn technical complexity into{' '}
-                  <span style={{ color: '#4A9FAE' }}>clear demos and decisions.</span>
+                  <span style={{ color: '#4A9FAE' }}>clear workflows and decisions.</span>
                 </span>
                 {!shouldReduce && (
                   <motion.span
@@ -363,9 +363,8 @@ export default function AboutPage() {
                 className="mt-4 max-w-[56ch] font-sans text-[14.5px] leading-7"
                 style={{ color: '#A8C5D1' }}
               >
-                I&apos;m an early-career Solutions Engineering candidate who builds AI/data tools,
-                explains how they work, and turns technical ambiguity into stakeholder-ready next
-                steps.
+                I build AI/data tools, explain how they work, and turn technical ambiguity into
+                stakeholder-ready next steps.
               </p>
             </motion.div>
 
@@ -683,7 +682,7 @@ export default function AboutPage() {
               <StarMark size="xs" color="#C4974A" className="opacity-80" />
             </motion.div>
             <span className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-text-muted">
-              Why I fit SE roles
+              Why I fit technical roles
             </span>
           </div>
         </motion.div>
@@ -771,14 +770,14 @@ export default function AboutPage() {
 
               <h2 className="font-display text-[44px] md:text-[56px] leading-[0.95] text-text-base text-balance">
                 How I create <br />
-                SE value
+                usable value
               </h2>
 
               <p
                 className="mt-6 max-w-[30ch] font-sans text-[16px] leading-8"
                 style={{ color: '#A8C5D1' }}
               >
-                I&apos;m useful when a team needs the technical answer, the customer workflow, and
+                I&apos;m useful when a team needs the technical answer, the user workflow, and
                 the next step in the same conversation.
               </p>
             </motion.div>
@@ -949,11 +948,11 @@ export default function AboutPage() {
                 </span>
               </div>
               <h2 className="font-display text-[34px] leading-[1.05] text-text-base md:text-[46px]">
-                Need someone who can demo the system and explain the value?
+                Need someone who can explain the system and clarify the value?
               </h2>
               <p className="mt-4 font-sans text-[15.5px] leading-7" style={{ color: '#A8C5D1' }}>
-                I&apos;m looking for early-career SE roles where customer-facing technical
-                translation, workflow discovery, and AI-enabled systems matter.
+                I&apos;m looking for early-career roles where technical translation, workflow clarity,
+                and AI-enabled systems matter.
               </p>
             </div>
 

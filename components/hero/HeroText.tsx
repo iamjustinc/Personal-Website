@@ -422,7 +422,7 @@ export function HeroText() {
         className="font-sans leading-relaxed mt-6 max-w-[520px]"
         style={{ fontSize: 'clamp(16px, 1.7vw, 19px)', color: '#A8C5D1' }}
       >
-        I translate messy business needs into technical demos, guided workflows, and clear decisions.
+        I turn messy needs into technical systems, guided workflows, and clear decisions.
       </motion.p>
 
       {/* ── Role pill ────────────────────────────────────────────────────── */}
@@ -436,7 +436,7 @@ export function HeroText() {
           }}
         >
           <StarMark size="xs" color="#C4974A" className="opacity-80" />
-          Solutions Engineering + Technical Translation
+          Technical Systems + Product Translation
         </span>
       </motion.div>
 

@@ -13,19 +13,19 @@ const careerCopyByRole: Record<string, string> = {
   'Senior Project Lead':
     'Designed recruitment, scheduling, and operational dashboard systems across 100+ sessions, improving completion 63% and giving teams cleaner coordination data.',
   'Intern Data Analyst':
-    'Built Python/R pipelines for 200+ fMRI sessions, reduced manual analysis time by 70%, and demoed outputs and tradeoffs to non-technical stakeholders.',
+    'Built Python/R pipelines for 200+ fMRI sessions, reduced manual analysis time by 70%, and walked non-technical stakeholders through outputs and tradeoffs.',
   'Research Data Analyst':
     'Standardized PETRUSHKA coordination with Excel, R, SQL, and Tableau tracking systems, reducing handoff friction across clinical and research teams.',
   'Independent Product Builder':
-    'Built Kestrel as a live AI decision-support demo, plus Quail Mail and Chirpie previews around triage logic, structured outputs, attribution, and explainability.',
+    'Built Kestrel as a live AI decision-support product, plus Quail Mail and Chirpie previews around triage logic, structured outputs, attribution, and explainability.',
 }
 
 const careerTagsByRole: Record<string, string[]> = {
   'Project Lead & Data Analyst': ['Decision Support', 'Data Pipelines', 'Stakeholder Translation'],
   'Senior Project Lead': ['Operational Dashboards', 'Workflow Design', 'Cross-Functional Alignment'],
-  'Intern Data Analyst': ['Python/R Pipelines', 'Technical Demos', 'Stakeholder Translation'],
+  'Intern Data Analyst': ['Python/R Pipelines', 'Technical Walkthroughs', 'Stakeholder Translation'],
   'Research Data Analyst': ['Tracking Systems', 'SQL + Tableau', 'Coordination Systems'],
-  'Independent Product Builder': ['Technical Demos', 'OpenAI Integration', 'Explainability'],
+  'Independent Product Builder': ['Product Walkthroughs', 'OpenAI Integration', 'Explainability'],
 }
 
 const ambientStars = [
@@ -111,14 +111,14 @@ export function CareerSection() {
 
         <h2 className="font-display text-h1 text-text-base leading-tight">
           Technical ownership across{' '}
-          <span style={{ color: '#4A9FAE' }}>systems and demos</span>
+          <span style={{ color: '#4A9FAE' }}>systems and workflows</span>
         </h2>
         <p
           className="font-sans mt-3 max-w-[560px] leading-relaxed"
           style={{ fontSize: '15px', color: '#A8C5D1' }}
         >
-          Across research, operations, and product work, I have built pipelines, dashboards, demos,
-          and workflow systems that help stakeholders understand what to do next.
+          Across research, operations, and product work, I have built pipelines, dashboards,
+          walkthroughs, and workflow systems that help stakeholders understand what to do next.
         </p>
       </motion.div>
 

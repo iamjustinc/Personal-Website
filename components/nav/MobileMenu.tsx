@@ -139,7 +139,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           <div className="px-6 pb-8 flex items-center gap-2">
             <StarMark size="xs" color="#C4974A" className="opacity-50" />
             <p className="font-mono text-[10px] text-text-muted tracking-wider uppercase">
-              SE + PM
+              Systems + Product
             </p>
           </div>
         </motion.div>

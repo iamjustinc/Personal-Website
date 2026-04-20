@@ -232,7 +232,7 @@ export function ProjectsSection() {
                 {/* Category tags */}
                 <div className="mb-4 flex flex-wrap gap-1.5">
                   {(project.slug === 'kestrel'
-                    ? ['Technical Demo', 'Requirement Mapping', 'Guided Workflow']
+                    ? ['Decision Support', 'Requirement Mapping', 'Guided Workflow']
                     : project.tags.slice(0, 3)
                   ).map((tag) => (
                     <span

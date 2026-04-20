@@ -42,15 +42,15 @@ const proofPoints: ProofPoint[] = [
     detail: 'Improved completion after redesigning recruitment and scheduling flows.',
   },
   {
-    textValue: 'Demo-led',
-    label: 'technical walkthroughs',
-    detail: 'Used demos to explain workflow, AI behavior, and next steps.',
+    textValue: 'Walkthrough-led',
+    label: 'product walkthroughs',
+    detail: 'Used walkthroughs to explain workflow, AI behavior, and next steps.',
   },
 ]
 
 const strengths = [
   {
-    title: 'Demo the customer value',
+    title: 'Make value visible',
     body: 'I tailor walkthroughs around the user workflow, decision criteria, and next step.',
   },
   {
@@ -165,14 +165,14 @@ export function AboutSection() {
         </div>
 
         <h2 className="font-display text-h1 leading-tight text-text-base text-balance">
-          Built to demo, discover, and <span style={{ color: '#4A9FAE' }}>translate value</span>
+          Built to discover, translate, and <span style={{ color: '#4A9FAE' }}>build value</span>
         </h2>
 
         <p
           className="mt-5 max-w-[670px] font-sans text-[16px] leading-7"
           style={{ color: '#A8C5D1' }}
         >
-          I work from the workflow first: clarify the friction, demo the path forward, and make
+          I work from the workflow first: clarify the friction, shape the path forward, and make
           AI/data tradeoffs understandable.
         </p>
       </motion.div>

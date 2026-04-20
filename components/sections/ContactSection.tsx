@@ -225,7 +225,7 @@ function SectionFooter({ showThanks = true }: { showThanks?: boolean }) {
         </p>
         {showThanks && (
           <p className="mt-2 text-sm" style={{ color: 'rgba(168,197,209,0.50)' }}>
-            Built to show how I translate systems into demos, workflows, and decisions.
+            Built to show how I translate systems into walkthroughs, workflows, and decisions.
           </p>
         )}
       </div>
@@ -236,7 +236,7 @@ function SectionFooter({ showThanks = true }: { showThanks?: boolean }) {
           className="font-mono text-[9px] uppercase tracking-widest"
           style={{ color: 'rgba(168,197,209,0.30)' }}
         >
-          Solutions Engineering
+          Technical Systems
         </span>
       </div>
     </div>
@@ -252,15 +252,15 @@ function ContactPageLayout() {
           
 
           <h2 className="font-display text-hero leading-none text-text-base">
-            Contact Me!
+            Let&apos;s build clarity.
           </h2>
 
           <p
             className="mt-6 max-w-[760px] font-sans leading-relaxed"
             style={{ color: '#A8C5D1', fontSize: '18px' }}
           >
-            I&apos;m looking for early-career Solutions Engineering conversations where demos,
-            discovery, AI workflows, and technical translation matter.
+            I&apos;m looking for early-career conversations around technical systems, AI workflows,
+            product operations, and stakeholder translation.
           </p>
 
           <div className="mt-10">
@@ -283,8 +283,8 @@ function ContactPageLayout() {
               </p>
             </div>
             <p className="font-sans text-[15px] leading-relaxed" style={{ color: '#A8C5D1' }}>
-              Customer-facing technical teams that need clear demos, workflow discovery, and
-              systems translated into usable value.
+              Technical, product, and data teams that need workflow discovery, clear walkthroughs,
+              and systems translated into usable value.
             </p>
           </div>
 
@@ -293,7 +293,8 @@ function ContactPageLayout() {
             style={{ borderColor: 'rgba(15,122,122,0.10)' }}
           >
             <p className="font-sans text-sm" style={{ color: 'rgba(168,197,209,0.55)' }}>
-              Best next step: email or LinkedIn for SE recruiting conversations.
+              Best next step: email or LinkedIn for technical, product, and data recruiting
+              conversations.
             </p>
             <div className="flex items-center gap-1.5">
               <StarMark size="xs" color="#C4974A" className="opacity-30" />
@@ -301,7 +302,7 @@ function ContactPageLayout() {
                 className="font-mono text-[9px] uppercase tracking-widest"
                 style={{ color: 'rgba(168,197,209,0.30)' }}
               >
-                Solutions Engineering
+                Systems + Product
               </span>
             </div>
           </div>
@@ -344,13 +345,13 @@ function ContactPageLayout() {
                 href={`mailto:${siteConfig.email}`}
                 icon={Send}
                 title="Email me"
-                body="Fastest route for Solutions Engineering roles, recruiter intros, and interview follow-ups."
+                body="Fastest route for technical/product roles, recruiter intros, and interview follow-ups."
               />
               <ActionCard
                 href={siteConfig.linkedinUrl}
                 icon={Linkedin}
                 title="Connect on LinkedIn"
-                body="Best for recruiting conversations, SE fit, and quick context."
+                body="Best for recruiting conversations, role fit, and quick context."
               />
               <ActionCard
                 href={siteConfig.githubUrl}
@@ -363,7 +364,7 @@ function ContactPageLayout() {
                 download="Justin-Chang-Resume.pdf"
                 icon={Download}
                 title="Download résumé"
-                body="Review experience across data pipelines, dashboards, demos, and technical communication."
+                body="Review experience across data pipelines, dashboards, walkthroughs, and technical communication."
               />
             </div>
           </div>
@@ -384,8 +385,8 @@ function ContactSectionLayout() {
           className="mt-5 max-w-[680px] font-sans leading-relaxed"
           style={{ color: '#A8C5D1', fontSize: '16px' }}
         >
-          Open to early-career Solutions Engineering roles where technical demos, discovery, and
-          workflow translation turn complex systems into customer value.
+          Open to early-career roles where technical systems, workflow translation, and stakeholder
+          clarity turn complexity into usable value.
         </p>
 
         <div className="mt-8">
@@ -410,11 +411,11 @@ function ContactSectionLayout() {
           <div className="space-y-3 text-sm" style={{ color: '#A8C5D1' }}>
             <div className="flex items-start gap-2">
               <StarMark size="xs" color="#4A9FAE" className="mt-1 opacity-70" />
-              <span>Early-career Solutions Engineering roles</span>
+              <span>Early-career technical product, data, and systems roles</span>
             </div>
             <div className="flex items-start gap-2">
               <StarMark size="xs" color="#C4974A" className="mt-1 opacity-70" />
-              <span>Technical demos, discovery, and workflow translation</span>
+              <span>Technical walkthroughs, discovery, and workflow translation</span>
             </div>
             <div className="flex items-start gap-2">
               <StarMark size="xs" color="#4A9FAE" className="mt-1 opacity-70" />
