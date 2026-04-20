@@ -266,7 +266,8 @@ body {
 
 .starfield-twinkle {
   animation: starfield-twinkle 4.5s ease-in-out infinite;
-  will-change: opacity;
+  /* No will-change: 1–3px spans don't need compositor promotion.
+     Opacity animation is already compositor-eligible in modern browsers. */
 }
 
 @keyframes constellation-twinkle {
@@ -279,15 +280,18 @@ body {
   will-change: opacity;
 }
 
+/* Opacity-only pulse — no scale transform avoids forcing a new stacking
+   context on every Starburst instance. The soft opacity breathe looks more
+   premium anyway (not "bouncy") and drops ~3 compositor layers site-wide. */
 @keyframes starburst-pulse {
-  0%, 100% { transform: scale(0.96); opacity: 0.82; }
-  50%      { transform: scale(1.06); opacity: 1;    }
+  0%, 100% { opacity: 0.70; }
+  50%       { opacity: 1;    }
 }
 
 .starburst-pulse {
   animation: starburst-pulse 5.5s ease-in-out infinite;
-  transform-origin: center;
-  will-change: transform, opacity;
+  /* No will-change needed: opacity transitions are compositor-eligible
+     without a promotion hint for elements this small. */
 }
 
 /* ── Timeline drift spark (CareerSection) ─────────────────────────────────── */
