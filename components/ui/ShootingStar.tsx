@@ -4,6 +4,9 @@ interface ShootingStarProps {
   angle?: number
   duration?: number
   delay?: number
+  scale?: number
+  opacity?: number
+  className?: string
 }
 
 /**
@@ -20,11 +23,14 @@ export function ShootingStar({
   angle = 32,
   duration = 14,
   delay = 0,
+  scale = 1,
+  opacity = 1,
+  className,
 }: ShootingStarProps) {
   return (
     <div
       aria-hidden
-      className="absolute pointer-events-none"
+      className={className ? `absolute pointer-events-none ${className}` : 'absolute pointer-events-none'}
       style={{
         left: startX,
         top: startY,
@@ -32,12 +38,15 @@ export function ShootingStar({
         height: 0,
         transform: `rotate(${angle}deg)`,
         transformOrigin: '0 0',
+        opacity,
       }}
     >
       <div
         className="shooting-star"
         style={{
           animation: `shoot-cycle ${duration}s linear ${delay}s infinite`,
+          width: `${160 * scale}px`,
+          height: `${1.5 * Math.max(0.82, Math.min(scale, 1.12))}px`,
         }}
       />
     </div>

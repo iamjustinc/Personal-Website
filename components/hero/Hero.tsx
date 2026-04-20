@@ -4,6 +4,7 @@ import { StarMark } from '@/components/ui/StarMark'
 import { StarField } from '@/components/ui/StarField'
 import { Constellation } from '@/components/ui/Constellation'
 import { Starburst } from '@/components/ui/Starburst'
+import { ShootingStar } from '@/components/ui/ShootingStar'
 
 /**
  * Hero section: cinematic dark opening.
@@ -20,22 +21,59 @@ export function Hero() {
     >
       {/* Hero atmosphere: richest star density on the site, kept behind content */}
       <div aria-hidden className="absolute inset-0 pointer-events-none select-none">
+        <div className="absolute inset-0">
+          <ShootingStar
+            startX="4%"
+            startY="18%"
+            angle={27}
+            duration={13.5}
+            delay={-3.4}
+            scale={0.86}
+            opacity={0.62}
+          />
+          <ShootingStar
+            startX="38%"
+            startY="8%"
+            angle={31}
+            duration={17}
+            delay={-10.2}
+            scale={1.08}
+            opacity={0.50}
+          />
+          <ShootingStar
+            startX="82%"
+            startY="14%"
+            angle={36}
+            duration={19}
+            delay={-15.6}
+            scale={0.72}
+            opacity={0.42}
+            className="hidden sm:block"
+          />
+        </div>
+
         <StarField
           className="opacity-95"
           stars={[
             { x: '4%', y: '22%', size: 1.5, color: '#F4D58D', opacity: 0.50, halo: 1.9 },
             { x: '7%', y: '54%', size: 1, color: '#7EE7F2', opacity: 0.40, halo: 1.4, twinkle: true, delay: 0.4, duration: 4.8 },
             { x: '10%', y: '73%', size: 2.2, color: '#7EE7F2', opacity: 0.44, halo: 2.4 },
+            { x: '12%', y: '40%', size: 1.2, color: '#E6EEF2', opacity: 0.28, halo: 1.1 },
             { x: '16%', y: '29%', size: 1, color: '#A8C5D1', opacity: 0.34, halo: 1.2 },
+            { x: '19%', y: '62%', size: 1.5, color: '#F4D58D', opacity: 0.30, halo: 1.3 },
             { x: '24%', y: '18%', size: 1.5, color: '#7EE7F2', opacity: 0.42, halo: 1.5 },
+            { x: '27%', y: '48%', size: 1, color: '#7EE7F2', opacity: 0.26, halo: 1, twinkle: true, delay: 4.1, duration: 6.4 },
             { x: '33%', y: '80%', size: 1, color: '#E6EEF2', opacity: 0.32, halo: 1.2 },
             { x: '41%', y: '38%', size: 1.2, color: '#F4D58D', opacity: 0.36, halo: 1.5 },
             { x: '48%', y: '70%', size: 1, color: '#7EE7F2', opacity: 0.30, halo: 1.2, twinkle: true, delay: 2.2, duration: 5.4 },
             { x: '58%', y: '17%', size: 1, color: '#E6EEF2', opacity: 0.28, halo: 1.1 },
+            { x: '62%', y: '43%', size: 1.2, color: '#7EE7F2', opacity: 0.24, halo: 1 },
             { x: '70%', y: '28%', size: 1.8, color: '#7EE7F2', opacity: 0.34, halo: 1.6 },
             { x: '76%', y: '55%', size: 1, color: '#A8C5D1', opacity: 0.28, halo: 1.1 },
+            { x: '79%', y: '70%', size: 1.4, color: '#F4D58D', opacity: 0.24, halo: 1.1 },
             { x: '84%', y: '19%', size: 1.2, color: '#F4D58D', opacity: 0.40, halo: 1.8, twinkle: true, delay: 3.1, duration: 6 },
             { x: '89%', y: '45%', size: 1, color: '#7EE7F2', opacity: 0.30, halo: 1.1 },
+            { x: '91%', y: '30%', size: 1.3, color: '#E6EEF2', opacity: 0.24, halo: 1.1, twinkle: true, delay: 1.7, duration: 5.8 },
             { x: '94%', y: '73%', size: 1.5, color: '#E6EEF2', opacity: 0.28, halo: 1.3 },
           ]}
         />

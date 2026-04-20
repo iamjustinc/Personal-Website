@@ -254,7 +254,7 @@ function ContactPageLayout() {
           
 
           <h2 className="font-display text-hero leading-none text-text-base">
-            Let&apos;s build clarity.
+            Contact Me!
           </h2>
 
           <p

@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { dmSerifDisplay, plusJakartaSans, jetbrainsMono } from '@/lib/fonts'
 import { Nav } from '@/components/nav/Nav'
 import { WatermarkStar } from '@/components/ui/WatermarkStar'
-import { ShootingStar } from '@/components/ui/ShootingStar'
 import { StarMark } from '@/components/ui/StarMark'
 import { StarField } from '@/components/ui/StarField'
 import { GlobalStarCursor } from '@/components/ui/GlobalStarCursor'
@@ -79,14 +78,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {/* Tertiary star: mid-page right, small, slow */}
           <div className="absolute top-[42%] right-[2%]">
             <WatermarkStar size={280} color="#C4974A" direction={1} duration={180} opacity={0.055} />
-          </div>
-
-          {/* Shooting stars: 3 kept (down from 5) to reduce compositor layer count.
-              Negative delays phase each into its cycle immediately on load.     */}
-          <div className="absolute inset-0">
-            <ShootingStar startX="7%"  startY="16%" angle={30} duration={12} delay={-2}  />
-            <ShootingStar startX="22%" startY="6%"  angle={32} duration={16} delay={-4}  />
-            <ShootingStar startX="85%" startY="14%" angle={34} duration={18} delay={-13} />
           </div>
         </div>
 
