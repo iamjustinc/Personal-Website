@@ -422,8 +422,7 @@ export function HeroText() {
         className="font-sans leading-relaxed mt-6 max-w-[520px]"
         style={{ fontSize: 'clamp(16px, 1.7vw, 19px)', color: '#A8C5D1' }}
       >
-        Early-career technical builder for Solutions Engineering, technical product, and data/workflow
-        roles. I turn AI systems and data into clear workflows, dashboards, and walkthroughs.
+        I design technical workflows, decision-support tools, and product walkthroughs that turn complex systems into clear next steps.
       </motion.p>
 
       {/* ── Role pill ────────────────────────────────────────────────────── */}
