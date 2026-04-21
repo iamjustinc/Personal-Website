@@ -53,20 +53,20 @@ const proofPoints: ProofPoint[] = [
 
 const strengths = [
   {
-    title: 'Make value visible',
-    body: 'I tailor walkthroughs around the user workflow, decision criteria, and next step.',
+    title: 'Make the workflow visible',
+    body: 'I shape walkthroughs around how the user works, what they need to decide, and what happens next.',
   },
   {
-    title: 'Diagnose before solving',
-    body: 'I map friction, constraints, and decision criteria before recommending a fix.',
+    title: 'Find the real friction',
+    body: 'I look for the constraint behind the request before choosing the simplest useful fix.',
   },
   {
-    title: 'Translate across the room',
-    body: 'I explain architecture, AI outputs, and tradeoffs in language each audience can use.',
+    title: 'Explain technical tradeoffs',
+    body: 'I explain architecture, AI outputs, and tradeoffs in language that technical and non-technical teams can both use.',
   },
   {
-    title: 'Tie systems to outcomes',
-    body: 'I connect data, automation, and product behavior to workflow impact and decisions unlocked.',
+    title: 'Connect systems to decisions',
+    body: 'I connect data, automation, and product behavior to clearer workflows and better decisions.',
   },
 ]
 
@@ -193,20 +193,20 @@ export function AboutSection() {
         >
           <StarMark size="xs" color="#C4974A" className="opacity-85" />
           <span className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-text-muted">
-            Why me
+            Why I fit
           </span>
         </div>
 
         <h2 className="font-display text-h1 leading-tight text-text-base text-balance">
-          Built to discover, translate, and <span style={{ color: '#4A9FAE' }}>build value</span>
+          Useful where technical systems <span style={{ color: '#4A9FAE' }}>meet people</span>
         </h2>
 
         <p
           className="mt-5 max-w-[670px] font-sans text-[16px] leading-7"
           style={{ color: '#A8C5D1' }}
         >
-          I work from the workflow first: clarify the friction, shape the path forward, and make
-          AI/data tradeoffs understandable.
+          I start with the workflow, isolate the friction, and explain AI/data tradeoffs clearly
+          enough to support the next decision.
         </p>
       </motion.div>
 
@@ -500,16 +500,17 @@ export function AboutSection() {
                 className="font-mono text-[10.5px] uppercase tracking-[0.14em]"
                 style={{ color: '#7FAFBB' }}
               >
-                Recruiter signal
+                Fit signal
               </span>
             </div>
 
             <h3 className="font-display text-[34px] leading-[1.05] text-text-base sm:text-[42px]">
-              How I create customer clarity
+              How I help teams understand technical work
             </h3>
 
             <p className="mt-5 font-sans text-[15px] leading-7" style={{ color: '#A8C5D1' }}>
-              I am useful when the room needs a credible technical answer and a clear next step.
+              I am useful when a team needs the technical answer, the user context, and the next
+              step in the same conversation.
             </p>
           </div>
 

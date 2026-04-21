@@ -86,7 +86,7 @@ function CopyEmailButton({
             {email}
           </p>
           <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-text-muted">
-            Direct email
+            Best direct contact
           </p>
         </div>
       </div>
@@ -228,7 +228,8 @@ function SectionFooter({ showThanks = true }: { showThanks?: boolean }) {
         </p>
         {showThanks && (
           <p className="mt-2 text-sm" style={{ color: 'rgba(168,197,209,0.50)' }}>
-            Built to show how I translate systems into walkthroughs, workflows, and decisions.
+            Built to show how I explain systems, design workflows, and make technical work easier
+            to act on.
           </p>
         )}
       </div>
@@ -239,7 +240,7 @@ function SectionFooter({ showThanks = true }: { showThanks?: boolean }) {
           className="font-mono text-[9px] uppercase tracking-widest"
           style={{ color: 'rgba(168,197,209,0.30)' }}
         >
-          Technical Systems
+          Systems + Workflows
         </span>
       </div>
     </div>
@@ -382,14 +383,14 @@ function ContactSectionLayout() {
     <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(420px,520px)] lg:gap-16">
       <div className="relative">
 
-        <h2 className="font-display text-h1 text-text-base">Let&apos;s talk solutions.</h2>
+        <h2 className="font-display text-h1 text-text-base">Let&apos;s talk technical fit.</h2>
 
         <p
           className="mt-5 max-w-[680px] font-sans leading-relaxed"
           style={{ color: '#A8C5D1', fontSize: '16px' }}
         >
-          Open to early-career roles where technical systems, workflow translation, and stakeholder
-          clarity turn complexity into usable value.
+          Open to early-career Solutions Engineering, technical product, and data/workflow roles
+          where clear systems thinking and stakeholder communication matter.
         </p>
 
         <div className="mt-8">
@@ -414,15 +415,15 @@ function ContactSectionLayout() {
           <div className="space-y-3 text-sm" style={{ color: '#A8C5D1' }}>
             <div className="flex items-start gap-2">
               <StarMark size="xs" color="#4A9FAE" className="mt-1 opacity-70" />
-              <span>Early-career technical product, data, and systems roles</span>
+              <span>Early-career Solutions Engineering, technical product, and data/workflow roles</span>
             </div>
             <div className="flex items-start gap-2">
               <StarMark size="xs" color="#C4974A" className="mt-1 opacity-70" />
-              <span>Technical walkthroughs, discovery, and workflow translation</span>
+              <span>Technical walkthroughs, workflow discovery, and stakeholder readouts</span>
             </div>
             <div className="flex items-start gap-2">
               <StarMark size="xs" color="#4A9FAE" className="mt-1 opacity-70" />
-              <span>Customer-facing teams turning complex systems into usable value</span>
+              <span>Customer-facing teams that need complex systems explained clearly</span>
             </div>
           </div>
         </div>

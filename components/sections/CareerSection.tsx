@@ -12,23 +12,23 @@ import { cn } from '@/lib/utils'
 
 const careerCopyByRole: Record<string, string> = {
   'Project Lead & Data Analyst':
-    'Owned predictive pipelines across 30K+ records, turning model outputs into risk-scoring dashboards stakeholders could use for decision support.',
+    'Built predictive pipelines across 30K+ records and translated model outputs into risk-scoring dashboards for stakeholder decision support.',
   'Senior Project Lead':
-    'Designed recruitment, scheduling, and operational dashboard systems across 100+ sessions, improving completion 63% and giving teams cleaner coordination data.',
+    'Redesigned recruitment, scheduling, and operational dashboard workflows across 100+ sessions, improving completion 63% and giving teams clearer coordination data.',
   'Intern Data Analyst':
-    'Built Python/R pipelines for 200+ fMRI sessions, reduced manual analysis time by 70%, and walked non-technical stakeholders through outputs and tradeoffs.',
+    'Built Python/R pipelines for 200+ fMRI sessions, reduced manual analysis time by 70%, and explained outputs and tradeoffs to non-technical research stakeholders.',
   'Research Data Analyst':
-    'Standardized PETRUSHKA coordination with Excel, R, SQL, and Tableau tracking systems, reducing handoff friction across clinical and research teams.',
+    'Built Excel, R, SQL, and Tableau tracking systems for PETRUSHKA operations, standardizing coordination and reducing handoff friction across clinical and research teams.',
   'Independent Product Builder':
-    'Built Kestrel as a live AI decision-support product, plus Quail Mail and Chirpie previews around triage logic, structured outputs, attribution, and explainability.',
+    'Built Kestrel as a live AI decision-support product and developed Quail Mail and Chirpie previews focused on triage logic, structured outputs, attribution, and explainability.',
 }
 
 const careerTagsByRole: Record<string, string[]> = {
-  'Project Lead & Data Analyst': ['Decision Support', 'Data Pipelines', 'Stakeholder Translation'],
-  'Senior Project Lead': ['Operational Dashboards', 'Workflow Design', 'Cross-Functional Alignment'],
-  'Intern Data Analyst': ['Python/R Pipelines', 'Technical Walkthroughs', 'Stakeholder Translation'],
-  'Research Data Analyst': ['Tracking Systems', 'SQL + Tableau', 'Coordination Systems'],
-  'Independent Product Builder': ['Product Walkthroughs', 'OpenAI Integration', 'Explainability'],
+  'Project Lead & Data Analyst': ['Decision Support', 'Data Pipelines', 'Stakeholder Readouts'],
+  'Senior Project Lead': ['Operational Dashboards', 'Workflow Design', 'Team Coordination'],
+  'Intern Data Analyst': ['Python/R Pipelines', 'Technical Walkthroughs', 'Stakeholder Readouts'],
+  'Research Data Analyst': ['Tracking Systems', 'SQL + Tableau', 'Study Operations'],
+  'Independent Product Builder': ['Workflow Demos', 'OpenAI Integration', 'Explainability'],
 }
 
 const ambientStars = [
@@ -191,20 +191,21 @@ export function CareerSection() {
         >
           <StarMark size="xs" color="#C4974A" className="opacity-80" />
           <span className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-text-muted">
-            Paths So Far
+            Experience
           </span>
         </div>
 
         <h2 className="font-display text-h1 text-text-base leading-tight">
-          Technical ownership across{' '}
-          <span style={{ color: '#4A9FAE' }}>systems</span>
+          Systems work across{' '}
+          <span style={{ color: '#4A9FAE' }}>data, operations, and product</span>
         </h2>
         <p
           className="font-sans mt-3 max-w-[560px] leading-relaxed"
           style={{ fontSize: '12px', color: '#A8C5D1' }}
         >
-          Across research, operations, and product work, I have built pipelines, dashboards,
-          walkthroughs, and workflow systems that help stakeholders understand what to do next.
+          Across research, operations, and product work, I have built data pipelines, dashboards,
+          scheduling systems, and AI workflow tools that made complex work easier to coordinate,
+          explain, and act on.
         </p>
       </motion.div>
 

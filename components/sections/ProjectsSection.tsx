@@ -22,11 +22,11 @@ const projectSpotlights: Record<
 > = {
   kestrel: {
     description:
-      'Translates a messy job description into fit signals, ranked gaps, and a guided action plan.',
+      'Parses a target job description into requirements, fit signals, ranked gaps, and a next-step roadmap.',
     metrics: [
-      { value: '1 JD', label: 'requirements mapped' },
-      { value: '4', label: 'decision signals' },
-      { value: '5', label: 'workflow views' },
+      { value: '1 JD', label: 'JD parsed' },
+      { value: '4', label: 'fit signals' },
+      { value: '5', label: 'output views' },
     ],
   },
   quail: {
@@ -96,13 +96,13 @@ export function ProjectsSection() {
         >
           <StarMark size="xs" color="#C4974A" className="opacity-80" />
           <span className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-text-muted">
-            Solution Proof
+            Product Proof
           </span>
         </div>
-        <h2 className="font-display text-h1 text-text-base">Featured Project</h2>
+        <h2 className="font-display text-h1 text-text-base">Featured Case Study</h2>
         <p className="font-sans text-text-muted mt-3 max-w-[560px]" style={{ fontSize: '15px' }}>
-          A live case study showing how I structure ambiguity, translate requirements, and turn AI
-          outputs into a guided decision workflow.
+          A live build showing how I parse role requirements, structure AI output, and turn career
+          ambiguity into a usable decision workflow.
         </p>
       </motion.div>
 
@@ -403,7 +403,7 @@ export function ProjectsSection() {
                       className="font-mono text-[9.5px] uppercase tracking-[0.14em]"
                       style={{ color: '#7FAFBB' }}
                     >
-                      Build stack
+                      Technical stack
                     </span>
                   </div>
 
@@ -445,7 +445,7 @@ export function ProjectsSection() {
                       variant="primary"
                       size="sm"
                     >
-                      View Case Study
+                      Read Case Study
                     </StarburstButton>
                   </HoverSparkle>
 
@@ -455,7 +455,7 @@ export function ProjectsSection() {
                       variant="secondary"
                       size="sm"
                     >
-                      View Demo
+                      Watch Demo
                     </StarburstButton>
                   </HoverSparkle>
 
@@ -468,7 +468,7 @@ export function ProjectsSection() {
                         variant="secondary"
                         size="sm"
                       >
-                        Try It Out
+                        Open Live Product
                       </StarburstButton>
                     </HoverSparkle>
                   )}

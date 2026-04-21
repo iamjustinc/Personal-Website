@@ -37,21 +37,21 @@ const workProjectSpotlights: Record<
   },
   chirpie: {
     description:
-      'Turns multi-source news into explainable digests with confidence and attribution built in.',
+      'Turns multi-source news into concise digests with source attribution, confidence cues, and context for follow-up.',
     metrics: [
-      { value: '3+', label: 'source streams' },
+      { value: '3+', label: 'source inputs' },
       { value: '4', label: 'trust cues' },
-      { value: '1', label: 'digest loop' },
+      { value: '1', label: 'digest flow' },
     ],
     glow: '72% 26%',
   },
   quail: {
     description:
-      'Turns inbox overload into prioritized action lanes so users know what needs attention first.',
+      'Turns high-volume email into priority signals and action lanes so users can see what needs attention first.',
     metrics: [
       { value: '3', label: 'priority signals' },
       { value: '4', label: 'action lanes' },
-      { value: '1', label: 'triage pipeline' },
+      { value: '1', label: 'triage flow' },
     ],
     glow: '34% 72%',
   },
@@ -228,7 +228,7 @@ function WorkProjectCard({
                   color: '#D8B76E',
                 }}
               >
-                Coming Soon
+                Preview
               </span>
             )}
           </div>
@@ -336,10 +336,10 @@ function WorkProjectCard({
               >
                 <StarMark size="xs" color="#C4974A" className="opacity-70" />
                 <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#D8B76E]">
-                  Coming Soon
+                  Preview
                 </span>
                 <span className="font-sans text-[12.5px] text-[#7FAFBB]">
-                  Case study, demo, and live access are being finalized.
+                  Full case study, demo, and live access are still being finalized.
                 </span>
               </div>
             </div>
@@ -529,8 +529,8 @@ export default function WorkPage() {
             className="font-sans mt-5 max-w-[520px] leading-relaxed"
             style={{ fontSize: '16px', color: '#A8C5D1' }}
           >
-            Kestrel is live as the flagship product; Chirpie and Quail Mail are previewed here
-            while their case studies and demos are being finalized.
+            Kestrel is live. Chirpie and Quail Mail are previewed here as product builds while
+            their full case studies and demos are being finalized.
           </p>
         </motion.div>
 

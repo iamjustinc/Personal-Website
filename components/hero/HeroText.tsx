@@ -422,7 +422,8 @@ export function HeroText() {
         className="font-sans leading-relaxed mt-6 max-w-[520px]"
         style={{ fontSize: 'clamp(16px, 1.7vw, 19px)', color: '#A8C5D1' }}
       >
-        I turn messy needs into technical systems, guided workflows, and clear decisions.
+        Early-career technical builder for Solutions Engineering, technical product, and data/workflow
+        roles. I turn AI systems and data into clear workflows, dashboards, and walkthroughs.
       </motion.p>
 
       {/* ── Role pill ────────────────────────────────────────────────────── */}
@@ -436,7 +437,7 @@ export function HeroText() {
           }}
         >
           <StarMark size="xs" color="#C4974A" className="opacity-80" />
-          Technical Systems + Product Translation
+          Solutions Engineering + Technical Product
         </span>
       </motion.div>
 
@@ -452,7 +453,7 @@ export function HeroText() {
       <motion.div variants={fast} className="flex flex-wrap gap-3 mt-6">
         <HoverSparkle className="inline-flex">
           <StarburstButton href="/#projects" variant="primary" size="lg">
-            See solution work
+            View technical work
           </StarburstButton>
         </HoverSparkle>
         <HoverSparkle className="inline-flex">

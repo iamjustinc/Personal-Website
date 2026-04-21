@@ -48,49 +48,49 @@ type CaseStudyCopy = {
 
 const kestrelCaseStudyCopy: CaseStudyCopy = {
   tagline:
-    'Role-readiness decision engine that turns a target job description into fit signals, ranked gaps, resume direction, and an ordered action roadmap.',
+    'AI role-readiness tool that turns a target job description and candidate profile into fit signals, ranked gaps, resume direction, and a next-step roadmap.',
   outcome:
-    'Turns fragmented career preparation into one interpretable decision surface: what matches, what is missing, what to improve first, and what to do next.',
+    'Turns scattered career prep into one structured decision view: what matches, what is missing, what to improve first, and what to do next.',
 
   overview:
-    'Kestrel is a role-readiness decision engine for early-career candidates. A user brings a target job description and their background; the product extracts role requirements, evaluates fit, surfaces strengths alongside ranked gaps, and converts the result into a concrete roadmap they can act on immediately. The product is not about generating more career advice. It is about making the right next action obvious.',
+    'Kestrel is a role-readiness tool for early-career candidates comparing their background against a specific job. It extracts role requirements, evaluates fit, surfaces strengths and ranked gaps, then turns the result into a roadmap the user can act on before applying. The goal is not more career advice. It is a clearer decision about what to fix, what to highlight, and what to do next.',
 
   pmInsight: {
     label: 'Key Product Decision',
-    body: 'Kestrel could have been a chatbot. The decision to build a structured card-based dashboard instead was the core product bet. Conversation allows for vagueness. A ranked, card-based output forces the system to be explicit about what it found, why it matters, and what to do first. Ranking is a harder problem than advising, and it is also more useful. That distinction shaped every design decision that followed.',
+    body: 'Kestrel could have been a chatbot, but chat would have made the hardest part easier to avoid: ranking the user’s next move. I chose a structured card-based dashboard so the system had to show what it found, why it mattered, and what the user should do first. That constraint made the product more useful for career prep and more credible as a decision-support tool.',
   },
 
   overviewCards: [
     {
       title: 'Product Thesis',
-      body: 'Career preparation is not an information shortage problem. Most candidates already have more than enough advice. What they lack is a clear, ranked order of operations specific to their target role.',
+      body: 'Career preparation is not an information shortage problem. Candidates already have job posts, advice, and resume feedback. What they lack is a ranked order of operations tied to the specific role they want.',
     },
     {
       title: 'Product Bet',
-      body: 'One structured output surface that ranks what changes the outcome, including fit score, skill gaps, resume edits, and roadmap, beats a conversational interface that advises without ranking.',
+      body: 'A structured output that ranks fit score, skill gaps, resume direction, and roadmap is more useful than a chat interface that gives advice without prioritization.',
     },
   ],
 
   problem:
-    'Early-career candidates targeting PM, Solutions Engineering, and adjacent roles prepare from scattered signals: job posts, resume edits, advice threads, and vague role expectations. That cycle produces effort without direction, including repeated resume tweaks before the most important gaps are even identified and no reliable way to judge when preparation is actually sufficient.',
+    'Early-career candidates targeting PM, Solutions Engineering, and adjacent roles often prepare from scattered inputs: job posts, resume edits, advice threads, and unclear role expectations. The result is effort without sequence. Candidates keep revising materials before knowing which gaps matter most, and they lack a clear way to judge whether they are ready for a specific role.',
 
   problemBullets: [
-    'Job descriptions conflate hard requirements with soft preferences and filler language. Candidates cannot reliably distinguish which gaps are disqualifying versus negotiable.',
-    'Most candidates improve their resume in isolation before knowing which specific capability gaps to close. The effort often moves in the wrong direction.',
-    'Available AI tools return generic guidance. They advise but do not rank. They list but do not prioritize. They generate output without helping users decide what to do first.',
+    'Job descriptions mix hard requirements, soft preferences, and filler language, making it hard to tell which gaps are serious and which are negotiable.',
+    'Candidates often revise their resume before knowing which capability gaps actually matter for the role.',
+    'Generic AI tools can produce advice, but they rarely rank what matters first. They list options without turning them into a decision path.',
   ],
 
   users:
-    'Built for early-career candidates targeting PM, Solutions Engineering, and SWE-adjacent roles who need to translate their own background into role requirements without guessing which gaps matter most or where to focus their preparation time.',
+    'Built for early-career candidates targeting PM, Solutions Engineering, and SWE-adjacent roles who need to compare their background against a target job and decide where to focus preparation time.',
 
   userCards: [
     {
       title: 'Primary User',
-      body: 'Early-career candidates who are applying to multiple roles and need a faster, more reliable way to self-assess fit and prioritize preparation.',
+      body: 'Early-career candidates applying across related technical/product roles who need a faster way to assess fit and prioritize preparation for each target job.',
     },
     {
       title: 'Job To Be Done',
-      body: 'Tell me where I stand against this specific role, rank what I should work on first, and give me something I can act on before my next application.',
+      body: 'Show me where I stand against this role, rank what I should work on first, and give me a next step I can use before applying.',
     },
   ],
 
