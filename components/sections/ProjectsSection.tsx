@@ -22,7 +22,7 @@ const projectSpotlights: Record<
 > = {
   kestrel: {
     description:
-      'Parses a target job description into requirements, fit signals, ranked gaps, and a next-step roadmap.',
+      'Turns a target job description into role requirements, fit signals, ranked skill gaps, and a clear action roadmap for job seekers.',
     metrics: [
       { value: '1 JD', label: 'JD parsed' },
       { value: '4', label: 'fit signals' },
@@ -101,8 +101,8 @@ export function ProjectsSection() {
         </div>
         <h2 className="font-display text-h1 text-text-base">Featured Case Study</h2>
         <p className="font-sans text-text-muted mt-3 max-w-[560px]" style={{ fontSize: '15px' }}>
-          A live build showing how I parse role requirements, structure AI output, and turn career
-          ambiguity into a usable decision workflow.
+          A live AI product showing how I translate messy job requirements into structured fit
+          signals, skill gaps, and a clear decision workflow.
         </p>
       </motion.div>
 
@@ -350,6 +350,16 @@ export function ProjectsSection() {
                   {spotlight.description}
                 </p>
 
+                {project.slug === 'kestrel' && (
+                  <p
+                    className="mt-4 max-w-[540px] font-mono text-[10px] leading-6"
+                    style={{ color: '#7FAFBB' }}
+                  >
+                    Role relevance: technical demo · requirement mapping · AI workflow design ·
+                    user-facing decision support
+                  </p>
+                )}
+
                 {/* Impact metrics */}
                 <div className="mt-7 grid grid-cols-3 gap-3">
                   {spotlight.metrics.map((metric, metricIndex) => (
@@ -441,18 +451,8 @@ export function ProjectsSection() {
                 >
                   <HoverSparkle className="inline-flex">
                     <StarburstButton
-                      href={`/projects/${project.slug}`}
-                      variant="primary"
-                      size="sm"
-                    >
-                      Read Case Study
-                    </StarburstButton>
-                  </HoverSparkle>
-
-                  <HoverSparkle className="inline-flex">
-                    <StarburstButton
                       href={`/projects/${project.slug}/demo`}
-                      variant="secondary"
+                      variant="primary"
                       size="sm"
                     >
                       Watch Demo
@@ -472,6 +472,16 @@ export function ProjectsSection() {
                       </StarburstButton>
                     </HoverSparkle>
                   )}
+
+                  <HoverSparkle className="inline-flex">
+                    <StarburstButton
+                      href={`/projects/${project.slug}`}
+                      variant="secondary"
+                      size="sm"
+                    >
+                      Read Case Study
+                    </StarburstButton>
+                  </HoverSparkle>
                 </div>
               </div>
             </motion.div>

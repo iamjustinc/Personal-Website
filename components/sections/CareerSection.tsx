@@ -24,10 +24,10 @@ const careerCopyByRole: Record<string, string> = {
 }
 
 const careerTagsByRole: Record<string, string[]> = {
-  'Project Lead & Data Analyst': ['Decision Support', 'Data Pipelines', 'Stakeholder Readouts'],
-  'Senior Project Lead': ['Operational Dashboards', 'Workflow Design', 'Team Coordination'],
-  'Intern Data Analyst': ['Python/R Pipelines', 'Technical Walkthroughs', 'Stakeholder Readouts'],
-  'Research Data Analyst': ['Tracking Systems', 'SQL + Tableau', 'Study Operations'],
+  'Project Lead & Data Analyst': ['Python/R pipelines', 'Predictive workflows', 'Dashboards', 'Stakeholder readouts'],
+  'Senior Project Lead': ['Workflow redesign', 'Operational dashboards', 'Scheduling systems', 'Team coordination'],
+  'Intern Data Analyst': ['Data pipelines', 'Technical walkthroughs', 'Research operations', 'Non-technical stakeholders'],
+  'Research Data Analyst': ['SQL/Tableau', 'Tracking systems', 'Documentation', 'Cross-functional coordination'],
   'Independent Product Builder': ['Workflow Demos', 'OpenAI Integration', 'Explainability'],
 }
 
@@ -196,16 +196,16 @@ export function CareerSection() {
         </div>
 
         <h2 className="font-display text-h1 text-text-base leading-tight">
-          Systems work across{' '}
-          <span style={{ color: '#4A9FAE' }}>data, operations, and product</span>
+          Experience turning data systems into{' '}
+          <span style={{ color: '#4A9FAE' }}>operational workflows</span>
         </h2>
         <p
           className="font-sans mt-3 max-w-[560px] leading-relaxed"
           style={{ fontSize: '12px', color: '#A8C5D1' }}
         >
-          Across research, operations, and product work, I have built data pipelines, dashboards,
-          scheduling systems, and AI workflow tools that made complex work easier to coordinate,
-          explain, and act on.
+          Across health AI, research operations, and product work, I have built pipelines,
+          dashboards, scheduling systems, and AI workflows that make complex work easier to
+          coordinate, explain, and act on.
         </p>
       </motion.div>
 

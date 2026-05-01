@@ -54,19 +54,19 @@ const proofPoints: ProofPoint[] = [
 const strengths = [
   {
     title: 'Make the workflow visible',
-    body: 'I shape walkthroughs around how the user works, what they need to decide, and what happens next.',
+    body: 'Process mapping · user journeys · technical walkthroughs',
   },
   {
     title: 'Find the real friction',
-    body: 'I look for the constraint behind the request before choosing the simplest useful fix.',
+    body: 'Gap analysis · requirements discovery · workflow diagnosis',
   },
   {
     title: 'Explain technical tradeoffs',
-    body: 'I explain architecture, AI outputs, and tradeoffs in language that technical and non-technical teams can both use.',
+    body: 'APIs · LLM outputs · data pipelines · implementation constraints',
   },
   {
     title: 'Connect systems to decisions',
-    body: 'I connect data, automation, and product behavior to clearer workflows and better decisions.',
+    body: 'Dashboards · success metrics · stakeholder readouts',
   },
 ]
 
@@ -198,15 +198,16 @@ export function AboutSection() {
         </div>
 
         <h2 className="font-display text-h1 leading-tight text-text-base text-balance">
-          Useful where technical systems <span style={{ color: '#4A9FAE' }}>meet people</span>
+          Built for roles that need technical depth and{' '}
+          <span style={{ color: '#4A9FAE' }}>clear communication</span>
         </h2>
 
         <p
           className="mt-5 max-w-[670px] font-sans text-[16px] leading-7"
           style={{ color: '#A8C5D1' }}
         >
-          I start with the workflow, isolate the friction, and explain AI/data tradeoffs clearly
-          enough to support the next decision.
+          I map workflows, identify friction, explain tradeoffs, and turn AI/data systems into
+          usable product experiences.
         </p>
       </motion.div>
 
@@ -500,17 +501,17 @@ export function AboutSection() {
                 className="font-mono text-[10.5px] uppercase tracking-[0.14em]"
                 style={{ color: '#7FAFBB' }}
               >
-                Fit signal
+                Role fit
               </span>
             </div>
 
             <h3 className="font-display text-[34px] leading-[1.05] text-text-base sm:text-[42px]">
-              How I help teams understand technical work
+              How I support technical and customer-facing teams
             </h3>
 
             <p className="mt-5 font-sans text-[15px] leading-7" style={{ color: '#A8C5D1' }}>
-              I am useful when a team needs the technical answer, the user context, and the next
-              step in the same conversation.
+              I am most useful where product context, technical detail, and stakeholder
+              communication need to stay aligned.
             </p>
           </div>
 

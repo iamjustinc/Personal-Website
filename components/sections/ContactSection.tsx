@@ -389,8 +389,8 @@ function ContactSectionLayout() {
           className="mt-5 max-w-[680px] font-sans leading-relaxed"
           style={{ color: '#A8C5D1', fontSize: '16px' }}
         >
-          Open to early-career Solutions Engineering, technical product, and data/workflow roles
-          where clear systems thinking and stakeholder communication matter.
+          Open to early-career Solutions Engineering, Technical Product, Product Operations, and
+          AI/Data Workflow roles where clear systems thinking and stakeholder communication matter.
         </p>
 
         <div className="mt-8">
@@ -415,7 +415,7 @@ function ContactSectionLayout() {
           <div className="space-y-3 text-sm" style={{ color: '#A8C5D1' }}>
             <div className="flex items-start gap-2">
               <StarMark size="xs" color="#4A9FAE" className="mt-1 opacity-70" />
-              <span>Early-career Solutions Engineering, technical product, and data/workflow roles</span>
+              <span>Early-career Solutions Engineering, Technical Product, Product Operations, and AI/Data Workflow roles</span>
             </div>
             <div className="flex items-start gap-2">
               <StarMark size="xs" color="#C4974A" className="mt-1 opacity-70" />
@@ -424,6 +424,10 @@ function ContactSectionLayout() {
             <div className="flex items-start gap-2">
               <StarMark size="xs" color="#4A9FAE" className="mt-1 opacity-70" />
               <span>Customer-facing teams that need complex systems explained clearly</span>
+            </div>
+            <div className="flex items-start gap-2">
+              <StarMark size="xs" color="#C4974A" className="mt-1 opacity-70" />
+              <span>Teams building AI/data workflows, dashboards, or internal tools</span>
             </div>
           </div>
         </div>
