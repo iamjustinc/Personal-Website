@@ -21,7 +21,7 @@ const snapshotCards = [
   },
   {
     title: 'Proof',
-    content: '30K+ records · 70% less manual review · 63% completion lift · 3 live AI products',
+    content: '30K+ records processed · 70% faster analysis · 63% higher study completion · 3 live AI products',
   },
 ]
 
