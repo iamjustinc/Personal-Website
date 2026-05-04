@@ -2,9 +2,9 @@ import type { SiteConfig } from '@/types/site'
 
 export const siteConfig: SiteConfig = {
   name: 'Justin Chang',
-  roleTag: 'Technical Systems + Product Workflows',
+  roleTag: 'Solutions Engineering · Technical Product · Product Operations',
   heroStatement:
-    'I turn technical complexity, AI systems, and data into clear workflows, decisions, and usable products.',
+    'Early-career technical product builder focused on Solutions Engineering, Product Operations, and Data / AI roles. I build AI-powered workflows, dashboards, and demos that turn complex systems into clear next steps.',
   resumeUrl: '/api/resume',
 
   logoSrc: '/images/justin-logo.png',
@@ -93,6 +93,6 @@ export const siteConfig: SiteConfig = {
   linkedinUrl: 'https://linkedin.com/in/jjustin-chang',
   githubUrl: 'https://github.com/iamjustinc',
   currentlyOpen:
-  'Open to early-career roles focused on technical systems, product workflows, and stakeholder value.',
+  'Open to early-career Solutions Engineering, Technical Product, Product Operations, and Data / AI Analyst roles.',
   copyrightName: 'Justin Chang',
 }

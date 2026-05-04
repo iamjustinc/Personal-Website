@@ -23,16 +23,16 @@ const previewCopy: Record<
   }
 > = {
   chirpie: {
-    status: 'Conversational news case study in progress',
+    status: 'News summary case study in progress',
     note:
-      'Chirpie is being tightened into a cleaner product story around source-aware summaries, trust cues, and lightweight follow-up depth.',
-    signals: ['Source-aware digests', 'Trust-first summaries', 'Conversational UX'],
+      'Chirpie is being tightened into a clearer product story around source-grounded summaries, trust cues, and follow-up context.',
+    signals: ['Source-grounded summaries', 'Trust cues', 'Follow-up context'],
   },
   quail: {
-    status: 'Inbox intelligence case study in progress',
+    status: 'Inbox triage case study in progress',
     note:
-      'Quail Mail is being polished into a sharper workflow story around priority signals, action lanes, and explainable inbox triage.',
-    signals: ['Priority scoring', 'Actionable triage', 'Workflow clarity'],
+      'Quail Mail is being polished into a clearer product story around prioritized email decisions, AI summaries, and next-step suggestions.',
+    signals: ['AI triage', 'Email summaries', 'Next-step suggestions'],
   },
 }
 
@@ -126,7 +126,7 @@ export function ProjectComingSoon({
                 className="font-mono text-[10.5px] uppercase tracking-[0.12em]"
                 style={{ color: project.panelAccentColor }}
               >
-                Coming Soon
+                Preview
               </span>
             </motion.div>
 

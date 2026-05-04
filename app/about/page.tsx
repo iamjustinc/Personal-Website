@@ -20,54 +20,54 @@ const proofStats = [
   {
     value: '30K+',
     label: 'records modeled',
-    body: 'risk-scoring workflows and dashboards',
+    body: 'risk-scoring dashboards and pipelines',
   },
   {
     value: '70%',
-    label: 'analysis time reduced',
-    body: 'Python/R pipelines replacing manual review',
+    label: 'less manual analysis',
+    body: 'Python/R pipelines replacing manual analysis',
   },
   {
     value: '63%',
-    label: 'workflow increase',
-    body: 'scheduling workflow redesign across 100+ sessions',
+    label: 'higher completion',
+    body: 'recruitment and scheduling redesign across 100+ sessions',
   },
   {
     value: '3',
-    label: 'AI workflow systems',
-    body: 'career, inbox, and news systems with clear walkthrough paths',
+    label: 'AI workflow products',
+    body: 'career, inbox, and news products with clear demo paths',
   },
 ]
 
 const strengths = [
   {
     number: '01',
-    title: 'Tailored product walkthroughs',
-    body: 'I tailor walkthroughs around the user workflow, decision criteria, and what needs to be believed.',
+    title: 'Tailored product demos',
+    body: 'I tailor demos around the user question, product logic, and the next step.',
   },
   {
     number: '02',
-    title: 'Discovery-first thinking',
-    body: 'I map friction, constraints, and adoption risks before recommending the fix.',
+    title: 'Discovery before build',
+    body: 'I map friction, requirements, and tradeoffs before choosing the fix.',
   },
   {
     number: '03',
-    title: 'Stakeholder-ready communication',
-    body: 'I translate architecture, AI outputs, and tradeoffs into language each audience can use.',
+    title: 'Clear stakeholder communication',
+    body: 'I explain architecture, AI outputs, and tradeoffs in language each audience can use.',
   },
   {
     number: '04',
-    title: 'Complexity translated into value',
-    body: 'I connect system behavior to workflow impact, decision support, and clearer action.',
+    title: 'From data to decisions',
+    body: 'I connect product behavior to dashboards, decisions, and next steps.',
   },
 ]
 
 const compactSignals = [
-  'Technical systems',
-  'Product walkthroughs',
-  'Workflow translation',
-  'Stakeholder clarity',
-  'Decision support',
+  'Technical demos',
+  'Product thinking',
+  'Data pipelines',
+  'Stakeholder communication',
+  'AI products',
 ]
 
 /**
@@ -344,14 +344,14 @@ export default function AboutPage() {
                   className="font-mono text-[9px] uppercase tracking-[0.12em]"
                   style={{ color: '#4A9FAE' }}
                 >
-                  Early-career technical systems
+                  Early-career technical product
                 </span>
               </div>
 
               <h1 className="group/name relative inline-block max-w-[580px] font-sans text-[22px] font-semibold leading-snug text-text-base sm:text-[24px] lg:text-[26px]">
                 <span className="relative z-10">
-                  I turn technical complexity into{' '}
-                  <span style={{ color: '#4A9FAE' }}>clear workflows and decisions.</span>
+                  I build technical products{' '}
+                  <span style={{ color: '#4A9FAE' }}>people can understand and use.</span>
                 </span>
                 {!shouldReduce && (
                   <motion.span
@@ -381,8 +381,10 @@ export default function AboutPage() {
                 className="mt-4 max-w-[56ch] font-sans text-[14.5px] leading-7"
                 style={{ color: '#A8C5D1' }}
               >
-                I build AI/data tools, explain how they work, and turn technical ambiguity into
-                stakeholder-ready next steps.
+                I&apos;m an early-career technical product builder with experience across health
+                AI, research operations, and self-directed AI products. My work sits between data,
+                product, and communication: I turn messy processes into usable tools and explain
+                them clearly to technical and non-technical teams.
               </p>
             </motion.div>
 
@@ -445,7 +447,7 @@ export default function AboutPage() {
               </HoverSparkle>
               <HoverSparkle className="inline-flex">
                 <StarburstButton href="/resume" variant="secondary" size="md">
-                  View Résumé
+                  Resume
                 </StarburstButton>
               </HoverSparkle>
             </motion.div>
@@ -760,21 +762,21 @@ export default function AboutPage() {
                   className="font-mono text-[10px] uppercase tracking-[0.14em]"
                   style={{ color: '#7FAFBB' }}
                 >
-                  Recruiter signal
+                  How I work
                 </span>
               </div>
 
               <h2 className="font-display text-[44px] md:text-[56px] leading-[0.95] text-text-base text-balance">
-                How I create <br />
-                usable value
+                How I make <br />
+                technical work easier to use
               </h2>
 
               <p
                 className="mt-6 max-w-[30ch] font-sans text-[16px] leading-8"
                 style={{ color: '#A8C5D1' }}
               >
-                I&apos;m useful when a team needs the technical answer, the user workflow, and
-                the next step in the same conversation.
+                I&apos;m most useful when a team needs the product context, technical detail, and
+                next step in the same conversation.
               </p>
             </motion.div>
 
@@ -939,11 +941,11 @@ export default function AboutPage() {
                 </span>
               </div>
               <h2 className="font-display text-[34px] leading-[1.05] text-text-base md:text-[46px]">
-                Need someone who can explain the system and clarify the value?
+                Looking for someone who can explain the product and the next step?
               </h2>
               <p className="mt-4 font-sans text-[15.5px] leading-7" style={{ color: '#A8C5D1' }}>
-                I&apos;m looking for early-career roles where technical translation, workflow clarity,
-                and AI-enabled systems matter.
+                I&apos;m looking for early-career roles where product thinking, AI/data tools, and
+                stakeholder communication overlap.
               </p>
             </div>
 
@@ -955,7 +957,7 @@ export default function AboutPage() {
               </HoverSparkle>
               <HoverSparkle className="inline-flex">
                 <StarburstButton href="/resume" variant="secondary" size="md">
-                  View Résumé
+                  Resume
                 </StarburstButton>
               </HoverSparkle>
             </div>

@@ -30,24 +30,24 @@ const proofPoints: ProofPoint[] = [
     value: 30,
     suffix: 'K+',
     label: 'records modeled',
-    detail: 'Built risk-scoring workflows from clinical-scale data.',
+    detail: 'Built risk-scoring dashboards from clinical-scale data.',
   },
   {
     value: 70,
     suffix: '%',
-    label: 'manual review reduced',
-    detail: 'Reduced analysis time through reusable Python/R pipelines.',
+    label: 'less manual analysis',
+    detail: 'Reduced manual analysis through reusable Python/R pipelines.',
   },
   {
     value: 63,
     suffix: '%',
-    label: 'completion rate lift',
-    detail: 'Improved completion after redesigning recruitment and scheduling flows.',
+    label: 'higher completion rate',
+    detail: 'Improved completion after redesigning recruitment and scheduling.',
   },
   {
-    textValue: 'Technical Demo',
+    textValue: 'Demos',
     label: 'product walkthroughs',
-    detail: 'Used walkthroughs to explain workflow, AI behavior, and next steps.',
+    detail: 'Used demos to explain workflows, AI behavior, and next steps.',
   },
 ]
 
@@ -206,8 +206,8 @@ export function AboutSection() {
           className="mt-5 max-w-[670px] font-sans text-[16px] leading-7"
           style={{ color: '#A8C5D1' }}
         >
-          I map workflows, identify friction, explain tradeoffs, and turn AI/data systems into
-          usable product experiences.
+          I map messy processes, identify friction, explain tradeoffs, and turn AI/data tools
+          into clear product decisions.
         </p>
       </motion.div>
 
@@ -510,7 +510,7 @@ export function AboutSection() {
             </h3>
 
             <p className="mt-5 font-sans text-[15px] leading-7" style={{ color: '#A8C5D1' }}>
-              I am most useful where product context, technical detail, and stakeholder
+              I am most useful when product context, technical detail, and stakeholder
               communication need to stay aligned.
             </p>
           </div>

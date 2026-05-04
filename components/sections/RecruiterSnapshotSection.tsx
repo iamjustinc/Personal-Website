@@ -9,7 +9,7 @@ import { fadeUp, fadeIn, staggerContainer, useMotionSafe } from '@/lib/motion'
 const snapshotCards = [
   {
     title: 'Target roles',
-    content: 'Solutions Engineering · Technical Product · Product Operations · AI/Data Workflows',
+    content: 'Solutions Engineering · Technical Product · Product Operations · Data / AI Analyst',
   },
   {
     title: 'Technical stack',
@@ -17,11 +17,11 @@ const snapshotCards = [
   },
   {
     title: 'Core strengths',
-    content: 'Technical demos · workflow mapping · stakeholder communication · dashboards',
+    content: 'Technical demos · workflow discovery · stakeholder communication · dashboards',
   },
   {
     title: 'Proof',
-    content: '30K+ records processed · 70% faster analysis · 63% higher study completion · 3 live AI products',
+    content: '30K+ records modeled · 70% less manual analysis · 63% higher completion · 3 AI workflow products',
   },
 ]
 

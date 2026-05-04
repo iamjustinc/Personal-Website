@@ -12,15 +12,15 @@ export const projects: Project[] = [
     slug: 'kestrel',
     name: 'Kestrel',
     tagline:
-      'AI career intelligence system that turns job descriptions into readiness scores, skill gaps, and next-step roadmaps.',
+      'AI role-readiness tool that turns job descriptions and resumes into fit signals, skill gaps, and action roadmaps.',
     summary:
-      'Kestrel is a decision-support tool that converts messy job descriptions into clear, structured career guidance users can act on immediately.',
+      'Kestrel helps job seekers turn confusing job descriptions and resumes into fit signals, skill gaps, and a clear action roadmap.',
     featured: true,
     order: 1,
     visible: true,
     homepageVisible: true,
     launchStatus: 'active',
-    role: 'Builder + Product Thinker',
+    role: 'Technical Product Builder',
     tags: ['Gen AI', 'Decision Support', 'Full-Stack'],
     stack: ['Next.js', 'TypeScript', 'OpenAI', 'PostgreSQL', 'Tailwind'],
     year: 2026,
@@ -32,16 +32,16 @@ export const projects: Project[] = [
     liveUrl: 'https://kestrel-resume.vercel.app/',
 
     overview:
-      'Kestrel helps candidates understand role fit faster. Users submit a job description and profile, then receive a readiness score, aligned strengths, ranked skill gaps, and a practical roadmap.',
+      'Kestrel helps job seekers compare a job description and resume, then returns fit signals, skill gaps, and a clear action plan.',
 
     problem:
-      'Most career tools give generic advice. Job seekers need guidance that is specific to the exact role they are targeting and clear enough to act on right away.',
+      'Most career tools give generic advice. Job seekers need role-specific guidance they can act on quickly.',
 
     users:
-      'Built for early-career candidates targeting competitive roles who need a clearer way to map their background to job requirements.',
+      'Built for early-career candidates who need a faster way to compare their background to role requirements.',
 
     solution:
-      'Kestrel runs job descriptions through a structured AI pipeline that extracts requirements, scores fit, surfaces skill gaps, and generates a prioritized roadmap in a card-based dashboard.',
+      'Kestrel extracts role requirements, compares them against a resume, and returns fit signals, skill gaps, and next-step guidance in a structured dashboard.',
 
     productLogic:
       'The product leads with orientation first, then action. Score, strengths, gaps, and roadmap appear in a sequence that makes the output easier to trust and use.',
@@ -50,7 +50,7 @@ export const projects: Project[] = [
       'The interface is built around one principle: messy input, structured output. Every panel is scannable, independent, and designed to reduce cognitive overload.',
 
     impact:
-      'The project shows how AI outputs can be made more explainable, structured, and useful. It communicates product judgment, systems thinking, and design clarity in one flow.',
+      'The project shows product judgment, AI output design, and decision-support thinking in one flow.',
 
     buildNotes:
       'The main engineering challenge was producing consistent structured output from inconsistent job descriptions. A staged pipeline and typed schema kept recommendations aligned and reliable.',
@@ -62,15 +62,15 @@ export const projects: Project[] = [
     slug: 'quail',
     name: 'Quail Mail',
     tagline:
-      'AI inbox triage assistant that turns high-volume email into prioritized action pipelines.',
+      'AI inbox triage tool that turns email overload into prioritized decisions and next steps.',
     summary:
-      'Quail Mail helps busy professionals reduce inbox overload by surfacing priorities, recommending actions, and turning email into a clearer workflow.',
+      'Quail Mail helps busy professionals turn inbox overload into prioritized email decisions, summaries, and next-step suggestions.',
     featured: false,
     order: 3,
     visible: true,
     homepageVisible: false,
     launchStatus: 'comingSoon',
-    role: 'Builder + Workflow Designer',
+    role: 'AI Workflow Builder',
     tags: ['Gen AI', 'Automation', 'Workflow'],
     stack: ['Next.js', 'TypeScript', 'OpenAI', 'Resend', 'Tailwind'],
     year: 2026,
@@ -82,16 +82,16 @@ export const projects: Project[] = [
     liveUrl: 'https://quail-mail.vercel.app/',
 
     overview:
-      'Quail Mail is an AI workflow tool for people who deal with too much email. It classifies messages, surfaces what matters, and helps users move from inbox overload to clear next steps.',
+      'Quail Mail helps users triage crowded inboxes by surfacing priority messages, summaries, and next steps.',
 
     problem:
-      'High-volume inboxes create constant friction. Important messages get buried, follow-ups are missed, and users spend too much time deciding what deserves attention first.',
+      'High-volume inboxes bury important messages and slow down decision-making. Users need help seeing what matters first.',
 
     users:
-      'Built for busy professionals, operators, and founders who need faster email triage without losing context or control.',
+      'Built for busy professionals, operators, and customer-facing teams who need faster email triage without losing context.',
 
     solution:
-      'Quail Mail scores messages across sender, urgency, and context, then groups them into more actionable categories so users can prioritize faster and with less friction.',
+      'Quail Mail scores messages for urgency, context, and actionability, then groups them into clear priorities with suggested next steps.',
 
     productLogic:
       'The system is designed around workflow compression. Instead of treating every email equally, it reduces attention load by helping users decide what matters first.',
@@ -100,7 +100,7 @@ export const projects: Project[] = [
       'The interface emphasizes quick scanning, low-friction categorization, and a cleaner path from message review to action.',
 
     impact:
-      'The project shows how AI can improve a familiar workflow by reducing noise and helping users act faster without making the experience feel gimmicky.',
+      'The project shows how AI can support faster prioritization without taking control away from the user.',
 
     buildNotes:
       'The hardest part was making prioritization feel believable and useful while integrating real-time analysis and production email delivery into a polished product flow.',
@@ -112,15 +112,15 @@ export const projects: Project[] = [
     slug: 'chirpie',
     name: 'Chirpie',
     tagline:
-      'AI news companion that turns multi-source content into personalized, explainable digests.',
+      'AI news product that turns multi-source reporting into source-grounded summaries and follow-up context.',
     summary:
-      'Chirpie ingests current events from multiple sources and delivers structured chat-style summaries built around trust, clarity, and repeat engagement.',
+      'Chirpie turns multi-source news into source-grounded summaries, trust cues, and follow-up context.',
     featured: false,
     order: 2,
     visible: true,
     homepageVisible: false,
     launchStatus: 'comingSoon',
-    role: 'Builder + Systems Designer',
+    role: 'Technical Product Builder',
     tags: ['Gen AI', 'Consumer', 'Full-Stack'],
     stack: ['Next.js', 'Python', 'OpenAI', 'Supabase'],
     year: 2026,
@@ -132,16 +132,16 @@ export const projects: Project[] = [
     liveUrl: 'https://chirpie-news.vercel.app/',
 
     overview:
-      'Chirpie is an AI-native news companion that turns high-volume reporting into structured, chat-style digests with context, confidence, and clear attribution.',
+      'Chirpie turns high-volume reporting into concise digests with source grounding, trust cues, and follow-up context.',
 
     problem:
-      'People want quick updates, but most news tools either overwhelm them with volume or flatten everything into generic summaries that lose trust and context.',
+      'People want quick updates, but most news tools either overwhelm them with volume or flatten stories into generic summaries that lose trust and context.',
 
     users:
-      'Built for users who want faster news consumption without giving up credibility, source awareness, or useful context.',
+      'Built for users who want faster news updates without giving up source awareness or context.',
 
     solution:
-      'Chirpie pulls from multiple sources and structures outputs around headlines, supporting context, confidence, and source links so summaries feel concise without feeling shallow.',
+      'Chirpie pulls from multiple sources and structures outputs around headlines, supporting context, confidence, and source links.',
 
     productLogic:
       'The product prioritizes trust as much as speed. Summaries are more useful when users can see where information came from and how much confidence to place in it.',
@@ -150,7 +150,7 @@ export const projects: Project[] = [
       'The interface is designed to feel lightweight and conversational while still preserving attribution and enough structure to support repeat use.',
 
     impact:
-      'The project shows how structured AI outputs can improve trust and usability in information-heavy workflows, especially when explainability is treated as a product feature.',
+      'The project shows how AI summaries can stay concise without losing the trust signals users need.',
 
     buildNotes:
       'The main challenge was balancing concise summaries with enough sourcing and context to keep the experience trustworthy instead of over-compressed.',

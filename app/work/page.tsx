@@ -27,17 +27,17 @@ const workProjectSpotlights: Record<
 > = {
   kestrel: {
     description:
-      'Turns job descriptions into fit scores, skill gaps, and an action roadmap users can trust.',
+      'Helps job seekers turn confusing job descriptions into fit scores, skill gaps, and a clear action roadmap.',
     metrics: [
-      { value: '30K+', label: 'records analyzed' },
-      { value: '4', label: 'fit signals' },
-      { value: '1', label: 'action roadmap' },
+      { value: 'JD', label: 'fit analysis' },
+      { value: 'Gap', label: 'skill map' },
+      { value: 'Plan', label: 'action roadmap' },
     ],
     glow: '28% 22%',
   },
   chirpie: {
     description:
-      'Turns multi-source news into concise digests with source attribution, confidence cues, and context for follow-up.',
+      'Turns multi-source news into source-grounded summaries, trust cues, and follow-up context.',
     metrics: [
       { value: '3+', label: 'source inputs' },
       { value: '4', label: 'trust cues' },
@@ -47,7 +47,7 @@ const workProjectSpotlights: Record<
   },
   quail: {
     description:
-      'Turns high-volume email into priority signals and action lanes so users can see what needs attention first.',
+      'Turns inbox overload into prioritized email decisions with AI triage, summaries, and next-step suggestions.',
     metrics: [
       { value: '3', label: 'priority signals' },
       { value: '4', label: 'action lanes' },
@@ -529,8 +529,8 @@ export default function WorkPage() {
             className="font-sans mt-5 max-w-[520px] leading-relaxed"
             style={{ fontSize: '16px', color: '#A8C5D1' }}
           >
-            Kestrel is live. Chirpie and Quail Mail are previewed here as product builds while
-            their full case studies and demos are being finalized.
+            Kestrel is live. Chirpie and Quail Mail are preview builds while their full case
+            studies and demos are being finalized.
           </p>
         </motion.div>
 

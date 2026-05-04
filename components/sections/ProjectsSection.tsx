@@ -22,16 +22,16 @@ const projectSpotlights: Record<
 > = {
   kestrel: {
     description:
-      'Turns a target job description into role requirements, fit signals, ranked skill gaps, and a clear action roadmap for job seekers.',
+      'Turns job descriptions and resumes into role requirements, fit signals, skill gaps, and a clear action roadmap.',
     metrics: [
-      { value: '1 JD', label: 'JD parsed' },
-      { value: '4', label: 'fit signals' },
-      { value: '5', label: 'output views' },
+      { value: 'JD', label: 'fit analysis' },
+      { value: 'Gap', label: 'skill map' },
+      { value: 'Plan', label: 'action roadmap' },
     ],
   },
   quail: {
     description:
-      'Turns inbox overload into a prioritized triage pipeline with clear next actions.',
+      'Turns inbox overload into prioritized email decisions with AI triage, summaries, and next-step suggestions.',
     metrics: [
       { value: '1', label: 'inbox flow' },
       { value: '3', label: 'priority signals' },
@@ -40,7 +40,7 @@ const projectSpotlights: Record<
   },
   chirpie: {
     description:
-      'Turns multi-source news into concise, source-aware digests with confidence cues.',
+      'Turns multi-source news into source-grounded summaries, trust cues, and follow-up context.',
     metrics: [
       { value: '3+', label: 'source streams' },
       { value: '4', label: 'trust cues' },
@@ -96,13 +96,13 @@ export function ProjectsSection() {
         >
           <StarMark size="xs" color="#C4974A" className="opacity-80" />
           <span className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-text-muted">
-            Product Proof
+            Featured Work
           </span>
         </div>
         <h2 className="font-display text-h1 text-text-base">Featured Case Study</h2>
         <p className="font-sans text-text-muted mt-3 max-w-[560px]" style={{ fontSize: '15px' }}>
-          A live AI product showing how I translate messy job requirements into structured fit
-          signals, skill gaps, and a clear decision workflow.
+          A live AI product that turns messy job requirements into fit signals, skill gaps, and a
+          clear action plan.
         </p>
       </motion.div>
 
@@ -355,8 +355,8 @@ export function ProjectsSection() {
                     className="mt-4 max-w-[540px] font-mono text-[10px] leading-6"
                     style={{ color: '#7FAFBB' }}
                   >
-                    Role relevance: technical demo · requirement mapping · AI workflow design ·
-                    user-facing decision support
+                    Role relevance: technical demos · requirement mapping · AI product logic ·
+                    decision support
                   </p>
                 )}
 

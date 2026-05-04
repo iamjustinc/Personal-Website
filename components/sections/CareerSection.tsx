@@ -12,15 +12,15 @@ import { cn } from '@/lib/utils'
 
 const careerCopyByRole: Record<string, string> = {
   'Project Lead & Data Analyst':
-    'Built predictive pipelines across 30K+ records and translated model outputs into risk-scoring dashboards for stakeholder decision support.',
+    'Built predictive pipelines across 30K+ records for risk scoring, resulting in dashboards stakeholders could use for decisions.',
   'Senior Project Lead':
-    'Redesigned recruitment, scheduling, and operational dashboard workflows across 100+ sessions, improving completion 63% and giving teams clearer coordination data.',
+    'Built recruitment, scheduling, and dashboard processes across 100+ sessions, resulting in 63% higher completion and clearer team coordination.',
   'Intern Data Analyst':
-    'Built Python/R pipelines for 200+ fMRI sessions, reduced manual analysis time by 70%, and explained outputs and tradeoffs to non-technical research stakeholders.',
+    'Built Python/R pipelines for 200+ fMRI sessions, resulting in 70% less manual analysis and clearer readouts for non-technical research teams.',
   'Research Data Analyst':
-    'Built Excel, R, SQL, and Tableau tracking systems for PETRUSHKA operations, standardizing coordination and reducing handoff friction across clinical and research teams.',
+    'Built Excel, R, SQL, and Tableau tracking tools for PETRUSHKA operations, resulting in smoother handoffs across clinical and research teams.',
   'Independent Product Builder':
-    'Built Kestrel as a live AI decision-support product and developed Quail Mail and Chirpie previews focused on triage logic, structured outputs, attribution, and explainability.',
+    'Built Kestrel and developed Chirpie and Quail Mail previews, resulting in three AI products focused on clearer decisions, prioritization, and explainable output.',
 }
 
 const careerTagsByRole: Record<string, string[]> = {
@@ -28,7 +28,7 @@ const careerTagsByRole: Record<string, string[]> = {
   'Senior Project Lead': ['Workflow redesign', 'Operational dashboards', 'Scheduling systems', 'Team coordination'],
   'Intern Data Analyst': ['Data pipelines', 'Technical walkthroughs', 'Research operations', 'Non-technical stakeholders'],
   'Research Data Analyst': ['SQL/Tableau', 'Tracking systems', 'Documentation', 'Cross-functional coordination'],
-  'Independent Product Builder': ['Workflow Demos', 'OpenAI Integration', 'Explainability'],
+  'Independent Product Builder': ['Technical demos', 'OpenAI APIs', 'Explainability'],
 }
 
 const ambientStars = [
@@ -196,15 +196,15 @@ export function CareerSection() {
         </div>
 
         <h2 className="font-display text-h1 text-text-base leading-tight">
-          Experience turning data systems into{' '}
-          <span style={{ color: '#4A9FAE' }}>operational workflows</span>
+          Experience building dashboards, pipelines, and{' '}
+          <span style={{ color: '#4A9FAE' }}>stakeholder-ready tools</span>
         </h2>
         <p
           className="font-sans mt-3 max-w-[560px] leading-relaxed"
           style={{ fontSize: '12px', color: '#A8C5D1' }}
         >
           Across health AI, research operations, and product work, I have built pipelines,
-          dashboards, scheduling systems, and AI workflows that make complex work easier to
+          dashboards, scheduling tools, and AI products that made complex work easier to
           coordinate, explain, and act on.
         </p>
       </motion.div>

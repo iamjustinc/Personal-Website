@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: Props) {
   if (!project) return {}
   if (project.launchStatus === 'comingSoon') {
     return {
-      title: `${project.name} Demo Coming Soon | Justin Chang`,
+      title: `${project.name} Demo Preview | Justin Chang`,
       description: `${project.name} demo is being finalized and will be available soon.`,
     }
   }

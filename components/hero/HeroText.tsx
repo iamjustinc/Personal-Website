@@ -422,8 +422,9 @@ export function HeroText() {
         className="font-sans leading-relaxed mt-6 max-w-[520px]"
         style={{ fontSize: 'clamp(16px, 1.7vw, 19px)', color: '#A8C5D1' }}
       >
-        I build AI-powered workflows, dashboards, and technical demos that turn complex systems
-        into clear next steps.
+        Early-career technical product builder for Solutions Engineering, Product Operations, and
+        Data / AI roles. I build AI-powered workflows, dashboards, and demos that turn complex
+        systems into clear next steps.
       </motion.p>
 
       {/* ── Role pill ────────────────────────────────────────────────────── */}
@@ -437,7 +438,7 @@ export function HeroText() {
           }}
         >
           <StarMark size="xs" color="#C4974A" className="opacity-80" />
-          Solutions Engineering · Technical Product · AI/Data Systems
+          Solutions Engineering · Technical Product · Product Operations
         </span>
       </motion.div>
 
@@ -461,7 +462,7 @@ export function HeroText() {
       <motion.div variants={fast} className="flex flex-wrap gap-3 mt-6">
         <HoverSparkle className="inline-flex">
           <StarburstButton href="/#projects" variant="primary" size="lg">
-            View project demos
+            View technical demos
           </StarburstButton>
         </HoverSparkle>
         <HoverSparkle className="inline-flex">

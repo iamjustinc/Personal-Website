@@ -228,8 +228,8 @@ function SectionFooter({ showThanks = true }: { showThanks?: boolean }) {
         </p>
         {showThanks && (
           <p className="mt-2 text-sm" style={{ color: 'rgba(168,197,209,0.50)' }}>
-            Built to show how I explain systems, design workflows, and make technical work easier
-            to act on.
+            Built to show how I explain products, design clear flows, and make technical work
+            easier to act on.
           </p>
         )}
       </div>
@@ -240,7 +240,7 @@ function SectionFooter({ showThanks = true }: { showThanks?: boolean }) {
           className="font-mono text-[9px] uppercase tracking-widest"
           style={{ color: 'rgba(168,197,209,0.30)' }}
         >
-          Systems + Workflows
+          Product + Data
         </span>
       </div>
     </div>
@@ -256,15 +256,15 @@ function ContactPageLayout() {
           
 
           <h2 className="font-display text-hero leading-none text-text-base">
-            Contact Me!
+            Open to early-career roles.
           </h2>
 
           <p
             className="mt-6 max-w-[760px] font-sans leading-relaxed"
             style={{ color: '#A8C5D1', fontSize: '18px' }}
           >
-            I&apos;m looking for early-career conversations around technical systems, AI workflows,
-            product operations, and stakeholder translation.
+            I&apos;m looking for early-career roles where technical products, AI workflows, and
+            stakeholder communication overlap.
           </p>
 
           <div className="mt-10">
@@ -287,8 +287,8 @@ function ContactPageLayout() {
               </p>
             </div>
             <p className="font-sans text-[15px] leading-relaxed" style={{ color: '#A8C5D1' }}>
-              Technical, product, and data teams that need workflow discovery, clear walkthroughs,
-              and systems translated into usable value.
+              Technical, product, and data teams that need workflow discovery, clear demos, and
+              products explained in usable terms.
             </p>
           </div>
 
@@ -297,8 +297,7 @@ function ContactPageLayout() {
             style={{ borderColor: 'rgba(15,122,122,0.10)' }}
           >
             <p className="font-sans text-sm" style={{ color: 'rgba(168,197,209,0.55)' }}>
-              Best next step: email or LinkedIn for technical, product, and data recruiting
-              conversations.
+              Best next step: email or LinkedIn for recruiting conversations and quick context.
             </p>
             <div className="flex items-center gap-1.5">
               <StarMark size="xs" color="#C4974A" className="opacity-30" />
@@ -306,7 +305,7 @@ function ContactPageLayout() {
                 className="font-mono text-[9px] uppercase tracking-widest"
                 style={{ color: 'rgba(168,197,209,0.30)' }}
               >
-                Systems + Product
+                Product + Data
               </span>
             </div>
           </div>
@@ -329,7 +328,7 @@ function ContactPageLayout() {
                   Recruiter actions
                 </p>
                 <p className="mt-1 text-sm" style={{ color: '#8DAFC0' }}>
-                  Start with email or LinkedIn; résumé and GitHub are there for deeper review.
+                  Start with email or LinkedIn, then review the resume or GitHub for more detail.
                 </p>
               </div>
 
@@ -355,20 +354,20 @@ function ContactPageLayout() {
                 href={siteConfig.linkedinUrl}
                 icon={Linkedin}
                 title="Connect on LinkedIn"
-                body="Best for recruiting conversations, role fit, and quick context."
+                body="Best for recruiting conversations, role scope, and quick context."
               />
               <ActionCard
                 href={siteConfig.githubUrl}
                 icon={Github}
                 title="View GitHub"
-                body="Secondary proof for implementation style, AI workflows, and product systems."
+                body="Implementation proof for AI workflows, product tools, and technical demos."
               />
               <ActionCard
                 href={siteConfig.resumeUrl}
                 download="Justin-Chang-Resume.pdf"
                 icon={Download}
-                title="Download résumé"
-                body="Review experience across data pipelines, dashboards, walkthroughs, and technical communication."
+                title="Download Resume PDF"
+                body="Review experience across data pipelines, dashboards, product walkthroughs, and stakeholder communication."
               />
             </div>
           </div>
@@ -383,14 +382,14 @@ function ContactSectionLayout() {
     <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(420px,520px)] lg:gap-16">
       <div className="relative">
 
-        <h2 className="font-display text-h1 text-text-base">Let&apos;s talk technical fit.</h2>
+        <h2 className="font-display text-h1 text-text-base">Open to early-career roles.</h2>
 
         <p
           className="mt-5 max-w-[680px] font-sans leading-relaxed"
           style={{ color: '#A8C5D1', fontSize: '16px' }}
         >
           Open to early-career Solutions Engineering, Technical Product, Product Operations, and
-          AI/Data Workflow roles where clear systems thinking and stakeholder communication matter.
+          Data / AI Analyst roles where product thinking and stakeholder communication matter.
         </p>
 
         <div className="mt-8">
@@ -415,7 +414,7 @@ function ContactSectionLayout() {
           <div className="space-y-3 text-sm" style={{ color: '#A8C5D1' }}>
             <div className="flex items-start gap-2">
               <StarMark size="xs" color="#4A9FAE" className="mt-1 opacity-70" />
-              <span>Early-career Solutions Engineering, Technical Product, Product Operations, and AI/Data Workflow roles</span>
+              <span>Early-career Solutions Engineering, Technical Product, Product Operations, and Data / AI Analyst roles</span>
             </div>
             <div className="flex items-start gap-2">
               <StarMark size="xs" color="#C4974A" className="mt-1 opacity-70" />
@@ -427,7 +426,7 @@ function ContactSectionLayout() {
             </div>
             <div className="flex items-start gap-2">
               <StarMark size="xs" color="#C4974A" className="mt-1 opacity-70" />
-              <span>Teams building AI/data workflows, dashboards, or internal tools</span>
+              <span>Teams building AI/data tools, dashboards, or internal products</span>
             </div>
           </div>
         </div>
