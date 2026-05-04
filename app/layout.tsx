@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
+import { Analytics } from '@vercel/analytics/next'
 import { dmSerifDisplay, plusJakartaSans, jetbrainsMono } from '@/lib/fonts'
 import { Nav } from '@/components/nav/Nav'
 import { WatermarkStar } from '@/components/ui/WatermarkStar'
@@ -117,6 +118,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
         </div>
 
+        <Analytics />
       </body>
     </html>
   )
