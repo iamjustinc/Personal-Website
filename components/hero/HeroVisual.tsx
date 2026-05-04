@@ -200,9 +200,11 @@ export function HeroVisual() {
                 height: 10,
                 transform: 'translate(-88%, -50%)',
                 borderRadius: 999,
+                // Widened gradient stops replace filter:blur — a CSS raster filter
+                // inside a CSS-animated rotating container forces Safari to
+                // software-rasterize the entire GPU layer on each frame.
                 background:
-                  'linear-gradient(90deg, rgba(196,151,74,0.0) 0%, rgba(196,151,74,0.10) 28%, rgba(196,151,74,0.22) 55%, rgba(196,151,74,0.0) 100%)',
-                filter: 'blur(4px)',
+                  'linear-gradient(90deg, rgba(196,151,74,0.0) 0%, rgba(196,151,74,0.07) 22%, rgba(196,151,74,0.16) 50%, rgba(196,151,74,0.07) 78%, rgba(196,151,74,0.0) 100%)',
                 opacity: 0.7,
               }}
             />

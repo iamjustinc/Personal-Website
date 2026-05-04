@@ -186,10 +186,9 @@ function WorkProjectCard({
           />
 
           <div
-            className="absolute bottom-4 left-4 z-20 flex items-center gap-1.5 rounded-full px-3 py-1"
+            className="absolute bottom-4 left-4 z-20 flex items-center gap-1.5 rounded-full px-3 py-1 glass-badge"
             style={{
               background: 'rgba(13,30,53,0.82)',
-              backdropFilter: 'blur(12px)',
               border: `1px solid ${project.panelAccentColor}32`,
             }}
           >

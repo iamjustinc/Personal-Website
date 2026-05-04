@@ -37,10 +37,10 @@ export function Nav() {
   const [openDropdown,  setOpenDropdown]  = useState<string | null>(null)
   const pathname = usePathname()
 
+  // backdrop-filter is moved to .glass-nav / .glass-dropdown CSS classes so
+  // @supports gates the blur — solid background serves as the fallback.
   const navShellStyle = {
     background: 'rgba(10,24,44,0.88)',
-    backdropFilter: 'blur(14px)',
-    WebkitBackdropFilter: 'blur(14px)',
     border: '1px solid rgba(15,122,122,0.28)',
     boxShadow:
       '0 8px 48px rgba(0,0,0,0.60), 0 0 0 1px rgba(15,122,122,0.08) inset, 0 1px 0 rgba(255,255,255,0.05) inset, 0 0 24px rgba(15,122,122,0.05)',
@@ -48,8 +48,6 @@ export function Nav() {
 
   const dropdownShellStyle = {
     background: 'rgba(8,20,38,0.97)',
-    backdropFilter: 'blur(14px)',
-    WebkitBackdropFilter: 'blur(14px)',
     border: '1px solid rgba(15,122,122,0.22)',
     boxShadow: '0 12px 40px rgba(0,0,0,0.65), 0 0 0 1px rgba(15,122,122,0.06) inset',
   } as const
@@ -70,7 +68,7 @@ export function Nav() {
 
             {/* ── Desktop nav ───────────────────────────────────────────── */}
             <div className="hidden md:flex justify-end pointer-events-auto">
-              <div className="relative rounded-3xl" style={navShellStyle}>
+              <div className="relative rounded-3xl glass-nav" style={navShellStyle}>
                 <div className="relative px-7 lg:px-8 py-2 flex items-center justify-center">
                   <nav
                     className="flex items-center gap-6 lg:gap-7"
@@ -161,7 +159,7 @@ export function Nav() {
                                     style={{ top: 'calc(100% + 14px)' }}
                                   >
                                     <div
-                                      className="rounded-2xl py-1.5 px-1.5"
+                                      className="rounded-2xl py-1.5 px-1.5 glass-dropdown"
                                       style={dropdownShellStyle}
                                     >
                                       {projects.map((proj, i) => (
@@ -251,7 +249,7 @@ export function Nav() {
 
             {/* ── Mobile hamburger ──────────────────────────────────────── */}
             <div className="md:hidden shrink-0 pointer-events-auto">
-              <div className="rounded-2xl" style={navShellStyle}>
+              <div className="rounded-2xl glass-nav" style={navShellStyle}>
                 <button
                   className="p-2.5 text-text-muted hover:text-text-base transition-colors rounded-btn"
                   onClick={() => setMobileOpen(true)}

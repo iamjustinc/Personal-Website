@@ -57,13 +57,12 @@ export function CapabilityStrip() {
       />
 
       <div
-        className="relative"
+        className="relative glass-capability"
         style={{
           borderTop: '1px solid rgba(15,122,122,0.14)',
           borderBottom: '1px solid rgba(15,122,122,0.10)',
           background:
             'linear-gradient(180deg, rgba(13,30,53,0.46) 0%, rgba(10,24,43,0.38) 100%)',
-          backdropFilter: 'blur(10px)',
         }}
       >
         {/* Ambient star field — 5 quiet pinpoints, 1 twinkle, zero cost */}

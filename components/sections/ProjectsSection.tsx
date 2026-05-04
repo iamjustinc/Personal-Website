@@ -297,10 +297,9 @@ export function ProjectsSection() {
                 </motion.div>
 
                 <div
-                  className="absolute top-4 right-4 z-20 flex items-center gap-1.5 rounded-full px-3 py-1"
+                  className="absolute top-4 right-4 z-20 flex items-center gap-1.5 rounded-full px-3 py-1 glass-badge"
                   style={{
                     background: 'rgba(13,30,53,0.86)',
-                    backdropFilter: 'blur(12px)',
                     border: `1px solid ${project.panelAccentColor}30`,
                     boxShadow: '0 8px 22px rgba(0,0,0,0.18)',
                   }}

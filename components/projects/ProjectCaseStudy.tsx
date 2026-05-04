@@ -1363,9 +1363,8 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
 
               {/* Badge */}
               <div
-                className="section-eyebrow absolute top-5 right-5 z-20 flex items-center gap-1.5 rounded-full px-3 py-1"
+                className="section-eyebrow glass-badge absolute top-5 right-5 z-20 flex items-center gap-1.5 rounded-full px-3 py-1"
                 style={{
-                  backdropFilter: 'blur(12px)',
                   '--eyebrow-border': `${project.panelAccentColor}38`,
                   '--eyebrow-shadow': `${project.panelAccentColor}12`,
                   '--eyebrow-glint': `${project.panelAccentColor}72`,

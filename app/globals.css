@@ -277,7 +277,8 @@ body {
 
 .constellation-twinkle {
   animation: constellation-twinkle 3.8s ease-in-out infinite;
-  will-change: opacity;
+  /* No will-change: tiny star points don't benefit from compositor promotion;
+     opacity-only animations are already handled on the compositor thread. */
 }
 
 /* Opacity-only pulse — no scale transform avoids forcing a new stacking
@@ -330,4 +331,70 @@ body {
     animation: none !important;
   }
   .timeline-drift-spark { opacity: 0; }
+}
+
+/* ── Glassmorphism @supports fallbacks ───────────────────────────────────── */
+/* Progressive-enhancement: each rule supplies a solid-background fallback so */
+/* browsers without backdrop-filter (or that have it disabled) remain         */
+/* readable. The @supports gate makes blur opt-in rather than assumed.        */
+/* Safari note: fixed/sticky elements with backdrop-filter repaint on every   */
+/* scroll frame. Reducing blur radius and routing through @supports gives the  */
+/* compositor a tighter hint and avoids paint for non-supporting contexts.    */
+
+/* Fixed nav bar — highest priority: visible on every page, painted on scroll */
+.glass-nav {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+@supports (backdrop-filter: blur(1px)) {
+  .glass-nav {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+  }
+}
+
+/* Ephemeral dropdown panel (not fixed, short-lived) */
+@supports (backdrop-filter: blur(1px)) {
+  .glass-dropdown {
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+}
+
+/* Mobile full-screen overlay — fixed, only active when menu is open */
+.glass-mobile-menu {
+  background: rgba(10, 22, 40, 0.99);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+@supports (backdrop-filter: blur(1px)) {
+  .glass-mobile-menu {
+    background: rgba(10, 22, 40, 0.97);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+  }
+}
+
+/* Capability strip — large scrolling element, not fixed */
+@supports (backdrop-filter: blur(1px)) {
+  .glass-capability {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+  }
+}
+
+/* Dark frosted badges (project cards, case-study overlays) */
+@supports (backdrop-filter: blur(1px)) {
+  .glass-badge {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+  }
+}
+
+/* Light frosted badge (FloatingPanel project label — white-tinted) */
+@supports (backdrop-filter: blur(1px)) {
+  .glass-badge-light {
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
 }

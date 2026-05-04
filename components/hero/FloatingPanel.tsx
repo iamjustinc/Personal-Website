@@ -68,10 +68,9 @@ export function FloatingPanel({
         >
           {/* Project badge: top right, frosted */}
           <div
-            className="absolute top-2.5 right-2.5 z-10 flex items-center gap-1.5 rounded-full px-2 py-0.5"
+            className="absolute top-2.5 right-2.5 z-10 flex items-center gap-1.5 rounded-full px-2 py-0.5 glass-badge-light"
             style={{
               background: 'rgba(255,255,255,0.90)',
-              backdropFilter: 'blur(8px)',
               border: '1px solid rgba(212,207,194,0.8)',
             }}
           >

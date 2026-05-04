@@ -214,9 +214,8 @@ export function ProjectComingSoon({
             />
 
             <div
-              className="section-eyebrow absolute left-5 top-5 z-20 inline-flex items-center gap-2 rounded-full px-3.5 py-1.5"
+              className="section-eyebrow glass-badge absolute left-5 top-5 z-20 inline-flex items-center gap-2 rounded-full px-3.5 py-1.5"
               style={{
-                backdropFilter: 'blur(14px)',
                 '--eyebrow-border': `${project.panelAccentColor}3D`,
                 '--eyebrow-shadow': `${project.panelAccentColor}12`,
                 '--eyebrow-glint': `${project.panelAccentColor}72`,
