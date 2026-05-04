@@ -25,6 +25,7 @@ const snapshotCards = [
   },
 ]
 
+
 export function RecruiterSnapshotSection() {
   const stagger = useMotionSafe(staggerContainer(0.08))
   const up = useMotionSafe(fadeUp)
