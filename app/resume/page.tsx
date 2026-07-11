@@ -82,7 +82,7 @@ const resumeExperienceCopyByRole: Record<string, string> = {
   'Research Data Analyst':
     'Built Excel, R, SQL, and Tableau tracking tools for PETRUSHKA operations, resulting in smoother handoffs across clinical and research teams.',
   'Independent Product Builder':
-    'Built Kestrel and developed Chirpie and Quail Mail previews, resulting in three AI products focused on clearer decisions, prioritization, and explainable output.',
+    'Built Kestrel, an AI product focused on clearer decisions, prioritization, and explainable output.',
 }
 
 const resumeExperienceTagsByRole: Record<string, string[]> = {
@@ -96,10 +96,6 @@ const resumeExperienceTagsByRole: Record<string, string[]> = {
 const resumeProjectDescriptions: Record<string, string> = {
   kestrel:
     'Helps job seekers turn confusing job descriptions into fit scores, skill gaps, and a clear action roadmap.',
-  chirpie:
-    'Turns multi-source news into source-grounded summaries, trust cues, and follow-up context.',
-  quail:
-    'Turns inbox overload into prioritized email decisions with AI triage, summaries, and next-step suggestions.',
 }
 
 // ── Section divider ─────────────────────────────────────────────────────────

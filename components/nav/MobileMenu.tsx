@@ -13,14 +13,18 @@ interface MobileMenuProps {
   onClose: () => void
 }
 
-const navItems = [
+type NavItem = {
+  label: string
+  href: string
+  projects?: { label: string; href: string; status?: 'comingSoon' }[]
+}
+
+const navItems: NavItem[] = [
   { label: 'Home',      href: '/#hero'   },
   {
     label: 'Portfolio', href: '/work',
     projects: [
       { label: 'Kestrel', href: '/projects/kestrel' },
-      { label: 'Chirpie', href: '/projects/chirpie', status: 'comingSoon' },
-      { label: 'Quail',   href: '/projects/quail',   status: 'comingSoon' },
     ],
   },
   { label: 'About',   href: '/about'   },

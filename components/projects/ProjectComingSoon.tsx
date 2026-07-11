@@ -21,20 +21,7 @@ const previewCopy: Record<
     note: string
     signals: string[]
   }
-> = {
-  chirpie: {
-    status: 'News summary case study in progress',
-    note:
-      'Chirpie is being tightened into a clearer product story around source-grounded summaries, trust cues, and follow-up context.',
-    signals: ['Source-grounded summaries', 'Trust cues', 'Follow-up context'],
-  },
-  quail: {
-    status: 'Inbox triage case study in progress',
-    note:
-      'Quail Mail is being polished into a clearer product story around prioritized email decisions, AI summaries, and next-step suggestions.',
-    signals: ['AI triage', 'Email summaries', 'Next-step suggestions'],
-  },
-}
+> = {}
 
 export function ProjectComingSoon({
   project,

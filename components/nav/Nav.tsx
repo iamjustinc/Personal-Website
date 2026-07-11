@@ -23,8 +23,6 @@ const navLinks: NavLink[] = [
     href: '/work',
     projects: [
       { label: 'Kestrel', href: '/projects/kestrel' },
-      { label: 'Chirpie', href: '/projects/chirpie', status: 'comingSoon' },
-      { label: 'Quail',   href: '/projects/quail',   status: 'comingSoon' },
     ],
   },
   { label: 'About',   href: '/about'   },

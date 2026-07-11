@@ -29,24 +29,6 @@ const projectSpotlights: Record<
       { value: 'Plan', label: 'action roadmap' },
     ],
   },
-  quail: {
-    description:
-      'Turns inbox overload into prioritized email decisions with AI triage, summaries, and next-step suggestions.',
-    metrics: [
-      { value: '1', label: 'inbox flow' },
-      { value: '3', label: 'priority signals' },
-      { value: '4', label: 'action lanes' },
-    ],
-  },
-  chirpie: {
-    description:
-      'Turns multi-source news into source-grounded summaries, trust cues, and follow-up context.',
-    metrics: [
-      { value: '3+', label: 'source streams' },
-      { value: '4', label: 'trust cues' },
-      { value: '1', label: 'digest loop' },
-    ],
-  },
 }
 
 // ── Section ──────────────────────────────────────────────────────────────────
@@ -57,7 +39,7 @@ export function ProjectsSection() {
   const up = useMotionSafe(fadeUp)
   const inn = useMotionSafe(fadeIn)
 
-  const visibleProjects = ['kestrel', 'chirpie', 'quail'].flatMap((slug) =>
+  const visibleProjects = ['kestrel'].flatMap((slug) =>
     projects.filter((p) => p.slug === slug && p.visible && p.homepageVisible),
   )
 

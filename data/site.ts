@@ -84,7 +84,7 @@ export const siteConfig: SiteConfig = {
       company: 'Self-Directed',
       period: '2024 to Present',
       description:
-        'Shipped Kestrel as the live flagship and developed Quail Mail and Chirpie as polished product previews focused on turning messy information into clearer workflows.',
+        'Shipped Kestrel as the live flagship product, focused on turning messy information into clearer workflows.',
       tags: ['AI', 'Full-Stack', 'Product Design'],
     },
   ],

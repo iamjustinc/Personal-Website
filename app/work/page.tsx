@@ -15,7 +15,7 @@ import type { Project } from '@/types/project'
 import { EASING, fadeIn } from '@/lib/motion'
 import { cn } from '@/lib/utils'
 
-const portfolioProjectOrder = ['kestrel', 'chirpie', 'quail'] as const
+const portfolioProjectOrder = ['kestrel'] as const
 
 const workProjectSpotlights: Record<
   string,
@@ -34,26 +34,6 @@ const workProjectSpotlights: Record<
       { value: 'Plan', label: 'action roadmap' },
     ],
     glow: '28% 22%',
-  },
-  chirpie: {
-    description:
-      'Turns multi-source news into source-grounded summaries, trust cues, and follow-up context.',
-    metrics: [
-      { value: '3+', label: 'source inputs' },
-      { value: '4', label: 'trust cues' },
-      { value: '1', label: 'digest flow' },
-    ],
-    glow: '72% 26%',
-  },
-  quail: {
-    description:
-      'Turns inbox overload into prioritized email decisions with AI triage, summaries, and next-step suggestions.',
-    metrics: [
-      { value: '3', label: 'priority signals' },
-      { value: '4', label: 'action lanes' },
-      { value: '1', label: 'triage flow' },
-    ],
-    glow: '34% 72%',
   },
 }
 
@@ -528,8 +508,7 @@ export default function WorkPage() {
             className="font-sans mt-5 max-w-[520px] leading-relaxed"
             style={{ fontSize: '16px', color: '#A8C5D1' }}
           >
-            Kestrel is live. Chirpie and Quail Mail are preview builds while their full case
-            studies and demos are being finalized.
+            Kestrel is live.
           </p>
         </motion.div>
 
