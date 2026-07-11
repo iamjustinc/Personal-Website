@@ -72,7 +72,7 @@ const kestrelCaseStudyCopy: CaseStudyCopy = {
   ],
 
   problem:
-    'Early-career candidates targeting PM, Solutions Engineering, and adjacent roles often prepare from scattered inputs: job posts, resume edits, advice threads, and unclear role expectations. The result is effort without sequence. Candidates keep revising materials before knowing which gaps matter most, and they lack a clear way to judge whether they are ready for a specific role.',
+    'Early-career candidates targeting PM and adjacent technical roles often prepare from scattered inputs: job posts, resume edits, advice threads, and unclear role expectations. The result is effort without sequence. Candidates keep revising materials before knowing which gaps matter most, and they lack a clear way to judge whether they are ready for a specific role.',
 
   problemBullets: [
     'Job descriptions mix hard requirements, soft preferences, and filler language, making it hard to tell which gaps are serious and which are negotiable.',
@@ -81,7 +81,7 @@ const kestrelCaseStudyCopy: CaseStudyCopy = {
   ],
 
   users:
-    'Built for early-career candidates targeting PM, Solutions Engineering, and SWE-adjacent roles who need to compare their background against a target job and decide where to focus preparation time.',
+    'Built for early-career candidates targeting PM and adjacent technical roles who need to compare their background against a target job and decide where to focus preparation time.',
 
   userCards: [
     {

@@ -9,19 +9,19 @@ import { fadeUp, fadeIn, staggerContainer, useMotionSafe } from '@/lib/motion'
 const snapshotCards = [
   {
     title: 'Target roles',
-    content: 'Solutions Engineering · Technical Product · Product Operations · Data / AI Analyst',
+    content: 'Associate Product Manager · Early-Career Product Builder · AI + CRM Workflows',
   },
   {
     title: 'Technical stack',
-    content: 'Python · SQL · TypeScript · React · Next.js · OpenAI APIs · Tableau',
+    content: 'Python · SQL · R · TypeScript · Salesforce · Next.js · Tableau',
   },
   {
     title: 'Core strengths',
-    content: 'Technical demos · workflow discovery · stakeholder communication · dashboards',
+    content: 'Product discovery · workflow design · prioritization · stakeholder communication',
   },
   {
     title: 'Proof',
-    content: '30K+ records modeled · 70% less manual analysis · 63% higher completion · 3 AI workflow products',
+    content: '30K+ records modeled · 70% less manual analysis · 63% higher completion · 200+ sessions redesigned',
   },
 ]
 

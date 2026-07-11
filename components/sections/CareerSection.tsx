@@ -11,24 +11,21 @@ import { siteConfig } from '@/data/site'
 import { cn } from '@/lib/utils'
 
 const careerCopyByRole: Record<string, string> = {
-  'Project Lead & Data Analyst':
-    'Built predictive pipelines across 30K+ records for risk scoring, resulting in dashboards stakeholders could use for decisions.',
-  'Senior Project Lead':
-    'Built recruitment, scheduling, and dashboard processes across 100+ sessions, resulting in 63% higher completion and clearer team coordination.',
-  'Intern Data Analyst':
-    'Built Python/R pipelines for 200+ fMRI sessions, resulting in 70% less manual analysis and clearer readouts for non-technical research teams.',
+  'ML Data Analyst':
+    'Translated stakeholder needs into product requirements for an AI risk-scoring workflow across 30K+ records, prioritizing a pipeline that cut manual analysis time by 70%.',
+  'Project Lead':
+    'Redesigned recruitment and scheduling workflows across 100+ sessions, raising completion rates by 63% and cutting data inconsistencies by 85%.',
+  'Imaging Data Analyst':
+    'Redesigned data intake across 200+ fMRI sessions, translating complex analyses into decision-ready insights for clinical and research stakeholders.',
   'Research Data Analyst':
-    'Built Excel, R, SQL, and Tableau tracking tools for PETRUSHKA operations, resulting in smoother handoffs across clinical and research teams.',
-  'Independent Product Builder':
-    'Built Kestrel, an AI product focused on clearer decisions, prioritization, and explainable output.',
+    'Coordinated requirements across 60+ patients and 20+ team members, building tracking systems that standardized onboarding and improved handoffs.',
 }
 
 const careerTagsByRole: Record<string, string[]> = {
-  'Project Lead & Data Analyst': ['Python/R pipelines', 'Predictive workflows', 'Dashboards', 'Stakeholder readouts'],
-  'Senior Project Lead': ['Workflow redesign', 'Operational dashboards', 'Scheduling systems', 'Team coordination'],
-  'Intern Data Analyst': ['Data pipelines', 'Technical walkthroughs', 'Research operations', 'Non-technical stakeholders'],
-  'Research Data Analyst': ['SQL/Tableau', 'Tracking systems', 'Documentation', 'Cross-functional coordination'],
-  'Independent Product Builder': ['Technical demos', 'OpenAI APIs', 'Explainability'],
+  'ML Data Analyst': ['Product Requirements', 'ML Pipelines', 'Explainability', 'Risk Scoring'],
+  'Project Lead': ['Workflow Redesign', 'Prioritization', 'Shared Systems', 'Team Scaling'],
+  'Imaging Data Analyst': ['Workflow Redesign', 'Stakeholder Collaboration', 'Technical Communication'],
+  'Research Data Analyst': ['Requirements Coordination', 'SQL/Tableau', 'Documentation'],
 }
 
 const ambientStars = [

@@ -20,6 +20,24 @@ const projectSpotlights: Record<
     metrics: { value: string; label: string }[]
   }
 > = {
+  handoffai: {
+    description:
+      'Salesforce-native workflow that turns Opportunity data into structured handoff summaries with review, saved history, and export.',
+    metrics: [
+      { value: 'Review', label: 'human-in-loop' },
+      { value: 'History', label: 'saved handoffs' },
+      { value: 'Export', label: 'structured summary' },
+    ],
+  },
+  harmoniq: {
+    description:
+      'Pre-import CRM workflow that profiles data risk, recommends transparent fixes, and exports a cleaned CSV for RevOps and Sales Ops teams.',
+    metrics: [
+      { value: 'Risk', label: 'data profiling' },
+      { value: 'Fixes', label: 'review controls' },
+      { value: 'CSV', label: 'clean export' },
+    ],
+  },
   kestrel: {
     description:
       'Turns job descriptions and resumes into role requirements, fit signals, skill gaps, and a clear action roadmap.',
@@ -39,9 +57,9 @@ export function ProjectsSection() {
   const up = useMotionSafe(fadeUp)
   const inn = useMotionSafe(fadeIn)
 
-  const visibleProjects = ['kestrel'].flatMap((slug) =>
-    projects.filter((p) => p.slug === slug && p.visible && p.homepageVisible),
-  )
+  const visibleProjects = projects
+    .filter((project) => project.visible && project.homepageVisible)
+    .sort((a, b) => a.order - b.order)
 
   return (
     <Section id="projects" paddingY="lg" className="relative overflow-hidden">
@@ -81,10 +99,10 @@ export function ProjectsSection() {
             Featured Work
           </span>
         </div>
-        <h2 className="font-display text-h1 text-text-base">Featured Case Study</h2>
+        <h2 className="font-display text-h1 text-text-base">Selected Work</h2>
         <p className="font-sans text-text-muted mt-3 max-w-[560px]" style={{ fontSize: '15px' }}>
-          A live AI product that turns messy job requirements into fit signals, skill gaps, and a
-          clear action plan.
+          Three product builds across Salesforce handoffs, CRM data readiness, and AI decision
+          support.
         </p>
       </motion.div>
 
@@ -98,6 +116,10 @@ export function ProjectsSection() {
       >
         {visibleProjects.map((project, index) => {
           const isReversed = index % 2 === 1
+          const hasCaseStudy = project.detailPageEnabled !== false
+          const hasDemo = project.demoPageEnabled !== false
+          const hasLiveUrl = Boolean(project.liveUrl)
+          const hasAnyCta = hasCaseStudy || hasDemo || hasLiveUrl
           const spotlight = projectSpotlights[project.slug] ?? {
             description: project.tagline,
             metrics: [
@@ -336,8 +358,8 @@ export function ProjectsSection() {
                     className="mt-4 max-w-[540px] font-mono text-[10px] leading-6"
                     style={{ color: '#7FAFBB' }}
                   >
-                    Role relevance: technical demos · requirement mapping · AI product logic ·
-                    decision support
+                    Role relevance: product diagnosis · requirement mapping · AI decision support ·
+                    scoped execution
                   </p>
                 )}
 
@@ -426,44 +448,50 @@ export function ProjectsSection() {
                 </div>
 
                 {/* CTAs */}
-                <div
-                  className="mt-auto flex flex-wrap gap-2.5 pt-8"
-                  style={{ borderTop: '1px solid rgba(74,159,174,0.12)' }}
-                >
-                  <HoverSparkle className="inline-flex">
-                    <StarburstButton
-                      href={`/projects/${project.slug}/demo`}
-                      variant="primary"
-                      size="sm"
-                    >
-                      Watch Demo
-                    </StarburstButton>
-                  </HoverSparkle>
+                {hasAnyCta && (
+                  <div
+                    className="mt-auto flex flex-wrap gap-2.5 pt-8"
+                    style={{ borderTop: '1px solid rgba(74,159,174,0.12)' }}
+                  >
+                    {hasDemo && (
+                      <HoverSparkle className="inline-flex">
+                        <StarburstButton
+                          href={`/projects/${project.slug}/demo`}
+                          variant="primary"
+                          size="sm"
+                        >
+                          Watch Demo
+                        </StarburstButton>
+                      </HoverSparkle>
+                    )}
 
-                  {project.liveUrl && (
-                    <HoverSparkle className="inline-flex">
-                      <StarburstButton
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        variant="secondary"
-                        size="sm"
-                      >
-                        Open Live Product
-                      </StarburstButton>
-                    </HoverSparkle>
-                  )}
+                    {hasLiveUrl && project.liveUrl && (
+                      <HoverSparkle className="inline-flex">
+                        <StarburstButton
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          variant="secondary"
+                          size="sm"
+                        >
+                          Open Live Product
+                        </StarburstButton>
+                      </HoverSparkle>
+                    )}
 
-                  <HoverSparkle className="inline-flex">
-                    <StarburstButton
-                      href={`/projects/${project.slug}`}
-                      variant="secondary"
-                      size="sm"
-                    >
-                      Read Case Study
-                    </StarburstButton>
-                  </HoverSparkle>
-                </div>
+                    {hasCaseStudy && (
+                      <HoverSparkle className="inline-flex">
+                        <StarburstButton
+                          href={`/projects/${project.slug}`}
+                          variant="secondary"
+                          size="sm"
+                        >
+                          Read Case Study
+                        </StarburstButton>
+                      </HoverSparkle>
+                    )}
+                  </div>
+                )}
               </div>
             </motion.div>
           )

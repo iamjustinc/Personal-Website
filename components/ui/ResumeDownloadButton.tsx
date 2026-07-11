@@ -4,7 +4,7 @@ import * as React from 'react'
 import { cn } from '@/lib/utils'
 
 const RESUME_FILE_PATH = '/api/resume'
-const RESUME_DOWNLOAD_NAME = 'Justin-Chang-Resume.pdf'
+const RESUME_DOWNLOAD_NAME = 'Justin_Chang_Product_Resume.pdf'
 
 type ResumeDownloadButtonProps = {
   children?: React.ReactNode

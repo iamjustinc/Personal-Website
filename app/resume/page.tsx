@@ -13,51 +13,51 @@ import { siteConfig } from '@/data/site'
 import { projects } from '@/data/projects'
 import { fadeUp, fadeIn, staggerContainer } from '@/lib/motion'
 
-// ── Impact metrics (SE-focused, quantified) ─────────────────────────────────
+// ── Impact metrics (product-focused, quantified) ────────────────────────────
 
 const impactMetrics = [
   { value: '30K+', label: 'records modeled',       accent: '#2A8B87' },
   { value: '70%',  label: 'less manual analysis',  accent: '#4A9FAE' },
   { value: '63%',  label: 'higher completion',     accent: '#0F7A7A' },
-  { value: '3',    label: 'AI workflow products',  accent: '#C4974A' },
+  { value: '200+', label: 'sessions redesigned',   accent: '#C4974A' },
 ]
 
-const resumeRoleTag = 'Solutions Engineering · Technical Product · Product Operations'
+const resumeRoleTag = 'Aspiring Associate Product Manager · AI-Native Product Builder'
 
 const resumeSummary =
-  'Early-career technical product candidate building AI-powered workflows, dashboards, and demos that help teams make clearer decisions.'
+  'Aspiring Associate Product Manager building AI-native tools for CRM, enterprise workflows, and data systems, then refining them through testing and iteration.'
 
-// ── SE-focused skill groups ─────────────────────────────────────────────────
+// ── Product-focused skill groups ────────────────────────────────────────────
 
 const skillGroups = [
   {
     label: 'Product & Discovery',
     accent: '#4A9FAE',
     items: [
-      'Technical demos',
-      'Workflow discovery',
-      'Requirements mapping',
-      'Product thinking',
+      'Product discovery & requirements definition',
+      'MVP scoping & feature prioritization',
+      'Workflow design',
+      'Stakeholder management',
     ],
   },
   {
-    label: 'Technical Stack',
+    label: 'Technical & Platform',
     accent: '#0F7A7A',
     items: [
-      'Python · SQL · TypeScript · React',
-      'Next.js · OpenAI APIs · Tableau',
-      'Dashboards and data pipelines',
-      'Python/R analysis pipelines',
+      'Python · SQL · R · TypeScript · JavaScript',
+      'React · Next.js · REST APIs · Git',
+      'Salesforce: LWC, Apex, SOQL, custom objects',
+      'LLM applications & AI workflow design',
     ],
   },
   {
-    label: 'Stakeholder Communication',
+    label: 'Communication & Design',
     accent: '#C4974A',
     items: [
-      'Non-technical readouts',
-      'Customer-facing communication',
+      'Figma · Tableau',
+      'Technical communication & stakeholder presentations',
       'Cross-functional collaboration',
-      'Decision support',
+      'Decision support & explainability',
     ],
   },
 ]
@@ -65,35 +65,55 @@ const skillGroups = [
 // ── Header signal phrases ───────────────────────────────────────────────────
 
 const signalPhrases = [
-  'Technical Demos',
-  'Data Pipelines',
-  'Dashboards',
+  'Product Discovery',
+  'Workflow Design',
+  'AI Product Thinking',
   'Stakeholder Communication',
-  'AI Products',
+  'Technical Fluency',
+]
+
+const profileFacts = [
+  { label: 'Based in', value: 'San Francisco, California' },
+  { label: 'Languages', value: 'English · Mandarin' },
+]
+
+const educationHistory = [
+  {
+    school: 'University of San Francisco',
+    degree: 'Master of Science in Information Systems',
+    period: 'August 2026 – May 2027',
+  },
+  {
+    school: 'University of Toronto',
+    degree: 'Honours Bachelor of Science',
+    detail: 'Double Major in Cognitive Science and Psychology',
+    period: 'September 2022 – June 2026',
+  },
 ]
 
 const resumeExperienceCopyByRole: Record<string, string> = {
-  'Project Lead & Data Analyst':
-    'Built predictive pipelines across 30K+ records for risk scoring, resulting in dashboards stakeholders could use for decisions.',
-  'Senior Project Lead':
-    'Built recruitment, scheduling, and dashboard processes across 100+ sessions, resulting in 63% higher completion and clearer team coordination.',
-  'Intern Data Analyst':
-    'Built Python/R pipelines across 200+ fMRI sessions, resulting in 70% less manual analysis and clearer readouts for non-technical research teams.',
+  'ML Data Analyst':
+    'Translated stakeholder needs into product requirements for an AI risk-scoring workflow across 30K+ records, prioritizing a pipeline that cut manual analysis time by 70%.',
+  'Project Lead':
+    'Redesigned recruitment and scheduling workflows across 100+ sessions, raising completion rates by 63% and cutting data inconsistencies by 85%.',
+  'Imaging Data Analyst':
+    'Redesigned data intake across 200+ fMRI sessions, translating complex analyses into decision-ready insights for clinical and research stakeholders.',
   'Research Data Analyst':
-    'Built Excel, R, SQL, and Tableau tracking tools for PETRUSHKA operations, resulting in smoother handoffs across clinical and research teams.',
-  'Independent Product Builder':
-    'Built Kestrel, an AI product focused on clearer decisions, prioritization, and explainable output.',
+    'Coordinated requirements across 60+ patients and 20+ team members, building tracking systems that standardized onboarding and improved handoffs.',
 }
 
 const resumeExperienceTagsByRole: Record<string, string[]> = {
-  'Project Lead & Data Analyst': ['Decision Support', 'Risk Dashboards', 'Stakeholder Communication'],
-  'Senior Project Lead': ['Workflow Redesign', 'Operational Dashboards', 'Scheduling Systems'],
-  'Intern Data Analyst': ['Python/R Pipelines', 'Technical Demos', 'Stakeholder Readouts'],
-  'Research Data Analyst': ['Tracking Tools', 'SQL + Tableau', 'Cross-Functional Ops'],
-  'Independent Product Builder': ['AI Products', 'OpenAI APIs', 'Explainability'],
+  'ML Data Analyst': ['Product Requirements', 'Explainable AI', 'Risk Scoring'],
+  'Project Lead': ['Workflow Redesign', 'Prioritization', 'Shared Systems'],
+  'Imaging Data Analyst': ['Workflow Redesign', 'Stakeholder Collaboration', 'Technical Communication'],
+  'Research Data Analyst': ['Requirements Coordination', 'SQL/Tableau', 'Documentation'],
 }
 
 const resumeProjectDescriptions: Record<string, string> = {
+  handoffai:
+    'Salesforce-native sales handoff workflow with structured summaries, user review, saved history, and export.',
+  harmoniq:
+    'CRM data-readiness workflow for profiling risk, reviewing transparent fixes, and exporting a cleaned CSV.',
   kestrel:
     'Helps job seekers turn confusing job descriptions into fit scores, skill gaps, and a clear action roadmap.',
 }
@@ -476,7 +496,7 @@ export default function ResumePage() {
               </p>
             </motion.div>
 
-            {/* SE signal pills */}
+            {/* Signal pills */}
             <motion.div variants={fadeIn} className="mt-5 flex flex-wrap gap-2">
               {signalPhrases.map((phrase) => (
                 <span
@@ -491,6 +511,79 @@ export default function ResumePage() {
                   {phrase}
                 </span>
               ))}
+            </motion.div>
+
+            <motion.div
+              variants={fadeIn}
+              className="mt-7 grid gap-4 md:grid-cols-[0.82fr_1.18fr]"
+            >
+              <div
+                className="rounded-[20px] p-4"
+                style={{
+                  background: 'rgba(15,42,61,0.42)',
+                  border: '1px solid rgba(15,122,122,0.14)',
+                }}
+              >
+                <p
+                  className="font-mono text-[10px] uppercase tracking-[0.12em]"
+                  style={{ color: '#4A9FAE' }}
+                >
+                  Profile
+                </p>
+                <div className="mt-3 space-y-3">
+                  {profileFacts.map((fact) => (
+                    <div key={fact.label}>
+                      <p
+                        className="font-mono text-[9px] uppercase tracking-[0.12em]"
+                        style={{ color: 'rgba(168,197,209,0.48)' }}
+                      >
+                        {fact.label}
+                      </p>
+                      <p className="mt-1 font-sans text-[13px] leading-relaxed text-[#D8E8EE]">
+                        {fact.value}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div
+                className="rounded-[20px] p-4"
+                style={{
+                  background: 'rgba(15,42,61,0.42)',
+                  border: '1px solid rgba(15,122,122,0.14)',
+                }}
+              >
+                <p
+                  className="font-mono text-[10px] uppercase tracking-[0.12em]"
+                  style={{ color: '#4A9FAE' }}
+                >
+                  Education
+                </p>
+                <div className="mt-3 space-y-4">
+                  {educationHistory.map((item) => (
+                    <div key={item.school}>
+                      <p className="font-sans text-[13px] font-semibold leading-relaxed text-text-base">
+                        {item.school}
+                      </p>
+                      <p className="mt-1 font-sans text-[12.5px] leading-relaxed text-[#D8E8EE]">
+                        {item.degree}
+                      </p>
+                      {'detail' in item && item.detail ? (
+                        <p className="mt-1 font-sans text-[12.5px] leading-relaxed text-[#A8C5D1]">
+                          {item.detail}
+                        </p>
+                      ) : null}
+                      <p
+                        className="mt-1 font-mono text-[9px] uppercase tracking-[0.12em]"
+                        style={{ color: 'rgba(168,197,209,0.48)' }}
+                      >
+                        {item.period}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </motion.div>
 
             {/* Download */}
@@ -688,29 +781,107 @@ export default function ResumePage() {
           >
             {visibleProjects.map((project) => {
               const isComingSoon = project.launchStatus === 'comingSoon'
+              const hasDetailPage = project.detailPageEnabled !== false
+
+              if (hasDetailPage) {
+                return (
+                  <motion.a
+                    key={project.slug}
+                    href={`/projects/${project.slug}`}
+                    variants={fadeUp}
+                    whileHover={reduceMotion ? {} : { y: -2 }}
+                    transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                    className="group flex items-center justify-between gap-4 rounded-xl p-4"
+                    style={{
+                      background: isComingSoon
+                        ? 'rgba(15,42,61,0.34)'
+                        : 'rgba(15,42,61,0.44)',
+                      border: isComingSoon
+                        ? '1px solid rgba(196,151,74,0.13)'
+                        : '1px solid rgba(15,122,122,0.12)',
+                    }}
+                  >
+                    <div className="flex min-w-0 items-center gap-3">
+                      <span
+                        className="h-2 w-2 shrink-0 rounded-full"
+                        style={{ background: isComingSoon ? '#C4974A' : project.panelAccentColor }}
+                      />
+                      <div className="min-w-0">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <span className="font-sans text-sm font-semibold text-text-base">
+                            {project.name}
+                          </span>
+                          <span
+                            className="font-mono text-[9.5px]"
+                            style={{ color: 'rgba(168,197,209,0.38)' }}
+                          >
+                            {project.year}
+                          </span>
+                          {isComingSoon && (
+                            <span
+                              className="rounded-full px-2 py-0.5 font-mono text-[8.5px] uppercase tracking-[0.1em]"
+                              style={{
+                                background: 'rgba(196,151,74,0.08)',
+                                border: '1px solid rgba(196,151,74,0.20)',
+                                color: '#D8B76E',
+                              }}
+                            >
+                              Preview
+                            </span>
+                          )}
+                        </div>
+                        <p
+                          className="mt-0.5 truncate font-sans text-[12.5px] leading-snug"
+                          style={{ color: '#7AAABB' }}
+                        >
+                          {resumeProjectDescriptions[project.slug] ??
+                            project.tagline.match(/.*?[.!?]/)?.[0] ??
+                            project.tagline}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex shrink-0 items-center gap-2">
+                      <div className="hidden gap-1.5 sm:flex">
+                        {project.stack.slice(0, 3).map((s) => (
+                          <span
+                            key={s}
+                            className="rounded px-2 py-0.5 font-mono text-[9px]"
+                            style={{
+                              background: 'rgba(15,42,61,0.82)',
+                              border: '1px solid rgba(15,122,122,0.11)',
+                              color: '#6A9BAA',
+                            }}
+                          >
+                            {s}
+                          </span>
+                        ))}
+                      </div>
+                      <span
+                        className="font-mono text-[9.5px] uppercase tracking-wider opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+                        style={{ color: isComingSoon ? '#D8B76E' : project.panelAccentColor }}
+                      >
+                        {isComingSoon ? 'Soon' : 'View →'}
+                      </span>
+                    </div>
+                  </motion.a>
+                )
+              }
 
               return (
-                <motion.a
+                <motion.div
                   key={project.slug}
-                  href={`/projects/${project.slug}`}
                   variants={fadeUp}
-                  whileHover={reduceMotion ? {} : { y: -2 }}
-                  transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-                  className="group flex items-center justify-between gap-4 rounded-xl p-4"
+                  className="flex items-center justify-between gap-4 rounded-xl p-4"
                   style={{
-                    background: isComingSoon
-                      ? 'rgba(15,42,61,0.34)'
-                      : 'rgba(15,42,61,0.44)',
-                    border: isComingSoon
-                      ? '1px solid rgba(196,151,74,0.13)'
-                      : '1px solid rgba(15,122,122,0.12)',
+                    background: 'rgba(15,42,61,0.34)',
+                    border: '1px solid rgba(15,122,122,0.12)',
                   }}
                 >
-                  {/* Left: dot + name + tagline */}
                   <div className="flex min-w-0 items-center gap-3">
                     <span
                       className="h-2 w-2 shrink-0 rounded-full"
-                      style={{ background: isComingSoon ? '#C4974A' : project.panelAccentColor }}
+                      style={{ background: project.panelAccentColor }}
                     />
                     <div className="min-w-0">
                       <div className="flex flex-wrap items-center gap-2">
@@ -723,18 +894,6 @@ export default function ResumePage() {
                         >
                           {project.year}
                         </span>
-                        {isComingSoon && (
-                          <span
-                            className="rounded-full px-2 py-0.5 font-mono text-[8.5px] uppercase tracking-[0.1em]"
-                            style={{
-                              background: 'rgba(196,151,74,0.08)',
-                              border: '1px solid rgba(196,151,74,0.20)',
-                              color: '#D8B76E',
-                            }}
-                            >
-                            Preview
-                          </span>
-                        )}
                       </div>
                       <p
                         className="mt-0.5 truncate font-sans text-[12.5px] leading-snug"
@@ -747,31 +906,22 @@ export default function ResumePage() {
                     </div>
                   </div>
 
-                  {/* Right: stack pills + arrow */}
-                  <div className="flex shrink-0 items-center gap-2">
-                    <div className="hidden gap-1.5 sm:flex">
-                      {project.stack.slice(0, 3).map((s) => (
-                        <span
-                          key={s}
-                          className="rounded px-2 py-0.5 font-mono text-[9px]"
-                          style={{
-                            background: 'rgba(15,42,61,0.82)',
-                            border: '1px solid rgba(15,122,122,0.11)',
-                            color: '#6A9BAA',
-                          }}
-                        >
-                          {s}
-                        </span>
-                      ))}
-                    </div>
-                    <span
-                      className="font-mono text-[9.5px] uppercase tracking-wider opacity-0 transition-opacity duration-200 group-hover:opacity-100"
-                      style={{ color: isComingSoon ? '#D8B76E' : project.panelAccentColor }}
-                    >
-                      {isComingSoon ? 'Soon' : 'View →'}
-                    </span>
+                  <div className="hidden shrink-0 gap-1.5 sm:flex">
+                    {project.stack.slice(0, 3).map((s) => (
+                      <span
+                        key={s}
+                        className="rounded px-2 py-0.5 font-mono text-[9px]"
+                        style={{
+                          background: 'rgba(15,42,61,0.82)',
+                          border: '1px solid rgba(15,122,122,0.11)',
+                          color: '#6A9BAA',
+                        }}
+                      >
+                        {s}
+                      </span>
+                    ))}
                   </div>
-                </motion.a>
+                </motion.div>
               )
             })}
           </motion.div>

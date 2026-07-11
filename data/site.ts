@@ -2,9 +2,9 @@ import type { SiteConfig } from '@/types/site'
 
 export const siteConfig: SiteConfig = {
   name: 'Justin Chang',
-  roleTag: 'Solutions Engineering · Technical Product · Product Operations',
+  roleTag: 'Aspiring Associate Product Manager · AI-Native Product Builder',
   heroStatement:
-    'Early-career technical product builder focused on Solutions Engineering, Product Operations, and Data / AI roles. I build AI-powered workflows, dashboards, and demos that turn complex systems into clear next steps.',
+    'Aspiring Associate Product Manager building AI-native tools for CRM, enterprise workflows, and data systems. I map messy processes, scope practical solutions, and build them with technical fluency.',
   resumeUrl: '/api/resume',
 
   logoSrc: '/images/justin-logo.png',
@@ -13,79 +13,70 @@ export const siteConfig: SiteConfig = {
   showCapabilityStrip: true,
   capabilities: [
     {
-      label: 'TECHNICAL SYSTEMS',
+      label: 'PRODUCT DISCOVERY',
       description:
-        'I turn AI workflows, APIs, and technical systems into clear walkthroughs, decision tools, and user-ready solutions.',
+        'I map messy workflows, identify the real problem, and turn it into scoped, prioritized product requirements.',
     },
     {
-      label: 'TECHNICAL COMMUNICATION',
+      label: 'STAKEHOLDER COMMUNICATION',
       description:
-        'I explain models, pipelines, and product behavior in ways stakeholders, customers, and non-technical teams can quickly trust.',
+        'I explain workflows, AI outputs, and product tradeoffs in ways technical and nontechnical teams can quickly trust.',
     },
     {
-      label: 'PRODUCT JUDGMENT',
+      label: 'TECHNICAL FLUENCY',
       description:
-        'I identify the right problem, prototype with speed, and ship tools that are useful, usable, and grounded in real workflows.',
+        'I build and ship the products I scope, so my product judgment stays grounded in what is actually feasible.',
     },
   ],
 
   aboutStatements: [
-    'I’m strongest where technical complexity meets user clarity. I like understanding how a system works, where it breaks, and how to make it more usable.',
-    'Technical product, data, and customer-facing systems roles make sense for me because they sit at the intersection of technical depth, user empathy, and business context.',
-    'I approach messy problems by mapping the workflow first, finding the leverage point, then building the simplest thing that actually helps people move faster.',
-    'I’m looking for early-career roles where technical credibility, communication, and product judgment all matter.',
+    'I’m strongest where product judgment meets technical depth. I like understanding how a system works, where it breaks, and what to build next.',
+    'Associate Product Manager and early-career product roles make sense for me because they sit at the intersection of user needs, technical feasibility, and business context.',
+    'I approach ambiguous problems by mapping the workflow first, finding the highest-impact gap, then scoping the simplest product that solves it.',
+    'I’m looking for early-career product roles where technical credibility, communication, and product judgment all matter.',
   ],
 
   aboutHighlights: [
-    'AI workflow design and integration',
-    'Technical systems and product workflows',
-    'Full-stack product development',
-    'Technical to non-technical communication',
+    'AI-native product design',
+    'CRM and enterprise workflows',
+    'Full-stack product execution',
+    'Technical to nontechnical communication',
   ],
 
   photoSrc: '/images/pfp.png',
 
   career: [
     {
-      role: 'Project Lead & Data Analyst',
+      role: 'ML Data Analyst',
       company: 'Temerty Centre for AI Research and Education in Medicine',
-      period: 'Apr 2025 to Present',
+      period: 'Apr 2025 to Jun 2026',
       description:
-        'Built predictive systems across 30K+ records and turned model outputs into risk-scoring workflows and dashboards that supported stakeholder decision-making.',
-      tags: ['AI Systems', 'Dashboards', 'Stakeholders'],
-      current: true,
+        'Translated clinical and technical stakeholder needs into product requirements for an AI risk-scoring workflow across 30K+ records, prioritizing a pipeline that cut manual analysis time by 70% and designing explainable, decision-ready outputs.',
+      tags: ['Product Requirements', 'Explainable AI', 'Risk Scoring'],
     },
     {
-      role: 'Senior Project Lead',
+      role: 'Project Lead',
       company: 'Ontario Institute for Studies in Education',
-      period: 'Sep 2023 to Present',
+      period: 'Sep 2023 to Jun 2026',
       description:
-        'Re-architected recruitment and scheduling workflows across 100+ sessions, increasing completion rates by 63% and improving operational reliability across the team.',
-      tags: ['Operations', 'Systems', 'Workflow Design'],
+        'Redesigned recruitment and scheduling workflows across 100+ sessions, raising completion rates by 63%. Built a shared planning system that cut inconsistencies by 85% as the project scaled from solo work into a team operation.',
+      tags: ['Workflow Redesign', 'Prioritization', 'Shared Systems'],
     },
     {
-      role: 'Intern Data Analyst',
-      company: 'CAMH',
+      role: 'Imaging Data Analyst',
+      company: 'CAMH, Centre for Addiction and Mental Health',
       period: 'Aug 2024 to May 2025',
       description:
-        'Built scalable data pipelines across 200+ fMRI sessions and translated complex analyses into clear stakeholder-facing insights for clinicians and research teams.',
-      tags: ['Data Pipelines', 'Technical Communication', 'Insights'],
+        'Redesigned data intake workflows across 200+ fMRI sessions with clinical, technical, and operations stakeholders, translating complex analyses into decision-ready insights and driving adoption through clear documentation and demonstrations.',
+      tags: ['Workflow Redesign', 'Stakeholder Collaboration', 'Technical Communication'],
     },
     {
       role: 'Research Data Analyst',
-      company: 'CAMH, PETRUSHKA Study',
+      company: 'CAMH, Centre for Addiction and Mental Health',
       period: 'Sep 2023 to Jun 2024',
       description:
-        'Built tracking systems in Excel, R, SQL, and Tableau to improve coordination, reduce errors, and standardize study operations across patients and team members.',
-      tags: ['SQL', 'Tableau', 'Cross-Functional Coordination'],
-    },
-    {
-      role: 'Independent Product Builder',
-      company: 'Self-Directed',
-      period: '2024 to Present',
-      description:
-        'Shipped Kestrel as the live flagship product, focused on turning messy information into clearer workflows.',
-      tags: ['AI', 'Full-Stack', 'Product Design'],
+        'Coordinated requirements and scheduling across 60+ patients and 20+ team members, building a centralized tracking system in Excel, SQL, R, and Tableau. Standardized onboarding and documentation to improve handoffs and ramp-up time.',
+      tags: ['Requirements Coordination', 'SQL/Tableau', 'Documentation'],
     },
   ],
 
@@ -93,6 +84,6 @@ export const siteConfig: SiteConfig = {
   linkedinUrl: 'https://linkedin.com/in/jjustin-chang',
   githubUrl: 'https://github.com/iamjustinc',
   currentlyOpen:
-  'Open to early-career Solutions Engineering, Technical Product, Product Operations, and Data / AI Analyst roles.',
+    'Open to early-career Associate Product Manager and adjacent product roles focused on AI, CRM workflows, and technical execution.',
   copyrightName: 'Justin Chang',
 }

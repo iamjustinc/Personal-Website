@@ -33,41 +33,41 @@ const proofStats = [
     body: 'recruitment and scheduling redesign across 100+ sessions',
   },
   {
-    value: '3',
-    label: 'AI workflow products',
-    body: 'career, inbox, and news products with clear demo paths',
+    value: '200+',
+    label: 'sessions redesigned',
+    body: 'fMRI data intake rebuilt with cross-functional stakeholders',
   },
 ]
 
 const strengths = [
   {
     number: '01',
-    title: 'Tailored product demos',
-    body: 'I tailor demos around the user question, product logic, and the next step.',
+    title: 'Discovery before build',
+    body: 'I map user friction, requirements, and tradeoffs before committing to a build.',
   },
   {
     number: '02',
-    title: 'Discovery before build',
-    body: 'I map friction, requirements, and tradeoffs before choosing the fix.',
+    title: 'Prioritized MVP scoping',
+    body: 'I scope MVPs around the highest-impact problem, then sequence what comes next.',
   },
   {
     number: '03',
     title: 'Clear stakeholder communication',
-    body: 'I explain architecture, AI outputs, and tradeoffs in language each audience can use.',
+    body: 'I explain product decisions, AI outputs, and tradeoffs in language each audience can use.',
   },
   {
     number: '04',
-    title: 'From data to decisions',
-    body: 'I connect product behavior to dashboards, decisions, and next steps.',
+    title: 'Test, learn, iterate',
+    body: 'I connect product behavior to metrics, decisions, and the next iteration.',
   },
 ]
 
 const compactSignals = [
-  'Technical demos',
-  'Product thinking',
-  'Data pipelines',
+  'Product discovery',
+  'Workflow design',
   'Stakeholder communication',
-  'AI products',
+  'AI product thinking',
+  'Technical fluency',
 ]
 
 /**
@@ -344,14 +344,14 @@ export default function AboutPage() {
                   className="font-mono text-[9px] uppercase tracking-[0.12em]"
                   style={{ color: '#4A9FAE' }}
                 >
-                  Early-career technical product
+                  Aspiring Associate Product Manager
                 </span>
               </div>
 
               <h1 className="group/name relative inline-block max-w-[580px] font-sans text-[22px] font-semibold leading-snug text-text-base sm:text-[24px] lg:text-[26px]">
                 <span className="relative z-10">
-                  I build technical products{' '}
-                  <span style={{ color: '#4A9FAE' }}>people can understand and use.</span>
+                  I build AI products{' '}
+                  <span style={{ color: '#4A9FAE' }}>people can understand, trust, and use.</span>
                 </span>
                 {!shouldReduce && (
                   <motion.span
@@ -381,10 +381,11 @@ export default function AboutPage() {
                 className="mt-4 max-w-[56ch] font-sans text-[14.5px] leading-7"
                 style={{ color: '#A8C5D1' }}
               >
-                I&apos;m an early-career technical product builder with experience across health
-                AI, research operations, and self-directed AI products. My work sits between data,
-                product, and communication: I turn messy processes into usable tools and explain
-                them clearly to technical and non-technical teams.
+                I&apos;m an aspiring Associate Product Manager who believes AI products succeed
+                only when people can understand, trust, and act on their output. That lens came
+                from health-AI research building predictive pipelines across 30K+ records, which
+                taught me the model is only half the challenge. I now bring it to enterprise AI
+                and CRM workflows, building HandoffAI and harmonIQ.
               </p>
             </motion.div>
 
@@ -659,7 +660,7 @@ export default function AboutPage() {
       </Section>
 
       {/* ══════════════════════════════════
-          WHY I FIT SE ROLES
+          WHY I FIT PRODUCT ROLES
       ══════════════════════════════════ */}
       <Section paddingY="sm">
         {/* Badge */}
@@ -680,7 +681,7 @@ export default function AboutPage() {
               <StarMark size="xs" color="#C4974A" className="opacity-80" />
             </motion.div>
             <span className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-text-muted">
-              Why I fit technical roles
+              Why I fit product roles
             </span>
           </div>
         </motion.div>
@@ -767,16 +768,16 @@ export default function AboutPage() {
               </div>
 
               <h2 className="font-display text-[44px] md:text-[56px] leading-[0.95] text-text-base text-balance">
-                How I make <br />
-                technical work easier to use
+                How I turn ambiguous <br />
+                problems into shipped products
               </h2>
 
               <p
                 className="mt-6 max-w-[30ch] font-sans text-[16px] leading-8"
                 style={{ color: '#A8C5D1' }}
               >
-                I&apos;m most useful when a team needs the product context, technical detail, and
-                next step in the same conversation.
+                I&apos;m most useful when a team needs product judgment, technical depth, and a
+                clear next step in the same conversation.
               </p>
             </motion.div>
 
@@ -941,11 +942,11 @@ export default function AboutPage() {
                 </span>
               </div>
               <h2 className="font-display text-[34px] leading-[1.05] text-text-base md:text-[46px]">
-                Looking for someone who can explain the product and the next step?
+                Looking for someone who can scope the problem and explain the next step?
               </h2>
               <p className="mt-4 font-sans text-[15.5px] leading-7" style={{ color: '#A8C5D1' }}>
-                I&apos;m looking for early-career roles where product thinking, AI/data tools, and
-                stakeholder communication overlap.
+                I&apos;m looking for early-career Associate Product Manager roles where product
+                judgment, technical fluency, and stakeholder communication overlap.
               </p>
             </div>
 

@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { motion, useReducedMotion } from 'framer-motion'
 import { StarMark } from '@/components/ui/StarMark'
+import { PlaceholderImage } from '@/components/ui/PlaceholderImage'
 import type { Project } from '@/types/project'
 import { cn } from '@/lib/utils'
 
@@ -54,7 +55,7 @@ export function ProjectFloatingScreenshots({
         </div>
       )}
 
-      {landingShot && (
+      {landingShot ? (
         <motion.div
           initial={false}
           whileInView={shouldReduce ? {} : { y: [0, -8, 0], rotate: [-1.4, -0.45, -1.4] }}
@@ -72,6 +73,17 @@ export function ProjectFloatingScreenshots({
             priority={priority}
           />
         </motion.div>
+      ) : (
+        <div
+          className="absolute left-[5%] top-[12%] w-[90%] aspect-[1.86/1] overflow-hidden rounded-2xl"
+          style={{ boxShadow: '0 22px 58px rgba(0,0,0,0.34)' }}
+        >
+          <PlaceholderImage
+            projectName={project.name}
+            accentColor={project.panelAccentColor}
+            label={project.name}
+          />
+        </div>
       )}
 
       {interfaceShot && (

@@ -28,6 +28,8 @@ export type Project = {
   visible: boolean          // false = hidden everywhere without deleting.
   homepageVisible: boolean  // false = accessible at /projects/[slug] but off homepage.
   launchStatus?: ProjectLaunchStatus // active = fully available, comingSoon = preview-only.
+  detailPageEnabled?: boolean // false = keep on list surfaces only; do not generate /projects/[slug].
+  demoPageEnabled?: boolean   // false = omit /projects/[slug]/demo and related CTAs.
 
   // ── Metadata ────────────────────────────────────────────────────────────────
   role: string              // "Builder + Designer"

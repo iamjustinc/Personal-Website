@@ -228,8 +228,8 @@ function SectionFooter({ showThanks = true }: { showThanks?: boolean }) {
         </p>
         {showThanks && (
           <p className="mt-2 text-sm" style={{ color: 'rgba(168,197,209,0.50)' }}>
-            Built to show how I explain products, design clear flows, and make technical work
-            easier to act on.
+            Built to show how I scope products, design clear flows, and translate technical
+            work into action.
           </p>
         )}
       </div>
@@ -263,8 +263,8 @@ function ContactPageLayout() {
             className="mt-6 max-w-[760px] font-sans leading-relaxed"
             style={{ color: '#A8C5D1', fontSize: '18px' }}
           >
-            I&apos;m looking for early-career roles where technical products, AI workflows, and
-            stakeholder communication overlap.
+            I&apos;m looking for early-career Associate Product Manager roles where AI-native
+            products, workflow design, and stakeholder communication overlap.
           </p>
 
           <div className="mt-10">
@@ -287,8 +287,8 @@ function ContactPageLayout() {
               </p>
             </div>
             <p className="font-sans text-[15px] leading-relaxed" style={{ color: '#A8C5D1' }}>
-              Technical, product, and data teams that need workflow discovery, clear demos, and
-              products explained in usable terms.
+              Product and technical teams that need workflow discovery, prioritization, and
+              clear execution.
             </p>
           </div>
 
@@ -348,7 +348,7 @@ function ContactPageLayout() {
                 href={`mailto:${siteConfig.email}`}
                 icon={Send}
                 title="Email me"
-                body="Fastest route for technical/product roles, recruiter intros, and interview follow-ups."
+                body="Fastest route for product/APM roles, recruiter intros, and interview follow-ups."
               />
               <ActionCard
                 href={siteConfig.linkedinUrl}
@@ -360,14 +360,14 @@ function ContactPageLayout() {
                 href={siteConfig.githubUrl}
                 icon={Github}
                 title="View GitHub"
-                body="Implementation proof for AI workflows, product tools, and technical demos."
+                body="Implementation proof for AI-native products, workflow tools, and technical builds."
               />
               <ActionCard
                 href={siteConfig.resumeUrl}
-                download="Justin-Chang-Resume.pdf"
+                download="Justin_Chang_Product_Resume.pdf"
                 icon={Download}
                 title="Download Resume PDF"
-                body="Review experience across data pipelines, dashboards, product walkthroughs, and stakeholder communication."
+                body="Review experience across product discovery, workflow design, data pipelines, and stakeholder communication."
               />
             </div>
           </div>
@@ -388,8 +388,8 @@ function ContactSectionLayout() {
           className="mt-5 max-w-[680px] font-sans leading-relaxed"
           style={{ color: '#A8C5D1', fontSize: '16px' }}
         >
-          Open to early-career Solutions Engineering, Technical Product, Product Operations, and
-          Data / AI Analyst roles where product thinking and stakeholder communication matter.
+          Open to early-career Associate Product Manager and product-focused roles where
+          technical fluency and stakeholder communication matter.
         </p>
 
         <div className="mt-8">
@@ -414,15 +414,15 @@ function ContactSectionLayout() {
           <div className="space-y-3 text-sm" style={{ color: '#A8C5D1' }}>
             <div className="flex items-start gap-2">
               <StarMark size="xs" color="#4A9FAE" className="mt-1 opacity-70" />
-              <span>Early-career Solutions Engineering, Technical Product, Product Operations, and Data / AI Analyst roles</span>
+              <span>Early-career Associate Product Manager and product-focused roles</span>
             </div>
             <div className="flex items-start gap-2">
               <StarMark size="xs" color="#C4974A" className="mt-1 opacity-70" />
-              <span>Technical walkthroughs, workflow discovery, and stakeholder readouts</span>
+              <span>Workflow discovery, MVP scoping, and stakeholder readouts</span>
             </div>
             <div className="flex items-start gap-2">
               <StarMark size="xs" color="#4A9FAE" className="mt-1 opacity-70" />
-              <span>Customer-facing teams that need complex systems explained clearly</span>
+              <span>Teams that need workflow discovery, prioritization, and clear execution</span>
             </div>
             <div className="flex items-start gap-2">
               <StarMark size="xs" color="#C4974A" className="mt-1 opacity-70" />

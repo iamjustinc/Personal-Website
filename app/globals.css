@@ -7,11 +7,22 @@
 html {
   scroll-behavior: smooth;
   background-color: #0A1628;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+@supports (overflow: clip) {
+  html,
+  body {
+    overflow-x: clip;
+  }
 }
 
 /* ── Selection ────────────────────────────────────────────────────────────── */

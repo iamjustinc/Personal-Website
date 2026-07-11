@@ -45,16 +45,16 @@ const proofPoints: ProofPoint[] = [
     detail: 'Improved completion after redesigning recruitment and scheduling.',
   },
   {
-    textValue: 'Demos',
-    label: 'product walkthroughs',
-    detail: 'Used demos to explain workflows, AI behavior, and next steps.',
+    textValue: 'CRM',
+    label: 'workflow products',
+    detail: 'Built HandoffAI and harmonIQ around handoff clarity and CRM data readiness.',
   },
 ]
 
 const strengths = [
   {
     title: 'Make the workflow visible',
-    body: 'Process mapping · user journeys · technical walkthroughs',
+    body: 'Process mapping · user journeys · workflow breakdowns',
   },
   {
     title: 'Find the real friction',
@@ -66,7 +66,7 @@ const strengths = [
   },
   {
     title: 'Connect systems to decisions',
-    body: 'Dashboards · success metrics · stakeholder readouts',
+    body: 'Dashboards · success metrics · decision readouts',
   },
 ]
 
@@ -198,7 +198,7 @@ export function AboutSection() {
         </div>
 
         <h2 className="font-display text-h1 leading-tight text-text-base text-balance">
-          Built for roles that need technical depth and{' '}
+          Built for roles that need product judgment and{' '}
           <span style={{ color: '#4A9FAE' }}>clear communication</span>
         </h2>
 
@@ -206,8 +206,8 @@ export function AboutSection() {
           className="mt-5 max-w-[670px] font-sans text-[16px] leading-7"
           style={{ color: '#A8C5D1' }}
         >
-          I map messy processes, identify friction, explain tradeoffs, and turn AI/data tools
-          into clear product decisions.
+          I map messy workflows, identify friction, prioritize tradeoffs, and turn AI/data
+          systems into clear, actionable products.
         </p>
       </motion.div>
 
@@ -506,11 +506,11 @@ export function AboutSection() {
             </div>
 
             <h3 className="font-display text-[34px] leading-[1.05] text-text-base sm:text-[42px]">
-              How I support technical and customer-facing teams
+              How I support product and technical teams
             </h3>
 
             <p className="mt-5 font-sans text-[15px] leading-7" style={{ color: '#A8C5D1' }}>
-              I am most useful when product context, technical detail, and stakeholder
+              I&apos;m most useful when product judgment, technical depth, and stakeholder
               communication need to stay aligned.
             </p>
           </div>

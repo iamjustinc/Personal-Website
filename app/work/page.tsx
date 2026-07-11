@@ -15,8 +15,6 @@ import type { Project } from '@/types/project'
 import { EASING, fadeIn } from '@/lib/motion'
 import { cn } from '@/lib/utils'
 
-const portfolioProjectOrder = ['kestrel'] as const
-
 const workProjectSpotlights: Record<
   string,
   {
@@ -25,6 +23,26 @@ const workProjectSpotlights: Record<
     glow: string
   }
 > = {
+  handoffai: {
+    description:
+      'Salesforce-native workflow that turns Opportunity data into structured handoff summaries with review, saved history, and export.',
+    metrics: [
+      { value: 'Review', label: 'human-in-loop' },
+      { value: 'History', label: 'saved handoffs' },
+      { value: 'Export', label: 'structured summary' },
+    ],
+    glow: '24% 26%',
+  },
+  harmoniq: {
+    description:
+      'Pre-import CRM workflow that profiles data risk, recommends transparent fixes, and exports a cleaned CSV before it reaches downstream systems.',
+    metrics: [
+      { value: 'Risk', label: 'data profiling' },
+      { value: 'Fixes', label: 'review controls' },
+      { value: 'CSV', label: 'clean export' },
+    ],
+    glow: '30% 24%',
+  },
   kestrel: {
     description:
       'Helps job seekers turn confusing job descriptions into fit scores, skill gaps, and a clear action roadmap.',
@@ -69,6 +87,10 @@ function WorkProjectCard({
     glow: '34% 28%',
   }
   const isComingSoon = project.launchStatus === 'comingSoon'
+  const hasCaseStudy = project.detailPageEnabled !== false
+  const hasDemo = project.demoPageEnabled !== false
+  const hasLiveUrl = Boolean(project.liveUrl)
+  const hasAnyCta = hasCaseStudy || hasDemo || hasLiveUrl
 
   return (
     <motion.article
@@ -322,25 +344,33 @@ function WorkProjectCard({
                 </span>
               </div>
             </div>
-          ) : (
+          ) : hasAnyCta ? (
             <div className="mt-auto flex flex-wrap gap-2.5 pt-6">
-              <HoverSparkle className="inline-flex">
-                <StarburstButton href={`/projects/${project.slug}`} variant="primary" size="sm">
-                  View Case Study
-                </StarburstButton>
-              </HoverSparkle>
+              {hasCaseStudy && (
+                <HoverSparkle className="inline-flex">
+                  <StarburstButton
+                    href={`/projects/${project.slug}`}
+                    variant="primary"
+                    size="sm"
+                  >
+                    View Case Study
+                  </StarburstButton>
+                </HoverSparkle>
+              )}
 
-              <HoverSparkle className="inline-flex">
-                <StarburstButton
-                  href={`/projects/${project.slug}/demo`}
-                  variant="secondary"
-                  size="sm"
-                >
-                  Demo
-                </StarburstButton>
-              </HoverSparkle>
+              {hasDemo && (
+                <HoverSparkle className="inline-flex">
+                  <StarburstButton
+                    href={`/projects/${project.slug}/demo`}
+                    variant="secondary"
+                    size="sm"
+                  >
+                    Demo
+                  </StarburstButton>
+                </HoverSparkle>
+              )}
 
-              {project.liveUrl && (
+              {hasLiveUrl && project.liveUrl && (
                 <HoverSparkle className="inline-flex">
                   <StarburstButton
                     href={project.liveUrl}
@@ -354,7 +384,7 @@ function WorkProjectCard({
                 </HoverSparkle>
               )}
             </div>
-          )}
+          ) : null}
         </div>
       </div>
     </motion.article>
@@ -364,9 +394,9 @@ function WorkProjectCard({
 // ── Page ──────────────────────────────────────────────────────────────────────
 
 export default function WorkPage() {
-  const visibleProjects = portfolioProjectOrder
-    .map((slug) => projects.find((project) => project.slug === slug && project.visible))
-    .filter((project): project is Project => Boolean(project))
+  const visibleProjects = projects
+    .filter((project) => project.visible)
+    .sort((a, b) => a.order - b.order)
 
   return (
     <main className="pt-16 min-h-screen relative overflow-hidden">
@@ -508,7 +538,8 @@ export default function WorkPage() {
             className="font-sans mt-5 max-w-[520px] leading-relaxed"
             style={{ fontSize: '16px', color: '#A8C5D1' }}
           >
-            Kestrel is live.
+            Three product builds across Salesforce handoffs, CRM data readiness, and AI decision
+            support.
           </p>
         </motion.div>
 
