@@ -46,8 +46,8 @@ const proofPoints: ProofPoint[] = [
   },
   {
     textValue: 'CRM',
-    label: 'workflow products',
-    detail: 'Built HandoffAI and harmonIQ around handoff clarity and CRM data readiness.',
+    label: 'data-readiness product',
+    detail: 'Built harmonIQ to profile CRM data risk and export business-ready records.',
   },
 ]
 

@@ -23,23 +23,13 @@ const workProjectSpotlights: Record<
     glow: string
   }
 > = {
-  handoffai: {
-    description:
-      'Salesforce-native workflow that turns Opportunity data into structured handoff summaries with review, saved history, and export.',
-    metrics: [
-      { value: 'Review', label: 'human-in-loop' },
-      { value: 'History', label: 'saved handoffs' },
-      { value: 'Export', label: 'structured summary' },
-    ],
-    glow: '24% 26%',
-  },
   harmoniq: {
     description:
-      'Pre-import CRM workflow that profiles data risk, recommends transparent fixes, and exports a cleaned CSV before it reaches downstream systems.',
+      'Profiles a messy CRM export, ranks issues by business impact, and exports business-ready data with a human in the loop before it reaches downstream systems.',
     metrics: [
-      { value: 'Risk', label: 'data profiling' },
-      { value: 'Fixes', label: 'review controls' },
-      { value: 'CSV', label: 'clean export' },
+      { value: '7', label: 'issue types profiled' },
+      { value: '+33', label: 'demo readiness lift' },
+      { value: 'CSV', label: 'reviewable export' },
     ],
     glow: '30% 24%',
   },
@@ -538,8 +528,7 @@ export default function WorkPage() {
             className="font-sans mt-5 max-w-[520px] leading-relaxed"
             style={{ fontSize: '16px', color: '#A8C5D1' }}
           >
-            Three product builds across Salesforce handoffs, CRM data readiness, and AI decision
-            support.
+            Two product builds across CRM data readiness and AI decision support.
           </p>
         </motion.div>
 

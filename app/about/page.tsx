@@ -385,7 +385,7 @@ export default function AboutPage() {
                 only when people can understand, trust, and act on their output. That lens came
                 from health-AI research building predictive pipelines across 30K+ records, which
                 taught me the model is only half the challenge. I now bring it to enterprise AI
-                and CRM workflows, building HandoffAI and harmonIQ.
+                and CRM workflows, building harmonIQ.
               </p>
             </motion.div>
 

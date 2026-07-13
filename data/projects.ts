@@ -2,83 +2,55 @@ import type { Project } from '@/types/project'
 
 import kestrelLanding from '../Kestrel.png'
 import kestrelInterface from '../kestrel-interface.png'
+import harmoniqLanding from '../harmoniq-interface.png'
+import harmoniqInterface from '../harmoniq-workspace.png'
 
 export const projects: Project[] = [
-  {
-    slug: 'handoffai',
-    name: 'HandoffAI',
-    tagline:
-      'Salesforce-native sales handoff workflow that turns Opportunity data into structured, reviewable account-transition summaries.',
-    summary:
-      'Designed for handoffs where context gets lost between teams. The workflow organizes Opportunity data into editable summaries, saved history, and exportable handoff records.',
-    featured: false,
-    order: 1,
-    visible: true,
-    homepageVisible: true,
-    detailPageEnabled: false,
-    demoPageEnabled: false,
-    launchStatus: 'active',
-    role: 'Product Builder',
-    tags: ['Workflow', 'Product', 'Systems'],
-    stack: ['Lightning Web Components', 'Apex', 'SOQL', 'Custom Objects', 'Permission Sets'],
-    year: 2026,
-    outcome:
-      'Scoped the MVP around handoff generation, user review, saved history, and export so the workflow keeps a human in the loop.',
-    thumbnail: '',
-    screenshots: [],
-    panelAccentColor: '#4A9FAE',
-    overview:
-      'HandoffAI is a Salesforce-native workflow designed to turn Opportunity information into structured account-transition summaries that a user can review, edit, save, and export before a handoff moves downstream.',
-    problem:
-      'Sales handoffs often lose context between the Opportunity and the next team. Notes are incomplete, next steps are unclear, and transition risks stay buried in scattered fields or memory.',
-    users:
-      'Built for sales and downstream account teams that need clearer account transitions and less information loss between stages of the workflow.',
-    solution:
-      'HandoffAI turns Opportunity information into a structured handoff draft, then keeps the user in control through review, editing, saved history, and export.',
-    impact:
-      'The product is designed to reduce missing context, unclear next steps, and transition risk by making handoff information structured and reviewable before it moves downstream.',
-    buildNotes:
-      'Built on Salesforce record pages with Lightning Web Components, Apex, SOQL, custom objects, and permission sets so the workflow stays close to the data it organizes.',
-    reflection:
-      'The strongest decision was keeping review and editing in the loop so the workflow stays useful without pretending automation should replace handoff judgment.',
-  },
   {
     slug: 'harmoniq',
     name: 'harmonIQ',
     tagline:
-      'CRM data-readiness workflow that profiles import risk, recommends transparent fixes, and exports a cleaned CSV.',
+      'AI-assisted CRM data-readiness workspace that profiles risky records, explains recommended fixes, and exports business-ready data.',
     summary:
-      'Built for RevOps and Sales Ops teams preparing data before CRM import. The MVP profiles missing owners, invalid values, and routing-breaking issues before clean export.',
-    featured: false,
-    order: 2,
+      'harmonIQ helps RevOps and Sales Ops teams turn messy CRM exports into business-ready data by profiling risk, explaining fixes, and keeping a human in the loop.',
+    featured: true,
+    order: 1,
     visible: true,
     homepageVisible: true,
-    detailPageEnabled: false,
-    demoPageEnabled: false,
+    detailPageEnabled: true,
+    demoPageEnabled: true,
     launchStatus: 'active',
     role: 'Product Builder',
-    tags: ['Workflow', 'AI', 'Systems'],
-    stack: ['Data Profiling', 'Explainable Scoring', 'Review Controls', 'CSV Export'],
+    tags: ['AI', 'Decision Support', 'Workflow'],
+    stack: ['Next.js', 'TypeScript', 'Tailwind', 'Deterministic Rules Engine', 'LLM Recommendations'],
     year: 2026,
     outcome:
-      'Tested with five sales and CRM users, which simplified the review flow and reprioritized missing-context alerts in the MVP.',
-    thumbnail: '',
-    screenshots: [],
+      'Tested with five sales and CRM users, whose feedback simplified the review flow and reprioritized missing-context alerts before launch.',
+    thumbnail: harmoniqLanding.src,
+    screenshots: [harmoniqLanding.src, harmoniqInterface.src],
     panelAccentColor: '#0F7A7A',
+    liveUrl: 'https://harmoniq-crm.vercel.app',
+
     overview:
-      'harmonIQ is a pre-import CRM data-readiness workflow for RevOps and Sales Ops teams. It profiles file quality, surfaces explainable risk, recommends corrections, and supports review before export.',
+      'harmonIQ is a CRM data-readiness workspace built for RevOps and Sales Ops teams preparing an account or contact export before a routing update, planning cycle, or campaign. It profiles the dataset, ranks issues by business impact rather than raw frequency, explains each recommended fix in plain language, and lets the user review, approve, or edit every change before exporting a business-ready CSV and a change log.',
+
     problem:
-      'Poor-quality data breaks routing, ownership, and downstream CRM workflows before it is even imported. Teams need a way to catch missing owners, invalid values, and inconsistent fields before those issues spread.',
+      'Operations teams inherit CRM exports full of duplicate accounts, missing owners, inconsistent state and country values, and invalid contact fields. These are not just formatting issues — they break lead routing, distort reporting, and erode trust in the CRM before a team can act on the data. Today, non-technical operators either wait on engineering support or clean the file manually with no clear view of what actually matters first.',
+
     users:
-      'Built for RevOps and Sales Ops teams cleaning data before import and trying to avoid routing-breaking errors downstream.',
+      'Built for Revenue Operations and Sales Operations managers who receive a CRM export before a routing update, planning cycle, or campaign and need to know which issues to fix first, without waiting on engineering.',
+
     solution:
-      'harmonIQ profiles incoming CRM data, highlights explainable risk, recommends transparent fixes, lets users review changes, and exports a cleaned CSV users can inspect before import.',
+      'harmonIQ profiles an uploaded CSV, classifies issues into categories like missing owners, duplicate accounts, and inconsistent formatting, then ranks them by business severity, affected record count, and workflow urgency rather than raw frequency. Each recommendation includes a plain-language rationale and confidence signal, and the user can approve, skip, or manually resolve exceptions before exporting a cleaned CSV and change log.',
+
     impact:
-      'The product is designed to keep weak data from entering core CRM workflows by making risk visible before import instead of after routing and reporting begin to fail.',
+      "In the product demo, reviewing the highest-priority issues first raised a sample export's readiness score from 35/100 to 68/100 before export, with routing- and territory-breaking issues addressed first. Testing with five sales and CRM users shaped two concrete changes: a simpler review flow and reprioritized alerts for missing ownership and context.",
+
     buildNotes:
-      'The MVP focused on transparent scoring and review controls so users can understand why a row is risky before accepting a fix.',
+      'The system splits work between deterministic logic and AI: null detection, duplicate heuristics, and readiness scoring run on deterministic rules so results stay consistent, while an LLM layer explains issue clusters and translates them into business language. When the AI layer is unavailable, the product falls back to deterministic and reference-based suggestions rather than blocking the review.',
+
     reflection:
-      'Testing with five sales and CRM users pushed the product toward a simpler review flow and higher-priority missing-context alerts.',
+      'The hardest product call was resisting the urge to make harmonIQ do everything a full ETL or master-data tool does. Narrowing V1 to one workflow, profiling and reviewing a CRM export before it causes downstream damage, made the trust model easier to design and the demo easier to explain.',
   },
   {
     slug: 'kestrel',
@@ -87,8 +59,8 @@ export const projects: Project[] = [
       'AI career intelligence system that turns job descriptions and resumes into fit signals, skill gaps, and action roadmaps.',
     summary:
       'Kestrel helps job seekers turn confusing job descriptions and resumes into fit signals, skill gaps, and a clear action roadmap.',
-    featured: true,
-    order: 3,
+    featured: false,
+    order: 2,
     visible: true,
     homepageVisible: true,
     detailPageEnabled: true,

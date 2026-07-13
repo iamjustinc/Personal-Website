@@ -20,22 +20,13 @@ const projectSpotlights: Record<
     metrics: { value: string; label: string }[]
   }
 > = {
-  handoffai: {
-    description:
-      'Salesforce-native workflow that turns Opportunity data into structured handoff summaries with review, saved history, and export.',
-    metrics: [
-      { value: 'Review', label: 'human-in-loop' },
-      { value: 'History', label: 'saved handoffs' },
-      { value: 'Export', label: 'structured summary' },
-    ],
-  },
   harmoniq: {
     description:
-      'Pre-import CRM workflow that profiles data risk, recommends transparent fixes, and exports a cleaned CSV for RevOps and Sales Ops teams.',
+      'Profiles a messy CRM export, ranks issues by business impact, explains each fix in plain language, and exports business-ready data with a human in the loop.',
     metrics: [
-      { value: 'Risk', label: 'data profiling' },
-      { value: 'Fixes', label: 'review controls' },
-      { value: 'CSV', label: 'clean export' },
+      { value: '7', label: 'issue types profiled' },
+      { value: '+33', label: 'demo readiness lift' },
+      { value: 'CSV', label: 'reviewable export' },
     ],
   },
   kestrel: {
@@ -58,7 +49,7 @@ export function ProjectsSection() {
   const inn = useMotionSafe(fadeIn)
 
   const visibleProjects = projects
-    .filter((project) => project.visible && project.homepageVisible)
+    .filter((project) => project.visible && project.homepageVisible && project.featured)
     .sort((a, b) => a.order - b.order)
 
   return (
@@ -99,10 +90,10 @@ export function ProjectsSection() {
             Featured Work
           </span>
         </div>
-        <h2 className="font-display text-h1 text-text-base">Selected Work</h2>
+        <h2 className="font-display text-h1 text-text-base">Featured Case Study</h2>
         <p className="font-sans text-text-muted mt-3 max-w-[560px]" style={{ fontSize: '15px' }}>
-          Three product builds across Salesforce handoffs, CRM data readiness, and AI decision
-          support.
+          A CRM data-readiness workspace that turns a messy export into business-ready data,
+          one reviewed decision at a time.
         </p>
       </motion.div>
 
@@ -326,6 +317,8 @@ export function ProjectsSection() {
                 <div className="mb-4 flex flex-wrap gap-1.5">
                   {(project.slug === 'kestrel'
                     ? ['Decision Support', 'Requirement Mapping', 'Guided Workflow']
+                    : project.slug === 'harmoniq'
+                    ? ['Business-Risk Profiling', 'Explainable AI', 'Reviewable Export']
                     : project.tags.slice(0, 3)
                   ).map((tag) => (
                     <span
@@ -360,6 +353,16 @@ export function ProjectsSection() {
                   >
                     Role relevance: product diagnosis · requirement mapping · AI decision support ·
                     scoped execution
+                  </p>
+                )}
+
+                {project.slug === 'harmoniq' && (
+                  <p
+                    className="mt-4 max-w-[540px] font-mono text-[10px] leading-6"
+                    style={{ color: '#7FAFBB' }}
+                  >
+                    Role relevance: business-impact prioritization · explainable AI ·
+                    human-in-the-loop trust · MVP scoping
                   </p>
                 )}
 

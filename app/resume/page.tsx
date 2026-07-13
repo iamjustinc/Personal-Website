@@ -110,10 +110,8 @@ const resumeExperienceTagsByRole: Record<string, string[]> = {
 }
 
 const resumeProjectDescriptions: Record<string, string> = {
-  handoffai:
-    'Salesforce-native sales handoff workflow with structured summaries, user review, saved history, and export.',
   harmoniq:
-    'CRM data-readiness workflow for profiling risk, reviewing transparent fixes, and exporting a cleaned CSV.',
+    'Profiles a messy CRM export, ranks issues by business impact, and exports business-ready data with a human in the loop.',
   kestrel:
     'Helps job seekers turn confusing job descriptions into fit scores, skill gaps, and a clear action roadmap.',
 }

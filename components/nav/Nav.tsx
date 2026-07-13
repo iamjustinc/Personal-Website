@@ -22,6 +22,7 @@ const navLinks: NavLink[] = [
     label: 'Portfolio',
     href: '/work',
     projects: [
+      { label: 'harmonIQ', href: '/projects/harmoniq' },
       { label: 'Kestrel', href: '/projects/kestrel' },
     ],
   },

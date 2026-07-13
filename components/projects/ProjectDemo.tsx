@@ -17,11 +17,16 @@ const kestrelDemoVideos = {
 const kestrelFullWalkthroughUrl =
   'https://www.linkedin.com/posts/jjustin-chang_buildinpublic-solutionsengineering-productmanagement-ugcPost-7448104114703527936-W0CI?utm_source=share&utm_medium=member_desktop&rcm=ACoAAC8kyn8BgbHl-T6FxSq__vvSg2wW3sCT8SM'
 
+const harmoniqDemoVideos = {
+  quick: '/videos/projects/harmoniq/harmoniq-quick.mp4',
+} as const
+
 export function ProjectDemo({ project }: { project: Project }) {
   const stagger = useMotionSafe(staggerContainer(0.10))
   const up      = useMotionSafe(fadeUp)
   const inn     = useMotionSafe(fadeIn)
   const hasKestrelVideoDemo = project.slug === 'kestrel'
+  const hasHarmoniqVideoDemo = project.slug === 'harmoniq'
 
   return (
     <main className="bg-bg min-h-screen pt-16">
@@ -237,6 +242,77 @@ export function ProjectDemo({ project }: { project: Project }) {
                   </svg>
                 </span>
               </a>
+            </div>
+          ) : hasHarmoniqVideoDemo ? (
+            <div
+              className="relative w-full overflow-hidden rounded-2xl p-4 sm:p-5"
+              style={{
+                background: 'linear-gradient(145deg, rgba(9,26,44,0.92), rgba(12,39,56,0.72))',
+                border: `1px solid ${project.panelAccentColor}26`,
+                boxShadow: '0 18px 55px rgba(0,0,0,0.42)',
+              }}
+            >
+              <div
+                className="pointer-events-none absolute -right-20 -top-24 h-56 w-56 rounded-full blur-3xl"
+                style={{ background: `${project.panelAccentColor}1C` }}
+                aria-hidden
+              />
+              <div
+                className="pointer-events-none absolute left-8 top-10 h-px w-28 rotate-12"
+                style={{ background: `linear-gradient(90deg, transparent, ${project.panelAccentColor}44, transparent)` }}
+                aria-hidden
+              />
+
+              <div className="relative mb-4">
+                <div>
+                  <div
+                    className="section-eyebrow mb-3 inline-flex items-center gap-2 rounded-full px-3 py-1.5"
+                    style={{
+                      '--eyebrow-border': `${project.panelAccentColor}3D`,
+                      '--eyebrow-shadow': `${project.panelAccentColor}12`,
+                      '--eyebrow-glint': `${project.panelAccentColor}77`,
+                      '--eyebrow-icon-glow': `${project.panelAccentColor}32`,
+                    } as React.CSSProperties}
+                  >
+                    <StarMark size="xs" color={project.panelAccentColor} className="opacity-75" />
+                    <span
+                      className="font-mono text-[10px] uppercase tracking-[0.12em]"
+                      style={{ color: project.panelAccentColor }}
+                    >
+                      Full walkthrough
+                    </span>
+                  </div>
+                  <h2 className="font-display text-[28px] leading-none text-text-base sm:text-[34px]">
+                    Full product walkthrough
+                  </h2>
+                  <p className="mt-3 max-w-[620px] font-sans text-[14px] leading-relaxed text-text-muted sm:text-[15px]">
+                    Watch harmonIQ profile a messy CRM export, rank issues by business impact, and walk through review and export.
+                  </p>
+                </div>
+              </div>
+
+              <div
+                className="relative overflow-hidden rounded-[18px]"
+                style={{
+                  background: 'rgba(0,0,0,0.34)',
+                  border: `1px solid ${project.panelAccentColor}22`,
+                  boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.05), 0 18px 40px rgba(0,0,0,0.34)',
+                  aspectRatio: '16 / 9',
+                }}
+              >
+                <video
+                  controls
+                  muted
+                  playsInline
+                  preload="none"
+                  poster={project.screenshots[0]}
+                  className="h-full w-full object-contain"
+                  aria-label="harmonIQ full product walkthrough video"
+                >
+                  <source src={harmoniqDemoVideos.quick} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
             </div>
           ) : (
             /* Placeholder: swap for an iframe or video when ready */

@@ -157,10 +157,124 @@ const kestrelCaseStudyCopy: CaseStudyCopy = {
   screenshotCaption: 'Kestrel decision dashboard',
 }
 
+// ── harmonIQ ─────────────────────────────────────────────────────────────────
+
+const harmoniqCaseStudyCopy: CaseStudyCopy = {
+  tagline:
+    'AI-assisted CRM data-readiness workspace that profiles risky records, explains recommended fixes, and exports business-ready data.',
+  outcome:
+    'Tested with five sales and CRM users, whose feedback simplified the review flow and reprioritized missing-context alerts before launch.',
+
+  overview:
+    'harmonIQ is a CRM data-readiness workspace built for RevOps and Sales Ops teams preparing an account or contact export before a routing update, planning cycle, or campaign. It profiles the dataset, ranks issues by business impact rather than raw frequency, explains each recommended fix in plain language, and lets the user review, approve, or edit every change before exporting a business-ready CSV and a change log.',
+
+  pmInsight: {
+    label: 'Key Product Decision',
+    body: 'harmonIQ could have auto-corrected every issue it detected. I chose to rank issues by business impact and require review before anything changes, because CRM data drives revenue decisions — a fast fix nobody trusts is worse than a slower one people will actually approve.',
+  },
+
+  overviewCards: [
+    {
+      title: 'Product Thesis',
+      body: 'Bad CRM data is not a formatting problem. It is an operational-risk problem — the same messy export can break routing for one team and reporting for another, depending on what happens to it next.',
+    },
+    {
+      title: 'Product Bet',
+      body: 'Ranking issues by downstream business impact, and requiring human review before export, builds more trust than a tool that "auto-cleans" everything invisibly.',
+    },
+  ],
+
+  problem:
+    'Operations teams inherit CRM exports full of duplicate accounts, missing owners, inconsistent state and country values, and invalid contact fields. These are not just formatting issues — they break lead routing, distort reporting, and erode trust in the CRM before a team can act on the data. Today, non-technical operators either wait on engineering support or clean the file manually with no clear view of what actually matters first.',
+
+  problemBullets: [
+    'Missing owner fields and inconsistent state values silently break lead routing and territory assignment downstream.',
+    'Spreadsheet cleanup has no way to rank which issues are actually business-critical versus cosmetic.',
+    'Automated cleanup tools that apply fixes without review are difficult to trust with CRM data that drives revenue decisions.',
+  ],
+
+  users:
+    'Built for Revenue Operations and Sales Operations managers who receive a CRM export before a routing update, planning cycle, or campaign and need to know which issues to fix first, without waiting on engineering.',
+
+  userCards: [
+    {
+      title: 'Primary User',
+      body: 'Revenue Operations and Sales Operations managers who own CRM hygiene before routing, reporting, or campaign workflows and need to move fast without specialized data tooling.',
+    },
+    {
+      title: 'Job To Be Done',
+      body: 'Show me which issues in this export actually matter, let me review the fix before it happens, and give me a clean file and a record of what changed.',
+    },
+  ],
+
+  solution:
+    'harmonIQ profiles an uploaded CSV, classifies issues into categories like missing owners, duplicate accounts, and inconsistent formatting, then ranks them by business severity, affected record count, and workflow urgency rather than raw frequency. Each recommendation includes a plain-language rationale and confidence signal, and the user can approve, skip, or manually resolve exceptions before exporting a cleaned CSV and change log.',
+
+  solutionCards: [
+    {
+      title: 'Business-Risk Profiling',
+      body: 'Classifies detected issues — missing owners, duplicates, inconsistent formatting, schema mismatches — and ranks them by how much they threaten routing, reporting, or segmentation, not by how often they occur.',
+    },
+    {
+      title: 'Explainable Recommendations',
+      body: 'Every suggested fix carries a rationale, a confidence signal, and a preview, so the user can judge whether to trust a specific recommendation instead of accepting a black box.',
+    },
+    {
+      title: 'Reviewable Export',
+      body: 'Users approve, skip, or manually resolve exceptions issue by issue before exporting a cleaned CSV and a change log that documents what was changed and why.',
+    },
+  ],
+
+  impact:
+    "In the product demo, reviewing the highest-priority issues first raised a sample export's readiness score from 35/100 to 68/100 before export, with routing- and territory-breaking issues addressed first. Testing with five sales and CRM users shaped two concrete changes: a simpler review flow and reprioritized alerts for missing ownership and context.",
+
+  impactCards: [
+    {
+      title: 'Demo Outcome',
+      body: "In a recorded walkthrough, reviewing the highest-priority issues raised a sample export's readiness score from 35/100 to 68/100 before export.",
+    },
+    {
+      title: 'User Feedback Loop',
+      body: 'Testing with five sales and CRM users led to a simpler review flow and reprioritized alerts for missing ownership and context, the fixes that blocked routing most often.',
+    },
+  ],
+
+  buildNotes:
+    'The system splits work between deterministic logic and AI: null detection, duplicate heuristics, and readiness scoring run on deterministic rules so results stay consistent, while an LLM layer explains issue clusters and translates them into business language. When the AI layer is unavailable, the product falls back to deterministic and reference-based suggestions rather than blocking the review.',
+
+  buildCards: [
+    {
+      title: 'Deterministic Core, AI Layer on Top',
+      body: 'Null detection, duplicate heuristics, and readiness scoring run on deterministic rules for consistency; an LLM layer explains issue clusters and rationale in business language.',
+    },
+    {
+      title: 'Graceful AI Fallback',
+      body: 'When the AI layer is unavailable, recommendations fall back to deterministic and reference-based logic instead of blocking the review, so the workflow never depends entirely on a live model.',
+    },
+  ],
+
+  reflection:
+    'The hardest product call was resisting the urge to make harmonIQ do everything a full ETL or master-data tool does. Narrowing V1 to one workflow, profiling and reviewing a CRM export before it causes downstream damage, made the trust model easier to design and the demo easier to explain.',
+
+  reflectionCards: [
+    {
+      title: 'What I Cut',
+      body: 'Live Salesforce integration, scheduled pipelines, and autonomous high-risk changes. Each would have expanded scope without strengthening the one workflow the product needed to prove.',
+    },
+    {
+      title: 'What Remained',
+      body: 'Profiling, business-risk ranking, explainable recommendations, and a reviewable export: the smallest set of steps that makes a messy CRM export trustworthy again.',
+    },
+  ],
+
+  screenshotCaption: 'harmonIQ decision workspace',
+}
+
 // ── Copy resolver ─────────────────────────────────────────────────────────────
 
 function getCaseStudyCopy(project: Project): CaseStudyCopy {
   if (project.slug === 'kestrel') return kestrelCaseStudyCopy
+  if (project.slug === 'harmoniq') return harmoniqCaseStudyCopy
 
   return {
     tagline: project.tagline,
@@ -1000,7 +1114,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
   const inn = useMotionSafe(fadeIn)
   const reduceMotion = useReducedMotion()
 
-  const isEnhancedCaseStudy = ['kestrel'].includes(project.slug)
+  const isEnhancedCaseStudy = ['kestrel', 'harmoniq'].includes(project.slug)
   const caseCopy = getCaseStudyCopy(project)
 
   let n = 0
