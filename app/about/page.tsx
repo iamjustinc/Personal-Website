@@ -951,9 +951,9 @@ export default function AboutPage() {
                 Looking for someone who can scope the problem and explain the next step?
               </h2>
               <p className="mt-4 font-sans text-[15.5px] leading-7" style={{ color: '#A8C5D1' }}>
-                I&apos;m targeting Associate Product Manager and early-career product builder
-                roles where product judgment, technical fluency, and stakeholder communication
-                overlap.
+                I&apos;m an aspiring PM targeting Associate Product Manager and early-career
+                product builder roles where product judgment, technical fluency, and
+                stakeholder communication overlap.
               </p>
             </div>
 

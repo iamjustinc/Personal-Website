@@ -2,10 +2,10 @@ import type { SiteConfig } from '@/types/site'
 
 export const siteConfig: SiteConfig = {
   name: 'Justin Chang',
-  seoTitle: 'Justin Chang | Associate Product Manager · AI Product Builder',
+  seoTitle: 'Justin Chang | Aspiring Product Manager · AI Product Builder',
   seoDescription:
     'Justin Chang builds AI-native products for CRM and enterprise workflows, turning ambiguous problems into scoped, testable products through discovery, prioritization, and iteration.',
-  roleTag: 'ASSOCIATE PRODUCT MANAGER · AI PRODUCT BUILDER',
+  roleTag: 'ASPIRING PRODUCT MANAGER · AI PRODUCT BUILDER',
   heroStatement:
     'I build AI-native products for CRM and enterprise workflows. I turn ambiguous problems into scoped, testable products through discovery, prioritization, and iteration.',
   heroTechLine: 'Salesforce · Agentforce · Python · SQL · TypeScript · React · Next.js',
@@ -38,7 +38,7 @@ export const siteConfig: SiteConfig = {
     'I translate ambiguous workflow and data problems into scoped products, align stakeholders around the build, and test solutions with users.',
     'My strongest work sits where product judgment, technical fluency, and stakeholder communication all need to stay aligned.',
     'I map the workflow first, isolate the highest-impact gap, and scope the smallest product that makes the next decision clearer.',
-    'I am targeting Associate Product Manager and early-career product builder roles across AI, CRM, and workflow-heavy teams.',
+    'I am an aspiring product manager targeting Associate Product Manager and early-career product builder roles across AI, CRM, and workflow-heavy teams.',
   ],
 
   aboutHighlights: [
@@ -88,7 +88,7 @@ export const siteConfig: SiteConfig = {
     supportingColumns: [
       {
         heading: 'TARGET ROLES',
-        content: 'Associate Product Manager · Early-Career Product Builder · AI + CRM Workflows',
+        content: 'Aspiring Product Manager · Early-Career Product Builder · AI + CRM Workflows',
       },
       {
         heading: 'PRODUCT STRENGTHS',
@@ -244,7 +244,7 @@ export const siteConfig: SiteConfig = {
   linkedinUrl: 'https://linkedin.com/in/jjustin-chang',
   githubUrl: 'https://github.com/iamjustinc',
   currentlyOpen:
-    'Associate Product Manager · Early-Career Product Builder · AI + CRM Workflows',
+    'Aspiring Product Manager · Early-Career Product Builder · AI + CRM Workflows',
   contactHeading: "Let's connect.",
   contactDescription:
     'Email is the fastest way to reach me for recruiting conversations, portfolio context, and product walkthroughs.',
