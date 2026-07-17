@@ -120,6 +120,15 @@ export function ProjectsSection() {
           const hasDemo = Boolean(demoHref)
           const demoIsExternal = Boolean(project.demoCtaUrl)
           const hasLiveUrl = Boolean(project.liveUrl)
+          const primaryDemoHref = demoHref ?? project.liveUrl
+          const primaryDemoIsExternal = hasDemo ? demoIsExternal : hasLiveUrl
+          const primaryDemoAriaLabel = hasDemo
+            ? project.demoCtaAriaLabel
+            : project.liveAriaLabel
+          const primaryDemoLabel = hasDemo
+            ? project.demoCtaLabel ?? 'Open Demo'
+            : project.liveCtaLabel ?? 'Live Demo'
+          const hasPrimaryDemo = Boolean(primaryDemoHref)
           const hasAnyCta = hasCaseStudy || hasDemo || hasLiveUrl
           const spotlight = projectSpotlights[project.slug] ?? {
             description: project.tagline,
@@ -466,36 +475,6 @@ export function ProjectsSection() {
                     className="mt-auto flex flex-wrap gap-2.5 pt-8"
                     style={{ borderTop: '1px solid rgba(74,159,174,0.12)' }}
                   >
-                    {hasDemo && (
-                      <HoverSparkle className="inline-flex">
-                        <StarburstButton
-                          href={demoHref}
-                          target={demoIsExternal ? '_blank' : undefined}
-                          rel={demoIsExternal ? 'noopener noreferrer' : undefined}
-                          ariaLabel={project.demoCtaAriaLabel}
-                          variant="primary"
-                          size="sm"
-                        >
-                          {project.demoCtaLabel ?? 'Open Demo'}
-                        </StarburstButton>
-                      </HoverSparkle>
-                    )}
-
-                    {hasLiveUrl && project.liveUrl && (
-                      <HoverSparkle className="inline-flex">
-                        <StarburstButton
-                          href={project.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          ariaLabel={project.liveAriaLabel}
-                          variant="secondary"
-                          size="sm"
-                        >
-                          {project.liveCtaLabel ?? 'Live Demo'}
-                        </StarburstButton>
-                      </HoverSparkle>
-                    )}
-
                     {hasCaseStudy && (
                       <HoverSparkle className="inline-flex">
                         <StarburstButton
@@ -504,6 +483,21 @@ export function ProjectsSection() {
                           size="sm"
                         >
                           Read Case Study
+                        </StarburstButton>
+                      </HoverSparkle>
+                    )}
+
+                    {hasPrimaryDemo && primaryDemoHref && (
+                      <HoverSparkle className="inline-flex">
+                        <StarburstButton
+                          href={primaryDemoHref}
+                          target={primaryDemoIsExternal ? '_blank' : undefined}
+                          rel={primaryDemoIsExternal ? 'noopener noreferrer' : undefined}
+                          ariaLabel={primaryDemoAriaLabel}
+                          variant="primary"
+                          size="sm"
+                        >
+                          {primaryDemoLabel}
                         </StarburstButton>
                       </HoverSparkle>
                     )}

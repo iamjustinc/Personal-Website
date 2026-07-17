@@ -84,6 +84,13 @@ function WorkProjectCard({
   const hasDemo = Boolean(demoHref)
   const demoIsExternal = Boolean(project.demoCtaUrl)
   const hasLiveUrl = Boolean(project.liveUrl)
+  const primaryDemoHref = demoHref ?? project.liveUrl
+  const primaryDemoIsExternal = hasDemo ? demoIsExternal : hasLiveUrl
+  const primaryDemoAriaLabel = hasDemo ? project.demoCtaAriaLabel : project.liveAriaLabel
+  const primaryDemoLabel = hasDemo
+    ? project.demoCtaLabel ?? 'Open Demo'
+    : project.liveCtaLabel ?? 'Live Demo'
+  const hasPrimaryDemo = Boolean(primaryDemoHref)
   const hasAnyCta = hasCaseStudy || hasDemo || hasLiveUrl
 
   return (
@@ -352,32 +359,17 @@ function WorkProjectCard({
                 </HoverSparkle>
               )}
 
-              {hasDemo && (
+              {hasPrimaryDemo && primaryDemoHref && (
                 <HoverSparkle className="inline-flex">
                   <StarburstButton
-                    href={demoHref}
-                    target={demoIsExternal ? '_blank' : undefined}
-                    rel={demoIsExternal ? 'noopener noreferrer' : undefined}
-                    ariaLabel={project.demoCtaAriaLabel}
+                    href={primaryDemoHref}
+                    target={primaryDemoIsExternal ? '_blank' : undefined}
+                    rel={primaryDemoIsExternal ? 'noopener noreferrer' : undefined}
+                    ariaLabel={primaryDemoAriaLabel}
                     variant="secondary"
                     size="sm"
                   >
-                    {project.demoCtaLabel ?? 'Open Demo'}
-                  </StarburstButton>
-                </HoverSparkle>
-              )}
-
-              {hasLiveUrl && project.liveUrl && (
-                <HoverSparkle className="inline-flex">
-                  <StarburstButton
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    ariaLabel={project.liveAriaLabel}
-                    variant="secondary"
-                    size="sm"
-                  >
-                    {project.liveCtaLabel ?? 'Live Demo'}
+                    {primaryDemoLabel}
                   </StarburstButton>
                 </HoverSparkle>
               )}
