@@ -31,11 +31,11 @@ const projectSpotlights: Record<
   },
   kestrel: {
     description:
-      'Turns complex job descriptions into structured requirements, transparent comparisons, and clear action plans.',
+      'Turns job descriptions into structured action-plan outputs, transparent comparisons, and clear next steps.',
     metrics: [
-      { value: 'AI', label: 'workflow prototype' },
-      { value: 'JSON', label: 'structured outputs' },
-      { value: 'E2E', label: 'product execution' },
+      { value: '15', label: 'users tested' },
+      { value: 'LLM', label: 'prompt workflow' },
+      { value: 'JSON', label: 'typed schemas' },
     ],
   },
 }

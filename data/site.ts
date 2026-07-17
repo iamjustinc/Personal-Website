@@ -4,13 +4,13 @@ export const siteConfig: SiteConfig = {
   name: 'Justin Chang',
   seoTitle: 'Justin Chang | Aspiring Product Manager · AI Product Builder',
   seoDescription:
-    'Justin Chang builds AI-native products for CRM and enterprise workflows, turning ambiguous problems into scoped, testable products through discovery, prioritization, and iteration.',
+    'Justin Chang builds AI products, workflow systems, and stakeholder-ready analytics, with experience across product discovery, explainable AI, CRM workflows, and applied ML.',
   roleTag: 'ASPIRING PRODUCT MANAGER · AI PRODUCT BUILDER',
   heroStatement:
-    'I build AI-native products for CRM and enterprise workflows. I turn ambiguous problems into scoped, testable products through discovery, prioritization, and iteration.',
-  heroTechLine: 'Salesforce · Agentforce · Python · SQL · TypeScript · React · Next.js',
-  resumeUrl: '/Justin_Chang_Resume.pdf',
-  resumeDownloadName: 'Justin_Chang_Resume.pdf',
+    'I build AI products, workflow systems, and stakeholder-ready analytics. My work spans product discovery, explainable AI, CRM workflows, and applied ML.',
+  heroTechLine: 'Databricks · Salesforce Platform · Python · SQL · R · React · Next.js',
+  resumeUrl: '/DATABRICKS_RESUME_JUSTIN.pdf',
+  resumeDownloadName: 'DATABRICKS_RESUME_JUSTIN.pdf',
 
   logoSrc: '/images/justin-logo.png',
   portraitSrc: '/images/me.png',
@@ -35,24 +35,24 @@ export const siteConfig: SiteConfig = {
   ],
 
   aboutStatements: [
-    'I translate ambiguous workflow and data problems into scoped products, align stakeholders around the build, and test solutions with users.',
+    'I translate ambiguous workflow, data, and AI problems into structured requirements, stakeholder-ready systems, and clearer next steps.',
     'My strongest work sits where product judgment, technical fluency, and stakeholder communication all need to stay aligned.',
-    'I map the workflow first, isolate the highest-impact gap, and scope the smallest product that makes the next decision clearer.',
-    'I am an aspiring product manager targeting Associate Product Manager and early-career product builder roles across AI, CRM, and workflow-heavy teams.',
+    'I care most about explainability, user trust, and the workflows people actually use before and after a product ships.',
+    'I am an aspiring product manager targeting Associate Product Manager and early-career product builder roles across AI, data, and workflow-heavy teams.',
   ],
 
   aboutHighlights: [
-    'AI-native product design',
-    'CRM and enterprise workflows',
-    'Explainable decision support',
-    'Technical to stakeholder communication',
+    'AI product design',
+    'Workflow discovery',
+    'Explainable analytics',
+    'Stakeholder-ready communication',
   ],
 
   whyIFit: {
     eyebrow: 'WHY I FIT',
     heading: 'Product judgment backed by technical execution',
     supportingCopy:
-      'I translate ambiguous workflow and data problems into scoped products, align stakeholders around the build, and test solutions with users.',
+      'I translate ambiguous workflow and data problems into structured requirements, stakeholder-ready systems, and user-tested products.',
     signals: [
       {
         value: '30K+',
@@ -79,16 +79,17 @@ export const siteConfig: SiteConfig = {
         suffix: '%',
       },
       {
-        value: 'AI + CRM',
-        label: 'PRODUCT BUILDER',
+        value: '15',
+        label: 'USERS TESTED',
         description:
-          'Built harmonIQ for CRM data readiness and HandoffAI for Salesforce-native sales handoffs.',
+          'Tested Kestrel action-plan outputs with 15 users and harmonIQ with five CRM users.',
+        animateTo: 15,
       },
     ],
     supportingColumns: [
       {
         heading: 'TARGET ROLES',
-        content: 'Aspiring Product Manager · Early-Career Product Builder · AI + CRM Workflows',
+        content: 'Aspiring Product Manager · Early-Career Product Builder · AI + Data Workflows',
       },
       {
         heading: 'PRODUCT STRENGTHS',
@@ -98,7 +99,7 @@ export const siteConfig: SiteConfig = {
       {
         heading: 'TECHNICAL FLUENCY',
         content:
-          'Salesforce · Agentforce · Apex · SOQL · Python · SQL · R · TypeScript · React · Next.js · Tableau',
+          'Python · SQL · R · TypeScript · React · Next.js · Salesforce Platform · Databricks training',
       },
     ],
   },
@@ -111,7 +112,7 @@ export const siteConfig: SiteConfig = {
       company: 'Temerty Centre for AI Research and Education in Medicine',
       period: 'Apr 2025 to Jun 2026',
       description:
-        'Defined the technical scope for a PTSD risk-prediction study using 30K patient records, translated an ambiguous research problem into five analytical objectives, and partnered with clinicians to build explainable ML workflows that cut manual analysis time by 70%.',
+        'Defined the technical scope for a PTSD risk-prediction study using 30K patient records, translated the problem into five prioritized analytical objectives, and helped build explainable statistical and ML workflows that cut manual analysis time by 70%.',
       tags: ['Product Requirements', 'Explainable AI', 'Risk Scoring'],
     },
     {
@@ -119,7 +120,7 @@ export const siteConfig: SiteConfig = {
       company: 'Ontario Institute for Studies in Education',
       period: 'Sep 2024 to Jun 2026',
       description:
-        'Expanded a solo research initiative into a five-member team, owned prioritization across recruitment, scheduling, documentation, and reporting for a 136-participant study, and raised completion rates by 63% while cutting data inconsistencies by 85%.',
+        'Expanded a solo research initiative into a five-member team, owned prioritization across recruitment, scheduling, documentation, and reporting for a two-phase 136-participant study, and raised completion rates by 63% while cutting data inconsistencies by 85%.',
       tags: ['Workflow Redesign', 'Prioritization', 'Shared Systems'],
     },
     {
@@ -127,7 +128,7 @@ export const siteConfig: SiteConfig = {
       company: 'CAMH, Centre for Addiction and Mental Health',
       period: 'Aug 2024 to May 2025',
       description:
-        'Redesigned fMRI data intake and preprocessing across 200+ imaging sessions for a 72-participant study, then built, documented, and demoed a repeatable R analytics pipeline that became the team’s default workflow.',
+        'Redesigned fMRI data intake and preprocessing via fMRIPrep across 200+ imaging sessions for a 72-participant study, then built, documented, and demoed a repeatable R analytics pipeline that became the team’s default workflow.',
       tags: ['Workflow Redesign', 'Stakeholder Collaboration', 'Technical Communication'],
     },
     {
@@ -176,21 +177,6 @@ export const siteConfig: SiteConfig = {
       ],
     },
     {
-      label: 'Salesforce Platform',
-      accent: '#0F7A7A',
-      items: [
-        'Agentforce',
-        'Salesforce CRM',
-        'Lightning Web Components',
-        'Apex',
-        'SOQL',
-        'Custom objects',
-        'Permission sets',
-        'Record-page experiences',
-        'Salesforce Agile Practices Trailmix',
-      ],
-    },
-    {
       label: 'AI & Data',
       accent: '#C4974A',
       items: [
@@ -207,7 +193,7 @@ export const siteConfig: SiteConfig = {
     },
     {
       label: 'Technical',
-      accent: '#7EE7F2',
+      accent: '#0F7A7A',
       items: [
         'Python',
         'SQL',
@@ -219,6 +205,17 @@ export const siteConfig: SiteConfig = {
         'REST APIs',
         'JSON schemas',
         'Git',
+        'Salesforce Platform',
+      ],
+    },
+    {
+      label: 'Databricks Training',
+      accent: '#7EE7F2',
+      items: [
+        'Databricks Platform Administration',
+        'Databricks AI/BI',
+        'SQL Analytics on Databricks',
+        'Fundamentals Accreditation',
       ],
     },
     {
@@ -229,6 +226,12 @@ export const siteConfig: SiteConfig = {
         'Tableau',
         'Technical demos',
         'Stakeholder presentations',
+      ],
+    },
+    {
+      label: 'Languages',
+      accent: '#C4974A',
+      items: [
         'English',
         'Mandarin',
       ],
@@ -244,9 +247,9 @@ export const siteConfig: SiteConfig = {
   linkedinUrl: 'https://linkedin.com/in/jjustin-chang',
   githubUrl: 'https://github.com/iamjustinc',
   currentlyOpen:
-    'Aspiring Product Manager · Early-Career Product Builder · AI + CRM Workflows',
+    'Aspiring Product Manager · Early-Career Product Builder · AI + Data Workflows',
   contactHeading: "Let's connect.",
   contactDescription:
-    'Email is the fastest way to reach me for recruiting conversations, portfolio context, and product walkthroughs.',
+    'Email is the fastest way to reach me for recruiting conversations, portfolio context, and product or analytics walkthroughs.',
   copyrightName: 'Justin Chang',
 }

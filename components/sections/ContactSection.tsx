@@ -286,7 +286,7 @@ function ContactPageLayout() {
               </p>
             </div>
             <p className="font-sans text-[15px] leading-relaxed" style={{ color: '#A8C5D1' }}>
-              Product and technical teams working across AI, CRM, and workflow-heavy systems.
+              Product and technical teams working across AI, data, and workflow-heavy systems.
             </p>
           </div>
 
@@ -358,14 +358,14 @@ function ContactPageLayout() {
                 href={siteConfig.githubUrl}
                 icon={Github}
                 title="View GitHub"
-                body="Implementation proof for AI-native products, workflow tools, and technical builds."
+                body="Implementation proof for AI products, workflow tools, and technical builds."
               />
               <ActionCard
                 href={siteConfig.resumeUrl}
                 download={siteConfig.resumeDownloadName}
                 icon={Download}
                 title="Download Resume PDF"
-                body="Review the current resume covering product, Salesforce, AI, and analytics experience."
+                body="Review the current resume covering product, AI, analytics, Salesforce platform work, and Databricks training."
               />
             </div>
           </div>
@@ -411,7 +411,7 @@ function ContactSectionLayout() {
           <div className="space-y-3 text-sm" style={{ color: '#A8C5D1' }}>
             <div className="flex items-start gap-2">
               <StarMark size="xs" color="#4A9FAE" className="mt-1 opacity-70" />
-              <span>AI + CRM product work with stakeholder-facing delivery</span>
+              <span>AI + data product work with stakeholder-facing delivery</span>
             </div>
             <div className="flex items-start gap-2">
               <StarMark size="xs" color="#C4974A" className="mt-1 opacity-70" />
@@ -419,7 +419,7 @@ function ContactSectionLayout() {
             </div>
             <div className="flex items-start gap-2">
               <StarMark size="xs" color="#4A9FAE" className="mt-1 opacity-70" />
-              <span>Salesforce, analytics, and explainable AI fluency</span>
+              <span>Databricks training, Salesforce platform work, and explainable AI analytics</span>
             </div>
             <div className="flex items-start gap-2">
               <StarMark size="xs" color="#C4974A" className="mt-1 opacity-70" />

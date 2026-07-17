@@ -50,7 +50,7 @@ const kestrelCaseStudyCopy: CaseStudyCopy = {
   tagline:
     'AI career intelligence system that turns job descriptions into structured role signals, transparent comparisons, and next-step action plans.',
   outcome:
-    'Turns scattered career prep into a clearer decision view: what a role asks for, where the gaps are, and what to do next.',
+    'Tested action-plan outputs with 15 users to refine UX, app language, and structure, improving clarity of AI-generated outputs.',
 
   overview:
     'Kestrel is an AI career intelligence system for candidates comparing their background against a specific job. It uses LLM prompts and JSON schemas to translate job descriptions into structured requirements, then presents the comparison in an explainable dashboard with clear next-step guidance.',
@@ -72,7 +72,7 @@ const kestrelCaseStudyCopy: CaseStudyCopy = {
   ],
 
   problem:
-    'Early-career candidates targeting PM and adjacent technical roles often prepare from scattered inputs: job posts, resume edits, advice threads, and unclear role expectations. The result is effort without sequence. Candidates keep revising materials before knowing which gaps matter most, and they lack a clear way to judge whether they are ready for a specific role.',
+    'Candidates preparing for a target role often work from scattered inputs: job posts, resume edits, advice threads, and unclear role expectations. The result is effort without sequence. They keep revising materials before knowing which gaps matter most, and they lack a clear way to judge whether they are ready for a specific role.',
 
   problemBullets: [
     'Job descriptions mix hard requirements, soft preferences, and filler language, making it hard to tell which gaps are serious and which are negotiable.',
@@ -81,12 +81,12 @@ const kestrelCaseStudyCopy: CaseStudyCopy = {
   ],
 
   users:
-    'Built for early-career candidates targeting PM and adjacent technical roles who need to compare their background against a target job and decide where to focus preparation time.',
+    'Built for candidates who need to compare their background against a target job and decide where to focus preparation time.',
 
   userCards: [
     {
       title: 'Primary User',
-      body: 'Early-career candidates applying across related technical/product roles who need a faster way to assess fit and prioritize preparation for each target job.',
+      body: 'Candidates applying to target roles who need a faster way to assess fit and prioritize preparation for each specific job.',
     },
     {
       title: 'Job To Be Done',
@@ -113,16 +113,16 @@ const kestrelCaseStudyCopy: CaseStudyCopy = {
   ],
 
   impact:
-    'Instead of leaving candidates with another generic suggestion list, Kestrel gives them a decision view: what to lead with in the application, what to address in preparation, and how to explain their fit with more specificity and confidence. The product reframes career preparation from scattered research into a clearer, more focused workflow.',
+    'Testing with 15 users refined the UX, app language, and structure so the dashboard made AI-generated outputs clearer and more actionable. The result is a product that turns scattered career prep into a more focused decision workflow.',
 
   impactCards: [
     {
-      title: 'User Shift',
-      body: 'Candidates move from the cycle of applying-then-guessing to preparing against a specific, ranked target before the application is submitted.',
+      title: 'User Testing Signal',
+      body: 'Testing with 15 users sharpened the product language and structure so candidates could interpret outputs faster and with less ambiguity.',
     },
     {
       title: 'Product Signal',
-      body: 'The value is not more advice. The value is making the next action obvious and specific to a real role, not a generic profile.',
+      body: 'The value is not more advice. The value is turning a target role into structured requirements, transparent comparisons, and a clear next step.',
     },
   ],
 

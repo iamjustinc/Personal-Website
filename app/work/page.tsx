@@ -35,11 +35,11 @@ const workProjectSpotlights: Record<
   },
   kestrel: {
     description:
-      'Turns job descriptions into structured requirements, transparent comparisons, and clear action plans.',
+      'Turns job descriptions into structured action-plan outputs, transparent comparisons, and clear next steps.',
     metrics: [
+      { value: '15', label: 'users tested' },
       { value: 'LLM', label: 'prompt workflow' },
       { value: 'JSON', label: 'typed schemas' },
-      { value: 'Plan', label: 'next-step outputs' },
     ],
     glow: '28% 22%',
   },

@@ -72,11 +72,11 @@ export const projects: Project[] = [
     demoPageEnabled: false,
     launchStatus: 'active',
     role: 'AI Product Builder',
-    tags: ['Gen AI', 'Decision Support', 'Full-Stack'],
+    tags: ['AI', 'Decision Support', 'Workflow'],
     stack: ['LLM Prompts', 'JSON Schemas', 'Comparative Dashboard', 'Action Plans'],
     year: 2026,
     outcome:
-      'Designed an explainable comparative dashboard that keeps AI recommendations transparent and actionable.',
+      'Tested action-plan outputs with 15 users to refine UX, app language, and structure.',
     thumbnail: kestrelLanding.src,
     screenshots: [kestrelLanding.src, kestrelInterface.src],
     panelAccentColor: '#2A8B87',

@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
+import { siteConfig } from '@/data/site'
 
 const title = 'Resume | Justin Chang'
 const description =
-  "View Justin Chang's experience across product development, Salesforce, AI systems, workflow design, analytics, and stakeholder collaboration."
+  `View ${siteConfig.name}'s experience across AI product projects, applied ML, workflow design, Databricks training, and stakeholder-ready analytics.`
 
 export const metadata: Metadata = {
   title,

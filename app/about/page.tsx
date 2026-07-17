@@ -381,10 +381,11 @@ export default function AboutPage() {
                 className="mt-4 max-w-[56ch] font-sans text-[14.5px] leading-7"
                 style={{ color: '#A8C5D1' }}
               >
-                I build AI-native products for CRM and enterprise workflows, and I care most
-                about making complex systems easier to understand, trust, and use. That lens
-                came from health-AI research across 30K+ records and product work spanning
-                harmonIQ, HandoffAI, and Kestrel.
+                I build AI products, workflow systems, and stakeholder-ready analytics, and I
+                care most about making complex systems easier to understand, trust, and use.
+                That lens came from health-AI research across 30K patient records, product
+                work spanning harmonIQ, HandoffAI, and Kestrel, and my MSIS focus on AI
+                product management and enterprise platforms.
               </p>
             </motion.div>
 
