@@ -1121,6 +1121,14 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
     (project.demoPageEnabled !== false ? `/projects/${project.slug}/demo` : undefined)
   const hasDemo = Boolean(demoHref)
   const demoIsExternal = Boolean(project.demoCtaUrl)
+  const hasLiveUrl = Boolean(project.liveUrl)
+  const primaryDemoHref = demoHref ?? project.liveUrl
+  const primaryDemoIsExternal = hasDemo ? demoIsExternal : hasLiveUrl
+  const primaryDemoAriaLabel = hasDemo ? project.demoCtaAriaLabel : project.liveAriaLabel
+  const primaryDemoLabel = hasDemo
+    ? project.demoCtaLabel ?? 'Open Demo'
+    : project.liveCtaLabel ?? 'Live Demo'
+  const hasPrimaryDemo = Boolean(primaryDemoHref)
 
   let n = 0
   const fmt = () => String(++n).padStart(2, '0')
@@ -1316,32 +1324,17 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
               </motion.div>
 
               <motion.div variants={inn} className="flex flex-wrap gap-2.5 mt-7">
-                {hasDemo && (
+                {hasPrimaryDemo && primaryDemoHref && (
                   <HoverSparkle className="inline-flex">
                     <StarburstButton
-                      href={demoHref}
-                      target={demoIsExternal ? '_blank' : undefined}
-                      rel={demoIsExternal ? 'noopener noreferrer' : undefined}
-                      ariaLabel={project.demoCtaAriaLabel}
+                      href={primaryDemoHref}
+                      target={primaryDemoIsExternal ? '_blank' : undefined}
+                      rel={primaryDemoIsExternal ? 'noopener noreferrer' : undefined}
+                      ariaLabel={primaryDemoAriaLabel}
                       variant="primary"
                       size="md"
                     >
-                      {project.demoCtaLabel ?? 'Open Demo'}
-                    </StarburstButton>
-                  </HoverSparkle>
-                )}
-
-                {project.liveUrl && (
-                  <HoverSparkle className="inline-flex">
-                    <StarburstButton
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      ariaLabel={project.liveAriaLabel}
-                      variant="secondary"
-                      size="md"
-                    >
-                      {project.liveCtaLabel ?? 'Live Demo'}
+                      {primaryDemoLabel}
                     </StarburstButton>
                   </HoverSparkle>
                 )}
@@ -1600,36 +1593,6 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
               enhanced={isEnhancedCaseStudy}
             >
               <div className="flex flex-wrap gap-3">
-                {hasDemo && (
-                  <HoverSparkle className="inline-flex">
-                    <StarburstButton
-                      href={demoHref}
-                      target={demoIsExternal ? '_blank' : undefined}
-                      rel={demoIsExternal ? 'noopener noreferrer' : undefined}
-                      ariaLabel={project.demoCtaAriaLabel}
-                      variant="primary"
-                      size="md"
-                    >
-                      {project.demoCtaLabel ?? 'Open Demo'}
-                    </StarburstButton>
-                  </HoverSparkle>
-                )}
-
-                {project.liveUrl && (
-                  <HoverSparkle className="inline-flex">
-                    <StarburstButton
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      ariaLabel={project.liveAriaLabel}
-                      variant="secondary"
-                      size="md"
-                    >
-                      {project.liveCtaLabel ?? 'Live Demo'}
-                    </StarburstButton>
-                  </HoverSparkle>
-                )}
-
                 {project.githubUrl && (
                   <HoverSparkle className="inline-flex">
                     <StarburstButton
