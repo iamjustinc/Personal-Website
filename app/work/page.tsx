@@ -80,9 +80,10 @@ function WorkProjectCard({
   const hasCaseStudy = project.detailPageEnabled !== false
   const demoHref =
     project.demoCtaUrl ??
+    project.demoUrl ??
     (project.demoPageEnabled !== false ? `/projects/${project.slug}/demo` : undefined)
   const hasDemo = Boolean(demoHref)
-  const demoIsExternal = Boolean(project.demoCtaUrl)
+  const demoIsExternal = Boolean(project.demoCtaUrl || project.demoUrl)
   const hasLiveUrl = Boolean(project.liveUrl)
   const hasAnyCta = hasCaseStudy || hasDemo || hasLiveUrl
 
@@ -175,6 +176,9 @@ function WorkProjectCard({
             priority={index === 0}
             showWatermark
             imageSizes="(max-width: 1024px) 100vw, 560px"
+            interactiveHref={project.previewLinkHref}
+            interactiveAriaLabel={project.previewLinkAriaLabel}
+            interactiveExternal={Boolean(project.previewLinkHref)}
             className={cn(
               'transition-transform duration-700 ease-out group-hover:scale-[1.025]',
               isComingSoon && 'opacity-[0.78] saturate-[0.84]',

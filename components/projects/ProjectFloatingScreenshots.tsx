@@ -12,6 +12,9 @@ type ProjectFloatingScreenshotsProps = {
   priority?: boolean
   imageSizes?: string
   showWatermark?: boolean
+  interactiveHref?: string
+  interactiveAriaLabel?: string
+  interactiveExternal?: boolean
   className?: string
 }
 
@@ -25,6 +28,9 @@ export function ProjectFloatingScreenshots({
   priority = false,
   imageSizes = '(max-width: 1024px) 100vw, 560px',
   showWatermark = false,
+  interactiveHref,
+  interactiveAriaLabel,
+  interactiveExternal = false,
   className,
 }: ProjectFloatingScreenshotsProps) {
   const shouldReduce = useReducedMotion()
@@ -32,8 +38,8 @@ export function ProjectFloatingScreenshots({
   const interfaceShot = project.screenshots?.[1]
   const floatViewport = { amount: 0.18 }
 
-  return (
-    <div className={cn('absolute inset-0 overflow-hidden', className)}>
+  const content = (
+    <>
       <div
         className="absolute inset-0"
         style={{
@@ -116,6 +122,25 @@ export function ProjectFloatingScreenshots({
       <div className="absolute bottom-4 right-4 pointer-events-none">
         <StarMark size="xs" color="#C4974A" className="opacity-30" />
       </div>
-    </div>
+    </>
   )
+
+  if (interactiveHref) {
+    return (
+      <a
+        href={interactiveHref}
+        target={interactiveExternal ? '_blank' : undefined}
+        rel={interactiveExternal ? 'noopener noreferrer' : undefined}
+        aria-label={interactiveAriaLabel}
+        className={cn(
+          'absolute inset-0 block overflow-hidden rounded-[inherit] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7EE7F2] focus-visible:ring-offset-2 focus-visible:ring-offset-[#081B2A]',
+          className,
+        )}
+      >
+        {content}
+      </a>
+    )
+  }
+
+  return <div className={cn('absolute inset-0 overflow-hidden', className)}>{content}</div>
 }

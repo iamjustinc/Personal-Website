@@ -1118,9 +1118,10 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
   const caseCopy = getCaseStudyCopy(project)
   const demoHref =
     project.demoCtaUrl ??
+    project.demoUrl ??
     (project.demoPageEnabled !== false ? `/projects/${project.slug}/demo` : undefined)
   const hasDemo = Boolean(demoHref)
-  const demoIsExternal = Boolean(project.demoCtaUrl)
+  const demoIsExternal = Boolean(project.demoCtaUrl || project.demoUrl)
 
   let n = 0
   const fmt = () => String(++n).padStart(2, '0')
@@ -1250,6 +1251,9 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                 priority
                 showWatermark
                 imageSizes="(max-width: 1024px) 100vw, 640px"
+                interactiveHref={project.previewLinkHref}
+                interactiveAriaLabel={project.previewLinkAriaLabel}
+                interactiveExternal={Boolean(project.previewLinkHref)}
               />
 
               {/* Badge */}
