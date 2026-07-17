@@ -12,38 +12,8 @@ export type ProjectTag =
   | 'Decision Support'
   | 'Web App'
   | '0→1'
-  | 'AI Workflow Design'
-  | 'Structured Outputs'
-  | 'Explainable AI'
-  | 'Rapid Prototyping'
 
 export type ProjectLaunchStatus = 'active' | 'comingSoon'
-
-export type ProjectFeatureSignal = {
-  value: string
-  label: string
-  description: string
-}
-
-export type ProjectFeatureCta = {
-  href: string
-  label: string
-  ariaLabel?: string
-  external?: boolean
-  variant?: 'primary' | 'secondary'
-}
-
-export type ProjectHomepageFeature = {
-  categories?: string[]
-  description: string
-  supportingDescription?: string
-  roleRelevance?: string
-  signals?: ProjectFeatureSignal[]
-  stack?: string[]
-  mediaHref?: string
-  mediaAriaLabel?: string
-  ctas?: ProjectFeatureCta[]
-}
 
 export type Project = {
   // ── Identity ────────────────────────────────────────────────────────────────
@@ -53,7 +23,7 @@ export type Project = {
   summary: string           // 2-3 sentences for cards. Max 200 chars.
 
   // ── Display control ─────────────────────────────────────────────────────────
-  featured: boolean         // true = include in the homepage featured-work section.
+  featured: boolean         // Exactly one should be true at a time.
   order: number             // Grid sort order, 1-indexed. Featured project excluded.
   visible: boolean          // false = hidden everywhere without deleting.
   homepageVisible: boolean  // false = accessible at /projects/[slug] but off homepage.
@@ -78,8 +48,6 @@ export type Project = {
   screenshots: string[]     // Detail page gallery.
   floatingPanelImage?: string // Hero section panel. Falls back to thumbnail.
   panelAccentColor: string  // Hex. Color dot on hero floating panel badge.
-  previewLinkHref?: string  // Optional external destination for clickable preview media.
-  previewLinkAriaLabel?: string
 
   // ── Links ───────────────────────────────────────────────────────────────────
   liveUrl?: string          // External production URL for "Try It Out" CTA
@@ -88,9 +56,8 @@ export type Project = {
   demoCtaUrl?: string       // External destination for the primary demo CTA
   demoCtaLabel?: string
   demoCtaAriaLabel?: string
-  demoUrl?: string          // Dedicated demo destination or embed URL for demo surfaces.
+  demoUrl?: string          // Embed URL (Loom / YouTube) for /demo page
   githubUrl?: string
-  homepageFeature?: ProjectHomepageFeature
 
   // ── Detail page narrative ───────────────────────────────────────────────────
   problem: string           // 2-4 sentences.

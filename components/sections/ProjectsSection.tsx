@@ -13,6 +13,33 @@ import { projects } from '@/data/projects'
 import { fadeUp, fadeIn, staggerContainer, useMotionSafe } from '@/lib/motion'
 import { cn } from '@/lib/utils'
 
+const projectSpotlights: Record<
+  string,
+  {
+    description: string
+    metrics: { value: string; label: string }[]
+  }
+> = {
+  harmoniq: {
+    description:
+      'Profiles high-impact CRM failures, prioritizes fixes, and keeps users in control before clean CSV export.',
+    metrics: [
+      { value: '5', label: 'users tested' },
+      { value: 'CRM', label: 'data readiness' },
+      { value: 'CSV', label: 'clean export' },
+    ],
+  },
+  kestrel: {
+    description:
+      'Turns job descriptions into structured requirements, transparent comparisons, and clear action plans.',
+    metrics: [
+      { value: 'LLM', label: 'prompt workflow' },
+      { value: 'JSON', label: 'typed schemas' },
+      { value: 'Plan', label: 'next-step outputs' },
+    ],
+  },
+}
+
 // ── Section ──────────────────────────────────────────────────────────────────
 
 export function ProjectsSection() {
@@ -65,8 +92,8 @@ export function ProjectsSection() {
         </div>
         <h2 className="font-display text-h1 text-text-base">Featured Case Study</h2>
         <p className="font-sans text-text-muted mt-3 max-w-[560px]" style={{ fontSize: '15px' }}>
-          AI-native product case studies focused on explainable workflows, structured outputs,
-          and decision support that stays clear under ambiguity.
+          A CRM data-readiness workspace that turns a messy export into business-ready data,
+          one reviewed decision at a time.
         </p>
       </motion.div>
 
@@ -80,33 +107,22 @@ export function ProjectsSection() {
       >
         {visibleProjects.map((project, index) => {
           const isReversed = index % 2 === 1
-          const feature = project.homepageFeature
           const hasCaseStudy = project.detailPageEnabled !== false
           const demoHref =
             project.demoCtaUrl ??
-            project.demoUrl ??
             (project.demoPageEnabled !== false ? `/projects/${project.slug}/demo` : undefined)
           const hasDemo = Boolean(demoHref)
-          const demoIsExternal = Boolean(project.demoCtaUrl || project.demoUrl)
+          const demoIsExternal = Boolean(project.demoCtaUrl)
           const hasLiveUrl = Boolean(project.liveUrl)
-          const featuredCategories = feature?.categories ?? project.tags.slice(0, 3)
-          const featuredDescription = feature?.description ?? project.summary
-          const featuredSupportingDescription = feature?.supportingDescription
-          const featuredRoleRelevance = feature?.roleRelevance
-          const featuredSignals =
-            feature?.signals ??
-            [
-              {
-                value: 'AI',
-                label: 'WORKFLOW',
-                description: project.outcome,
-              },
-            ]
-          const featuredStack = feature?.stack ?? project.stack
-          const featuredCtas = feature?.ctas
-          const mediaHref = feature?.mediaHref ?? project.previewLinkHref
-          const mediaAriaLabel = feature?.mediaAriaLabel ?? project.previewLinkAriaLabel
-          const hasAnyCta = Boolean(featuredCtas?.length) || hasCaseStudy || hasDemo || hasLiveUrl
+          const hasAnyCta = hasCaseStudy || hasDemo || hasLiveUrl
+          const spotlight = projectSpotlights[project.slug] ?? {
+            description: project.tagline,
+            metrics: [
+              { value: 'AI', label: 'workflow' },
+              { value: '1', label: 'demo path' },
+              { value: '3', label: 'signals' },
+            ],
+          }
 
           return (
             <motion.div
@@ -276,9 +292,6 @@ export function ProjectsSection() {
                   <ProjectFloatingScreenshots
                     project={project}
                     imageSizes="(max-width: 1024px) 100vw, 560px"
-                    interactiveHref={mediaHref}
-                    interactiveAriaLabel={mediaAriaLabel}
-                    interactiveExternal={Boolean(mediaHref)}
                   />
                 </motion.div>
 
@@ -300,13 +313,18 @@ export function ProjectsSection() {
               {/* ── Content ── */}
               <div
                 className={cn(
-                  'relative z-10 flex min-w-0 flex-col px-7 py-9 sm:px-8 lg:px-11 lg:py-11',
+                  'relative z-10 flex flex-col px-7 py-9 sm:px-8 lg:px-11 lg:py-11',
                   isReversed ? 'lg:order-1' : 'lg:order-2',
                 )}
               >
                 {/* Category tags */}
                 <div className="mb-4 flex flex-wrap gap-1.5">
-                  {featuredCategories.map((tag) => (
+                  {(project.slug === 'kestrel'
+                    ? ['Decision Support', 'Requirement Mapping', 'Guided Workflow']
+                    : project.slug === 'harmoniq'
+                    ? ['Business-Risk Profiling', 'Explainable AI', 'Reviewable Export']
+                    : project.tags.slice(0, 3)
+                  ).map((tag) => (
                     <span
                       key={tag}
                       className="font-mono text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full"
@@ -329,30 +347,32 @@ export function ProjectsSection() {
                   className="mt-4 max-w-[540px] font-sans text-[15px] leading-7"
                   style={{ color: '#B8D0DC' }}
                 >
-                  {featuredDescription}
+                  {spotlight.description}
                 </p>
 
-                {featuredSupportingDescription && (
-                  <p
-                    className="mt-4 max-w-[540px] font-sans text-[14.5px] leading-7"
-                    style={{ color: '#9DBECA' }}
-                  >
-                    {featuredSupportingDescription}
-                  </p>
-                )}
-
-                {featuredRoleRelevance && (
+                {project.slug === 'kestrel' && (
                   <p
                     className="mt-4 max-w-[540px] font-mono text-[10px] leading-6"
                     style={{ color: '#7FAFBB' }}
                   >
-                    {featuredRoleRelevance}
+                    Role relevance: product diagnosis · requirement mapping · AI decision support ·
+                    scoped execution
+                  </p>
+                )}
+
+                {project.slug === 'harmoniq' && (
+                  <p
+                    className="mt-4 max-w-[540px] font-mono text-[10px] leading-6"
+                    style={{ color: '#7FAFBB' }}
+                  >
+                    Role relevance: business-impact prioritization · explainable AI ·
+                    human-in-the-loop trust · MVP scoping
                   </p>
                 )}
 
                 {/* Impact metrics */}
-                <div className="mt-7 grid auto-rows-fr gap-3 sm:grid-cols-2 xl:grid-cols-4">
-                  {featuredSignals.map((metric, metricIndex) => (
+                <div className="mt-7 grid grid-cols-3 gap-3">
+                  {spotlight.metrics.map((metric, metricIndex) => (
                     <motion.div
                       key={`${project.slug}-${metric.label}`}
                       whileHover={
@@ -364,7 +384,7 @@ export function ProjectsSection() {
                             }
                       }
                       transition={{ duration: 0.2 }}
-                      className="relative flex h-full flex-col overflow-hidden rounded-[18px] px-3.5 py-4 sm:px-4"
+                      className="relative overflow-hidden rounded-[18px] px-3.5 py-4 sm:px-4"
                       style={{
                         background:
                           'linear-gradient(180deg, rgba(10,33,50,0.70) 0%, rgba(8,27,42,0.54) 100%)',
@@ -388,11 +408,8 @@ export function ProjectsSection() {
                       <p
                         className="mt-3 font-mono text-[9.5px] uppercase tracking-[0.11em]"
                         style={{ color: metricIndex === 1 ? '#D8B76E' : '#7EE7F2' }}
-                      >
-                        {metric.label}
-                      </p>
-                      <p className="mt-3 font-sans text-[12.5px] leading-5 text-[#9DBECA]">
-                        {metric.description}
+                        >
+                          {metric.label}
                       </p>
                     </motion.div>
                   ))}
@@ -411,7 +428,7 @@ export function ProjectsSection() {
                   </div>
 
                   <div className="flex flex-wrap gap-2.5">
-                    {featuredStack.map((s, stackIndex) => (
+                    {project.stack.slice(0, 5).map((s, stackIndex) => (
                       <motion.span
                         key={s}
                         whileHover={shouldReduce ? {} : { y: -2 }}
@@ -443,66 +460,47 @@ export function ProjectsSection() {
                     className="mt-auto flex flex-wrap gap-2.5 pt-8"
                     style={{ borderTop: '1px solid rgba(74,159,174,0.12)' }}
                   >
-                    {featuredCtas
-                      ? featuredCtas.map((cta) => (
-                          <HoverSparkle key={`${project.slug}-${cta.label}`} className="inline-flex">
-                            <StarburstButton
-                              href={cta.href}
-                              target={cta.external ? '_blank' : undefined}
-                              rel={cta.external ? 'noopener noreferrer' : undefined}
-                              ariaLabel={cta.ariaLabel}
-                              variant={cta.variant ?? 'secondary'}
-                              size="sm"
-                            >
-                              {cta.label}
-                            </StarburstButton>
-                          </HoverSparkle>
-                        ))
-                      : (
-                          <>
-                            {hasDemo && (
-                              <HoverSparkle className="inline-flex">
-                                <StarburstButton
-                                  href={demoHref}
-                                  target={demoIsExternal ? '_blank' : undefined}
-                                  rel={demoIsExternal ? 'noopener noreferrer' : undefined}
-                                  ariaLabel={project.demoCtaAriaLabel}
-                                  variant="primary"
-                                  size="sm"
-                                >
-                                  {project.demoCtaLabel ?? 'Open Demo'}
-                                </StarburstButton>
-                              </HoverSparkle>
-                            )}
+                    {hasDemo && (
+                      <HoverSparkle className="inline-flex">
+                        <StarburstButton
+                          href={demoHref}
+                          target={demoIsExternal ? '_blank' : undefined}
+                          rel={demoIsExternal ? 'noopener noreferrer' : undefined}
+                          ariaLabel={project.demoCtaAriaLabel}
+                          variant="primary"
+                          size="sm"
+                        >
+                          {project.demoCtaLabel ?? 'Open Demo'}
+                        </StarburstButton>
+                      </HoverSparkle>
+                    )}
 
-                            {hasLiveUrl && project.liveUrl && (
-                              <HoverSparkle className="inline-flex">
-                                <StarburstButton
-                                  href={project.liveUrl}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  ariaLabel={project.liveAriaLabel}
-                                  variant="secondary"
-                                  size="sm"
-                                >
-                                  {project.liveCtaLabel ?? 'Live Demo'}
-                                </StarburstButton>
-                              </HoverSparkle>
-                            )}
+                    {hasLiveUrl && project.liveUrl && (
+                      <HoverSparkle className="inline-flex">
+                        <StarburstButton
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          ariaLabel={project.liveAriaLabel}
+                          variant="secondary"
+                          size="sm"
+                        >
+                          {project.liveCtaLabel ?? 'Live Demo'}
+                        </StarburstButton>
+                      </HoverSparkle>
+                    )}
 
-                            {hasCaseStudy && (
-                              <HoverSparkle className="inline-flex">
-                                <StarburstButton
-                                  href={`/projects/${project.slug}`}
-                                  variant="secondary"
-                                  size="sm"
-                                >
-                                  Read Case Study
-                                </StarburstButton>
-                              </HoverSparkle>
-                            )}
-                          </>
-                        )}
+                    {hasCaseStudy && (
+                      <HoverSparkle className="inline-flex">
+                        <StarburstButton
+                          href={`/projects/${project.slug}`}
+                          variant="secondary"
+                          size="sm"
+                        >
+                          Read Case Study
+                        </StarburstButton>
+                      </HoverSparkle>
+                    )}
                   </div>
                 )}
               </div>

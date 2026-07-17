@@ -7,13 +7,15 @@ import { StarMark } from '@/components/ui/StarMark'
 import { StarburstButton } from '@/components/ui/StarburstButton'
 import { HoverSparkle } from '@/components/ui/HoverSparkle'
 import { Tag } from '@/components/ui/Tag'
-import { kestrelDemoUrl } from '@/data/projects'
 import type { Project } from '@/types/project'
 import { fadeUp, fadeIn, staggerContainer, useMotionSafe } from '@/lib/motion'
 
 const kestrelDemoVideos = {
   quick: '/videos/projects/kestrel/kestrel-quick.mp4',
 } as const
+
+const kestrelFullWalkthroughUrl =
+  'https://www.linkedin.com/posts/jjustin-chang_buildinpublic-solutionsengineering-productmanagement-ugcPost-7448104114703527936-W0CI?utm_source=share&utm_medium=member_desktop&rcm=ACoAAC8kyn8BgbHl-T6FxSq__vvSg2wW3sCT8SM'
 
 const harmoniqDemoVideos = {
   quick: '/videos/projects/harmoniq/harmoniq-quick.mp4',
@@ -197,10 +199,10 @@ export function ProjectDemo({ project }: { project: Project }) {
               </div>
 
               <a
-                href={kestrelDemoUrl}
+                href={kestrelFullWalkthroughUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Open the Kestrel product demo on LinkedIn"
+                aria-label="Watch full 5:13 walkthrough on LinkedIn"
                 className="group mt-4 flex items-center justify-between gap-4 rounded-2xl px-4 py-3 transition duration-200 hover:-translate-y-0.5 hover:bg-white/[0.025]"
                 style={{
                   background: 'rgba(7,20,36,0.46)',
