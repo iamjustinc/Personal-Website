@@ -3,6 +3,32 @@ export type CapabilityItem = {
   description: string  // 1-2 sentence expansion. Max 80 chars.
 }
 
+export type WhyIFitSignal = {
+  value: string
+  label: string
+  description: string
+  animateTo?: number
+  suffix?: string
+}
+
+export type WhyIFitColumn = {
+  heading: string
+  content: string
+}
+
+export type EducationItem = {
+  school: string
+  degree: string
+  period: string
+  details?: string[]
+}
+
+export type SkillGroup = {
+  label: string
+  accent: string
+  items: string[]
+}
+
 export type HeroPanelItem = {
   slug: string
   projectName: string
@@ -22,9 +48,13 @@ export type CareerItem = {
 export type SiteConfig = {
   // ── Identity ────────────────────────────────────────────────────────────────
   name: string
+  seoTitle: string
+  seoDescription: string
   roleTag: string
   heroStatement: string
+  heroTechLine: string
   resumeUrl: string
+  resumeDownloadName: string
 
   /** Brand logo shown in nav. e.g. /images/justin-logo.png */
   logoSrc?: string
@@ -40,17 +70,29 @@ export type SiteConfig = {
   aboutStatements: string[]
   /** Highlights listed as star-marked items in the About section. */
   aboutHighlights?: string[]
+  whyIFit: {
+    eyebrow: string
+    heading: string
+    supportingCopy: string
+    signals: WhyIFitSignal[]
+    supportingColumns: WhyIFitColumn[]
+  }
   /** Legacy: square photo. Use portraitSrc for the round portrait. */
   photoSrc?: string
 
   // ── Career ──────────────────────────────────────────────────────────────────
   career?: CareerItem[]
+  education?: EducationItem[]
+  skillGroups?: SkillGroup[]
+  profileFacts?: { label: string; value: string }[]
 
   // ── Contact ─────────────────────────────────────────────────────────────────
   email: string
   linkedinUrl: string
   githubUrl: string
   currentlyOpen: string
+  contactHeading: string
+  contactDescription: string
 
   // ── Footer ──────────────────────────────────────────────────────────────────
   copyrightName: string

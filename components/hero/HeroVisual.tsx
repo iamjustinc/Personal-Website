@@ -17,23 +17,27 @@ export function HeroVisual() {
       initial={shouldReduce ? false : { opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1.0, delay: 0.45, ease: EASING }}
-      className="relative flex flex-col items-center"
+      className="relative flex w-full items-center justify-center"
     >
-      <div className="relative flex items-center justify-center" style={{ width: 380, height: 420 }}>
+      <div className="relative flex h-[336px] w-full max-w-[336px] items-center justify-center sm:h-[380px] sm:max-w-[360px] md:h-[420px] md:max-w-[380px]">
         <div
-          aria-hidden
-          className="absolute pointer-events-none"
-          style={{
-            width: 440,
-            height: 440,
-            borderRadius: '50%',
-            background:
-              'radial-gradient(circle, rgba(15,122,122,0.20) 0%, rgba(15,122,122,0.06) 40%, transparent 70%)',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-          }}
-        />
+          className="relative flex items-center justify-center scale-[0.78] sm:scale-[0.88] md:scale-100"
+          style={{ width: 380, height: 420 }}
+        >
+          <div
+            aria-hidden
+            className="absolute pointer-events-none"
+            style={{
+              width: 440,
+              height: 440,
+              borderRadius: '50%',
+              background:
+                'radial-gradient(circle, rgba(15,122,122,0.20) 0%, rgba(15,122,122,0.06) 40%, transparent 70%)',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+            }}
+          />
 
         <div
           aria-hidden
@@ -412,48 +416,39 @@ export function HeroVisual() {
         >
           <StarMark size="xs" color="#4A9FAE" className="opacity-25" />
         </div>
+        </div>
       </div>
 
-      <motion.div
-        initial={shouldReduce ? false : { opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.9, ease: EASING }}
-        className="flex items-center gap-2 mt-1"
-      >
-        {panels.slice(0, 3).map((panel) => (
-          <div
-            key={panel.slug}
-            className="flex items-center gap-1.5 rounded-full px-3 py-1.5"
-            style={{
-              background: 'rgba(13,30,53,0.90)',
-              border: `1px solid ${panel.accentColor}30`,
-            }}
-          >
+      {panels.length > 0 && (
+        <motion.div
+          initial={shouldReduce ? false : { opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.9, ease: EASING }}
+          className="mt-1 flex items-center gap-2"
+        >
+          {panels.slice(0, 3).map((panel) => (
             <div
-              className="w-[6px] h-[6px] rounded-full shrink-0"
-              style={{ background: panel.accentColor, boxShadow: `0 0 5px ${panel.accentColor}80` }}
-            />
-            <span className="font-mono text-[9px] uppercase tracking-wider text-text-muted">
-              {panel.projectName}
-            </span>
-          </div>
-        ))}
-      </motion.div>
-
-      <motion.div
-        initial={shouldReduce ? false : { opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 1.1, ease: EASING }}
-        className="mt-3 flex items-center gap-1.5"
-      >
-        <span
-          className="w-1.5 h-1.5 rounded-full"
-          style={{ background: '#4A9FAE', boxShadow: '0 0 6px rgba(74,159,174,0.8)' }}
-        />
-        <span className="font-mono text-[15px] uppercase tracking-wider text-text-muted">
-          Open to early-career Associate Product Manager roles
-        </span>
-      </motion.div>
+              key={panel.slug}
+              className="flex items-center gap-1.5 rounded-full px-3 py-1.5"
+              style={{
+                background: 'rgba(13,30,53,0.90)',
+                border: `1px solid ${panel.accentColor}30`,
+              }}
+            >
+              <div
+                className="h-[6px] w-[6px] shrink-0 rounded-full"
+                style={{
+                  background: panel.accentColor,
+                  boxShadow: `0 0 5px ${panel.accentColor}80`,
+                }}
+              />
+              <span className="font-mono text-[9px] uppercase tracking-wider text-text-muted">
+                {panel.projectName}
+              </span>
+            </div>
+          ))}
+        </motion.div>
+      )}
     </motion.div>
   )
 }

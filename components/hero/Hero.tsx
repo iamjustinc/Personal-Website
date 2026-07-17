@@ -281,9 +281,9 @@ export function Hero() {
       </div>
 
       <div className="mx-auto max-w-[1200px] px-6 w-full">
-        <div className="grid md:grid-cols-[52fr_48fr] gap-14 lg:gap-20 items-center">
+        <div className="grid items-center gap-10 md:grid-cols-[52fr_48fr] md:gap-14 lg:gap-20">
           <HeroText />
-          <div className="hidden md:block">
+          <div className="flex justify-center md:justify-end">
             <HeroVisual />
           </div>
         </div>

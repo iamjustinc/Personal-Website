@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation'
 import { EASING } from '@/lib/motion'
 import { StarMark } from '@/components/ui/StarMark'
 import { cn } from '@/lib/utils'
+import { siteConfig } from '@/data/site'
 
 interface MobileMenuProps {
   isOpen: boolean
@@ -16,6 +17,7 @@ interface MobileMenuProps {
 type NavItem = {
   label: string
   href: string
+  external?: boolean
   projects?: { label: string; href: string; status?: 'comingSoon' }[]
 }
 
@@ -29,7 +31,7 @@ const navItems: NavItem[] = [
     ],
   },
   { label: 'About',   href: '/about'   },
-  { label: 'Resume',  href: '/resume'  },
+  { label: 'Resume',  href: siteConfig.resumeUrl, external: true },
   { label: 'Contact', href: '/contact' },
 ]
 
@@ -75,6 +77,8 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                   ? pathname === '/'
                   : item.projects
                   ? pathname === item.href || pathname.startsWith('/projects/')
+                  : item.external
+                  ? false
                   : pathname === item.href
 
               return (
@@ -85,16 +89,29 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: primaryIdx * 0.05 + 0.06, duration: 0.3, ease: EASING }}
                   >
-                    <Link
-                      href={item.href}
-                      onClick={onClose}
-                      className={cn(
-                        'block font-sans font-medium text-2xl py-3 transition-colors duration-200',
-                        isActive ? 'text-text-base' : 'text-text-muted hover:text-text-base',
-                      )}
-                    >
-                      {item.label}
-                    </Link>
+                    {item.external ? (
+                      <a
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={onClose}
+                        aria-label="Open Justin Chang resume PDF in a new tab"
+                        className="block py-3 font-sans text-2xl font-medium text-text-muted transition-colors duration-200 hover:text-text-base"
+                      >
+                        {item.label}
+                      </a>
+                    ) : (
+                      <Link
+                        href={item.href}
+                        onClick={onClose}
+                        className={cn(
+                          'block font-sans font-medium text-2xl py-3 transition-colors duration-200',
+                          isActive ? 'text-text-base' : 'text-text-muted hover:text-text-base',
+                        )}
+                      >
+                        {item.label}
+                      </Link>
+                    )}
                   </motion.div>
 
                   {/* Sub-links (project pages under Portfolio) */}

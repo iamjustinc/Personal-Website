@@ -22,20 +22,20 @@ const projectSpotlights: Record<
 > = {
   harmoniq: {
     description:
-      'Profiles a messy CRM export, ranks issues by business impact, explains each fix in plain language, and exports business-ready data with a human in the loop.',
+      'Profiles high-impact CRM failures, prioritizes fixes, and keeps users in control before clean CSV export.',
     metrics: [
-      { value: '7', label: 'issue types profiled' },
-      { value: '+33', label: 'demo readiness lift' },
-      { value: 'CSV', label: 'reviewable export' },
+      { value: '5', label: 'users tested' },
+      { value: 'CRM', label: 'data readiness' },
+      { value: 'CSV', label: 'clean export' },
     ],
   },
   kestrel: {
     description:
-      'Turns job descriptions and resumes into role requirements, fit signals, skill gaps, and a clear action roadmap.',
+      'Turns job descriptions into structured requirements, transparent comparisons, and clear action plans.',
     metrics: [
-      { value: 'JD', label: 'fit analysis' },
-      { value: 'Gap', label: 'skill map' },
-      { value: 'Plan', label: 'action roadmap' },
+      { value: 'LLM', label: 'prompt workflow' },
+      { value: 'JSON', label: 'typed schemas' },
+      { value: 'Plan', label: 'next-step outputs' },
     ],
   },
 }
@@ -108,7 +108,11 @@ export function ProjectsSection() {
         {visibleProjects.map((project, index) => {
           const isReversed = index % 2 === 1
           const hasCaseStudy = project.detailPageEnabled !== false
-          const hasDemo = project.demoPageEnabled !== false
+          const demoHref =
+            project.demoCtaUrl ??
+            (project.demoPageEnabled !== false ? `/projects/${project.slug}/demo` : undefined)
+          const hasDemo = Boolean(demoHref)
+          const demoIsExternal = Boolean(project.demoCtaUrl)
           const hasLiveUrl = Boolean(project.liveUrl)
           const hasAnyCta = hasCaseStudy || hasDemo || hasLiveUrl
           const spotlight = projectSpotlights[project.slug] ?? {
@@ -459,11 +463,14 @@ export function ProjectsSection() {
                     {hasDemo && (
                       <HoverSparkle className="inline-flex">
                         <StarburstButton
-                          href={`/projects/${project.slug}/demo`}
+                          href={demoHref}
+                          target={demoIsExternal ? '_blank' : undefined}
+                          rel={demoIsExternal ? 'noopener noreferrer' : undefined}
+                          ariaLabel={project.demoCtaAriaLabel}
                           variant="primary"
                           size="sm"
                         >
-                          Watch Demo
+                          {project.demoCtaLabel ?? 'Open Demo'}
                         </StarburstButton>
                       </HoverSparkle>
                     )}
@@ -474,10 +481,11 @@ export function ProjectsSection() {
                           href={project.liveUrl}
                           target="_blank"
                           rel="noopener noreferrer"
+                          ariaLabel={project.liveAriaLabel}
                           variant="secondary"
                           size="sm"
                         >
-                          Open Live Product
+                          {project.liveCtaLabel ?? 'Live Demo'}
                         </StarburstButton>
                       </HoverSparkle>
                     )}

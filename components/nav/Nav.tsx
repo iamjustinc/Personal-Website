@@ -9,10 +9,12 @@ import { cn } from '@/lib/utils'
 import { MobileMenu } from './MobileMenu'
 import { HoverSparkle } from '@/components/ui/HoverSparkle'
 import { StarMark } from '@/components/ui/StarMark'
+import { siteConfig } from '@/data/site'
 
 type NavLink = {
   label: string
   href: string
+  external?: boolean
   projects?: { label: string; href: string; status?: 'comingSoon' }[]
 }
 
@@ -27,7 +29,7 @@ const navLinks: NavLink[] = [
     ],
   },
   { label: 'About',   href: '/about'   },
-  { label: 'Resume',  href: '/resume'  },
+  { label: 'Resume',  href: siteConfig.resumeUrl, external: true },
   { label: 'Contact', href: '/contact' },
 ]
 
@@ -73,13 +75,15 @@ export function Nav() {
                     className="flex items-center gap-6 lg:gap-7"
                     aria-label="Main navigation"
                   >
-                    {navLinks.map(({ label, href, projects }, idx) => {
+                    {navLinks.map(({ label, href, external, projects }, idx) => {
                       // Active state: Home matches '/', Portfolio matches /work or any /projects/*
                       const isActive =
                         href === '/#hero'
                           ? pathname === '/'
                           : projects
                           ? pathname === href || pathname.startsWith('/projects/')
+                          : external
+                          ? false
                           : pathname === href
 
                       return (
@@ -205,6 +209,25 @@ export function Nav() {
                                 )}
                               </AnimatePresence>
                             </div>
+                          ) : external ? (
+                            <HoverSparkle className="inline-flex">
+                              <a
+                                href={href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label="Open Justin Chang resume PDF in a new tab"
+                                className="relative group font-sans text-[14.5px] lg:text-[15px] font-medium tracking-[0.02em] text-text-muted transition-colors duration-200 pb-0.5 hover:text-text-base"
+                              >
+                                {label}
+
+                                <span
+                                  className="absolute -bottom-px left-0 right-0 h-px rounded-full transition-all duration-200 opacity-0 group-hover:opacity-35"
+                                  style={{
+                                    background: 'linear-gradient(90deg, #0F7A7A, #4A9FAE)',
+                                  }}
+                                />
+                              </a>
+                            </HoverSparkle>
                           ) : (
                             // ── Regular link ───────────────────────────────
                             <HoverSparkle className="inline-flex">

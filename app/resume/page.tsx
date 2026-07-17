@@ -16,51 +16,19 @@ import { fadeUp, fadeIn, staggerContainer } from '@/lib/motion'
 // ── Impact metrics (product-focused, quantified) ────────────────────────────
 
 const impactMetrics = [
-  { value: '30K+', label: 'records modeled',       accent: '#2A8B87' },
-  { value: '70%',  label: 'less manual analysis',  accent: '#4A9FAE' },
-  { value: '63%',  label: 'higher completion',     accent: '#0F7A7A' },
-  { value: '200+', label: 'sessions redesigned',   accent: '#C4974A' },
+  { value: '30K+', label: 'records modeled',          accent: '#2A8B87' },
+  { value: '70%',  label: 'less manual analysis',     accent: '#4A9FAE' },
+  { value: '63%',  label: 'higher completion',        accent: '#0F7A7A' },
+  { value: '85%',  label: 'fewer inconsistencies',    accent: '#C4974A' },
 ]
 
-const resumeRoleTag = 'Aspiring Associate Product Manager · AI-Native Product Builder'
+const resumeRoleTag = siteConfig.roleTag
 
-const resumeSummary =
-  'Aspiring Associate Product Manager building AI-native tools for CRM, enterprise workflows, and data systems, then refining them through testing and iteration.'
+const resumeSummary = siteConfig.heroStatement
 
 // ── Product-focused skill groups ────────────────────────────────────────────
 
-const skillGroups = [
-  {
-    label: 'Product & Discovery',
-    accent: '#4A9FAE',
-    items: [
-      'Product discovery & requirements definition',
-      'MVP scoping & feature prioritization',
-      'Workflow design',
-      'Stakeholder management',
-    ],
-  },
-  {
-    label: 'Technical & Platform',
-    accent: '#0F7A7A',
-    items: [
-      'Python · SQL · R · TypeScript · JavaScript',
-      'React · Next.js · REST APIs · Git',
-      'Salesforce: LWC, Apex, SOQL, custom objects',
-      'LLM applications & AI workflow design',
-    ],
-  },
-  {
-    label: 'Communication & Design',
-    accent: '#C4974A',
-    items: [
-      'Figma · Tableau',
-      'Technical communication & stakeholder presentations',
-      'Cross-functional collaboration',
-      'Decision support & explainability',
-    ],
-  },
-]
+const skillGroups = siteConfig.skillGroups ?? []
 
 // ── Header signal phrases ───────────────────────────────────────────────────
 
@@ -72,49 +40,8 @@ const signalPhrases = [
   'Technical Fluency',
 ]
 
-const profileFacts = [
-  { label: 'Based in', value: 'San Francisco, California' },
-  { label: 'Languages', value: 'English · Mandarin' },
-]
-
-const educationHistory = [
-  {
-    school: 'University of San Francisco',
-    degree: 'Master of Science in Information Systems',
-    period: 'August 2026 – May 2027',
-  },
-  {
-    school: 'University of Toronto',
-    degree: 'Honours Bachelor of Science',
-    detail: 'Double Major in Cognitive Science and Psychology',
-    period: 'September 2022 – June 2026',
-  },
-]
-
-const resumeExperienceCopyByRole: Record<string, string> = {
-  'ML Data Analyst':
-    'Translated stakeholder needs into product requirements for an AI risk-scoring workflow across 30K+ records, prioritizing a pipeline that cut manual analysis time by 70%.',
-  'Project Lead':
-    'Redesigned recruitment and scheduling workflows across 100+ sessions, raising completion rates by 63% and cutting data inconsistencies by 85%.',
-  'Imaging Data Analyst':
-    'Redesigned data intake across 200+ fMRI sessions, translating complex analyses into decision-ready insights for clinical and research stakeholders.',
-  'Research Data Analyst':
-    'Coordinated requirements across 60+ patients and 20+ team members, building tracking systems that standardized onboarding and improved handoffs.',
-}
-
-const resumeExperienceTagsByRole: Record<string, string[]> = {
-  'ML Data Analyst': ['Product Requirements', 'Explainable AI', 'Risk Scoring'],
-  'Project Lead': ['Workflow Redesign', 'Prioritization', 'Shared Systems'],
-  'Imaging Data Analyst': ['Workflow Redesign', 'Stakeholder Collaboration', 'Technical Communication'],
-  'Research Data Analyst': ['Requirements Coordination', 'SQL/Tableau', 'Documentation'],
-}
-
-const resumeProjectDescriptions: Record<string, string> = {
-  harmoniq:
-    'Profiles a messy CRM export, ranks issues by business impact, and exports business-ready data with a human in the loop.',
-  kestrel:
-    'Helps job seekers turn confusing job descriptions into fit scores, skill gaps, and a clear action roadmap.',
-}
+const profileFacts = siteConfig.profileFacts ?? []
+const educationHistory = siteConfig.education ?? []
 
 // ── Section divider ─────────────────────────────────────────────────────────
 
@@ -166,8 +93,8 @@ function TimelineEntry({
   const [before, after] = item.period.split(' to ')
   const accentColor   = item.current ? '#C4974A' : '#0F7A7A'
   const accentBright  = item.current ? '#E8B055' : '#4A9FAE'
-  const description = resumeExperienceCopyByRole[item.role] ?? item.description
-  const tags = resumeExperienceTagsByRole[item.role] ?? item.tags
+  const description = item.description
+  const tags = item.tags
 
   return (
     <motion.div
@@ -567,11 +494,14 @@ export default function ResumePage() {
                       <p className="mt-1 font-sans text-[12.5px] leading-relaxed text-[#D8E8EE]">
                         {item.degree}
                       </p>
-                      {'detail' in item && item.detail ? (
-                        <p className="mt-1 font-sans text-[12.5px] leading-relaxed text-[#A8C5D1]">
-                          {item.detail}
+                      {item.details?.map((detail) => (
+                        <p
+                          key={detail}
+                          className="mt-1 font-sans text-[12.5px] leading-relaxed text-[#A8C5D1]"
+                        >
+                          {detail}
                         </p>
-                      ) : null}
+                      ))}
                       <p
                         className="mt-1 font-mono text-[9px] uppercase tracking-[0.12em]"
                         style={{ color: 'rgba(168,197,209,0.48)' }}
@@ -590,6 +520,7 @@ export default function ResumePage() {
                 <StarburstButton
                   href={siteConfig.resumeUrl}
                   download
+                  ariaLabel="Download Justin Chang resume PDF"
                   variant="secondary"
                   size="md"
                   starSpin
@@ -708,7 +639,7 @@ export default function ResumePage() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="mb-14 mt-8 grid gap-4 sm:grid-cols-3"
+            className="mb-14 mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-3"
           >
             {skillGroups.map((group, i) => (
               <motion.div
@@ -832,9 +763,7 @@ export default function ResumePage() {
                           className="mt-0.5 truncate font-sans text-[12.5px] leading-snug"
                           style={{ color: '#7AAABB' }}
                         >
-                          {resumeProjectDescriptions[project.slug] ??
-                            project.tagline.match(/.*?[.!?]/)?.[0] ??
-                            project.tagline}
+                          {project.summary}
                         </p>
                       </div>
                     </div>
@@ -897,9 +826,7 @@ export default function ResumePage() {
                         className="mt-0.5 truncate font-sans text-[12.5px] leading-snug"
                         style={{ color: '#7AAABB' }}
                       >
-                        {resumeProjectDescriptions[project.slug] ??
-                          project.tagline.match(/.*?[.!?]/)?.[0] ??
-                          project.tagline}
+                        {project.summary}
                       </p>
                     </div>
                   </div>
@@ -946,6 +873,7 @@ export default function ResumePage() {
               <StarburstButton
                 href={siteConfig.resumeUrl}
                 download
+                ariaLabel="Download Justin Chang resume PDF"
                 variant="secondary"
                 size="sm"
               >

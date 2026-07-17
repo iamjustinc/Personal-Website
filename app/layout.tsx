@@ -13,26 +13,23 @@ import './globals.css'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://justinchang.me'),
-  title: `${siteConfig.name} | Aspiring Associate Product Manager`,
-  description:
-    'Justin Chang is an early-career product builder creating AI-native products across CRM, Salesforce, enterprise workflows, and data systems.',
+  title: siteConfig.seoTitle,
+  description: siteConfig.seoDescription,
   icons: {
     icon: [{ url: '/star.png', type: 'image/png' }],
     shortcut: '/star.png',
     apple: '/star.png',
   },
   openGraph: {
-    title: `${siteConfig.name} | Aspiring Associate Product Manager`,
-    description:
-      'Justin Chang is an early-career product builder creating AI-native products across CRM, Salesforce, enterprise workflows, and data systems.',
+    title: siteConfig.seoTitle,
+    description: siteConfig.seoDescription,
     type: 'website',
     siteName: siteConfig.name,
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${siteConfig.name} | Aspiring Associate Product Manager`,
-    description:
-      'Justin Chang is an early-career product builder creating AI-native products across CRM, Salesforce, enterprise workflows, and data systems.',
+    title: siteConfig.seoTitle,
+    description: siteConfig.seoDescription,
   },
 }
 

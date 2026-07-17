@@ -34,8 +34,8 @@ const proofStats = [
   },
   {
     value: '200+',
-    label: 'sessions redesigned',
-    body: 'fMRI data intake rebuilt with cross-functional stakeholders',
+    label: 'imaging sessions',
+    body: 'standardized intake and preprocessing workflow',
   },
 ]
 
@@ -344,7 +344,7 @@ export default function AboutPage() {
                   className="font-mono text-[9px] uppercase tracking-[0.12em]"
                   style={{ color: '#4A9FAE' }}
                 >
-                  Aspiring Associate Product Manager
+                  {siteConfig.roleTag}
                 </span>
               </div>
 
@@ -381,11 +381,10 @@ export default function AboutPage() {
                 className="mt-4 max-w-[56ch] font-sans text-[14.5px] leading-7"
                 style={{ color: '#A8C5D1' }}
               >
-                I&apos;m an aspiring Associate Product Manager who believes AI products succeed
-                only when people can understand, trust, and act on their output. That lens came
-                from health-AI research building predictive pipelines across 30K+ records, which
-                taught me the model is only half the challenge. I now bring it to enterprise AI
-                and CRM workflows, building harmonIQ.
+                I build AI-native products for CRM and enterprise workflows, and I care most
+                about making complex systems easier to understand, trust, and use. That lens
+                came from health-AI research across 30K+ records and product work spanning
+                harmonIQ, HandoffAI, and Kestrel.
               </p>
             </motion.div>
 
@@ -447,7 +446,14 @@ export default function AboutPage() {
                 </StarburstButton>
               </HoverSparkle>
               <HoverSparkle className="inline-flex">
-                <StarburstButton href="/resume" variant="secondary" size="md">
+                <StarburstButton
+                  href={siteConfig.resumeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ariaLabel="Open Justin Chang resume PDF in a new tab"
+                  variant="secondary"
+                  size="md"
+                >
                   Resume
                 </StarburstButton>
               </HoverSparkle>
@@ -945,8 +951,9 @@ export default function AboutPage() {
                 Looking for someone who can scope the problem and explain the next step?
               </h2>
               <p className="mt-4 font-sans text-[15.5px] leading-7" style={{ color: '#A8C5D1' }}>
-                I&apos;m looking for early-career Associate Product Manager roles where product
-                judgment, technical fluency, and stakeholder communication overlap.
+                I&apos;m targeting Associate Product Manager and early-career product builder
+                roles where product judgment, technical fluency, and stakeholder communication
+                overlap.
               </p>
             </div>
 
@@ -957,7 +964,14 @@ export default function AboutPage() {
                 </StarburstButton>
               </HoverSparkle>
               <HoverSparkle className="inline-flex">
-                <StarburstButton href="/resume" variant="secondary" size="md">
+                <StarburstButton
+                  href={siteConfig.resumeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ariaLabel="Open Justin Chang resume PDF in a new tab"
+                  variant="secondary"
+                  size="md"
+                >
                   Resume
                 </StarburstButton>
               </HoverSparkle>

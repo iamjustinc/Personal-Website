@@ -10,24 +10,6 @@ import { EASING, fadeUp, fadeIn, staggerContainer, useMotionSafe } from '@/lib/m
 import { siteConfig } from '@/data/site'
 import { cn } from '@/lib/utils'
 
-const careerCopyByRole: Record<string, string> = {
-  'ML Data Analyst':
-    'Translated stakeholder needs into product requirements for an AI risk-scoring workflow across 30K+ records, prioritizing a pipeline that cut manual analysis time by 70%.',
-  'Project Lead':
-    'Redesigned recruitment and scheduling workflows across 100+ sessions, raising completion rates by 63% and cutting data inconsistencies by 85%.',
-  'Imaging Data Analyst':
-    'Redesigned data intake across 200+ fMRI sessions, translating complex analyses into decision-ready insights for clinical and research stakeholders.',
-  'Research Data Analyst':
-    'Coordinated requirements across 60+ patients and 20+ team members, building tracking systems that standardized onboarding and improved handoffs.',
-}
-
-const careerTagsByRole: Record<string, string[]> = {
-  'ML Data Analyst': ['Product Requirements', 'ML Pipelines', 'Explainability', 'Risk Scoring'],
-  'Project Lead': ['Workflow Redesign', 'Prioritization', 'Shared Systems', 'Team Scaling'],
-  'Imaging Data Analyst': ['Workflow Redesign', 'Stakeholder Collaboration', 'Technical Communication'],
-  'Research Data Analyst': ['Requirements Coordination', 'SQL/Tableau', 'Documentation'],
-}
-
 const ambientStars = [
   { left: '9%',  top: '14%', delay: 0,   color: '#C4974A' },
   { left: '86%', top: '10%', delay: 0.7, color: '#4A9FAE' },
@@ -246,8 +228,8 @@ export function CareerSection() {
         >
           {items.map((item, index) => {
             const accent = item.current ? '#C4974A' : index % 2 === 0 ? '#4A9FAE' : '#62BDB8'
-            const description = careerCopyByRole[item.role] ?? item.description
-            const tags = careerTagsByRole[item.role] ?? item.tags
+            const description = item.description
+            const tags = item.tags
 
             return (
               <motion.div

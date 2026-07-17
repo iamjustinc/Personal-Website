@@ -256,15 +256,14 @@ function ContactPageLayout() {
           
 
           <h2 className="font-display text-hero leading-none text-text-base">
-            Open to early-career roles.
+            {siteConfig.contactHeading}
           </h2>
 
           <p
             className="mt-6 max-w-[760px] font-sans leading-relaxed"
             style={{ color: '#A8C5D1', fontSize: '18px' }}
           >
-            I&apos;m looking for early-career Associate Product Manager roles where AI-native
-            products, workflow design, and stakeholder communication overlap.
+            {siteConfig.contactDescription}
           </p>
 
           <div className="mt-10">
@@ -287,8 +286,7 @@ function ContactPageLayout() {
               </p>
             </div>
             <p className="font-sans text-[15px] leading-relaxed" style={{ color: '#A8C5D1' }}>
-              Product and technical teams that need workflow discovery, prioritization, and
-              clear execution.
+              Product and technical teams working across AI, CRM, and workflow-heavy systems.
             </p>
           </div>
 
@@ -328,7 +326,7 @@ function ContactPageLayout() {
                   Recruiter actions
                 </p>
                 <p className="mt-1 text-sm" style={{ color: '#8DAFC0' }}>
-                  Start with email or LinkedIn, then review the resume or GitHub for more detail.
+                  Start with email or LinkedIn, then review the current resume PDF or GitHub for more detail.
                 </p>
               </div>
 
@@ -348,7 +346,7 @@ function ContactPageLayout() {
                 href={`mailto:${siteConfig.email}`}
                 icon={Send}
                 title="Email me"
-                body="Fastest route for product/APM roles, recruiter intros, and interview follow-ups."
+                body="Fastest route for recruiting conversations, product walkthroughs, and interview follow-ups."
               />
               <ActionCard
                 href={siteConfig.linkedinUrl}
@@ -364,10 +362,10 @@ function ContactPageLayout() {
               />
               <ActionCard
                 href={siteConfig.resumeUrl}
-                download="Justin_Chang_Product_Resume.pdf"
+                download={siteConfig.resumeDownloadName}
                 icon={Download}
                 title="Download Resume PDF"
-                body="Review experience across product discovery, workflow design, data pipelines, and stakeholder communication."
+                body="Review the current resume covering product, Salesforce, AI, and analytics experience."
               />
             </div>
           </div>
@@ -382,14 +380,13 @@ function ContactSectionLayout() {
     <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(420px,520px)] lg:gap-16">
       <div className="relative">
 
-        <h2 className="font-display text-h1 text-text-base">Open to early-career roles.</h2>
+        <h2 className="font-display text-h1 text-text-base">{siteConfig.contactHeading}</h2>
 
         <p
           className="mt-5 max-w-[680px] font-sans leading-relaxed"
           style={{ color: '#A8C5D1', fontSize: '16px' }}
         >
-          Open to early-career Associate Product Manager and product-focused roles where
-          technical fluency and stakeholder communication matter.
+          {siteConfig.contactDescription}
         </p>
 
         <div className="mt-8">
@@ -414,7 +411,7 @@ function ContactSectionLayout() {
           <div className="space-y-3 text-sm" style={{ color: '#A8C5D1' }}>
             <div className="flex items-start gap-2">
               <StarMark size="xs" color="#4A9FAE" className="mt-1 opacity-70" />
-              <span>Early-career Associate Product Manager and product-focused roles</span>
+              <span>AI + CRM product work with stakeholder-facing delivery</span>
             </div>
             <div className="flex items-start gap-2">
               <StarMark size="xs" color="#C4974A" className="mt-1 opacity-70" />
@@ -422,11 +419,11 @@ function ContactSectionLayout() {
             </div>
             <div className="flex items-start gap-2">
               <StarMark size="xs" color="#4A9FAE" className="mt-1 opacity-70" />
-              <span>Teams that need workflow discovery, prioritization, and clear execution</span>
+              <span>Salesforce, analytics, and explainable AI fluency</span>
             </div>
             <div className="flex items-start gap-2">
               <StarMark size="xs" color="#C4974A" className="mt-1 opacity-70" />
-              <span>Teams building AI/data tools, dashboards, or internal products</span>
+              <span>Portfolio walkthroughs, resume review, and implementation detail</span>
             </div>
           </div>
         </div>

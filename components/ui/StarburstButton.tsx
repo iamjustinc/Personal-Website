@@ -18,6 +18,7 @@ interface StarburstButtonProps {
   download?: boolean
   target?: string
   rel?: string
+  ariaLabel?: string
   onClick?: (e: React.MouseEvent) => void
   variant?: 'primary' | 'secondary'
   size?: 'sm' | 'md' | 'lg'
@@ -37,6 +38,7 @@ export function StarburstButton({
   download,
   target,
   rel,
+  ariaLabel,
   onClick,
   variant = 'primary',
   size = 'md',
@@ -110,6 +112,7 @@ export function StarburstButton({
       download={download}
       target={target}
       rel={rel}
+      aria-label={ariaLabel}
       onClick={fire}
       whileHover="hov"
       whileTap={{ scale: 0.95 }}

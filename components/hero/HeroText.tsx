@@ -141,7 +141,7 @@ export function HeroText() {
       variants={stagger}
       initial="hidden"
       animate="visible"
-      className="flex flex-col"
+      className="flex w-full max-w-[620px] flex-col items-start text-left"
     >
       {/* ── Name ────────────────────────────────────────────────────────── */}
       {/*
@@ -419,12 +419,10 @@ export function HeroText() {
       {/* ── Statement ───────────────────────────────────────────────────── */}
       <motion.p
         variants={up}
-        className="font-sans leading-relaxed mt-6 max-w-[520px]"
+        className="mt-6 max-w-[620px] font-sans leading-relaxed"
         style={{ fontSize: 'clamp(16px, 1.7vw, 19px)', color: '#A8C5D1' }}
       >
-        I build AI-native products for CRM, enterprise workflows, and data systems. I turn
-        ambiguous problems into scoped products by mapping the workflow, prioritizing the build,
-        then testing and iterating.
+        {siteConfig.heroStatement}
       </motion.p>
 
       {/* ── Role pill ────────────────────────────────────────────────────── */}
@@ -438,35 +436,35 @@ export function HeroText() {
           }}
         >
           <StarMark size="xs" color="#C4974A" className="opacity-80" />
-          Aspiring Associate Product Manager · AI-Native Product Builder
+          {siteConfig.roleTag}
         </span>
       </motion.div>
 
       <motion.p
         variants={fast}
-        className="mt-4 max-w-[560px] font-mono text-[10px] leading-6"
+        className="mt-4 max-w-[620px] font-mono text-[10px] leading-6"
         style={{ color: '#7FAFBB' }}
       >
-        Python · SQL · TypeScript · React · Next.js · OpenAI APIs · Tableau · Data Pipelines
+        {siteConfig.heroTechLine}
       </motion.p>
 
-      {/* ── Separator ───────────────────────────────────────────────────── */}
-      <motion.div
-        variants={fast}
-        className="mt-10 w-8 h-px"
-        style={{ background: 'rgba(15,122,122,0.35)' }}
-        aria-hidden
-      />
-
       {/* ── CTAs ─────────────────────────────────────────────────────────── */}
-      <motion.div variants={fast} className="flex flex-wrap gap-3 mt-6">
+      <motion.div variants={fast} className="mt-8 flex flex-wrap items-center gap-3">
         <HoverSparkle className="inline-flex">
           <StarburstButton href="/#projects" variant="primary" size="lg">
             See my work
           </StarburstButton>
         </HoverSparkle>
         <HoverSparkle className="inline-flex">
-          <StarburstButton href="/resume" variant="secondary" size="lg" starSpin>
+          <StarburstButton
+            href={siteConfig.resumeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            ariaLabel="Open Justin Chang resume PDF in a new tab"
+            variant="secondary"
+            size="lg"
+            starSpin
+          >
             Resume
           </StarburstButton>
         </HoverSparkle>

@@ -48,12 +48,12 @@ type CaseStudyCopy = {
 
 const kestrelCaseStudyCopy: CaseStudyCopy = {
   tagline:
-    'AI role-readiness tool that turns a target job description and candidate profile into fit signals, ranked gaps, resume direction, and a next-step roadmap.',
+    'AI career intelligence system that turns job descriptions into structured role signals, transparent comparisons, and next-step action plans.',
   outcome:
-    'Turns scattered career prep into one structured decision view: what matches, what is missing, what to improve first, and what to do next.',
+    'Turns scattered career prep into a clearer decision view: what a role asks for, where the gaps are, and what to do next.',
 
   overview:
-    'Kestrel is a role-readiness tool for early-career candidates comparing their background against a specific job. It extracts role requirements, evaluates fit, surfaces strengths and ranked gaps, then turns the result into a roadmap the user can act on before applying. The goal is not more career advice. It is a clearer decision about what to fix, what to highlight, and what to do next.',
+    'Kestrel is an AI career intelligence system for candidates comparing their background against a specific job. It uses LLM prompts and JSON schemas to translate job descriptions into structured requirements, then presents the comparison in an explainable dashboard with clear next-step guidance.',
 
   pmInsight: {
     label: 'Key Product Decision',
@@ -67,7 +67,7 @@ const kestrelCaseStudyCopy: CaseStudyCopy = {
     },
     {
       title: 'Product Bet',
-      body: 'A structured output that ranks fit score, skill gaps, resume direction, and roadmap is more useful than a chat interface that gives advice without prioritization.',
+      body: 'A structured output that ranks requirements, gaps, and next steps is more useful than a chat interface that gives advice without prioritization.',
     },
   ],
 
@@ -95,7 +95,7 @@ const kestrelCaseStudyCopy: CaseStudyCopy = {
   ],
 
   solution:
-    'Kestrel parses the job description, extracts its core requirements into structured role signals, compares those signals against the user profile, and returns a readiness score, matched strengths, ranked skill gaps, resume improvement prompts, and a prioritized next-step roadmap in a card-based dashboard designed for fast scanning and clear interpretation.',
+    'Kestrel parses the job description into structured role signals, compares those signals against the user profile, and returns matched strengths, prioritized gaps, and next-step guidance in a comparative dashboard designed for fast scanning and clear interpretation.',
 
   solutionCards: [
     {
@@ -127,7 +127,7 @@ const kestrelCaseStudyCopy: CaseStudyCopy = {
   ],
 
   buildNotes:
-    'The hardest technical problem was normalizing inconsistent job description text into structured, comparable role requirements. I used a staged AI pipeline with typed output schemas to keep requirements, scores, gaps, and roadmap items consistent enough to render reliably, support cross-role comparison, and stay explainable to the user.',
+    'The hardest technical problem was normalizing inconsistent job description text into structured, comparable role requirements. A staged AI pipeline with typed output schemas kept requirements, comparisons, and next-step outputs consistent enough to render reliably and stay explainable to the user.',
 
   buildCards: [
     {
@@ -141,7 +141,7 @@ const kestrelCaseStudyCopy: CaseStudyCopy = {
   ],
 
   reflection:
-    'The strongest product decision was restraint. An early version tried to generate polished resume sections. That was the wrong level of abstraction. Candidates needed to know what to fix and why, not to have AI write it for them. Once the output narrowed to fit score, ranked gaps, resume direction, and roadmap, the product felt more credible, more trusted, and significantly more actionable.',
+    'The strongest product decision was restraint. An early version expanded into broader coaching and resume rewriting. The product became stronger once it stayed focused on structured comparison, explainable gaps, and next-step guidance.',
 
   reflectionCards: [
     {
@@ -150,7 +150,7 @@ const kestrelCaseStudyCopy: CaseStudyCopy = {
     },
     {
       title: 'What Remained',
-      body: 'Score, gaps, resume direction, and roadmap appear in ranked order, specific to the role. Once the scope narrowed to those four outputs, the product felt like a tool rather than a demo.',
+      body: 'Role signals, gap analysis, and next-step guidance appear in ranked order, specific to the role. Once the scope narrowed to those outputs, the product felt like a tool rather than a demo.',
     },
   ],
 
@@ -226,30 +226,30 @@ const harmoniqCaseStudyCopy: CaseStudyCopy = {
   ],
 
   impact:
-    "In the product demo, reviewing the highest-priority issues first raised a sample export's readiness score from 35/100 to 68/100 before export, with routing- and territory-breaking issues addressed first. Testing with five sales and CRM users shaped two concrete changes: a simpler review flow and reprioritized alerts for missing ownership and context.",
+    'Testing with five sales and CRM users simplified record review, reprioritized missing-context alerts, and reinforced user control over recommended changes.',
 
   impactCards: [
     {
-      title: 'Demo Outcome',
-      body: "In a recorded walkthrough, reviewing the highest-priority issues raised a sample export's readiness score from 35/100 to 68/100 before export.",
+      title: 'User Feedback Loop',
+      body: 'Testing with five sales and CRM users led to a simpler review flow and reprioritized alerts for missing ownership and context.',
     },
     {
-      title: 'User Feedback Loop',
-      body: 'Testing with five sales and CRM users led to a simpler review flow and reprioritized alerts for missing ownership and context, the fixes that blocked routing most often.',
+      title: 'Scope Signal',
+      body: 'The strongest feedback validated the core workflow: profile the data, explain the risk, preserve user review, and export a cleaner file.',
     },
   ],
 
   buildNotes:
-    'The system splits work between deterministic logic and AI: null detection, duplicate heuristics, and readiness scoring run on deterministic rules so results stay consistent, while an LLM layer explains issue clusters and translates them into business language. When the AI layer is unavailable, the product falls back to deterministic and reference-based suggestions rather than blocking the review.',
+    'The MVP prioritized explainable risk scoring, recommended fixes, and user review so every change stayed auditable.',
 
   buildCards: [
     {
-      title: 'Deterministic Core, AI Layer on Top',
-      body: 'Null detection, duplicate heuristics, and readiness scoring run on deterministic rules for consistency; an LLM layer explains issue clusters and rationale in business language.',
+      title: 'Explainable Risk Scoring',
+      body: 'The workflow centers data profiling and explainable risk scoring so users can see what matters before deciding what to fix.',
     },
     {
-      title: 'Graceful AI Fallback',
-      body: 'When the AI layer is unavailable, recommendations fall back to deterministic and reference-based logic instead of blocking the review, so the workflow never depends entirely on a live model.',
+      title: 'Review Before Export',
+      body: 'Recommended fixes stay behind user review and approval, which keeps the workflow auditable and easier to trust.',
     },
   ],
 
@@ -259,7 +259,7 @@ const harmoniqCaseStudyCopy: CaseStudyCopy = {
   reflectionCards: [
     {
       title: 'What I Cut',
-      body: 'Live Salesforce integration, scheduled pipelines, and autonomous high-risk changes. Each would have expanded scope without strengthening the one workflow the product needed to prove.',
+      body: 'Broader automation and expanded workflow coverage. Each would have expanded scope without strengthening the one pre-import workflow the product needed to prove.',
     },
     {
       title: 'What Remained',
@@ -316,7 +316,7 @@ function FactStrip({ project, enhanced = false }: { project: Project; enhanced?:
   const facts = [
     { label: 'Year', value: String(project.year) },
     { label: 'Role', value: project.role },
-    { label: 'Stack', value: project.stack.slice(0, 4).join(' · ') },
+    { label: 'Focus', value: project.stack.slice(0, 4).join(' · ') },
   ]
 
   return (
@@ -1116,6 +1116,11 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
 
   const isEnhancedCaseStudy = ['kestrel', 'harmoniq'].includes(project.slug)
   const caseCopy = getCaseStudyCopy(project)
+  const demoHref =
+    project.demoCtaUrl ??
+    (project.demoPageEnabled !== false ? `/projects/${project.slug}/demo` : undefined)
+  const hasDemo = Boolean(demoHref)
+  const demoIsExternal = Boolean(project.demoCtaUrl)
 
   let n = 0
   const fmt = () => String(++n).padStart(2, '0')
@@ -1311,11 +1316,20 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
               </motion.div>
 
               <motion.div variants={inn} className="flex flex-wrap gap-2.5 mt-7">
-                <HoverSparkle className="inline-flex">
-                  <StarburstButton href={`/projects/${project.slug}/demo`} variant="primary" size="md">
-                    View Demo
-                  </StarburstButton>
-                </HoverSparkle>
+                {hasDemo && (
+                  <HoverSparkle className="inline-flex">
+                    <StarburstButton
+                      href={demoHref}
+                      target={demoIsExternal ? '_blank' : undefined}
+                      rel={demoIsExternal ? 'noopener noreferrer' : undefined}
+                      ariaLabel={project.demoCtaAriaLabel}
+                      variant="primary"
+                      size="md"
+                    >
+                      {project.demoCtaLabel ?? 'Open Demo'}
+                    </StarburstButton>
+                  </HoverSparkle>
+                )}
 
                 {project.liveUrl && (
                   <HoverSparkle className="inline-flex">
@@ -1323,10 +1337,11 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
+                      ariaLabel={project.liveAriaLabel}
                       variant="secondary"
                       size="md"
                     >
-                      Try It Out
+                      {project.liveCtaLabel ?? 'Live Demo'}
                     </StarburstButton>
                   </HoverSparkle>
                 )}
@@ -1585,15 +1600,20 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
               enhanced={isEnhancedCaseStudy}
             >
               <div className="flex flex-wrap gap-3">
-                <HoverSparkle className="inline-flex">
-                  <StarburstButton
-                    href={`/projects/${project.slug}/demo`}
-                    variant="primary"
-                    size="md"
-                  >
-                    View Demo
-                  </StarburstButton>
-                </HoverSparkle>
+                {hasDemo && (
+                  <HoverSparkle className="inline-flex">
+                    <StarburstButton
+                      href={demoHref}
+                      target={demoIsExternal ? '_blank' : undefined}
+                      rel={demoIsExternal ? 'noopener noreferrer' : undefined}
+                      ariaLabel={project.demoCtaAriaLabel}
+                      variant="primary"
+                      size="md"
+                    >
+                      {project.demoCtaLabel ?? 'Open Demo'}
+                    </StarburstButton>
+                  </HoverSparkle>
+                )}
 
                 {project.liveUrl && (
                   <HoverSparkle className="inline-flex">
@@ -1601,10 +1621,11 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
+                      ariaLabel={project.liveAriaLabel}
                       variant="secondary"
                       size="md"
                     >
-                      Try It Out
+                      {project.liveCtaLabel ?? 'Live Demo'}
                     </StarburstButton>
                   </HoverSparkle>
                 )}

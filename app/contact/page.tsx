@@ -4,16 +4,16 @@ import { siteConfig } from '@/data/site'
 
 export const metadata: Metadata = {
   title: `Contact | ${siteConfig.name}`,
-  description: siteConfig.currentlyOpen,
+  description: siteConfig.contactDescription,
   openGraph: {
     title: `Contact | ${siteConfig.name}`,
-    description: siteConfig.currentlyOpen,
+    description: siteConfig.contactDescription,
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
     title: `Contact | ${siteConfig.name}`,
-    description: siteConfig.currentlyOpen,
+    description: siteConfig.contactDescription,
   },
 }
 

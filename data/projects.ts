@@ -5,14 +5,17 @@ import kestrelInterface from '../kestrel-interface.png'
 import harmoniqLanding from '../harmoniq-interface.png'
 import harmoniqInterface from '../harmoniq-workspace.png'
 
+const kestrelLinkedInDemoUrl =
+  'https://www.linkedin.com/posts/jjustin-chang_buildinpublic-solutionsengineering-productmanagement-ugcPost-7448104114703527936-W0CI/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAC8kyn8BgbHl-T6FxSq__vvSg2wW3sCT8SM'
+
 export const projects: Project[] = [
   {
     slug: 'harmoniq',
     name: 'harmonIQ',
     tagline:
-      'AI-assisted CRM data-readiness workspace that profiles risky records, explains recommended fixes, and exports business-ready data.',
+      'CRM data-readiness product that profiles high-impact issues, recommends fixes, and preserves user review before export.',
     summary:
-      'harmonIQ helps RevOps and Sales Ops teams turn messy CRM exports into business-ready data by profiling risk, explaining fixes, and keeping a human in the loop.',
+      'harmonIQ helps RevOps and SalesOps teams profile CRM failures, prioritize fixes, and review changes before clean export.',
     featured: true,
     order: 1,
     visible: true,
@@ -22,7 +25,7 @@ export const projects: Project[] = [
     launchStatus: 'active',
     role: 'Product Builder',
     tags: ['AI', 'Decision Support', 'Workflow'],
-    stack: ['Next.js', 'TypeScript', 'Tailwind', 'Deterministic Rules Engine', 'LLM Recommendations'],
+    stack: ['Product Discovery', 'Risk Scoring', 'Explainable AI', 'Clean CSV Export'],
     year: 2026,
     outcome:
       'Tested with five sales and CRM users, whose feedback simplified the review flow and reprioritized missing-context alerts before launch.',
@@ -30,78 +33,85 @@ export const projects: Project[] = [
     screenshots: [harmoniqLanding.src, harmoniqInterface.src],
     panelAccentColor: '#0F7A7A',
     liveUrl: 'https://harmoniq-crm.vercel.app',
+    liveCtaLabel: 'Live Demo',
+    liveAriaLabel: 'Open the harmonIQ live demo in a new tab',
 
     overview:
-      'harmonIQ is a CRM data-readiness workspace built for RevOps and Sales Ops teams preparing an account or contact export before a routing update, planning cycle, or campaign. It profiles the dataset, ranks issues by business impact rather than raw frequency, explains each recommended fix in plain language, and lets the user review, approve, or edit every change before exporting a business-ready CSV and a change log.',
+      'harmonIQ is a CRM data-readiness product built for RevOps and SalesOps teams preparing data before downstream routing, reporting, and handoff workflows. It centers data profiling, explainable risk scoring, recommended fixes, and clean CSV export in an auditable review-and-export flow.',
 
     problem:
-      'Operations teams inherit CRM exports full of duplicate accounts, missing owners, inconsistent state and country values, and invalid contact fields. These are not just formatting issues — they break lead routing, distort reporting, and erode trust in the CRM before a team can act on the data. Today, non-technical operators either wait on engineering support or clean the file manually with no clear view of what actually matters first.',
+      'RevOps and SalesOps teams deal with missing owners, inconsistent fields, invalid values, and routing-breaking CRM errors before data can be trusted downstream. Without a clear way to prioritize the failures that matter most, cleanup becomes slow, manual, and difficult to trust.',
 
     users:
-      'Built for Revenue Operations and Sales Operations managers who receive a CRM export before a routing update, planning cycle, or campaign and need to know which issues to fix first, without waiting on engineering.',
+      'Built for RevOps and SalesOps users responsible for pre-import CRM hygiene and downstream workflow reliability.',
 
     solution:
-      'harmonIQ profiles an uploaded CSV, classifies issues into categories like missing owners, duplicate accounts, and inconsistent formatting, then ranks them by business severity, affected record count, and workflow urgency rather than raw frequency. Each recommendation includes a plain-language rationale and confidence signal, and the user can approve, skip, or manually resolve exceptions before exporting a cleaned CSV and change log.',
+      'harmonIQ focuses the MVP on data profiling, explainable risk scoring, recommended fixes, and clean CSV export. Users can review recommendations, simplify record review, and preserve control before changes are exported.',
 
     impact:
-      "In the product demo, reviewing the highest-priority issues first raised a sample export's readiness score from 35/100 to 68/100 before export, with routing- and territory-breaking issues addressed first. Testing with five sales and CRM users shaped two concrete changes: a simpler review flow and reprioritized alerts for missing ownership and context.",
+      'Testing with five sales and CRM users simplified record review, reprioritized missing-context alerts, and reinforced user control over recommended changes.',
 
     buildNotes:
-      'The system splits work between deterministic logic and AI: null detection, duplicate heuristics, and readiness scoring run on deterministic rules so results stay consistent, while an LLM layer explains issue clusters and translates them into business language. When the AI layer is unavailable, the product falls back to deterministic and reference-based suggestions rather than blocking the review.',
+      'The MVP emphasized explainable risk scoring and user review so the workflow stayed auditable and trustworthy for CRM updates.',
 
     reflection:
-      'The hardest product call was resisting the urge to make harmonIQ do everything a full ETL or master-data tool does. Narrowing V1 to one workflow, profiling and reviewing a CRM export before it causes downstream damage, made the trust model easier to design and the demo easier to explain.',
+      'Keeping the scope centered on one pre-import workflow made the product easier to explain, easier to test with users, and easier to trust.',
   },
   {
     slug: 'kestrel',
     name: 'Kestrel',
     tagline:
-      'AI career intelligence system that turns job descriptions and resumes into fit signals, skill gaps, and action roadmaps.',
+      'AI career intelligence system that turns job descriptions into structured fit signals and action plans.',
     summary:
-      'Kestrel helps job seekers turn confusing job descriptions and resumes into fit signals, skill gaps, and a clear action roadmap.',
+      'Kestrel translates job descriptions into structured requirements, transparent comparisons, and clear next-step guidance.',
     featured: false,
     order: 2,
     visible: true,
     homepageVisible: true,
     detailPageEnabled: true,
-    demoPageEnabled: true,
+    demoPageEnabled: false,
     launchStatus: 'active',
     role: 'AI Product Builder',
     tags: ['Gen AI', 'Decision Support', 'Full-Stack'],
-    stack: ['Next.js', 'TypeScript', 'OpenAI', 'PostgreSQL', 'Tailwind'],
+    stack: ['LLM Prompts', 'JSON Schemas', 'Comparative Dashboard', 'Action Plans'],
     year: 2026,
     outcome:
-      'Designed explainable, card-based outputs so every recommendation is specific, attributed, and actionable.',
+      'Designed an explainable comparative dashboard that keeps AI recommendations transparent and actionable.',
     thumbnail: kestrelLanding.src,
     screenshots: [kestrelLanding.src, kestrelInterface.src],
     panelAccentColor: '#2A8B87',
-    liveUrl: 'https://kestrel-resume.vercel.app/',
+    liveUrl: kestrelLinkedInDemoUrl,
+    liveCtaLabel: 'Live Demo',
+    liveAriaLabel: 'Open the Kestrel LinkedIn demo in a new tab',
+    demoCtaUrl: kestrelLinkedInDemoUrl,
+    demoCtaLabel: 'Open Demo',
+    demoCtaAriaLabel: 'Open the Kestrel LinkedIn demo in a new tab',
 
     overview:
-      'Kestrel helps job seekers compare a job description and resume, then returns fit signals, skill gaps, and a clear action plan.',
+      'Kestrel is an AI career intelligence system that transforms job descriptions into structured role signals and comparative guidance for the next step a candidate should take.',
 
     problem:
-      'Most career tools give generic advice. Job seekers need role-specific guidance they can use to decide what matters first.',
+      'Job seekers often work from scattered advice, repeated resume edits, and unclear role expectations without a structured way to prioritize what matters for a specific opportunity.',
 
     users:
-      'Built for early-career candidates targeting PM and adjacent technical roles who need a faster way to compare their background to role requirements.',
+      'Built for candidates who need a clearer way to compare their background against a target job and decide where to focus preparation time.',
 
     solution:
-      'Kestrel extracts role requirements, compares them against a resume, and returns fit signals, skill gaps, and next-step guidance in a structured dashboard.',
+      'Kestrel uses LLM prompts and JSON schemas to turn job descriptions into structured action-plan outputs, then presents the result in a comparative dashboard that keeps recommendations transparent and actionable.',
 
     productLogic:
-      'The product leads with orientation first, then action. Score, strengths, gaps, and roadmap appear in a sequence that makes the output easier to trust and use.',
+      'The product leads with orientation first, then action, so users can see what the role asks for before deciding what to improve next.',
 
     experienceDesign:
-      'The interface is built around one principle: messy input, structured output. Every panel is scannable, independent, and designed to reduce cognitive overload.',
+      'The interface is built around one principle: messy input, structured output. The dashboard keeps the comparison readable and explainable instead of burying the recommendation in chat.',
 
     impact:
-      'The project shows product judgment, AI output design, and decision-support thinking in one flow.',
+      'The project reframed career prep from generic advice into a structured decision view focused on fit, gaps, and next steps.',
 
     buildNotes:
-      'The main engineering challenge was producing consistent structured output from inconsistent job descriptions. A staged pipeline and typed schema kept recommendations aligned and reliable.',
+      'The main technical challenge was turning inconsistent job descriptions into consistent structured outputs. Typed schemas kept the AI workflow explainable and easier to compare across roles.',
 
     reflection:
-      'The biggest lesson was restraint. The product became stronger by reducing output noise and focusing only on the information that changes what a user does next.',
+      'Prioritizing explainability over a generic chatbot clarified the product: users needed a transparent comparison and concrete next steps, not more open-ended advice.',
   },
 ]

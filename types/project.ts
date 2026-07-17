@@ -51,6 +51,11 @@ export type Project = {
 
   // ── Links ───────────────────────────────────────────────────────────────────
   liveUrl?: string          // External production URL for "Try It Out" CTA
+  liveCtaLabel?: string
+  liveAriaLabel?: string
+  demoCtaUrl?: string       // External destination for the primary demo CTA
+  demoCtaLabel?: string
+  demoCtaAriaLabel?: string
   demoUrl?: string          // Embed URL (Loom / YouTube) for /demo page
   githubUrl?: string
 
