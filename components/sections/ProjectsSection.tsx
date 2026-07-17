@@ -31,11 +31,11 @@ const projectSpotlights: Record<
   },
   kestrel: {
     description:
-      'Turns job descriptions into structured requirements, transparent comparisons, and clear action plans.',
+      'Turns complex job descriptions into structured requirements, transparent comparisons, and clear action plans.',
     metrics: [
-      { value: 'LLM', label: 'prompt workflow' },
-      { value: 'JSON', label: 'typed schemas' },
-      { value: 'Plan', label: 'next-step outputs' },
+      { value: 'AI', label: 'workflow prototype' },
+      { value: 'JSON', label: 'structured outputs' },
+      { value: 'E2E', label: 'product execution' },
     ],
   },
 }
@@ -48,9 +48,15 @@ export function ProjectsSection() {
   const up = useMotionSafe(fadeUp)
   const inn = useMotionSafe(fadeIn)
 
-  const visibleProjects = projects
+  const featuredProjects = projects
     .filter((project) => project.visible && project.homepageVisible && project.featured)
     .sort((a, b) => a.order - b.order)
+  const kestrelProject = projects.find(
+    (project) => project.slug === 'kestrel' && project.visible && project.homepageVisible,
+  )
+  const visibleProjects = kestrelProject
+    ? [...featuredProjects, kestrelProject]
+    : featuredProjects
 
   return (
     <Section id="projects" paddingY="lg" className="relative overflow-hidden">
@@ -106,7 +112,7 @@ export function ProjectsSection() {
         className="flex flex-col gap-9"
       >
         {visibleProjects.map((project, index) => {
-          const isReversed = index % 2 === 1
+          const isReversed = index % 2 === 1 && project.slug !== 'kestrel'
           const hasCaseStudy = project.detailPageEnabled !== false
           const demoHref =
             project.demoCtaUrl ??
@@ -355,8 +361,8 @@ export function ProjectsSection() {
                     className="mt-4 max-w-[540px] font-mono text-[10px] leading-6"
                     style={{ color: '#7FAFBB' }}
                   >
-                    Role relevance: product diagnosis · requirement mapping · AI decision support ·
-                    scoped execution
+                    Role relevance: ambiguous problem framing · explainable AI · structured
+                    outputs · end-to-end execution
                   </p>
                 )}
 
