@@ -4,6 +4,8 @@ import kestrelLanding from '../Kestrel.png'
 import kestrelInterface from '../kestrel-interface.png'
 import harmoniqLanding from '../harmoniq-interface.png'
 import harmoniqInterface from '../harmoniq-workspace.png'
+import handoffaiLanding from '../handoffai-interface.png'
+import handoffaiInterface from '../handoffai-workspace.png'
 
 const kestrelLinkedInDemoUrl =
   'https://www.linkedin.com/posts/jjustin-chang_buildinpublic-solutionsengineering-productmanagement-ugcPost-7448104114703527936-W0CI/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAC8kyn8BgbHl-T6FxSq__vvSg2wW3sCT8SM'
@@ -38,8 +40,9 @@ export const projects: Project[] = [
     year: 2026,
     outcome:
       'Reached technical workflow validation in Agentforce Builder: preview-then-save, structured persistence, and safe failure handling all passed acceptance testing; production-user and customer-impact data have not yet been collected.',
-    thumbnail: '',
-    screenshots: [],
+    thumbnail: handoffaiLanding.src,
+    screenshots: [handoffaiLanding.src, handoffaiInterface.src],
+    screenshotAlt: 'HandoffAI interface and Salesforce Opportunity handoff workspace',
     panelAccentColor: '#3E8EDE',
     liveUrl: handoffaiDemoUrl,
     liveCtaLabel: 'Watch Demo',

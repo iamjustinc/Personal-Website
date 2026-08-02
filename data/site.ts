@@ -9,8 +9,8 @@ export const siteConfig: SiteConfig = {
   heroStatement:
     'I build AI products, workflow systems, and stakeholder-ready analytics. My work spans product discovery, explainable AI, CRM workflows, and applied ML.',
   heroTechLine: 'Databricks · Salesforce Platform · Python · SQL · R · React · Next.js',
-  resumeUrl: '/DATABRICKS_RESUME_JUSTIN.pdf',
-  resumeDownloadName: 'DATABRICKS_RESUME_JUSTIN.pdf',
+  resumeUrl: '/JUSTIN_SALESFORCE_APM_RESUME.pdf',
+  resumeDownloadName: 'JUSTIN_SALESFORCE_APM_RESUME.pdf',
 
   logoSrc: '/images/justin-logo.png',
   portraitSrc: '/images/me.png',

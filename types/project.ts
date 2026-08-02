@@ -52,6 +52,7 @@ export type Project = {
   previewVideo?: string     // Short loop for card hover. "/videos/[slug]-preview.mp4" (muted, 5-15s)
   demoVideo?: string        // Full walkthrough. YouTube or Loom embed URL.
   screenshots: string[]     // Detail page gallery.
+  screenshotAlt?: string    // Shared alt text for the floating screenshot pair. Falls back to generated text.
   floatingPanelImage?: string // Hero section panel. Falls back to thumbnail.
   panelAccentColor: string  // Hex. Color dot on hero floating panel badge.
 

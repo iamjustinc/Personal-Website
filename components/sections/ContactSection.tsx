@@ -365,7 +365,7 @@ function ContactPageLayout() {
                 download={siteConfig.resumeDownloadName}
                 icon={Download}
                 title="Download Resume PDF"
-                body="Review the current resume covering product, AI, analytics, Salesforce platform work, and Databricks training."
+                body="Review the current resume covering product, AI, analytics, and Salesforce platform work."
               />
             </div>
           </div>

@@ -8,7 +8,7 @@ import type { Project } from '@/types/project'
 import { cn } from '@/lib/utils'
 
 type ProjectFloatingScreenshotsProps = {
-  project: Pick<Project, 'name' | 'thumbnail' | 'screenshots' | 'panelAccentColor'>
+  project: Pick<Project, 'name' | 'thumbnail' | 'screenshots' | 'panelAccentColor' | 'screenshotAlt'>
   priority?: boolean
   imageSizes?: string
   showWatermark?: boolean
@@ -66,7 +66,7 @@ export function ProjectFloatingScreenshots({
         >
           <Image
             src={landingShot}
-            alt={`${project.name} landing view`}
+            alt={project.screenshotAlt ?? `${project.name} landing view`}
             fill
             sizes={imageSizes}
             className="object-contain object-center"
@@ -97,7 +97,7 @@ export function ProjectFloatingScreenshots({
         >
           <Image
             src={interfaceShot}
-            alt={`${project.name} interface view`}
+            alt={project.screenshotAlt ?? `${project.name} interface view`}
             fill
             sizes={imageSizes}
             className="object-contain object-center"

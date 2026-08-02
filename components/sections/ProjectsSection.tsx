@@ -22,7 +22,7 @@ const projectSpotlights: Record<
 > = {
   handoffai: {
     description:
-      'HandoffAI turns live Salesforce Opportunity and Account context into a structured, reviewable handoff for Customer Success, onboarding, and implementation.',
+      'HandoffAI turns Salesforce Opportunity and Account context into a structured, reviewable handoff for Customer Success, onboarding, and implementation.',
     metrics: [
       { value: '6', label: 'structured sections' },
       { value: '2', label: 'product surfaces' },
@@ -339,7 +339,7 @@ export function ProjectsSection() {
                 {/* Category tags */}
                 <div className="mb-4 flex flex-wrap gap-1.5">
                   {(project.slug === 'handoffai'
-                    ? ['Sales Handoff Workflow', 'Agentforce', 'Human Approval', 'Governed CRM Records']
+                    ? ['Sales Handoff Workflow', 'Agentforce', 'Human Approval']
                     : project.slug === 'kestrel'
                     ? ['Decision Support', 'Requirement Mapping', 'Guided Workflow']
                     : project.slug === 'harmoniq'
@@ -376,9 +376,9 @@ export function ProjectsSection() {
                     className="mt-3 max-w-[540px] font-sans text-[13.5px] leading-6"
                     style={{ color: '#9BC0CC' }}
                   >
-                    Users can generate a preview through Agentforce or directly from the
-                    Opportunity page, review six structured sections, and explicitly approve
-                    the result before Salesforce creates a reusable handoff record.
+                    Users can generate a preview in Agentforce or from the Opportunity page,
+                    review six structured sections, and explicitly approve the result before
+                    saving.
                   </p>
                 )}
 
@@ -387,9 +387,8 @@ export function ProjectsSection() {
                     className="mt-4 max-w-[540px] font-mono text-[10px] leading-6"
                     style={{ color: '#7FAFBB' }}
                   >
-                    Role relevance: product strategy · enterprise workflow design ·
-                    human-in-the-loop automation · Salesforce platform · trust and governance ·
-                    end-to-end execution
+                    Role relevance: product strategy · workflow design · human-in-the-loop
+                    automation · Salesforce platform · trust and governance
                   </p>
                 )}
 
