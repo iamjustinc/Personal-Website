@@ -22,7 +22,7 @@ const projectSpotlights: Record<
 > = {
   handoffai: {
     description:
-      'HandoffAI turns Salesforce Opportunity and Account context into a structured, reviewable handoff for Customer Success, onboarding, and implementation.',
+      'Turns Salesforce Opportunity and Account context into a structured handoff for post-sales teams.',
     metrics: [
       { value: '6', label: 'structured sections' },
       { value: '2', label: 'product surfaces' },
@@ -373,22 +373,11 @@ export function ProjectsSection() {
 
                 {project.slug === 'handoffai' && (
                   <p
-                    className="mt-3 max-w-[540px] font-sans text-[13.5px] leading-6"
-                    style={{ color: '#9BC0CC' }}
-                  >
-                    Users can generate a preview in Agentforce or from the Opportunity page,
-                    review six structured sections, and explicitly approve the result before
-                    saving.
-                  </p>
-                )}
-
-                {project.slug === 'handoffai' && (
-                  <p
                     className="mt-4 max-w-[540px] font-mono text-[10px] leading-6"
                     style={{ color: '#7FAFBB' }}
                   >
                     Role relevance: product strategy · workflow design · human-in-the-loop
-                    automation · Salesforce platform · trust and governance
+                    automation · trust and governance
                   </p>
                 )}
 
@@ -470,7 +459,7 @@ export function ProjectsSection() {
                   </div>
 
                   <div className="flex flex-wrap gap-2.5">
-                    {project.stack.slice(0, 5).map((s, stackIndex) => (
+                    {project.stack.slice(0, 4).map((s, stackIndex) => (
                       <motion.span
                         key={s}
                         whileHover={shouldReduce ? {} : { y: -2 }}

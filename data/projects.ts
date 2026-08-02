@@ -36,7 +36,7 @@ export const projects: Project[] = [
       'Enterprise Workflow',
       'Human-in-the-Loop',
     ],
-    stack: ['Agentforce', 'Apex', 'Lightning Web Components', 'Salesforce DX', 'Custom Objects', 'Jest'],
+    stack: ['Agentforce', 'Apex', 'Lightning Web Components', 'Salesforce DX', 'Jest', 'Custom Objects'],
     year: 2026,
     outcome:
       'Reached technical workflow validation in Agentforce Builder: preview-then-save, structured persistence, and safe failure handling all passed acceptance testing; production-user and customer-impact data have not yet been collected.',

@@ -25,7 +25,7 @@ const workProjectSpotlights: Record<
 > = {
   handoffai: {
     description:
-      'HandoffAI turns live Salesforce Opportunity and Account context into a structured, reviewable handoff for Customer Success, onboarding, and implementation.',
+      'Turns Salesforce Opportunity and Account context into a structured handoff for post-sales teams.',
     metrics: [
       { value: '6', label: 'structured sections' },
       { value: '2', label: 'product surfaces' },
