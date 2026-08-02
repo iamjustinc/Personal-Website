@@ -23,6 +23,16 @@ const workProjectSpotlights: Record<
     glow: string
   }
 > = {
+  handoffai: {
+    description:
+      'HandoffAI turns live Salesforce Opportunity and Account context into a structured, reviewable handoff for Customer Success, onboarding, and implementation.',
+    metrics: [
+      { value: '6', label: 'structured sections' },
+      { value: '2', label: 'product surfaces' },
+      { value: '0', label: 'source mutations' },
+    ],
+    glow: '32% 26%',
+  },
   harmoniq: {
     description:
       'Profiles high-impact CRM failures, prioritizes fixes, and keeps users in control before clean CSV export.',
@@ -528,7 +538,8 @@ export default function WorkPage() {
             className="font-sans mt-5 max-w-[520px] leading-relaxed"
             style={{ fontSize: '16px', color: '#A8C5D1' }}
           >
-            Two product builds across CRM data readiness and AI decision support.
+            Three product builds across enterprise workflow automation, CRM data readiness, and
+            AI decision support.
           </p>
         </motion.div>
 

@@ -12,6 +12,12 @@ export type ProjectTag =
   | 'Decision Support'
   | 'Web App'
   | '0→1'
+  | 'Salesforce'
+  | 'Agentforce'
+  | 'Apex'
+  | 'Lightning Web Components'
+  | 'Enterprise Workflow'
+  | 'Human-in-the-Loop'
 
 export type ProjectLaunchStatus = 'active' | 'comingSoon'
 

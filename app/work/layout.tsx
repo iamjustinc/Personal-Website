@@ -3,7 +3,7 @@ import type { ReactNode } from 'react'
 
 const title = 'Product Work | Justin Chang'
 const description =
-  'Explore harmonIQ and Kestrel: products focused on CRM data readiness, AI decision support, explainability, and human-centered AI.'
+  'Explore HandoffAI, harmonIQ, and Kestrel: products focused on enterprise workflow automation, CRM data readiness, AI decision support, and human-centered AI.'
 
 export const metadata: Metadata = {
   title,

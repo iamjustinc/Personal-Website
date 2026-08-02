@@ -20,6 +20,15 @@ const projectSpotlights: Record<
     metrics: { value: string; label: string }[]
   }
 > = {
+  handoffai: {
+    description:
+      'HandoffAI turns live Salesforce Opportunity and Account context into a structured, reviewable handoff for Customer Success, onboarding, and implementation.',
+    metrics: [
+      { value: '6', label: 'structured sections' },
+      { value: '2', label: 'product surfaces' },
+      { value: '0', label: 'source mutations' },
+    ],
+  },
   harmoniq: {
     description:
       'Profiles high-impact CRM failures, prioritizes fixes, and keeps users in control before clean CSV export.',
@@ -48,15 +57,9 @@ export function ProjectsSection() {
   const up = useMotionSafe(fadeUp)
   const inn = useMotionSafe(fadeIn)
 
-  const featuredProjects = projects
+  const visibleProjects = projects
     .filter((project) => project.visible && project.homepageVisible && project.featured)
     .sort((a, b) => a.order - b.order)
-  const kestrelProject = projects.find(
-    (project) => project.slug === 'kestrel' && project.visible && project.homepageVisible,
-  )
-  const visibleProjects = kestrelProject
-    ? [...featuredProjects, kestrelProject]
-    : featuredProjects
 
   return (
     <Section id="projects" paddingY="lg" className="relative overflow-hidden">
@@ -98,8 +101,8 @@ export function ProjectsSection() {
         </div>
         <h2 className="font-display text-h1 text-text-base">Featured Case Study</h2>
         <p className="font-sans text-text-muted mt-3 max-w-[560px]" style={{ fontSize: '15px' }}>
-          A CRM data-readiness workspace that turns a messy export into business-ready data,
-          one reviewed decision at a time.
+          Enterprise workflows designed around clearer decisions, trusted automation, and
+          human control.
         </p>
       </motion.div>
 
@@ -112,7 +115,8 @@ export function ProjectsSection() {
         className="flex flex-col gap-9"
       >
         {visibleProjects.map((project, index) => {
-          const isReversed = index % 2 === 1 && project.slug !== 'kestrel'
+          // Both featured cards use the same media-left, content-right layout.
+          const isReversed = false
           const hasCaseStudy = project.detailPageEnabled !== false
           const demoHref =
             project.demoCtaUrl ??
@@ -334,7 +338,9 @@ export function ProjectsSection() {
               >
                 {/* Category tags */}
                 <div className="mb-4 flex flex-wrap gap-1.5">
-                  {(project.slug === 'kestrel'
+                  {(project.slug === 'handoffai'
+                    ? ['Sales Handoff Workflow', 'Agentforce', 'Human Approval', 'Governed CRM Records']
+                    : project.slug === 'kestrel'
                     ? ['Decision Support', 'Requirement Mapping', 'Guided Workflow']
                     : project.slug === 'harmoniq'
                     ? ['Business-Risk Profiling', 'Explainable AI', 'Reviewable Export']
@@ -364,6 +370,28 @@ export function ProjectsSection() {
                 >
                   {spotlight.description}
                 </p>
+
+                {project.slug === 'handoffai' && (
+                  <p
+                    className="mt-3 max-w-[540px] font-sans text-[13.5px] leading-6"
+                    style={{ color: '#9BC0CC' }}
+                  >
+                    Users can generate a preview through Agentforce or directly from the
+                    Opportunity page, review six structured sections, and explicitly approve
+                    the result before Salesforce creates a reusable handoff record.
+                  </p>
+                )}
+
+                {project.slug === 'handoffai' && (
+                  <p
+                    className="mt-4 max-w-[540px] font-mono text-[10px] leading-6"
+                    style={{ color: '#7FAFBB' }}
+                  >
+                    Role relevance: product strategy · enterprise workflow design ·
+                    human-in-the-loop automation · Salesforce platform · trust and governance ·
+                    end-to-end execution
+                  </p>
+                )}
 
                 {project.slug === 'kestrel' && (
                   <p
