@@ -4,7 +4,7 @@ import { siteConfig } from '@/data/site'
 
 const title = 'Resume | Justin Chang'
 const description =
-  `View ${siteConfig.name}'s experience across AI product projects, applied ML, workflow design, Databricks training, and stakeholder-ready analytics.`
+  `View ${siteConfig.name}'s experience across AI product projects, applied ML, workflow design, Salesforce platform development, and stakeholder-ready analytics.`
 
 export const metadata: Metadata = {
   title,

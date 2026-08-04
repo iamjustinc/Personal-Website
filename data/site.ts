@@ -8,7 +8,7 @@ export const siteConfig: SiteConfig = {
   roleTag: 'ASPIRING PRODUCT MANAGER · AI PRODUCT BUILDER',
   heroStatement:
     'I build AI products, workflow systems, and stakeholder-ready analytics. My work spans product discovery, explainable AI, CRM workflows, and applied ML.',
-  heroTechLine: 'Databricks · Salesforce Platform · Python · SQL · R · React · Next.js',
+  heroTechLine: 'Salesforce Platform · Apex · Python · SQL · R · React · Next.js',
   resumeUrl: '/JUSTIN_SALESFORCE_APM_RESUME.pdf',
   resumeDownloadName: 'JUSTIN_SALESFORCE_APM_RESUME.pdf',
 
@@ -99,7 +99,7 @@ export const siteConfig: SiteConfig = {
       {
         heading: 'TECHNICAL FLUENCY',
         content:
-          'Python · SQL · R · TypeScript · React · Next.js · Salesforce Platform · Databricks training',
+          'Python · SQL · R · TypeScript · React · Next.js · Salesforce Platform · Apex',
       },
     ],
   },
@@ -177,6 +177,23 @@ export const siteConfig: SiteConfig = {
       ],
     },
     {
+      label: 'Salesforce',
+      accent: '#00A1E0',
+      items: [
+        'Salesforce Certified Platform Administrator',
+        'Agentforce',
+        'Agentforce Builder',
+        'Sales Cloud',
+        'Lightning Web Components',
+        'Apex',
+        'SOQL',
+        'Custom objects and data modeling',
+        'Security and sharing',
+        'Permission sets',
+        'Salesforce CLI',
+      ],
+    },
+    {
       label: 'AI & Data',
       accent: '#C4974A',
       items: [
@@ -206,16 +223,6 @@ export const siteConfig: SiteConfig = {
         'JSON schemas',
         'Git',
         'Salesforce Platform',
-      ],
-    },
-    {
-      label: 'Databricks Training',
-      accent: '#7EE7F2',
-      items: [
-        'Databricks Platform Administration',
-        'Databricks AI/BI',
-        'SQL Analytics on Databricks',
-        'Fundamentals Accreditation',
       ],
     },
     {

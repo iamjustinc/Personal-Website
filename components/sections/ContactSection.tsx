@@ -419,7 +419,7 @@ function ContactSectionLayout() {
             </div>
             <div className="flex items-start gap-2">
               <StarMark size="xs" color="#4A9FAE" className="mt-1 opacity-70" />
-              <span>Databricks training, Salesforce platform work, and explainable AI analytics</span>
+              <span>Salesforce platform work, Agentforce development, and explainable AI analytics</span>
             </div>
             <div className="flex items-start gap-2">
               <StarMark size="xs" color="#C4974A" className="mt-1 opacity-70" />
